@@ -96,12 +96,12 @@ The active provider is selected with `AI_PROVIDER`. The chat panel does not chan
 
 | `AI_PROVIDER` | Model variable | Key variable | Default model |
 | --- | --- | --- | --- |
-| `google` | `GOOGLE_MODEL` | `GOOGLE_GENERATIVE_AI_API_KEY` | `gemini-2.5-flash-lite` |
+| `google` | `GOOGLE_MODEL` | `GOOGLE_GENERATIVE_AI_API_KEY` | `gemini-3.5-flash-lite` |
 | `openai` | `OPENAI_MODEL` | `OPENAI_API_KEY` | `gpt-6-luna` |
 
-Current development setting: `AI_PROVIDER=google` and `GOOGLE_MODEL=gemini-2.5-flash-lite`.
+Current development setting: `AI_PROVIDER=google` and `GOOGLE_MODEL=gemini-3.5-flash-lite`. A Gemini Developer API key for the Google AI Studio project `CX83 Labs Website` is in the ignored local `.env` file. It is not in Git.
 
-Gemini API pricing on October 6, 2026 still lists `gemini-2.5-flash-lite`. On the standard free tier, input and output tokens are free of charge, and Google says that content is used to improve its products. Paid-tier content is not used that way. Google also says new access to Gemini 2.5 is limited to accounts that have used those models before, and points new projects at `gemini-3.5-flash-lite` or `gemini-3.8-flash`. `gemini-3.5-flash-lite` is also free of charge for standard input and output. If a new key rejects 2.5 Flash-Lite, change `GOOGLE_MODEL` only.
+Gemini API pricing on October 6, 2026 still lists `gemini-2.5-flash-lite` with free standard-tier input and output. A live request that night reached `generativelanguage.googleapis.com` and Google returned that `gemini-2.5-flash-lite` is no longer available to new users. The same response named `gemini-3.5-flash-lite`, which is also free of charge for standard input and output. A second live request with that model reached Gemini and returned HTTP 403, `Your project has been denied access`. In AI Studio, `CX83 Labs Website`, `Default Gemini Project`, and `cx83-labs-pilot` are all marked Restricted, and the billing page says there is no billing account. The restriction text says to set up billing to continue. Paid billing was not enabled. Free-tier content is used to improve Google products. OpenAI was not called.
 
 Because the free tier can use prompts to improve Google products, this provider currently receives public CX83 site knowledge and ordinary visitor chat messages. Do not send private form submissions, credentials, confidential client information, or patient information to it. The chat route does not read form submissions.
 
@@ -109,7 +109,7 @@ Switch back to OpenAI by setting `AI_PROVIDER=openai`, `OPENAI_API_KEY`, and opt
 
 The OpenAI model `gpt-6-luna` remains available for that switch. OpenAI's model documentation on October 6, 2026 lists it at $0.10 per million input tokens and $0.50 per million output tokens. When `AI_PROVIDER=openai` and `OPENAI_MODEL` is empty, the Assistant settings global can still set the OpenAI model. Output is capped, and only the latest 12 messages are sent.
 
-A local OpenAI request on October 6, 2026 reached OpenAI and the account returned `credit_balance_exhausted`. A completed live OpenAI answer has not been observed. A Gemini key is not in the local environment, so a live Gemini stream has not been run.
+A local OpenAI request on October 6, 2026 reached OpenAI and the account returned `credit_balance_exhausted`. A completed live OpenAI answer has not been observed. The Gemini key stays in the ignored `.env` file.
 
 Approved knowledge comes from published Payload content when the database is connected, and from the labeled development fallback when it is not. There is no vector database. A later retrieval step can read the same Payload content, create embeddings, and pass retrieved excerpts into `buildSystemPrompt` in `src/ai/assistant.ts`.
 

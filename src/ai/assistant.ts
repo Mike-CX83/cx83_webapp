@@ -2,7 +2,7 @@ import { loadCaseStudies, loadProjects, loadServices, loadSiteCopy } from '@/con
 import { getPayloadClient } from '@/lib/payload'
 
 const defaultOpenAIModel = 'gpt-6-luna'
-const defaultGoogleModel = 'gemini-2.5-flash-lite'
+const defaultGoogleModel = 'gemini-3.5-flash-lite'
 const defaultMaxOutputTokens = 800
 
 export type AssistantProvider = 'google' | 'openai'

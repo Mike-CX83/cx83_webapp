@@ -57,7 +57,10 @@ export async function POST(req: Request) {
     const message = error instanceof Error ? error.message : 'unknown error'
     console.error(
       'CX83 assistant request failed.',
-      message.replace(/sk-[A-Za-z0-9_-]+/g, '[redacted]').replace(/AIza[0-9A-Za-z_-]{10,}/g, '[redacted]'),
+      message
+        .replace(/sk-[A-Za-z0-9_-]+/g, '[redacted]')
+        .replace(/AIza[0-9A-Za-z_-]{10,}/g, '[redacted]')
+        .replace(/AQ\.[0-9A-Za-z_-]{10,}/g, '[redacted]'),
     )
     return Response.json(
       { error: 'The assistant request failed before a reply started. The selected provider was not changed.' },
