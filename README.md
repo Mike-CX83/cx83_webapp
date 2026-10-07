@@ -54,17 +54,11 @@ Required before admin, publishing, media, and saved forms will work:
 
 The website pages still render without `DATABASE_URL`. They show a labeled development fallback instead of published content.
 
-The active development provider is Google Gemini. `CHATBOT_ENABLED=false` hides the launcher. A missing key for the selected provider returns a configuration error and does not switch providers.
+The active development provider is OpenRouter. `CHATBOT_ENABLED=false` hides the launcher. A missing key for the selected provider returns a configuration error and does not switch providers.
 
 ## Database
 
-PostgreSQL is the only database adapter configured. This Mac does not have PostgreSQL or Docker installed, and neither was added. Until `DATABASE_URL` points at a development database, these checks stay blocked:
-
-- Payload admin login
-- Owner publishing
-- Media upload
-- Form submission persistence
-- Payload MCP create, read, update, delete, and publish
+PostgreSQL is the only database adapter configured. Local development uses PostgreSQL 17 from Homebrew, database `cx83_webapp_dev`, started with `brew services`. `DATABASE_URL` in the ignored `.env` points at that database on this Mac. It is not a hosted or paid database.
 
 Payload stores uploads in `public/media` during development. Production hosting needs persistent disk or object storage. No external media service was purchased.
 

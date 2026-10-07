@@ -30,6 +30,7 @@ export const Projects: CollectionConfig = {
     {
       name: 'status',
       type: 'select',
+      enumName: 'enum_projects_progress',
       defaultValue: 'in-progress',
       options: [
         { label: 'Planned', value: 'planned' },
