@@ -3,9 +3,10 @@ import { getPayloadClient } from '@/lib/payload'
 
 const defaultOpenAIModel = 'gpt-6-luna'
 const defaultGoogleModel = 'gemini-3.5-flash-lite'
+const defaultOpenRouterModel = 'openrouter/free'
 const defaultMaxOutputTokens = 800
 
-export type AssistantProvider = 'google' | 'openai'
+export type AssistantProvider = 'google' | 'openai' | 'openrouter'
 
 export type AssistantRuntimeConfig = {
   enabled: boolean
@@ -18,14 +19,13 @@ export type AssistantRuntimeConfig = {
 }
 
 function missingKeyError(provider: AssistantProvider, keyName: string): string {
-  const other = provider === 'google' ? 'OpenAI' : 'Google'
-  return `AI_PROVIDER is ${provider}, but ${keyName} is not set. ${other} was not used as a fallback.`
+  return `AI_PROVIDER is ${provider}, but ${keyName} is not set. No other provider was used as a fallback.`
 }
 
 export async function getAssistantRuntimeConfig(): Promise<AssistantRuntimeConfig> {
   const requested = process.env.AI_PROVIDER?.trim() ?? ''
   const provider: AssistantProvider | null =
-    requested === 'google' || requested === 'openai' ? requested : null
+    requested === 'google' || requested === 'openai' || requested === 'openrouter' ? requested : null
   const envMax = Number(process.env.OPENAI_MAX_OUTPUT_TOKENS)
   let model = ''
   let maxOutputTokens = Number.isFinite(envMax) && envMax > 0 ? envMax : defaultMaxOutputTokens
@@ -35,17 +35,22 @@ export async function getAssistantRuntimeConfig(): Promise<AssistantRuntimeConfi
 
   if (provider == null) {
     configurationError = requested
-      ? `AI_PROVIDER is "${requested}". Set it to google or openai. No other provider was used.`
-      : 'AI_PROVIDER is not set. Set it to google or openai.'
+      ? `AI_PROVIDER is "${requested}". Set it to openrouter, google, or openai. No other provider was used.`
+      : 'AI_PROVIDER is not set. Set it to openrouter, google, or openai.'
   } else if (provider === 'google') {
     model = process.env.GOOGLE_MODEL?.trim() || defaultGoogleModel
     if (!process.env.GOOGLE_GENERATIVE_AI_API_KEY?.trim()) {
       configurationError = missingKeyError('google', 'GOOGLE_GENERATIVE_AI_API_KEY')
     }
-  } else {
+  } else if (provider === 'openai') {
     model = process.env.OPENAI_MODEL?.trim() || defaultOpenAIModel
     if (!process.env.OPENAI_API_KEY?.trim()) {
       configurationError = missingKeyError('openai', 'OPENAI_API_KEY')
+    }
+  } else {
+    model = process.env.OPENROUTER_MODEL?.trim() || defaultOpenRouterModel
+    if (!process.env.OPENROUTER_API_KEY?.trim()) {
+      configurationError = missingKeyError('openrouter', 'OPENROUTER_API_KEY')
     }
   }
 

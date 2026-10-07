@@ -1,5 +1,6 @@
 import { createGoogle } from '@ai-sdk/google'
 import { createOpenAI } from '@ai-sdk/openai'
+import { createOpenRouter } from '@openrouter/ai-sdk-provider'
 import type { LanguageModel } from 'ai'
 
 import type { AssistantRuntimeConfig } from './assistant'
@@ -31,5 +32,16 @@ export function getLanguageModel(config: AssistantRuntimeConfig): LanguageModel 
     return createOpenAI({ apiKey })(config.model)
   }
 
-  throw new Error(`AI provider "${config.provider}" is not supported. Set AI_PROVIDER to google or openai.`)
+  if (config.provider === 'openrouter') {
+    const apiKey = process.env.OPENROUTER_API_KEY?.trim()
+    if (!apiKey) {
+      throw new Error('OPENROUTER_API_KEY is not set.')
+    }
+
+    return createOpenRouter({ apiKey })(config.model)
+  }
+
+  throw new Error(
+    `AI provider "${config.provider}" is not supported. Set AI_PROVIDER to openrouter, google, or openai.`,
+  )
 }

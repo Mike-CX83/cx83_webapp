@@ -90,22 +90,23 @@ The contact page posts to `/api/inquiries`. The server validates the fields and,
 
 ## Assistant
 
-The browser talks to assistant-ui. assistant-ui posts to `/api/chat`. That endpoint uses the Vercel AI SDK on the server. The browser never receives `GOOGLE_GENERATIVE_AI_API_KEY` or `OPENAI_API_KEY`.
+The browser talks to assistant-ui. assistant-ui posts to `/api/chat`. That endpoint uses the Vercel AI SDK on the server. The browser never receives `OPENROUTER_API_KEY`, `GOOGLE_GENERATIVE_AI_API_KEY`, or `OPENAI_API_KEY`.
 
 The active provider is selected with `AI_PROVIDER`. The chat panel does not change between providers.
 
 | `AI_PROVIDER` | Model variable | Key variable | Default model |
 | --- | --- | --- | --- |
+| `openrouter` | `OPENROUTER_MODEL` | `OPENROUTER_API_KEY` | `openrouter/free` |
 | `google` | `GOOGLE_MODEL` | `GOOGLE_GENERATIVE_AI_API_KEY` | `gemini-3.5-flash-lite` |
 | `openai` | `OPENAI_MODEL` | `OPENAI_API_KEY` | `gpt-6-luna` |
 
-Current development setting: `AI_PROVIDER=google` and `GOOGLE_MODEL=gemini-3.5-flash-lite`. A Gemini Developer API key for the Google AI Studio project `CX83 Labs Website` is in the ignored local `.env` file. It is not in Git.
+Current development setting: `AI_PROVIDER=openrouter` and `OPENROUTER_MODEL=openrouter/free`. Gemini and OpenAI stay configured and are selected only by changing `AI_PROVIDER`. Provider keys stay in the ignored local `.env` file. They are not in Git.
 
 Gemini API pricing on October 6, 2026 still lists `gemini-2.5-flash-lite` with free standard-tier input and output. A live request that night reached `generativelanguage.googleapis.com` and Google returned that `gemini-2.5-flash-lite` is no longer available to new users. The same response named `gemini-3.5-flash-lite`, which is also free of charge for standard input and output. A second live request with that model reached Gemini and returned HTTP 403, `Your project has been denied access`. In AI Studio, `CX83 Labs Website`, `Default Gemini Project`, and `cx83-labs-pilot` are all marked Restricted, and the billing page says there is no billing account. The restriction text says to set up billing to continue. Paid billing was not enabled. Free-tier content is used to improve Google products. OpenAI was not called.
 
 Because the free tier can use prompts to improve Google products, this provider currently receives public CX83 site knowledge and ordinary visitor chat messages. Do not send private form submissions, credentials, confidential client information, or patient information to it. The chat route does not read form submissions.
 
-Switch back to OpenAI by setting `AI_PROVIDER=openai`, `OPENAI_API_KEY`, and optionally `OPENAI_MODEL`. No frontend change is required. Leave the unused provider's key in place. The selected provider is the only one called. A missing key returns HTTP 503 with the missing variable name.
+Switch providers by setting `AI_PROVIDER` to `openrouter`, `google`, or `openai`, plus that provider's key and model variables. No frontend change is required. Leave the unused providers' keys in place. The selected provider is the only one called. A missing key returns HTTP 503 with the missing variable name. A live request on October 7, 2026 with `openrouter/free` streamed an answer through the existing chat panel. Gemini and OpenAI were not called.
 
 The OpenAI model `gpt-6-luna` remains available for that switch. OpenAI's model documentation on October 6, 2026 lists it at $0.10 per million input tokens and $0.50 per million output tokens. When `AI_PROVIDER=openai` and `OPENAI_MODEL` is empty, the Assistant settings global can still set the OpenAI model. Output is capped, and only the latest 12 messages are sent.
 

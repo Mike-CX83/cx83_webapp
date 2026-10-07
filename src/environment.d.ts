@@ -14,6 +14,8 @@ declare global {
       OPENAI_MODEL?: string
       OPENAI_API_KEY?: string
       OPENAI_MAX_OUTPUT_TOKENS?: string
+      OPENROUTER_API_KEY?: string
+      OPENROUTER_MODEL?: string
       PAYLOAD_MCP_ENABLED?: string
     }
   }

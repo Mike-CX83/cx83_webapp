@@ -27,6 +27,7 @@
     "@assistant-ui/ai-sdk": "^0.0.9",
     "@assistant-ui/react": "^0.15.23",
     "@assistant-ui/react-markdown": "^0.14.18",
+    "@openrouter/ai-sdk-provider": "3.1.0",
     "@payloadcms/admin-bar": "3.90.2",
     "@payloadcms/db-postgres": "3.90.2",
     "@payloadcms/live-preview-react": "3.90.2",

@@ -23,6 +23,9 @@ importers:
       '@assistant-ui/react-markdown':
         specifier: ^0.14.18
         version: 0.14.18(@assistant-ui/react@0.15.23(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(ai@7.0.128(zod@4.6.5))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(use-sync-external-store@1.7.0(react@19.2.6)))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(supports-color@7.2.0)
+      '@openrouter/ai-sdk-provider':
+        specifier: 3.1.0
+        version: 3.1.0(ai@7.0.128(zod@4.6.5))(zod@4.6.5)
       '@payloadcms/admin-bar':
         specifier: 3.90.2
         version: 3.90.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
@@ -1622,6 +1625,13 @@ packages:
   '@nolyfill/is-core-module@1.0.39':
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
+
+  '@openrouter/ai-sdk-provider@3.1.0':
+    resolution: {integrity: sha512-BQy1TA9fKrh47s9ivsO6FY5QimN7GUF0i8Qon3pkxQclEgShso0dClpcWn8OIyPLEZZPFaFKgI8TW4S/O0p0Dw==}
+    engines: {node: '>=22'}
+    peerDependencies:
+      ai: ^7.0.0
+      zod: ^3.25.76 || ^4.1.8
 
   '@payloadcms/admin-bar@3.90.2':
     resolution: {integrity: sha512-MrT4WAgedJfPawaKXoRCRzuidsL5Hv42QOOLFO0cIKgFDrjkskQjycplfa+Tof68KiuKrifQQ18Mb3cvd5sXDw==}
@@ -7410,6 +7420,11 @@ snapshots:
       fastq: 1.20.3
 
   '@nolyfill/is-core-module@1.0.39': {}
+
+  '@openrouter/ai-sdk-provider@3.1.0(ai@7.0.128(zod@4.6.5))(zod@4.6.5)':
+    dependencies:
+      ai: 7.0.128(zod@4.6.5)
+      zod: 4.6.5
 
   '@payloadcms/admin-bar@3.90.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
     dependencies:
