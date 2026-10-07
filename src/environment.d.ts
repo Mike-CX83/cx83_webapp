@@ -5,6 +5,14 @@ declare global {
       DATABASE_URL: string
       NEXT_PUBLIC_SERVER_URL: string
       VERCEL_PROJECT_PRODUCTION_URL: string
+      CRON_SECRET: string
+      PREVIEW_SECRET: string
+      CHATBOT_ENABLED?: string
+      AI_PROVIDER?: string
+      OPENAI_MODEL?: string
+      OPENAI_API_KEY?: string
+      OPENAI_MAX_OUTPUT_TOKENS?: string
+      PAYLOAD_MCP_ENABLED?: string
     }
   }
 }

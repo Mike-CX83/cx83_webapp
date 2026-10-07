@@ -5,13 +5,6 @@ export const themeLocalStorageKey = 'payload-theme'
 export const defaultTheme = 'light'
 
 export const getImplicitPreference = (): Theme | null => {
-  const mediaQuery = '(prefers-color-scheme: dark)'
-  const mql = window.matchMedia(mediaQuery)
-  const hasImplicitPreference = typeof mql.matches === 'boolean'
-
-  if (hasImplicitPreference) {
-    return mql.matches ? 'dark' : 'light'
-  }
-
-  return null
+  // The public site stays on the light token set until a brand theme decision exists.
+  return 'light'
 }

@@ -7,6 +7,7 @@ import React from 'react'
 import { Search } from '@/search/Component'
 import PageClient from './page.client'
 import { CardPostData } from '@/components/Card'
+import { databaseConfigured } from '@/lib/database'
 
 type Args = {
   searchParams: Promise<{
@@ -15,6 +16,16 @@ type Args = {
 }
 export default async function Page({ searchParams: searchParamsPromise }: Args) {
   const { q: query } = await searchParamsPromise
+
+  if (!databaseConfigured()) {
+    return (
+      <div className="cx83-container py-24">
+        <h1 className="text-3xl font-semibold">Search</h1>
+        <p className="mt-4 text-muted-foreground">Search is available after PostgreSQL is connected.</p>
+      </div>
+    )
+  }
+
   const payload = await getPayload({ config: configPromise })
 
   const posts = await payload.find({
@@ -83,6 +94,6 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Payload Website Template Search`,
+    title: `Search`,
   }
 }

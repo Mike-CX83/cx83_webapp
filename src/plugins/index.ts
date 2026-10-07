@@ -1,4 +1,5 @@
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
+import { mcpPlugin } from '@payloadcms/plugin-mcp'
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
@@ -14,7 +15,7 @@ import { Page, Post } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
-  return doc?.title ? `${doc.title} | Payload Website Template` : 'Payload Website Template'
+  return doc?.title ? `${doc.title} | CX83 Labs` : 'CX83 Labs'
 }
 
 const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
@@ -23,9 +24,42 @@ const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
   return doc?.slug ? `${url}/${doc.slug}` : url
 }
 
+const mcpContent = {
+  enabled: {
+    find: true,
+    create: true,
+    update: true,
+    delete: true,
+  },
+} as const
+
 export const plugins: Plugin[] = [
+  mcpPlugin({
+    disabled: process.env.NODE_ENV === 'production' && process.env.PAYLOAD_MCP_ENABLED !== 'true',
+    collections: {
+      pages: { description: 'Website pages.', ...mcpContent },
+      posts: { description: 'Articles.', ...mcpContent },
+      media: { description: 'Uploaded media.', ...mcpContent },
+      services: { description: 'CX83 services.', ...mcpContent },
+      projects: { description: 'CX83 projects.', ...mcpContent },
+      'case-studies': { description: 'CX83 case studies.', ...mcpContent },
+      forms: { description: 'Payload forms.', ...mcpContent },
+      'form-submissions': { description: 'Saved form submissions.', ...mcpContent },
+      users: { description: 'Admin users.', ...mcpContent },
+      categories: { description: 'Post categories.', ...mcpContent },
+    },
+    globals: {
+      header: { description: 'Header navigation.', enabled: { find: true, update: true } },
+      footer: { description: 'Footer navigation.', enabled: { find: true, update: true } },
+      'site-settings': { description: 'Site settings.', enabled: { find: true, update: true } },
+      'assistant-settings': {
+        description: 'Visitor assistant settings.',
+        enabled: { find: true, update: true },
+      },
+    },
+  }),
   redirectsPlugin({
-    collections: ['pages', 'posts'],
+    collections: ['pages', 'posts', 'services', 'projects', 'case-studies'],
     overrides: {
       // @ts-expect-error - This is a valid override, mapped fields don't resolve to the same type
       fields: ({ defaultFields }) => {

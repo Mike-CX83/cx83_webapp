@@ -25,6 +25,8 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   }, [pathname])
 
   useEffect(() => {
+    // The template syncs the header theme from the server payload after hydration.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (headerTheme && headerTheme !== theme) setTheme(headerTheme)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [headerTheme])

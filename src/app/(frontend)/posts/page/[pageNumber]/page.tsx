@@ -8,6 +8,7 @@ import { getPayload } from 'payload'
 import React from 'react'
 import PageClient from './page.client'
 import { notFound } from 'next/navigation'
+import { databaseConfigured } from '@/lib/database'
 
 export const revalidate = 600
 
@@ -18,6 +19,7 @@ type Args = {
 }
 
 export default async function Page({ params: paramsPromise }: Args) {
+  if (!databaseConfigured()) notFound()
   const { pageNumber } = await paramsPromise
   const payload = await getPayload({ config: configPromise })
 
@@ -65,11 +67,14 @@ export default async function Page({ params: paramsPromise }: Args) {
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
   const { pageNumber } = await paramsPromise
   return {
-    title: `Payload Website Template Posts Page ${pageNumber || ''}`,
+    title: `Notes ${pageNumber || ''}`,
   }
 }
 
 export async function generateStaticParams() {
+  if (!databaseConfigured()) return []
+
+  try {
   const payload = await getPayload({ config: configPromise })
   const { totalDocs } = await payload.count({
     collection: 'posts',
@@ -85,4 +90,7 @@ export async function generateStaticParams() {
   }
 
   return pages
+  } catch {
+    return []
+  }
 }

@@ -7,11 +7,22 @@ import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import React from 'react'
 import PageClient from './page.client'
+import { databaseConfigured } from '@/lib/database'
 
-export const dynamic = 'force-static'
-export const revalidate = 600
+export const dynamic = 'force-dynamic'
 
 export default async function Page() {
+  if (!databaseConfigured()) {
+    return (
+      <div className="cx83-container py-24">
+        <h1 className="text-3xl font-semibold">Notes</h1>
+        <p className="mt-4 max-w-2xl text-muted-foreground">
+          Articles will appear here after PostgreSQL is connected and posts are published.
+        </p>
+      </div>
+    )
+  }
+
   const payload = await getPayload({ config: configPromise })
 
   const posts = await payload.find({
@@ -58,6 +69,6 @@ export default async function Page() {
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Payload Website Template Posts`,
+    title: `Notes`,
   }
 }

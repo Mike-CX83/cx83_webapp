@@ -5,9 +5,11 @@ import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
 import React from 'react'
 
+import { AssistantWidget } from '@/components/assistant/AssistantWidget'
 import { AdminBar } from '@/components/AdminBar'
-import { Footer } from '@/Footer/Component'
-import { Header } from '@/Header/Component'
+import { SiteFooter } from '@/components/site/SiteFooter'
+import { SiteHeader } from '@/components/site/SiteHeader'
+import { loadNavigation, loadSiteCopy } from '@/content/load'
 import { Providers } from '@/providers'
 import { InitTheme } from '@/providers/Theme/InitTheme'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
@@ -16,8 +18,11 @@ import { draftMode } from 'next/headers'
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 
+export const dynamic = 'force-dynamic'
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()
+  const [site, navigation] = await Promise.all([loadSiteCopy(), loadNavigation()])
 
   return (
     <html className={cn(GeistSans.variable, GeistMono.variable)} lang="en" suppressHydrationWarning>
@@ -33,10 +38,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               preview: isEnabled,
             }}
           />
-
-          <Header />
-          {children}
-          <Footer />
+          <a className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-background focus:p-3" href="#content">
+            Skip to content
+          </a>
+          <SiteHeader items={navigation} siteName={site.copy.siteName} />
+          <main id="content">{children}</main>
+          <SiteFooter email={site.copy.contactEmail} siteName={site.copy.siteName} />
+          {process.env.CHATBOT_ENABLED === 'false' ? null : <AssistantWidget />}
         </Providers>
       </body>
     </html>
@@ -45,9 +53,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
 export const metadata: Metadata = {
   metadataBase: new URL(getServerSideURL()),
+  title: {
+    default: 'CX83 Labs',
+    template: '%s | CX83 Labs',
+  },
+  description: 'CX83 Labs focuses on AI systems, automation, software, and business integration.',
   openGraph: mergeOpenGraph(),
   twitter: {
     card: 'summary_large_image',
-    creator: '@payloadcms',
   },
 }

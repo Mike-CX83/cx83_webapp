@@ -29,6 +29,7 @@ export const Card: React.FC<{
   const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
   const href = `/${relationTo}/${slug}`
 
+  /* eslint-disable react-hooks/refs -- template clickable-card refs */
   return (
     <article
       className={cn(
