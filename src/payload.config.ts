@@ -11,6 +11,13 @@ import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Projects } from './collections/Projects'
 import { Services } from './collections/Services'
+import {
+  StudioArtifacts,
+  StudioDownloadEvents,
+  StudioEntitlements,
+  StudioProducts,
+  StudioReleases,
+} from './collections/StudioDownloads'
 import { Users } from './collections/Users'
 import { Footer } from './Footer/config'
 import { AssistantSettings } from './globals/AssistantSettings'
@@ -68,7 +75,21 @@ export default buildConfig({
       connectionTimeoutMillis: 5000,
     },
   }),
-  collections: [Pages, Posts, Services, Projects, CaseStudies, Media, Categories, Users],
+  collections: [
+    Pages,
+    Posts,
+    Services,
+    Projects,
+    CaseStudies,
+    Media,
+    Categories,
+    Users,
+    StudioProducts,
+    StudioReleases,
+    StudioArtifacts,
+    StudioEntitlements,
+    StudioDownloadEvents,
+  ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer, SiteSettings, AssistantSettings],
   plugins,
