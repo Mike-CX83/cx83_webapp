@@ -10,7 +10,6 @@ export async function GET(req: Request) {
   if (url.searchParams.get('path') || url.searchParams.get('key') || url.searchParams.get('url')) {
     return Response.json({ ok: false, error: 'A download cannot use a caller-supplied path.' }, { status: 400 })
   }
-  const artifactId = url.searchParams.get('id') || ''
   if (!databaseConfigured()) {
     return Response.json(
       { ok: false, error: 'The download service is not connected to PostgreSQL yet, so no file was sent.' },
@@ -25,17 +24,35 @@ export async function GET(req: Request) {
     )
   }
   const { user } = await payload.auth({ headers: req.headers })
+  return downloadForUser(user ? String(user.id) : null, url.searchParams.get('id') || '')
+}
+
+export async function downloadForUser(userId: string | null, artifactId: string): Promise<Response> {
+  if (!databaseConfigured()) {
+    return Response.json(
+      { ok: false, error: 'The download service is not connected to PostgreSQL yet, so no file was sent.' },
+      { status: 503 },
+    )
+  }
+  const payload = await getPayloadClient()
+  if (!payload) {
+    return Response.json(
+      { ok: false, error: 'PostgreSQL did not accept the connection, so no file was sent.' },
+      { status: 503 },
+    )
+  }
   const entitlements: StudioEntitlement[] = []
-  if (user) {
+  if (userId) {
     const found = await payload.find({
       collection: 'studio-entitlements',
-      where: { user: { equals: user.id } },
+      where: { user: { equals: userId } },
       depth: 0,
       limit: 20,
+      overrideAccess: true,
     })
     for (const doc of found.docs) {
       entitlements.push({
-        userId: String(user.id),
+        userId,
         productSlug: 'client-brand-studio',
         grant: doc.grant === 'owner' ? 'owner' : 'test',
         platforms: (doc.platforms || []) as StudioPlatform[],
@@ -43,7 +60,7 @@ export async function GET(req: Request) {
     }
   }
   const decision = authorizeStudioDownload({
-    userId: user ? String(user.id) : null,
+    userId,
     artifactId,
     entitlements,
   })
@@ -52,22 +69,16 @@ export async function GET(req: Request) {
   }
   const root = process.env.STUDIO_DOWNLOAD_ROOT
   if (!root) {
-    return Response.json(
-      { ok: false, error: 'The installer has not been published to this server.' },
-      { status: 404 },
-    )
+    return Response.json({ ok: false, error: 'The installer has not been published to this server.' }, { status: 404 })
   }
   const filePath = resolveCatalogFile(root, decision.artifact.storageKey)
   if (!filePath || !fs.existsSync(filePath)) {
-    return Response.json(
-      { ok: false, error: 'The installer has not been published to this server.' },
-      { status: 404 },
-    )
+    return Response.json({ ok: false, error: 'The installer has not been published to this server.' }, { status: 404 })
   }
   await payload.create({
     collection: 'studio-download-events',
     data: {
-      user: user?.id,
+      user: Number(userId),
       catalogId: decision.artifact.id,
       testGrant: decision.testGrant,
     },

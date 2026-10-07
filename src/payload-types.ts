@@ -76,6 +76,11 @@ export interface Config {
     media: Media;
     categories: Category;
     users: User;
+    'studio-products': StudioProduct;
+    'studio-releases': StudioRelease;
+    'studio-artifacts': StudioArtifact;
+    'studio-entitlements': StudioEntitlement;
+    'studio-download-events': StudioDownloadEvent;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -102,6 +107,11 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    'studio-products': StudioProductsSelect<false> | StudioProductsSelect<true>;
+    'studio-releases': StudioReleasesSelect<false> | StudioReleasesSelect<true>;
+    'studio-artifacts': StudioArtifactsSelect<false> | StudioArtifactsSelect<true>;
+    'studio-entitlements': StudioEntitlementsSelect<false> | StudioEntitlementsSelect<true>;
+    'studio-download-events': StudioDownloadEventsSelect<false> | StudioDownloadEventsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -897,6 +907,68 @@ export interface CaseStudy {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "studio-products".
+ */
+export interface StudioProduct {
+  id: number;
+  name: string;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "studio-releases".
+ */
+export interface StudioRelease {
+  id: number;
+  product: number | StudioProduct;
+  version: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "studio-artifacts".
+ */
+export interface StudioArtifact {
+  id: number;
+  release: number | StudioRelease;
+  catalogId: string;
+  platform: 'mac-arm64' | 'windows-x64';
+  filename: string;
+  sha256?: string | null;
+  signingStatus: 'unsigned' | 'developer-id' | 'notarized';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "studio-entitlements".
+ */
+export interface StudioEntitlement {
+  id: number;
+  user: number | User;
+  productSlug: string;
+  grant: 'test' | 'owner';
+  platforms: ('mac-arm64' | 'windows-x64')[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "studio-download-events".
+ */
+export interface StudioDownloadEvent {
+  id: number;
+  user: number | User;
+  catalogId: string;
+  testGrant?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1378,6 +1450,26 @@ export interface PayloadLockedDocument {
         value: number | User;
       } | null)
     | ({
+        relationTo: 'studio-products';
+        value: number | StudioProduct;
+      } | null)
+    | ({
+        relationTo: 'studio-releases';
+        value: number | StudioRelease;
+      } | null)
+    | ({
+        relationTo: 'studio-artifacts';
+        value: number | StudioArtifact;
+      } | null)
+    | ({
+        relationTo: 'studio-entitlements';
+        value: number | StudioEntitlement;
+      } | null)
+    | ({
+        relationTo: 'studio-download-events';
+        value: number | StudioDownloadEvent;
+      } | null)
+    | ({
         relationTo: 'redirects';
         value: number | Redirect;
       } | null)
@@ -1837,6 +1929,63 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "studio-products_select".
+ */
+export interface StudioProductsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "studio-releases_select".
+ */
+export interface StudioReleasesSelect<T extends boolean = true> {
+  product?: T;
+  version?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "studio-artifacts_select".
+ */
+export interface StudioArtifactsSelect<T extends boolean = true> {
+  release?: T;
+  catalogId?: T;
+  platform?: T;
+  filename?: T;
+  sha256?: T;
+  signingStatus?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "studio-entitlements_select".
+ */
+export interface StudioEntitlementsSelect<T extends boolean = true> {
+  user?: T;
+  productSlug?: T;
+  grant?: T;
+  platforms?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "studio-download-events_select".
+ */
+export interface StudioDownloadEventsSelect<T extends boolean = true> {
+  user?: T;
+  catalogId?: T;
+  testGrant?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
