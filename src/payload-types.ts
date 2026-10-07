@@ -2329,7 +2329,7 @@ export interface AssistantSetting {
    */
   extraGuidance?: string | null;
   /**
-   * Used when OPENAI_MODEL is not set. The default is an inexpensive OpenAI model.
+   * Used only when AI_PROVIDER is openai and OPENAI_MODEL is not set.
    */
   model?: string | null;
   maxOutputTokens?: number | null;

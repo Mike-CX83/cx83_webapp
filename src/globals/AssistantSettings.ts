@@ -29,7 +29,7 @@ export const AssistantSettings: GlobalConfig = {
       name: 'model',
       type: 'text',
       admin: {
-        description: 'Used when OPENAI_MODEL is not set. The default is an inexpensive OpenAI model.',
+        description: 'Used only when AI_PROVIDER is openai and OPENAI_MODEL is not set.',
       },
     },
     {

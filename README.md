@@ -13,7 +13,7 @@ CX83 Labs focuses on AI systems, automation, software, and business integration.
 | Database | PostgreSQL through `@payloadcms/db-postgres` 3.90.2 |
 | UI | Tailwind CSS 4.3.3 and the template's shadcn/ui components |
 | Assistant interface | assistant-ui `@assistant-ui/react` 0.15.23 |
-| AI boundary | Vercel AI SDK `ai` 7.0.128 and `@ai-sdk/openai` 4.0.84 |
+| AI boundary | Vercel AI SDK `ai` 7.0.128, `@ai-sdk/google` 4.0.90, and `@ai-sdk/openai` 4.0.84 |
 | OpenAI SDK | `openai` 7.28.0, used for a direct API check, not from browser components |
 | Package manager | pnpm 11.28.5 |
 | Node | 26.5.0 on this Mac. The project accepts Node `>=20.18.1` |
@@ -54,7 +54,7 @@ Required before admin, publishing, media, and saved forms will work:
 
 The website pages still render without `DATABASE_URL`. They show a labeled development fallback instead of published content.
 
-OpenAI is optional. Leave `OPENAI_API_KEY` empty and the assistant stays in a labeled mock mode. `CHATBOT_ENABLED=false` hides the launcher.
+The active development provider is Google Gemini. `CHATBOT_ENABLED=false` hides the launcher. A missing key for the selected provider returns a configuration error and does not switch providers.
 
 ## Database
 
@@ -90,15 +90,28 @@ The contact page posts to `/api/inquiries`. The server validates the fields and,
 
 ## Assistant
 
-The browser talks to assistant-ui. assistant-ui posts to `/api/chat`. That endpoint uses the Vercel AI SDK, which calls OpenAI on the server. The browser never receives `OPENAI_API_KEY`.
+The browser talks to assistant-ui. assistant-ui posts to `/api/chat`. That endpoint uses the Vercel AI SDK on the server. The browser never receives `GOOGLE_GENERATIVE_AI_API_KEY` or `OPENAI_API_KEY`.
 
-The default model is `gpt-6-luna`. OpenAI's model documentation on October 6, 2026 lists it at $0.10 per million input tokens and $0.50 per million output tokens. Override it with `OPENAI_MODEL` or the Assistant settings global. Output is capped, and only the latest 12 messages are sent.
+The active provider is selected with `AI_PROVIDER`. The chat panel does not change between providers.
 
-A local request on October 6, 2026 reached OpenAI and the account returned `credit_balance_exhausted`. The chat showed an error instead of a reply. A completed live answer has not been observed. The labeled mock path is used when the key is missing, the provider is not OpenAI, or the request fails before a stream starts.
+| `AI_PROVIDER` | Model variable | Key variable | Default model |
+| --- | --- | --- | --- |
+| `google` | `GOOGLE_MODEL` | `GOOGLE_GENERATIVE_AI_API_KEY` | `gemini-2.5-flash-lite` |
+| `openai` | `OPENAI_MODEL` | `OPENAI_API_KEY` | `gpt-6-luna` |
+
+Current development setting: `AI_PROVIDER=google` and `GOOGLE_MODEL=gemini-2.5-flash-lite`.
+
+Gemini API pricing on October 6, 2026 still lists `gemini-2.5-flash-lite`. On the standard free tier, input and output tokens are free of charge, and Google says that content is used to improve its products. Paid-tier content is not used that way. Google also says new access to Gemini 2.5 is limited to accounts that have used those models before, and points new projects at `gemini-3.5-flash-lite` or `gemini-3.8-flash`. `gemini-3.5-flash-lite` is also free of charge for standard input and output. If a new key rejects 2.5 Flash-Lite, change `GOOGLE_MODEL` only.
+
+Because the free tier can use prompts to improve Google products, this provider currently receives public CX83 site knowledge and ordinary visitor chat messages. Do not send private form submissions, credentials, confidential client information, or patient information to it. The chat route does not read form submissions.
+
+Switch back to OpenAI by setting `AI_PROVIDER=openai`, `OPENAI_API_KEY`, and optionally `OPENAI_MODEL`. No frontend change is required. Leave the unused provider's key in place. The selected provider is the only one called. A missing key returns HTTP 503 with the missing variable name.
+
+The OpenAI model `gpt-6-luna` remains available for that switch. OpenAI's model documentation on October 6, 2026 lists it at $0.10 per million input tokens and $0.50 per million output tokens. When `AI_PROVIDER=openai` and `OPENAI_MODEL` is empty, the Assistant settings global can still set the OpenAI model. Output is capped, and only the latest 12 messages are sent.
+
+A local OpenAI request on October 6, 2026 reached OpenAI and the account returned `credit_balance_exhausted`. A completed live OpenAI answer has not been observed. A Gemini key is not in the local environment, so a live Gemini stream has not been run.
 
 Approved knowledge comes from published Payload content when the database is connected, and from the labeled development fallback when it is not. There is no vector database. A later retrieval step can read the same Payload content, create embeddings, and pass retrieved excerpts into `buildSystemPrompt` in `src/ai/assistant.ts`.
-
-Another provider belongs in `src/ai/model.ts`. The chat panel does not need to change.
 
 ## Payload MCP
 
@@ -128,9 +141,9 @@ pnpm start
 
 ## Costs
 
-The application code uses open source licenses for the major packages: Payload MIT, Next.js MIT, React MIT, TypeScript Apache-2.0, Tailwind MIT, the AI SDK Apache-2.0, `@ai-sdk/openai` Apache-2.0, the OpenAI SDK Apache-2.0, and assistant-ui MIT. License cost is separate from operating cost.
+The application code uses open source licenses for the major packages: Payload MIT, Next.js MIT, React MIT, TypeScript Apache-2.0, Tailwind MIT, the AI SDK Apache-2.0, `@ai-sdk/google` Apache-2.0, `@ai-sdk/openai` Apache-2.0, the OpenAI SDK Apache-2.0, and assistant-ui MIT. License cost is separate from operating cost.
 
-Possible later operating costs, none of which were purchased here: domain, hosting, database hosting, media storage, email delivery, and OpenAI API usage.
+Possible later operating costs, none of which were purchased here: domain, hosting, database hosting, media storage, email delivery, Gemini API usage above the free tier, and OpenAI API usage.
 
 ## Deferred
 

@@ -9,6 +9,8 @@ declare global {
       PREVIEW_SECRET: string
       CHATBOT_ENABLED?: string
       AI_PROVIDER?: string
+      GOOGLE_GENERATIVE_AI_API_KEY?: string
+      GOOGLE_MODEL?: string
       OPENAI_MODEL?: string
       OPENAI_API_KEY?: string
       OPENAI_MAX_OUTPUT_TOKENS?: string

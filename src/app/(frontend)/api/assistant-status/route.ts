@@ -8,6 +8,6 @@ export async function GET() {
     provider: config.provider,
     model: config.model,
     configured: config.configured,
-    mock: config.mock,
+    configurationError: config.configurationError,
   })
 }

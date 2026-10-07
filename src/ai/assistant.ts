@@ -1,27 +1,53 @@
 import { loadCaseStudies, loadProjects, loadServices, loadSiteCopy } from '@/content/load'
 import { getPayloadClient } from '@/lib/payload'
 
-const defaultModel = 'gpt-6-luna'
+const defaultOpenAIModel = 'gpt-6-luna'
+const defaultGoogleModel = 'gemini-2.5-flash-lite'
 const defaultMaxOutputTokens = 800
+
+export type AssistantProvider = 'google' | 'openai'
 
 export type AssistantRuntimeConfig = {
   enabled: boolean
-  provider: string
+  provider: AssistantProvider | null
   model: string
   maxOutputTokens: number
   configured: boolean
-  mock: boolean
+  configurationError: string | null
   extraGuidance: string
 }
 
+function missingKeyError(provider: AssistantProvider, keyName: string): string {
+  const other = provider === 'google' ? 'OpenAI' : 'Google'
+  return `AI_PROVIDER is ${provider}, but ${keyName} is not set. ${other} was not used as a fallback.`
+}
+
 export async function getAssistantRuntimeConfig(): Promise<AssistantRuntimeConfig> {
-  const provider = process.env.AI_PROVIDER?.trim() || 'openai'
-  const envModel = process.env.OPENAI_MODEL?.trim()
+  const requested = process.env.AI_PROVIDER?.trim() ?? ''
+  const provider: AssistantProvider | null =
+    requested === 'google' || requested === 'openai' ? requested : null
   const envMax = Number(process.env.OPENAI_MAX_OUTPUT_TOKENS)
-  let model = envModel || defaultModel
+  let model = ''
   let maxOutputTokens = Number.isFinite(envMax) && envMax > 0 ? envMax : defaultMaxOutputTokens
   let extraGuidance = ''
   let enabled = process.env.CHATBOT_ENABLED !== 'false'
+  let configurationError: string | null = null
+
+  if (provider == null) {
+    configurationError = requested
+      ? `AI_PROVIDER is "${requested}". Set it to google or openai. No other provider was used.`
+      : 'AI_PROVIDER is not set. Set it to google or openai.'
+  } else if (provider === 'google') {
+    model = process.env.GOOGLE_MODEL?.trim() || defaultGoogleModel
+    if (!process.env.GOOGLE_GENERATIVE_AI_API_KEY?.trim()) {
+      configurationError = missingKeyError('google', 'GOOGLE_GENERATIVE_AI_API_KEY')
+    }
+  } else {
+    model = process.env.OPENAI_MODEL?.trim() || defaultOpenAIModel
+    if (!process.env.OPENAI_API_KEY?.trim()) {
+      configurationError = missingKeyError('openai', 'OPENAI_API_KEY')
+    }
+  }
 
   const payload = await getPayloadClient()
   if (payload) {
@@ -29,22 +55,22 @@ export async function getAssistantRuntimeConfig(): Promise<AssistantRuntimeConfi
     if (typeof settings.enabled === 'boolean' && process.env.CHATBOT_ENABLED == null) {
       enabled = settings.enabled
     }
-    if (!envModel && settings.model) model = settings.model
+    if (provider === 'openai' && !process.env.OPENAI_MODEL?.trim() && settings.model) {
+      model = settings.model
+    }
     if (!process.env.OPENAI_MAX_OUTPUT_TOKENS && settings.maxOutputTokens) {
       maxOutputTokens = settings.maxOutputTokens
     }
     extraGuidance = settings.extraGuidance || ''
   }
 
-  const configured = provider === 'openai' && Boolean(process.env.OPENAI_API_KEY?.trim())
-
   return {
     enabled,
     provider,
     model,
     maxOutputTokens: Math.min(Math.max(maxOutputTokens, 100), 4000),
-    configured,
-    mock: !configured,
+    configured: configurationError == null,
+    configurationError,
     extraGuidance,
   }
 }

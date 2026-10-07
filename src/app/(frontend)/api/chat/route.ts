@@ -38,18 +38,12 @@ export async function POST(req: Request) {
 
   const messages = Array.isArray(body.messages) ? body.messages.slice(-historyLimit) : []
 
-  if (!config.configured || config.provider !== 'openai') {
-    const reason =
-      config.provider !== 'openai'
-        ? `The configured provider is ${config.provider}, and only OpenAI is connected in this version.`
-        : 'OPENAI_API_KEY is not set.'
-
-    return mockResponse(
-      `Mock response. ${reason} This is not a live OpenAI reply. The assistant can still explain that CX83 Labs focuses on AI systems, automation, software, and business integration, and that a real inquiry belongs on the contact form.`,
-    )
+  if (config.configurationError) {
+    return Response.json({ error: config.configurationError }, { status: 503 })
   }
 
   try {
+    // Public site knowledge and the visitor's chat messages only. Form submissions stay out of this request.
     const knowledge = await buildApprovedKnowledge()
     const result = streamText({
       model: getLanguageModel(config),
@@ -61,9 +55,13 @@ export async function POST(req: Request) {
     return result.toUIMessageStreamResponse()
   } catch (error) {
     const message = error instanceof Error ? error.message : 'unknown error'
-    console.error('CX83 assistant request failed.', message.replace(/sk-[A-Za-z0-9_-]+/g, '[redacted]'))
-    return mockResponse(
-      'Mock response. The live assistant request failed, so this is not an OpenAI reply. Please use the contact form.',
+    console.error(
+      'CX83 assistant request failed.',
+      message.replace(/sk-[A-Za-z0-9_-]+/g, '[redacted]').replace(/AIza[0-9A-Za-z_-]{10,}/g, '[redacted]'),
+    )
+    return Response.json(
+      { error: 'The assistant request failed before a reply started. The selected provider was not changed.' },
+      { status: 502 },
     )
   }
 }

@@ -22,17 +22,28 @@ function AssistantSession({ onReset }: { onReset: () => void }) {
     transport: new AssistantChatTransport({ api: '/api/chat' }),
   })
   const [open, setOpen] = useState(false)
-  const [status, setStatus] = useState<'unknown' | 'live' | 'mock'>('unknown')
+  const [status, setStatus] = useState<'unknown' | 'live' | 'unconfigured'>('unknown')
+  const [statusDetail, setStatusDetail] = useState('Checking assistant status.')
 
   useEffect(() => {
     let cancelled = false
     fetch('/api/assistant-status')
       .then((response) => response.json())
-      .then((result: { mock?: boolean }) => {
-        if (!cancelled) setStatus(result.mock ? 'mock' : 'live')
+      .then((result: { configured?: boolean; configurationError?: string | null }) => {
+        if (cancelled) return
+        if (result.configured) {
+          setStatus('live')
+          setStatusDetail('Connected through the server.')
+          return
+        }
+        setStatus('unconfigured')
+        setStatusDetail(result.configurationError || 'The selected AI provider is not configured.')
       })
       .catch(() => {
-        if (!cancelled) setStatus('mock')
+        if (!cancelled) {
+          setStatus('unconfigured')
+          setStatusDetail('Assistant status could not be checked.')
+        }
       })
 
     return () => {
@@ -61,13 +72,7 @@ function AssistantSession({ onReset }: { onReset: () => void }) {
           <header className="flex items-start justify-between gap-3 border-b border-border px-4 py-3">
             <div>
               <p className="text-sm font-semibold">CX83 assistant</p>
-              <p className="text-xs text-muted-foreground">
-                {status === 'live'
-                  ? 'Connected to OpenAI through the server.'
-                  : status === 'mock'
-                    ? 'Mock mode. OpenAI is not configured, so replies are labeled mocks.'
-                    : 'Checking assistant status.'}
-              </p>
+              <p className="text-xs text-muted-foreground">{status === 'unknown' ? 'Checking assistant status.' : statusDetail}</p>
             </div>
             <button
               className="text-xs text-muted-foreground underline-offset-4 hover:underline"

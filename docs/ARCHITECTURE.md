@@ -22,8 +22,8 @@ Assistant:
 
 1. assistant-ui renders the launcher, panel, composer, message list, streaming state, and markdown.
 2. It posts UI messages to the Next.js route `/api/chat`. That route does not start Payload when PostgreSQL is not configured.
-3. `src/ai/model.ts` chooses the provider. OpenAI is the only implemented provider.
-4. The Vercel AI SDK streams the reply. The OpenAI key stays on the server.
+3. `src/ai/assistant.ts` reads `AI_PROVIDER`. `google` selects Gemini through `@ai-sdk/google`. `openai` selects OpenAI through `@ai-sdk/openai`. A missing key is an error. The other provider is not called.
+4. The Vercel AI SDK streams the reply. Provider keys stay on the server. The request contains public site knowledge and the visitor's chat messages.
 5. `src/ai/assistant.ts` builds the system prompt from approved site content.
 
 Owner administration:
