@@ -381,3 +381,24 @@
 .cx83-logo-dark { display: none; }
 [data-theme='dark'] .cx83-logo-light { display: none; }
 [data-theme='dark'] .cx83-logo-dark { display: block; }
+
+
+/* Global public-page interaction consistency, including CMS-rendered content. */
+#content a:focus-visible,
+#content button:focus-visible,
+#content [role='button']:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
+#content a:not(.cx83-action):hover { text-decoration-thickness: .08em; text-underline-offset: .25em; }
+#content button:not(:disabled), #content [data-slot='button']:not(:disabled) { cursor: pointer; }
+#content button:disabled, #content [data-slot='button']:disabled { cursor: not-allowed; }
+#content button:active:not(:disabled) { transform: translateY(1px); }
+.cx83-assistant-launcher { cursor: pointer; transition: transform var(--cx83-motion), box-shadow var(--cx83-motion), filter var(--cx83-motion); }
+.cx83-assistant-launcher:hover { transform: translateY(-2px); filter: brightness(1.04); box-shadow: 0 12px 30px rgb(36 107 255 / 22%); }
+.cx83-assistant-launcher:active { transform: translateY(0); }
+.cx83-assistant-launcher:focus-visible,
+.cx83-assistant-panel :is(button, textarea):focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
+.cx83-assistant-panel button:not(:disabled) { cursor: pointer; }
+.cx83-assistant-panel button:hover:not(:disabled) { filter: brightness(1.08); }
+@media (prefers-reduced-motion: reduce) {
+  .cx83-assistant-launcher { transition: none; }
+  .cx83-assistant-launcher:hover, #content button:active:not(:disabled) { transform: none; }
+}
