@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 const fallbackNav = [
   { href: '/about', label: 'About' },
@@ -15,6 +15,7 @@ const fallbackNav = [
 export function SiteHeader({ siteName, items }: { siteName: string; items: { href: string; label: string }[] }) {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
+  const menuButton = useRef<HTMLButtonElement>(null)
   const nav = items.length ? items : fallbackNav
   const active = (href: string) => href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(href + '/')
   const menuId = 'cx83-mobile-navigation'
@@ -31,11 +32,11 @@ export function SiteHeader({ siteName, items }: { siteName: string; items: { hre
             <Link aria-current={active(item.href) ? 'page' : undefined} className="cx83-site-nav-link" href={item.href} key={item.href}>{item.label}</Link>
           ))}
         </nav>
-        <button aria-controls={menuId} aria-expanded={open} className="cx83-site-menu-button inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-border px-3 text-sm font-semibold md:hidden" onClick={() => setOpen(!open)} type="button">
+        <button ref={menuButton} aria-controls={menuId} aria-expanded={open} className="cx83-site-menu-button inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-border px-3 text-sm font-semibold md:hidden" onClick={() => setOpen(!open)} type="button">
           {open ? 'Close' : 'Menu'}
         </button>
       </div>
-      <nav aria-label="Mobile" onKeyDown={(event) => { if (event.key === 'Escape') setOpen(false) }} className={open ? 'cx83-site-mobile-nav border-t border-border md:hidden' : 'hidden'} id={menuId}>
+      <nav aria-label="Mobile" onKeyDown={(event) => { if (event.key === 'Escape') { setOpen(false); menuButton.current?.focus() } }} className={open ? 'cx83-site-mobile-nav border-t border-border md:hidden' : 'hidden'} id={menuId}>
         <div className="cx83-container flex flex-col py-3">
           {nav.map(item => (
             <Link aria-current={active(item.href) ? 'page' : undefined} className="cx83-site-mobile-link" href={item.href} key={item.href} onClick={() => setOpen(false)}>{item.label}</Link>
