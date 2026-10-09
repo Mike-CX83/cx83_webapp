@@ -17,13 +17,13 @@ export default async function ServicesPage() {
   return (
     <>
       <PageHero eyebrow="Services" title="Practical systems, built for a real operation.">
-        <p>Each service is managed in Payload. The cards below are published services, or labeled development placeholders when the database is unavailable.</p>
+        <p>Websites, automation, and AI tools designed around the way your business works.</p>
       </PageHero>
       <Section>
         <ContentNotice source={services.source} />
         <div className="grid gap-4 lg:grid-cols-2">
           {services.items.map((service) => (
-            <article className="flex flex-col rounded-2xl border border-border bg-card p-6" key={service.slug}>
+            <article className="cx83-shared-card flex flex-col" key={service.slug}>
               <h2 className="text-xl font-semibold">{service.name}</h2>
               <p className="mt-3 leading-7 text-muted-foreground">{service.shortDescription}</p>
               {service.capabilities.length ? (
@@ -35,7 +35,7 @@ export default async function ServicesPage() {
                   ))}
                 </ul>
               ) : null}
-              <Link className="mt-6 text-sm font-medium underline-offset-4 hover:underline" href={`/services/${service.slug}`}>
+              <Link className="mt-6 inline-flex min-h-11 items-center text-sm font-semibold" href={`/services/${service.slug}`}>
                 Read {service.name}
               </Link>
             </article>
