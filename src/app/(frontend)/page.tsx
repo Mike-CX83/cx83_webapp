@@ -37,27 +37,48 @@ export default async function HomePage() {
 
   return (
     <div className="cx83-home cx83-showcase-home" data-testid="cx83-homepage">
-      <section className="cx83-showcase-hero" aria-labelledby="home-title">
+      <section className="cx83-home-hero" aria-labelledby="home-title">
+        <div className="cx83-home-banner" aria-label="CX83 Labs banner">
+          <Image
+            src="/brand/cx83-labs-hero.avif"
+            alt="CX83 Labs illuminated logo in electric blue, silver, and violet"
+            width={960}
+            height={319}
+            sizes="(min-width: 1024px) 1024px, 100vw"
+            priority
+            className="block h-auto w-full"
+            data-testid="homepage-banner"
+          />
+        </div>
+        <div className="cx83-container cx83-home-hero-copy">
+          <div>
+            <p className="cx83-home-eyebrow">{site.copy.tagline}</p>
+            <h1 id="home-title">Systems for work that should not stay manual.</h1>
+          </div>
+          <div className="cx83-home-hero-intro">
+            <p>{site.copy.overview}</p>
+            <div className="cx83-home-actions">
+              <Link className="cx83-action cx83-action-primary" href="/contact">
+                Start a conversation <span aria-hidden="true">↗</span>
+              </Link>
+              <Link className="cx83-action cx83-action-quiet" href="/services">
+                Explore services
+              </Link>
+            </div>
+            <p className="cx83-home-note">Start with one useful improvement. Build from there.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="cx83-showcase-hero" aria-labelledby="showcase-title">
         <div className="cx83-container cx83-showcase-hero-grid">
           <div className="cx83-showcase-intro">
-            <div className="cx83-showcase-identity">
-              <Image
-                alt="CX83 Labs illuminated original brand banner"
-                className="block h-auto w-full"
-                data-testid="homepage-banner"
-                height={319}
-                priority
-                sizes="(min-width: 1024px) 440px, 85vw"
-                src="/brand/cx83-labs-hero.avif"
-                width={960}
-              />
-            </div>
             <p className="cx83-showcase-kicker">{site.copy.tagline}</p>
-            <h1 id="home-title">
+            <h2 id="showcase-title">
               Your website.<br />
               <span>Your AI.</span><br />
               Just ask.
-            </h1>
+            </h2>
             <p className="cx83-showcase-lead">
               CX83 connects your website to supported AI tools you already use. Ask for a change in everyday language,
               and the connected system can make real updates you can review and publish.
@@ -67,7 +88,7 @@ export default async function HomePage() {
                 {showcaseMediaReady ? 'Watch a real website change' : 'See a real website change'} <span aria-hidden="true">↘</span>
               </a>
               <Link className="cx83-action cx83-action-quiet" href="/contact">
-                Start a conversation
+                Discuss your project
               </Link>
             </div>
             <Link className="cx83-showcase-subnav" href="/services">Explore services <span aria-hidden="true">&nbsp;↗</span></Link>
