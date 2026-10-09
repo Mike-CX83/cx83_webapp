@@ -5,7 +5,8 @@ const host = 'http://localhost:3000'
 test.describe('CX83 real website demonstration', () => {
   test('shows a genuine website change and explains separate AI roles', async ({ page }) => {
     await page.goto(host + '/')
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('Your AI.')
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Systems for work that should not stay manual.')
+    await expect(page.getByRole('heading', { level: 2, name: /Your website.*Your AI.*Just ask/s })).toBeVisible()
     await expect(page.getByTestId('cx83-proof-panel')).toBeVisible()
     const action = page.getByRole('link', { name: 'See a real website change', exact: false })
     await expect(action).toHaveAttribute('href', '#website-proof')
