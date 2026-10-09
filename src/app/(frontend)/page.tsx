@@ -173,7 +173,7 @@ export default async function HomePage() {
             <h3>An AI that helps your customers.</h3>
             <p>
               A separate customer-facing assistant can explain your services and help visitors find the right next step.
-              It does not receive the website owner's editing permissions.
+              It does not receive the website owner&apos;s editing permissions.
             </p>
           </article>
         </div>
