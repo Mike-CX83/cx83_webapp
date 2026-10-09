@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 
 import { ContentNotice, PageHero, Section, TextLink } from '@/components/site/Section'
 import { loadProjects, loadServices, loadSiteCopy } from '@/content/load'
@@ -15,6 +16,17 @@ export default async function HomePage() {
 
   return (
     <>
+      <section aria-label="CX83 Labs banner" className="w-full bg-[#080E22]">
+        <Image
+          src="/brand/cx83-labs-hero.avif"
+          alt="CX83 Labs illuminated logo in electric blue, silver, and violet"
+          width={960}
+          height={319}
+          sizes="100vw"
+          priority
+          className="block h-auto w-full"
+        />
+      </section>
       <PageHero eyebrow="CX83 Labs" title="Systems for work that should not stay manual.">
         <p>{site.copy.tagline}</p>
       </PageHero>
