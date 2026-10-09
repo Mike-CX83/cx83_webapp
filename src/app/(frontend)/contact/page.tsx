@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const steps = [
   {
     number: '01',
-    title: 'Tell me what is happening',
+    title: 'Tell us what is happening',
     detail: 'A process, a bottleneck, or an idea is enough to begin.',
   },
   {
@@ -41,11 +41,11 @@ export default async function ContactPage() {
             Let&apos;s make your business <span>work better.</span>
           </h1>
           <p className="cx83-contact-lead">
-            Tell me what takes too much time, what feels disconnected, or what you want to build.
+            Tell us what takes too much time, what feels disconnected, or what you want to build.
             You do not need a technical plan to start the conversation.
           </p>
           <a className="cx83-action cx83-action-primary cx83-contact-hero-link" href="#contact-form">
-            Tell me about your project <span aria-hidden="true">↗</span>
+            Tell us about your project <span aria-hidden="true">↗</span>
           </a>
         </div>
       </section>
@@ -89,8 +89,8 @@ export default async function ContactPage() {
           <div aria-labelledby="contact-form-title" className="cx83-contact-form-card" id="contact-form">
             <div className="cx83-contact-form-intro">
               <p className="cx83-contact-form-kicker">Project inquiry or general question</p>
-              <h2 id="contact-form-title">Tell me what you have in mind.</h2>
-              <p>Share a few details and I can follow up about what makes sense for your business.</p>
+              <h2 id="contact-form-title">Tell us what you have in mind.</h2>
+              <p>Share a few details and we can follow up about what makes sense for your business.</p>
             </div>
             <InquiryForm />
             <p className="cx83-contact-form-note">
