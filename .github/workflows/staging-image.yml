@@ -136,7 +136,7 @@ jobs:
           printf '%s\n' "$STAGING_DEPLOY_SSH_KEY" > "$RUNNER_TEMP/ssh/key"
           chmod 600 "$RUNNER_TEMP/ssh/key"
           set -o pipefail
-          gzip -dc image/cx83-webapp-staging.tar.gz | ssh \
+          ssh \
             -i "$RUNNER_TEMP/ssh/key" \
             -o IdentitiesOnly=yes \
             -o StrictHostKeyChecking=yes \
@@ -144,5 +144,5 @@ jobs:
             -o BatchMode=yes \
             -o ServerAliveInterval=30 \
             "$STAGING_DEPLOY_USER@$STAGING_DEPLOY_HOST" \
-            "deploy $GITHUB_SHA" | tee "$RUNNER_TEMP/deploy-output.txt"
+            "deploy $GITHUB_SHA" < image/cx83-webapp-staging.tar.gz | tee "$RUNNER_TEMP/deploy-output.txt"
           grep -q 'STAGING DEPLOY SUCCESS' "$RUNNER_TEMP/deploy-output.txt"

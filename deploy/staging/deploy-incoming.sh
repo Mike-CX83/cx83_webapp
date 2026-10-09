@@ -87,14 +87,28 @@ fi
 
 snap=$(mktemp)
 image_tar=$(mktemp /tmp/cx83-webapp-image.XXXXXX.tar)
+payload=$(mktemp /tmp/cx83-webapp-payload.XXXXXX)
 health=$(mktemp)
-trap 'rm -f "$snap" "$image_tar" "$health"' EXIT
+trap 'rm -f "$snap" "$image_tar" "$payload" "$health"' EXIT
 
 docker ps --format '{{.Names}}' | while read -r name; do
   docker inspect -f '{{.Name}} {{.State.Status}} {{.State.StartedAt}}' "$name"
 done > "$snap"
 
-if ! gzip -dc > "$image_tar"; then
+if ! cat > "$payload"; then
+  fail "image-receive-failed"
+fi
+
+if gzip -t "$payload" 2>/dev/null; then
+  if ! gzip -dc "$payload" > "$image_tar"; then
+    fail "image-unpack-failed"
+  fi
+else
+  mv "$payload" "$image_tar"
+  payload=$(mktemp /tmp/cx83-webapp-payload.XXXXXX)
+fi
+
+if [ ! -s "$image_tar" ]; then
   fail "image-unpack-failed"
 fi
 
