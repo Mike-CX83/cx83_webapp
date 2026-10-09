@@ -5,6 +5,13 @@ import path from 'node:path'
 import type { MCPPluginConfig } from '@payloadcms/plugin-mcp'
 import { z } from 'zod'
 
+import {
+  formatCheckoutReport,
+  inspectRepositoryCheckout,
+  resolveOwnerCheckoutOptions,
+  syncRepositoryCheckout,
+} from '@/plugins/repositoryCheckout'
+
 const repoRoot = process.env.CX83_REPO_ROOT
   ? path.resolve(process.env.CX83_REPO_ROOT)
   : process.cwd()
@@ -361,7 +368,9 @@ export async function startRepositoryCheck(check: string): Promise<string> {
     cwd: repoRoot,
     env: {
       ...process.env,
-      NODE_OPTIONS: [process.env.NODE_OPTIONS, '--max-old-space-size=640'].filter(Boolean).join(' '),
+      NODE_OPTIONS: [process.env.NODE_OPTIONS, '--max-old-space-size=640']
+        .filter(Boolean)
+        .join(' '),
     },
     stdio: ['ignore', 'pipe', 'pipe'],
   })
@@ -426,6 +435,19 @@ function toolError(error: unknown) {
   const message = error instanceof Error ? error.message : 'The repository tool failed.'
 
   return textResult(message)
+}
+
+async function checkoutReport(action: 'status' | 'sync', expectedSha?: string) {
+  const resolved = resolveOwnerCheckoutOptions(expectedSha)
+
+  if (!resolved.ok) return formatCheckoutReport(resolved.report)
+
+  const report =
+    action === 'status'
+      ? await inspectRepositoryCheckout(resolved.options)
+      : await syncRepositoryCheckout(resolved.options)
+
+  return formatCheckoutReport(report)
 }
 
 export const repositoryTools: NonNullable<NonNullable<MCPPluginConfig['mcp']>['tools']> = [
@@ -511,6 +533,39 @@ export const repositoryTools: NonNullable<NonNullable<MCPPluginConfig['mcp']>['t
         if (id) return textResult(await readRepositoryCheck(id))
 
         return textResult(await startRepositoryCheck(String(args.check ?? '')))
+      } catch (error) {
+        return toolError(error)
+      }
+    },
+  },
+  {
+    name: 'getRepositoryStatus',
+    description:
+      'Read the staging website checkout. Reports the checkout commit, the deployed commit, branch, whether the owner has uncommitted changes, whether a sync is needed, and whether a fast-forward is safe. This is read-only and does not print secrets, remote URLs, or credential files.',
+    parameters: {},
+    handler: async () => {
+      try {
+        return textResult(await checkoutReport('status'))
+      } catch (error) {
+        return toolError(error)
+      }
+    },
+  },
+  {
+    name: 'syncRepositoryCheckout',
+    description:
+      'Fast-forward the staging website checkout to the deployed commit when that is safe. Refuses a dirty checkout, the wrong branch, an unexpected repository, a detached HEAD, diverged history, a missing deployment record, or any commit other than the recorded staging deployment. Does not reset, delete, push, or accept a path or shell command. Pass expectedSha only to confirm the deployed commit.',
+    parameters: {
+      expectedSha: z
+        .string()
+        .optional()
+        .describe('Optional deployed commit id. It must match the recorded staging deployment.'),
+    },
+    handler: async (args) => {
+      try {
+        const expectedSha = typeof args.expectedSha === 'string' ? args.expectedSha : undefined
+
+        return textResult(await checkoutReport('sync', expectedSha))
       } catch (error) {
         return toolError(error)
       }

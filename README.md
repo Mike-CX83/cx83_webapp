@@ -114,7 +114,7 @@ Approved knowledge comes from published Payload content when the database is con
 
 `@payloadcms/plugin-mcp` 3.90.2 is installed and registered. It is enabled during local development and disabled in production unless `PAYLOAD_MCP_ENABLED=true`. The local endpoint is `POST http://127.0.0.1:3000/api/mcp`. It expects `Authorization: Bearer` with an API key from the MCP API keys collection. That key is tied to the owner user, and the plugin calls Payload with `overrideAccess: false`, so the owner keeps full authenticated access. Do not expose this port with a public tunnel.
 
-The same server exposes repository tools for code repair: `readRepositoryFile`, `searchRepository`, `readDevelopmentErrors`, `applyRepositoryEdit`, and `runRepositoryCheck` (`typecheck`, `lint`, `test:int`). Those tools stay inside this repository and refuse credential files. The owner key is stored only in the ignored `.env` as `PAYLOAD_MCP_API_KEY`.
+The same server exposes repository tools for code repair: `readRepositoryFile`, `searchRepository`, `readDevelopmentErrors`, `applyRepositoryEdit`, `runRepositoryCheck` (`typecheck`, `lint`, `test:int`), `getRepositoryStatus`, and `syncRepositoryCheckout`. Those tools stay inside this repository and refuse credential files. The owner key is stored only in the ignored `.env` as `PAYLOAD_MCP_API_KEY`. `getRepositoryStatus` is read-only. `syncRepositoryCheckout` fast-forwards the staging checkout to the deployed commit only when that is safe. The public visitor assistant does not receive these tools.
 
 `runRepositoryCheck` starts the existing command and returns an id immediately. Call the same tool again with that id to retrieve the exit code and output.
 
