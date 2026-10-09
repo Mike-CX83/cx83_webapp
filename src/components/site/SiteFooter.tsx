@@ -4,6 +4,7 @@ import Image from 'next/image'
 const footerNav = [
   { href: '/about', label: 'About' },
   { href: '/services', label: 'Services' },
+  { href: '/software', label: 'Software' },
   { href: '/work', label: 'Work' },
   { href: '/contact', label: 'Contact' },
 ]
