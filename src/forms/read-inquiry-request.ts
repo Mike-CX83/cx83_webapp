@@ -1,0 +1,1 @@
+export const MAX_INQUIRY_BYTES = 32768
