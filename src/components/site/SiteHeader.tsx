@@ -8,6 +8,7 @@ import { useRef, useState } from 'react'
 const fallbackNav = [
   { href: '/about', label: 'About' },
   { href: '/services', label: 'Services' },
+  { href: '/software', label: 'Software' },
   { href: '/work', label: 'Work' },
   { href: '/contact', label: 'Contact' },
 ]
