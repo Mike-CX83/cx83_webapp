@@ -3,13 +3,18 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { ContentNotice, Section } from '@/components/site/Section'
+import { WebsiteDemoPlayer } from '@/components/site/WebsiteDemoPlayer'
+import { WebsiteProofPanel } from '@/components/site/WebsiteProofPanel'
+import { showcaseMediaReady } from '@/content/showcaseMedia'
+
+import './cx83-showcase.css'
 import { loadProjects, loadServices, loadSiteCopy } from '@/content/load'
 
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'CX83 Labs',
-  description: 'AI Systems, Automation, and Business Integration. Connect your tools, simplify repetitive work, and build software around your business.',
+  description: 'CX83 connects websites and business tools to supported AI, so real updates can start with a simple conversation.',
 }
 
 const process = [
@@ -31,39 +36,84 @@ export default async function HomePage() {
   const [site, services, projects] = await Promise.all([loadSiteCopy(), loadServices(), loadProjects()])
 
   return (
-    <div className="cx83-home" data-testid="cx83-homepage">
-      <section className="cx83-home-hero" aria-labelledby="home-title">
-        <div className="cx83-home-banner" aria-label="CX83 Labs banner">
-          <Image
-            src="/brand/cx83-labs-hero.avif"
-            alt="CX83 Labs illuminated logo in electric blue, silver, and violet"
-            width={960}
-            height={319}
-            sizes="(min-width: 1024px) 1024px, 100vw"
-            priority
-            className="block h-auto w-full"
-            data-testid="homepage-banner"
-          />
-        </div>
-        <div className="cx83-container cx83-home-hero-copy">
-          <div>
-            <p className="cx83-home-eyebrow">{site.copy.tagline}</p>
-            <h1 id="home-title">Systems for work that should not stay manual.</h1>
-          </div>
-          <div className="cx83-home-hero-intro">
-            <p>{site.copy.overview}</p>
-            <div className="cx83-home-actions">
-              <Link className="cx83-action cx83-action-primary" href="/contact">
-                Start a conversation <span aria-hidden="true">↗</span>
-              </Link>
-              <Link className="cx83-action cx83-action-quiet" href="/services">
-                Explore services
+    <div className="cx83-home cx83-showcase-home" data-testid="cx83-homepage">
+      <section className="cx83-showcase-hero" aria-labelledby="home-title">
+        <div className="cx83-container cx83-showcase-hero-grid">
+          <div className="cx83-showcase-intro">
+            <div className="cx83-showcase-identity">
+              <Image
+                alt="CX83 Labs illuminated original brand banner"
+                className="block h-auto w-full"
+                data-testid="homepage-banner"
+                height={319}
+                priority
+                sizes="(min-width: 1024px) 440px, 85vw"
+                src="/brand/cx83-labs-hero.avif"
+                width={960}
+              />
+            </div>
+            <p className="cx83-showcase-kicker">{site.copy.tagline}</p>
+            <h1 id="home-title">
+              Your website.<br />
+              <span>Your AI.</span><br />
+              Just ask.
+            </h1>
+            <p className="cx83-showcase-lead">
+              CX83 connects your website to supported AI tools you already use. Ask for a change in everyday language,
+              and the connected system can make real updates you can review and publish.
+            </p>
+            <div className="cx83-showcase-actions">
+              <a className="cx83-action cx83-action-primary" href={showcaseMediaReady ? "#website-demo" : "#website-proof"}>
+                {showcaseMediaReady ? 'Watch a real website change' : 'See a real website change'} <span aria-hidden="true">↘</span>
+              </a>
+              <Link className="cx83-action cx83-action-quiet" href="/contact">
+                Start a conversation
               </Link>
             </div>
-            <p className="cx83-home-note">Start with one useful improvement. Build from there.</p>
+            <Link className="cx83-showcase-subnav" href="/services">Explore services <span aria-hidden="true">&nbsp;↗</span></Link>
+            <p className="cx83-showcase-status">
+              The website you are visiting is itself a CX83 demonstration.
+            </p>
           </div>
+          {showcaseMediaReady ? (
+          <WebsiteDemoPlayer
+            captions="/showcase/cx83-website-showcase-v2.en.vtt"
+            poster="/showcase/cx83-website-showcase-poster-v2.jpg"
+            source="/showcase/cx83-website-showcase-v2.mp4"
+          >
+            Requested through ChatGPT, changed in real software, then checked before publishing.
+          </WebsiteDemoPlayer>
+          ) : (
+            <WebsiteProofPanel />
+          )}
         </div>
       </section>
+
+      <Section className="cx83-showcase-proof-strip" id="how-it-works">
+        <p className="cx83-home-kicker">How the website changes</p>
+        <h2 className="cx83-showcase-proof-title">Describe it. Check it. Make it live.</h2>
+        <p className="mt-5 max-w-2xl leading-7 text-muted-foreground">
+          A conversation can lead to an actual website update, not just instructions about what to do next.
+          The connected tools still use your access permissions and publishing process.
+        </p>
+        <ol className="cx83-showcase-proof-list">
+          <li>
+            <span>01 / Connect</span>
+            <h3>Use the AI you already know.</h3>
+            <p>Connect a supported AI platform to your website with the appropriate owner permissions.</p>
+          </li>
+          <li>
+            <span>02 / Request</span>
+            <h3>Ask for the change.</h3>
+            <p>Tell your AI what should look or work differently. It can work on the actual site, not just suggest code.</p>
+          </li>
+          <li>
+            <span>03 / Review</span>
+            <h3>Test, then publish.</h3>
+            <p>Check the change and publish through the workflow configured for your website.</p>
+          </li>
+        </ol>
+      </Section>
 
       <Section id="services">
         <ContentNotice source={site.source} />
@@ -110,6 +160,29 @@ export default async function HomePage() {
             </li>
           ))}
         </ol>
+      </Section>
+
+      <Section className="cx83-showcase-roles" id="ai-roles">
+        <p className="cx83-home-kicker">Two kinds of help, different permissions</p>
+        <h2 className="cx83-showcase-proof-title">Your AI runs the tools.<br />Your customers get answers.</h2>
+        <div className="cx83-showcase-role-grid">
+          <article className="cx83-showcase-role-card">
+            <p className="cx83-home-kicker">For your team</p>
+            <h3>An AI connected to your website.</h3>
+            <p>
+              With authorized access, your AI can work on site content and code, run checks, and prepare real updates.
+              You control the tools and publishing permissions it receives.
+            </p>
+          </article>
+          <article className="cx83-showcase-role-card">
+            <p className="cx83-home-kicker">For your visitors</p>
+            <h3>An AI that helps your customers.</h3>
+            <p>
+              A separate customer-facing assistant can explain your services and help visitors find the right next step.
+              It does not receive the website owner&apos;s editing permissions.
+            </p>
+          </article>
+        </div>
       </Section>
 
       {projects.items.length ? (
