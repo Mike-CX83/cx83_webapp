@@ -17,7 +17,7 @@ test.describe('CX83 branded intake', () => {
     await expect(name).toHaveAttribute('aria-invalid', 'true')
     await expect(name).toHaveAttribute('aria-describedby', 'name-error')
     await expect(page.locator('#name-error')).toBeVisible()
-    await expect(page.getByRole('alert')).toHaveCount(1)
+    await expect(page.locator('form [role="alert"]')).toContainText('The inquiry was not saved.')
   })
 
   test('a synthetic inquiry is saved before success is shown', async ({ page }) => {
