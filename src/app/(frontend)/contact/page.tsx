@@ -38,7 +38,7 @@ export default async function ContactPage() {
         <div className="cx83-container cx83-contact-hero-inner">
           <p className="cx83-contact-kicker">CX83 Labs / Let&apos;s connect</p>
           <h1 id="contact-title">
-            Let's make your business <span>work better.</span>
+            Let&apos;s make your business <span>work better.</span>
           </h1>
           <p className="cx83-contact-lead">
             Tell me what takes too much time, what feels disconnected, or what you want to build.
