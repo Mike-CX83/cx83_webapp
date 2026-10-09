@@ -83,6 +83,8 @@ The existing CX83 Website connection exposes two more owner tools. Do not add a 
 
 ChatGPT keeps the tool list from the conversation that connected to the app. Start a new conversation with the existing CX83 Website app. If the new tools are absent, disconnect and reconnect that same app so ChatGPT requests the tool list again. Then call `getRepositoryStatus`. When `decision` is `aligned` or `safe-to-sync`, call `syncRepositoryCheckout`, then `readRepositoryFile` on `public/brand/logo-dark.svg` and `src/components/site/SiteHeader.tsx`.
 
+Each owner tool has a boolean column on `payload_mcp_api_keys`. Staging does not run database push during an image deploy. After a new tool ships, add `payload_mcp_tool_<tool_name>` as a boolean with default true. Without those columns the owner connection cannot load any tool. This change added `payload_mcp_tool_get_repository_status` and `payload_mcp_tool_sync_repository_checkout`.
+
 ## Repository checks
 
 `runRepositoryCheck` starts `pnpm exec tsc --noEmit`, `pnpm lint`, or `pnpm test:int` in `/repo` and returns an id immediately. A second call with that id returns the exit code and output. Those commands are unchanged. An edit made by `applyRepositoryEdit` is written in `/opt/cx83-webapp/repo`. Commit and push that checkout, then let the existing GitHub Actions workflow validate it. Do not edit files inside the running image.
