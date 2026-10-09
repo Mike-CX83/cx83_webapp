@@ -226,3 +226,10 @@
   .cx83-showcase-proof-stages li { grid-template-columns: 1fr; gap: .2rem; }
   .cx83-showcase-proof-feature { min-height: auto; }
 }
+
+/* Product discovery belongs below the original, unchanged homepage banner. */
+.cx83-home-software { background: var(--cx83-background); border-top: 1px solid var(--cx83-border); }
+.cx83-home-software-intro { max-width: 56rem; margin-bottom: 2rem; color: var(--cx83-muted); line-height: 1.8; }
+.cx83-home-software-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.cx83-home-software-status { display: inline-flex; width: fit-content; padding: .25rem .8rem; margin-bottom: 1.2rem; border: 1px solid var(--cx83-border); border-radius: 100rem; color: var(--cx83-primary); background: var(--cx83-background); font-size: .73rem; line-height: 1.6; font-weight: 700; }
+@media (max-width: 47.99rem) { .cx83-home-software-grid { grid-template-columns: 1fr; } }
