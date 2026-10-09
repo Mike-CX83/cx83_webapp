@@ -1,0 +1,33 @@
+# Copied to /data/coolify/proxy/dynamic/cx83-webapp.yaml on the staging server.
+# The basic-auth file is created on the server and is not stored in Git.
+http:
+  middlewares:
+    cx83-webapp-https:
+      redirectScheme:
+        scheme: https
+    cx83-webapp-gate:
+      basicAuth:
+        usersFile: /traefik/dynamic/cx83-webapp.htpasswd
+        realm: CX83 staging
+  routers:
+    cx83-webapp-http:
+      entryPoints:
+        - http
+      middlewares:
+        - cx83-webapp-https
+      rule: Host(`staging.cx83labs.com`)
+      service: cx83-webapp
+    cx83-webapp-https:
+      entryPoints:
+        - https
+      middlewares:
+        - cx83-webapp-gate
+      rule: Host(`staging.cx83labs.com`)
+      service: cx83-webapp
+      tls:
+        certResolver: letsencrypt
+  services:
+    cx83-webapp:
+      loadBalancer:
+        servers:
+          - url: http://cx83-webapp:3000

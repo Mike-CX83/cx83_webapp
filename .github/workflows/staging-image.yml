@@ -1,0 +1,37 @@
+name: Staging image
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - staging-host
+
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build the staging image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          load: true
+          tags: cx83-webapp:staging
+          build-args: |
+            NEXT_PUBLIC_SERVER_URL=https://staging.cx83labs.com
+
+      - name: Save the image
+        run: docker save cx83-webapp:staging | gzip -1 > cx83-webapp-staging.tar.gz
+
+      - name: Upload the image
+        uses: actions/upload-artifact@v4
+        with:
+          name: cx83-webapp-staging
+          path: cx83-webapp-staging.tar.gz
+          retention-days: 7

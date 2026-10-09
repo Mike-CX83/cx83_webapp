@@ -116,7 +116,9 @@ Approved knowledge comes from published Payload content when the database is con
 
 The same server exposes repository tools for code repair: `readRepositoryFile`, `searchRepository`, `readDevelopmentErrors`, `applyRepositoryEdit`, and `runRepositoryCheck` (`typecheck`, `lint`, `test:int`). Those tools stay inside this repository and refuse credential files. The owner key is stored only in the ignored `.env` as `PAYLOAD_MCP_API_KEY`.
 
-Personal ChatGPT reaches this private endpoint through OpenAI Secure MCP Tunnel when the account can create one. `tunnel-client` runs on this Mac and adds the owner key locally with `MCP_EXTRA_HEADERS`. The key is not entered in ChatGPT. There is no separate approval step.
+`runRepositoryCheck` starts the existing command and returns an id immediately. Call the same tool again with that id to retrieve the exit code and output.
+
+Personal ChatGPT reaches this private endpoint through the existing OpenAI tunnel. The tunnel client adds the owner key locally. The key is not entered in ChatGPT. On staging, that client runs beside the website so ChatGPT does not need this Mac. See `docs/STAGING.md`.
 
 ## Checks
 

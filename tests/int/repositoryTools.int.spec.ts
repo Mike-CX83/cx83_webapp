@@ -1,4 +1,4 @@
-import { mkdtemp, rm, writeFile } from 'node:fs/promises'
+import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 
@@ -6,6 +6,7 @@ import { afterEach, describe, expect, it } from 'vitest'
 
 import {
   applyRepositoryEdit,
+  readRepositoryCheck,
   readRepositorySource,
   redactToolOutput,
   resolveRepositoryFile,
@@ -49,6 +50,39 @@ describe('repository tools', () => {
       /found 0/,
     )
     await applyRepositoryEdit(disposablePath, 'changed', 'original')
+  })
+
+  it('retrieves a finished check by id and refuses an unsafe id', async () => {
+    const id = 'typecheck-stored-result'
+    const directory = path.resolve(process.cwd(), '.cx83-checks')
+    const jobPath = path.join(directory, `${id}.json`)
+
+    await mkdir(directory, { recursive: true })
+    await writeFile(
+      jobPath,
+      JSON.stringify({
+        id,
+        check: 'typecheck',
+        status: 'finished',
+        startedAt: '2026-10-08T00:00:00.000Z',
+        exitCode: 0,
+        output: 'tsc ok',
+      }),
+      'utf8',
+    )
+
+    try {
+      const result = await readRepositoryCheck(id)
+
+      expect(result).toContain('status: finished')
+      expect(result).toContain('exit: 0')
+      expect(result).toContain('tsc ok')
+      expect(JSON.parse(await readFile(jobPath, 'utf8')).output).toBe('tsc ok')
+      await expect(readRepositoryCheck('../.env')).rejects.toThrow(/Unknown check id/)
+      await expect(readRepositoryCheck('missing-check')).rejects.toThrow(/No repository check/)
+    } finally {
+      await rm(jobPath, { force: true })
+    }
   })
 
   it('does not follow a path that leaves the repository through a temporary directory', async () => {

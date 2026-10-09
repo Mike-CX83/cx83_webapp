@@ -1235,11 +1235,11 @@ export interface PayloadMcpApiKey {
      */
     readDevelopmentErrors?: boolean | null;
     /**
-     * Replace one unique text span in a repository file. The old text must match exactly once. This writes the working tree on this Mac.
+     * Replace one unique text span in a repository file. The old text must match exactly once. This writes the git checkout on this server and does not change the running site until that change is committed and deployed.
      */
     applyRepositoryEdit?: boolean | null;
     /**
-     * Run an existing project check in this repository and return its exit code and output. Allowed checks are typecheck, lint, and test:int.
+     * Start typecheck, lint, or test:int and return immediately with an id. Call again with that id to retrieve the exit code and output. The commands stay pnpm exec tsc --noEmit, pnpm lint, and pnpm test:int.
      */
     runRepositoryCheck?: boolean | null;
   };

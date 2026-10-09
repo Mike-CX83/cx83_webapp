@@ -12,6 +12,9 @@ tsconfig.tsbuildinfo
 # Payload default media upload directory
 public/media/
 
+# Repository check results written for the owner MCP tools
+.cx83-checks/
+
 public/robots.txt
 public/sitemap*.xml
 

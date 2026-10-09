@@ -1,13 +1,17 @@
-import { spawn } from 'node:child_process'
-import { readFile, writeFile } from 'node:fs/promises'
+import { spawn, type ChildProcess } from 'node:child_process'
+import { mkdir, readdir, readFile, rename, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
 import type { MCPPluginConfig } from '@payloadcms/plugin-mcp'
 import { z } from 'zod'
 
-const repoRoot = process.cwd()
+const repoRoot = process.env.CX83_REPO_ROOT
+  ? path.resolve(process.env.CX83_REPO_ROOT)
+  : process.cwd()
+const checksDirectory = path.join(repoRoot, '.cx83-checks')
 const maxReadCharacters = 80_000
 const maxOutputCharacters = 40_000
+const jobIdPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 
 const checks = {
   typecheck: ['exec', 'tsc', '--noEmit'],
@@ -16,6 +20,17 @@ const checks = {
 } as const
 
 type RepositoryCheck = keyof typeof checks
+
+type CheckJob = {
+  id: string
+  check: RepositoryCheck
+  status: 'running' | 'finished'
+  startedAt: string
+  finishedAt?: string
+  exitCode: number | null
+  output: string
+  pid?: number
+}
 
 const secretPatterns = [
   /postgres(?:ql)?:\/\/\S+/gi,
@@ -179,16 +194,185 @@ export async function readDevelopmentErrors(): Promise<string> {
   }
 }
 
-export async function runRepositoryCheck(check: RepositoryCheck): Promise<string> {
-  const args = checks[check]
+function isRepositoryCheck(value: string): value is RepositoryCheck {
+  return Object.prototype.hasOwnProperty.call(checks, value)
+}
 
-  if (!args) {
+function jobPath(id: string): string {
+  if (!jobIdPattern.test(id) || id.length > 80) {
+    throw new Error('Unknown check id.')
+  }
+
+  const absolute = path.resolve(checksDirectory, `${id}.json`)
+  const relative = path.relative(checksDirectory, absolute)
+
+  if (!relative || relative.startsWith('..') || path.isAbsolute(relative)) {
+    throw new Error('Unknown check id.')
+  }
+
+  return absolute
+}
+
+function formatJob(job: CheckJob, note?: string): string {
+  const lines = [
+    `check: ${job.check}`,
+    `id: ${job.id}`,
+    `status: ${job.status}`,
+    job.exitCode == null ? 'exit: pending' : `exit: ${job.exitCode}`,
+  ]
+
+  if (note) lines.push(note)
+  if (job.output) lines.push(job.output)
+
+  return lines.join('\n')
+}
+
+async function writeJob(job: CheckJob): Promise<void> {
+  await mkdir(checksDirectory, { recursive: true })
+  const destination = jobPath(job.id)
+  const temporary = `${destination}.${process.pid}.tmp`
+
+  await writeFile(temporary, JSON.stringify(job), 'utf8')
+  await rename(temporary, destination)
+}
+
+function pidAlive(pid: number | undefined): boolean {
+  if (!pid) return false
+
+  try {
+    process.kill(pid, 0)
+    return true
+  } catch {
+    return false
+  }
+}
+
+async function readJob(id: string): Promise<CheckJob> {
+  let text: string
+
+  try {
+    text = await readFile(jobPath(id), 'utf8')
+  } catch {
+    throw new Error('No repository check has that id.')
+  }
+
+  let job: CheckJob
+
+  try {
+    job = JSON.parse(text) as CheckJob
+  } catch {
+    throw new Error('That check result could not be read.')
+  }
+
+  if (job.status === 'running' && !pidAlive(job.pid)) {
+    job = {
+      ...job,
+      status: 'finished',
+      finishedAt: new Date().toISOString(),
+      exitCode: job.exitCode ?? 1,
+      output: job.output || 'The check process stopped before it recorded a result.',
+    }
+    await writeJob(job)
+  }
+
+  return job
+}
+
+async function findRunningCheck(check: RepositoryCheck): Promise<CheckJob | undefined> {
+  let names: string[]
+
+  try {
+    names = await readdir(checksDirectory)
+  } catch {
+    return undefined
+  }
+
+  for (const name of names) {
+    if (!name.endsWith('.json')) continue
+
+    try {
+      const job = await readJob(name.slice(0, -'.json'.length))
+
+      if (job.check === check && job.status === 'running') return job
+    } catch {
+      continue
+    }
+  }
+
+  return undefined
+}
+
+function recordCheckProcess(job: CheckJob, child: ChildProcess): void {
+  let output = ''
+  let settled = false
+
+  const finish = (code: number) => {
+    if (settled) return
+    settled = true
+    void writeJob({
+      ...job,
+      status: 'finished',
+      finishedAt: new Date().toISOString(),
+      exitCode: code,
+      output: redactToolOutput(output).slice(0, maxOutputCharacters),
+      pid: child.pid,
+    })
+  }
+
+  child.stdout?.on('data', (chunk: Buffer) => {
+    output += chunk.toString()
+  })
+  child.stderr?.on('data', (chunk: Buffer) => {
+    output += chunk.toString()
+  })
+  child.on('error', (error) => {
+    output += error.message
+    finish(127)
+  })
+  child.on('close', (code) => finish(code ?? 1))
+  child.unref()
+}
+
+export async function startRepositoryCheck(check: string): Promise<string> {
+  if (!isRepositoryCheck(check)) {
     throw new Error('Choose typecheck, lint, or test:int.')
   }
 
-  const { code, output } = await runCommand('pnpm', [...args], 240_000)
+  const running = await findRunningCheck(check)
 
-  return [`check: ${check}`, `exit: ${code}`, output || '(no output)'].join('\n')
+  if (running) {
+    return formatJob(running, 'Already running. Call runRepositoryCheck again with this id.')
+  }
+
+  const job: CheckJob = {
+    id: `${check.replace(':', '-')}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`,
+    check,
+    status: 'running',
+    startedAt: new Date().toISOString(),
+    exitCode: null,
+    output: '',
+  }
+  const child = spawn('pnpm', [...checks[check]], {
+    cwd: repoRoot,
+    env: {
+      ...process.env,
+      NODE_OPTIONS: [process.env.NODE_OPTIONS, '--max-old-space-size=640'].filter(Boolean).join(' '),
+    },
+    stdio: ['ignore', 'pipe', 'pipe'],
+  })
+
+  job.pid = child.pid
+  recordCheckProcess(job, child)
+  await writeJob(job)
+
+  return formatJob(
+    job,
+    'Started. Call runRepositoryCheck again with this id to retrieve the result.',
+  )
+}
+
+export async function readRepositoryCheck(id: string): Promise<string> {
+  return formatJob(await readJob(id.trim()))
 }
 
 function runCommand(
@@ -281,7 +465,7 @@ export const repositoryTools: NonNullable<NonNullable<MCPPluginConfig['mcp']>['t
   {
     name: 'applyRepositoryEdit',
     description:
-      'Replace one unique text span in a repository file. The old text must match exactly once. This writes the working tree on this Mac.',
+      'Replace one unique text span in a repository file. The old text must match exactly once. This writes the git checkout on this server and does not change the running site until that change is committed and deployed.',
     parameters: {
       path: z.string().describe('Repository-relative path'),
       oldText: z.string().describe('Exact existing text to replace'),
@@ -304,13 +488,24 @@ export const repositoryTools: NonNullable<NonNullable<MCPPluginConfig['mcp']>['t
   {
     name: 'runRepositoryCheck',
     description:
-      'Run an existing project check in this repository and return its exit code and output. Allowed checks are typecheck, lint, and test:int.',
+      'Start typecheck, lint, or test:int and return immediately with an id. Call again with that id to retrieve the exit code and output. The commands stay pnpm exec tsc --noEmit, pnpm lint, and pnpm test:int.',
     parameters: {
-      check: z.enum(['typecheck', 'lint', 'test:int']).describe('Existing project check to run'),
+      check: z
+        .enum(['typecheck', 'lint', 'test:int'])
+        .optional()
+        .describe('Existing project check to start'),
+      id: z
+        .string()
+        .optional()
+        .describe('Id from a previous runRepositoryCheck call. Returns that check result.'),
     },
     handler: async (args) => {
       try {
-        return textResult(await runRepositoryCheck(args.check as RepositoryCheck))
+        const id = String(args.id ?? '').trim()
+
+        if (id) return textResult(await readRepositoryCheck(id))
+
+        return textResult(await startRepositoryCheck(String(args.check ?? '')))
       } catch (error) {
         return toolError(error)
       }
