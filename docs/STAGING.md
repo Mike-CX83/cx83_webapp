@@ -39,7 +39,7 @@ gzip -dc cx83-webapp-staging.tar.gz | ssh -i ~/.ssh/vaultstorage-pilot root@157.
 3. Copy `deploy/staging/compose.yml` to `/opt/cx83-webapp/compose.yml` and `deploy/staging/traefik.yaml` to `/data/coolify/proxy/dynamic/cx83-webapp.yaml`.
 4. Keep `/opt/cx83-webapp/.env` filled from the local ignored `.env`, with these staging values:
 
-- `DATABASE_URL` points at `postgres:5432/cx83_webapp_staging` inside the compose network.
+- `DATABASE_URL` points at `cx83-webapp-postgres:5432/cx83_webapp_staging`. Use that container name. The hostname `postgres` on the Coolify network is Coolify's own database.
 - `NEXT_PUBLIC_SERVER_URL=https://staging.cx83labs.com`
 - `PAYLOAD_MCP_ENABLED=true`
 - `CX83_REPO_ROOT=/repo`
