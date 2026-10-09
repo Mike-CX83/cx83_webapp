@@ -1,6 +1,7 @@
 import type { Metadata } from 'next/types'
 
 import { CollectionArchive } from '@/components/CollectionArchive'
+import { PageHero } from '@/components/site/Section'
 import { PageRange } from '@/components/PageRange'
 import { Pagination } from '@/components/Pagination'
 import configPromise from '@payload-config'
@@ -14,9 +15,9 @@ export const dynamic = 'force-dynamic'
 export default async function Page() {
   if (!databaseConfigured()) {
     return (
-      <div className="cx83-container py-24">
-        <h1 className="text-3xl font-semibold">Notes</h1>
-        <p className="mt-4 max-w-2xl text-muted-foreground">
+      <div>
+        <PageHero eyebrow="Notes" title="Notes from CX83 Labs." />
+        <p className="cx83-container py-20 text-muted-foreground">
           Articles will appear here after PostgreSQL is connected and posts are published.
         </p>
       </div>
@@ -39,13 +40,9 @@ export default async function Page() {
   })
 
   return (
-    <div className="pt-24 pb-24">
+    <div className="pb-24">
       <PageClient />
-      <div className="container mb-16">
-        <div className="prose dark:prose-invert max-w-none">
-          <h1>Posts</h1>
-        </div>
-      </div>
+      <PageHero eyebrow="Notes" title="Notes from CX83 Labs." />
 
       <div className="container mb-8">
         <PageRange
