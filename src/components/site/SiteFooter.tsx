@@ -13,7 +13,7 @@ export function SiteFooter({
         <div>
           <p className="text-sm font-semibold tracking-[0.18em] uppercase">{siteName}</p>
           <p className="mt-2 max-w-md text-sm leading-6 text-muted-foreground">
-            AI systems, automation, software, and business integration.
+            AI Systems, Automation, and Business Integration.
           </p>
         </div>
         <div className="flex flex-col gap-2 text-sm md:items-end">
@@ -21,14 +21,12 @@ export function SiteFooter({
             <a className="hover:underline" href={`mailto:${email}`}>
               {email}
             </a>
-          ) : (
-            <span className="text-muted-foreground">Contact email is set in Site settings.</span>
-          )}
+          ) : null}
           <Link className="hover:underline" href="/contact">
             Start a project
           </Link>
-          <Link className="text-muted-foreground hover:underline" href="/posts">
-            Notes
+          <Link className="text-muted-foreground hover:underline" href="/about">
+            About CX83 Labs
           </Link>
         </div>
       </div>

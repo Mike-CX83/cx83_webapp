@@ -1,0 +1,130 @@
+/* Website draft using Client Brand Studio 0.8.2 source colors.
+   Imported after globals.css. These are the active public-site brand roles.
+   The approved banner is unchanged; this does not approve the Studio release. */
+:root {
+  --cx83-blue: #246bff;
+  --cx83-midnight: #080e22;
+  --cx83-violet: #8247f5;
+  --cx83-silver: #e6ebf5;
+  --cx83-white: #ffffff;
+  --cx83-hero-muted: #a4b6d3;
+  --cx83-on-dark-accent: #b6eaff;
+  --cx83-action-hover: #174ed4;
+  --cx83-primary: #174ed4;
+  --cx83-secondary: #24334f;
+  --cx83-accent: var(--cx83-violet);
+  --cx83-background: #f5f7ff;
+  --cx83-surface: var(--cx83-white);
+  --cx83-text: var(--cx83-midnight);
+  --cx83-muted: #515d76;
+  --cx83-border: #d4deef;
+  --cx83-shadow: 0 12px 36px rgb(8 14 34 / 7%);
+  --background: var(--cx83-background);
+  --foreground: var(--cx83-text);
+  --card: var(--cx83-surface);
+  --card-foreground: var(--cx83-text);
+  --popover: var(--cx83-surface);
+  --popover-foreground: var(--cx83-text);
+  --primary: var(--cx83-primary);
+  --primary-foreground: var(--cx83-white);
+  --secondary: var(--cx83-silver);
+  --secondary-foreground: var(--cx83-secondary);
+  --muted: var(--cx83-silver);
+  --muted-foreground: var(--cx83-muted);
+  --accent: var(--cx83-accent);
+  --accent-foreground: var(--cx83-white);
+  --border: var(--cx83-border);
+  --input: var(--cx83-border);
+  --ring: var(--cx83-blue);
+}
+
+[data-theme='dark'] {
+  --cx83-primary: #b6eaff;
+  --cx83-secondary: #d4e1f0;
+  --cx83-background: #080e22;
+  --cx83-surface: #101a33;
+  --cx83-text: #e6ebf5;
+  --cx83-muted: #a4b6d3;
+  --cx83-border: #33405d;
+  --background: var(--cx83-background);
+  --foreground: var(--cx83-text);
+  --card: var(--cx83-surface);
+  --card-foreground: var(--cx83-text);
+  --popover: var(--cx83-surface);
+  --popover-foreground: var(--cx83-text);
+  --primary: var(--cx83-primary);
+  --primary-foreground: var(--cx83-midnight);
+  --secondary: #1b2945;
+  --secondary-foreground: var(--cx83-text);
+  --muted: #1b2945;
+  --muted-foreground: var(--cx83-muted);
+  --accent: var(--cx83-violet);
+  --accent-foreground: var(--cx83-white);
+  --border: var(--cx83-border);
+  --input: var(--cx83-border);
+  --ring: var(--cx83-on-dark-accent);
+}
+
+.cx83-home { overflow-wrap: anywhere; }
+.cx83-home section[id] { scroll-margin-top: 5rem; }
+.cx83-home-hero { background: var(--cx83-midnight); color: var(--cx83-white); }
+.cx83-home-banner { width: min(100%, 64rem); margin-inline: auto; }
+.cx83-home-hero-copy { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: center; gap: 3.5rem; padding-block: 1.75rem 4.5rem; }
+.cx83-home-eyebrow { color: var(--cx83-on-dark-accent); font-size: 0.72rem; font-weight: 600; line-height: 1.7; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.1rem; }
+.cx83-home-hero h1 { font-size: clamp(2.15rem, 4.6vw, 4rem); font-weight: 600; line-height: 1.08; letter-spacing: -0.045em; text-wrap: balance; max-width: 17ch; }
+.cx83-home-hero-intro > p:first-child { color: var(--cx83-silver); font-size: 1.075rem; line-height: 1.8; max-width: 44ch; }
+.cx83-home-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.75rem; }
+.cx83-action { display: inline-flex; align-items: center; justify-content: center; gap: 0.8rem; min-height: 3rem; padding: 0.75rem 1.1rem; border-radius: 0.55rem; font-size: 0.9rem; font-weight: 600; line-height: 1.5; transition: background-color var(--cx83-motion), border-color var(--cx83-motion); text-decoration: none; }
+.cx83-action-primary { background: var(--cx83-blue); color: var(--cx83-white); border: 1px solid transparent; }
+.cx83-action-primary:hover { background: var(--cx83-action-hover); }
+.cx83-action-quiet { border: 1px solid var(--cx83-hero-muted); color: var(--cx83-silver); }
+.cx83-action-quiet:hover { background: rgb(230 235 245 / 8%); }
+.cx83-action:focus-visible, .cx83-home-text-link:focus-visible { outline: 3px solid var(--cx83-violet); outline-offset: 4px; }
+.cx83-home-hero .cx83-action:focus-visible, .cx83-home-contact .cx83-action:focus-visible { outline-color: var(--cx83-on-dark-accent); }
+.cx83-home-note { margin-top: 1rem; color: var(--cx83-hero-muted); font-size: 0.82rem; line-height: 1.6; }
+.cx83-home-section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; margin-bottom: 2.5rem; }
+.cx83-home-kicker { margin-bottom: 1rem; color: var(--cx83-primary); font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+.cx83-home-section-heading h2 { font-size: clamp(1.9rem, 3.3vw, 2.75rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1.14; }
+.cx83-home-section-heading > p { color: var(--cx83-muted); max-width: 40ch; font-size: 1rem; line-height: 1.8; }
+.cx83-home-card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+.cx83-home-service-card { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; padding: 1.8rem; background: var(--cx83-surface); border: 1px solid var(--cx83-border); border-radius: var(--cx83-radius); transition: border-color var(--cx83-motion), box-shadow var(--cx83-motion); }
+.cx83-home-service-card:hover, .cx83-home-service-card:focus-within { border-color: var(--cx83-blue); box-shadow: var(--cx83-shadow); }
+.cx83-home-card-number { color: var(--cx83-primary); font-family: var(--font-mono); font-size: 0.8rem; margin-bottom: 2rem; }
+.cx83-home-service-card h3 { font-size: 1.35rem; line-height: 1.3; letter-spacing: -0.025em; font-weight: 600; margin-bottom: 1rem; }
+.cx83-home-service-card p { color: var(--cx83-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem; }
+.cx83-home-text-link { display: inline-flex; align-items: center; gap: 0.65rem; color: var(--cx83-primary); font-size: 0.9rem; font-weight: 600; min-height: 2.75rem; text-underline-offset: 4px; }
+.cx83-home-text-link:hover { text-decoration: underline; }
+.cx83-home-service-card .cx83-home-text-link { margin-top: auto; }
+.cx83-home-process { background: var(--cx83-surface); border-block: 1px solid var(--cx83-border); }
+.cx83-home-process-grid { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem; padding: 0; margin: 0; }
+.cx83-home-process-grid li { border-top: 1px solid var(--cx83-border); padding-top: 1.5rem; }
+.cx83-home-step-number { display: block; color: var(--cx83-primary); font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 1.25rem; }
+.cx83-home-process-grid h3 { font-size: 1.15rem; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 0.8rem; }
+.cx83-home-process-grid p { color: var(--cx83-muted); font-size: 0.95rem; line-height: 1.8; }
+.cx83-home-contact { display: flex; align-items: center; justify-content: space-between; gap: 2.5rem; padding: clamp(1.5rem, 4vw, 3.5rem); border-radius: 1rem; background: radial-gradient(ellipse at top right, rgb(130 71 245 / 17%), transparent 65%), var(--cx83-midnight); color: var(--cx83-white); }
+.cx83-home-contact h2 { font-size: clamp(1.8rem, 3.1vw, 2.75rem); font-weight: 600; line-height: 1.15; letter-spacing: -0.04em; }
+.cx83-home-contact h2 + p { max-width: 48ch; margin-top: 1rem; line-height: 1.8; color: var(--cx83-silver); }
+.cx83-home-contact > a { flex-shrink: 0; }
+
+@media (max-width: 63.99rem) {
+  .cx83-home-hero-copy { gap: 2rem; }
+  .cx83-home-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cx83-home-contact { align-items: flex-start; flex-direction: column; }
+}
+@media (max-width: 47.99rem) {
+  .cx83-home-hero-copy { grid-template-columns: 1fr; gap: 1.5rem; padding-block: 1.5rem 3rem; }
+  .cx83-home-hero h1 { max-width: 19ch; }
+  .cx83-home-section-heading { display: block; margin-bottom: 2rem; }
+  .cx83-home-section-heading > p, .cx83-home-section-heading > a { margin-top: 1.25rem; }
+  .cx83-home-card-grid, .cx83-home-process-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .cx83-home-service-card { padding: 1.5rem; }
+  .cx83-home-card-number { margin-bottom: 1.25rem; }
+  .cx83-home-process-grid li { padding-block: 1.25rem 0.75rem; }
+}
+@media (max-width: 26rem) {
+  .cx83-home-actions { flex-direction: column; }
+  .cx83-home-actions .cx83-action, .cx83-home-contact > a { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cx83-action, .cx83-home-service-card { transition: none; }
+}
