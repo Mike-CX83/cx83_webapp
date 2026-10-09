@@ -47,9 +47,6 @@ FROM base AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
-
-ARG CX83_STAGING_SOURCE_SHA
-ENV CX83_STAGING_SOURCE_SHA=$CX83_STAGING_SOURCE_SHA
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
@@ -67,8 +64,6 @@ RUN chown nextjs:nodejs .next
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-COPY --from=builder /app/.cx83-staging-source.bundle /app/.cx83-staging-source.bundle
-COPY --from=builder /app/scripts/staging-repo-sync.mjs /app/staging-repo-sync.mjs
 
 RUN apk add --no-cache git ripgrep \
   && corepack enable \
@@ -84,4 +79,4 @@ ENV PORT 3000
 
 # server.js is created by next build from the standalone output
 # https://nextjs.org/docs/pages/api-reference/next-config-js/output
-CMD node /app/staging-repo-sync.mjs; HOSTNAME="0.0.0.0" node server.js
+CMD HOSTNAME="0.0.0.0" node server.js
