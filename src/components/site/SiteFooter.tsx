@@ -13,7 +13,7 @@ export function SiteFooter({ siteName, email }: { siteName: string; email?: stri
     <footer className="cx83-site-footer">
       <div className="cx83-container grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <Link className="cx83-footer-brand inline-flex min-h-11 items-center text-sm font-bold tracking-[0.18em] uppercase" href="/" aria-label={siteName + ', Home'}><Image src="/brand/logo-dark.svg" alt="CX83 Labs" width={1014} height={288} className="h-auto w-[11rem]" /></Link>
+          <Link className="cx83-footer-brand inline-flex min-h-11 items-center text-sm font-bold tracking-[0.18em] uppercase" href="/" aria-label={siteName + ', Home'}><Image src="/brand/logo-dark.svg" alt="CX83 Labs" loading="eager" width={1014} height={288} className="h-auto w-[11rem]" /></Link>
           <p className="mt-3 max-w-sm text-sm leading-7">AI systems, automation, software, and business integration.</p>
         </div>
         <nav aria-label="Footer navigation">
