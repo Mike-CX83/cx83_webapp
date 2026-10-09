@@ -4,7 +4,7 @@ const base = 'http://localhost:3000'
 
 test.describe('CX83 shared brand system', () => {
   test('keeps linked original logos and common navigation across public pages', async ({ page }) => {
-    for (const route of ['/', '/about', '/services', '/work', '/contact']) {
+    for (const route of ['/', '/about', '/services', '/work', '/contact', '/posts', '/search']) {
       await page.goto(base + route)
 
       const header = page.locator('header.cx83-site-header')
@@ -15,6 +15,8 @@ test.describe('CX83 shared brand system', () => {
       await expect(header.locator('img[src="/brand/logo-light.svg"]')).toHaveCount(1)
       await expect(footer.getByRole('link', { name: 'CX83 Labs, Home' })).toHaveAttribute('href', '/')
       await expect(footer.locator('img[src="/brand/logo-dark.svg"]')).toHaveCount(1)
+      await footer.scrollIntoViewIfNeeded()
+      await expect.poll(async () => footer.locator('img[src="/brand/logo-dark.svg"]').evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true)
       await expect(page.locator('main h1')).toHaveCount(1)
     }
   })
@@ -48,7 +50,7 @@ test.describe('CX83 shared brand system', () => {
   for (const width of [320, 390, 768, 1440]) {
     test(`primary routes fit ${width}px viewport without horizontal overflow`, async ({ page }) => {
       await page.setViewportSize({ width, height: 900 })
-      for (const route of ['/', '/about', '/services', '/work', '/contact']) {
+      for (const route of ['/', '/about', '/services', '/work', '/contact', '/posts', '/search']) {
         await page.goto(base + route)
         await page.evaluate(() => document.fonts.ready)
         const documentWidth = await page.evaluate(() => document.documentElement.scrollWidth)
