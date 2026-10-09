@@ -82,6 +82,16 @@ These business records govern commercial positioning. The dedicated `cx83_webapp
 
 **Important continuity:** October 9 homepage and contact page work already exists. Preserve the banner, configured services, contact form, visitor assistant, owner authentication, PostgreSQL, and staging pipeline. Do not replace the application, bootstrap a second site, or undo recent CSS work to implement this brief.
 
+### Owner requirement: do not change the existing homepage banner
+
+**Confirmed October 9, 2026:** The original home banner was never authorized to be resized, moved into a side column, replaced, cropped or redesigned. Phase 2 mistakenly shrank it and moved it. PR #17 restores the **complete original hero JSX verbatim** from Phase 1 commit `3dd8bf219089ccbf9a300918d7f9c6cc6d8ec381`.
+
+Keep `src/app/(frontend)/page.tsx` section `cx83-home-hero` as the **first section**, with `cx83-home-banner` full width, the existing static asset `/brand/cx83-labs-hero.avif`, original alt text, intrinsic 960 × 319 aspect ratio and responsive `sizes="(min-width: 1024px) 1024px, 100vw"`. Keep the selected original hero headline and its CTA buttons. This is a fixed owner selection, not a suggested template.
+
+Place demonstrations, videos, software announcements and future homepage content in separate sections **after** this original hero. Do not move the original banner to fit a new feature. Do not change the banner asset, displayed size, original position, image treatment or hero composition unless the owner specifically authorizes that exact alteration.
+
+`tests/e2e/homeBanner.e2e.spec.ts` checks banner identity, placement, sizing, ratio and original hero text at 320, 390, 768 and 1440 pixels. Do not remove or weaken these regression tests in future phases.
+
 ## 3. The real CX83 brand identity
 
 ### Source of truth and approval state
