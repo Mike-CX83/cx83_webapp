@@ -12,6 +12,7 @@ import { searchFields } from '@/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
 
 import { Page, Post } from '@/payload-types'
+import { repositoryTools } from '@/plugins/repositoryTools'
 import { getServerSideURL } from '@/utilities/getURL'
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
@@ -56,6 +57,20 @@ export const plugins: Plugin[] = [
         description: 'Visitor assistant settings.',
         enabled: { find: true, update: true },
       },
+    },
+    mcp: {
+      handlerOptions: {
+        maxDuration: 300,
+      },
+      serverOptions: {
+        serverInfo: {
+          name: 'CX83 Website',
+          version: '0.1.0',
+        },
+        instructions:
+          'This server is the CX83 Labs owner connection. Content tools find, create, update, and delete pages, posts, media, services, projects, case studies, forms, form submissions, categories, and users, and they find and update header, footer, site settings, and assistant settings. Those tools run with the authenticated owner account. Code tools read and search this repository, read the local development log, apply a unique text edit, and run typecheck, lint, or test:int. Do not ask for or repeat credential files.',
+      },
+      tools: repositoryTools,
     },
   }),
   redirectsPlugin({

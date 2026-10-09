@@ -67,6 +67,9 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URL || '',
       connectionTimeoutMillis: 5000,
     },
+    // This development database also holds the studio download tables and enums.
+    // Automatic push tries to drop those enums, fails, and takes Payload down with it.
+    push: false,
   }),
   collections: [Pages, Posts, Services, Projects, CaseStudies, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),

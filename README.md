@@ -47,6 +47,8 @@ The first visit to `/admin` creates the owner user when PostgreSQL is connected.
 
 Copy `.env.example` to `.env`. Do not commit `.env`.
 
+The OpenAI API key is `OPENAI_API_KEY` in that ignored `.env`. Agents retrieve it from the file and do not print it.
+
 Required before admin, publishing, media, and saved forms will work:
 
 - `DATABASE_URL`: a development PostgreSQL connection string. Do not use a production database.
@@ -58,7 +60,7 @@ The active development provider is OpenRouter. `CHATBOT_ENABLED=false` hides the
 
 ## Database
 
-PostgreSQL is the only database adapter configured. Local development uses PostgreSQL 17 from Homebrew, database `cx83_webapp_dev`, started with `brew services`. `DATABASE_URL` in the ignored `.env` points at that database on this Mac. It is not a hosted or paid database.
+PostgreSQL is the only database adapter configured. Local development uses PostgreSQL 17 from Homebrew, database `cx83_webapp_dev`, started with `brew services`. `DATABASE_URL` in the ignored `.env` points at that database on this Mac. It is not a hosted or paid database. Development schema push is off because this database also holds the studio download tables. Do not turn push back on against this database.
 
 Payload stores uploads in `public/media` during development. Production hosting needs persistent disk or object storage. No external media service was purchased.
 
@@ -110,9 +112,11 @@ Approved knowledge comes from published Payload content when the database is con
 
 ## Payload MCP
 
-`@payloadcms/plugin-mcp` 3.90.2 is installed and registered. It is enabled during local development and disabled in production unless `PAYLOAD_MCP_ENABLED=true`. The local endpoint is `POST http://127.0.0.1:3000/api/mcp`. It expects a bearer API key created in the admin panel's MCP API keys collection and tied to the owner user. Enable find, create, update, and delete on that key for full content control. Do not expose this port with a public tunnel.
+`@payloadcms/plugin-mcp` 3.90.2 is installed and registered. It is enabled during local development and disabled in production unless `PAYLOAD_MCP_ENABLED=true`. The local endpoint is `POST http://127.0.0.1:3000/api/mcp`. It expects `Authorization: Bearer` with an API key from the MCP API keys collection. That key is tied to the owner user, and the plugin calls Payload with `overrideAccess: false`, so the owner keeps full authenticated access. Do not expose this port with a public tunnel.
 
-The installed plugin does not use the newer documentation's `overrideAccess=true` development URL. Follow the installed package: API key plus the owner's Payload access. CRUD through MCP was not tested because PostgreSQL is not connected. A local MCP process is not a connection to remote ChatGPT.
+The same server exposes repository tools for code repair: `readRepositoryFile`, `searchRepository`, `readDevelopmentErrors`, `applyRepositoryEdit`, and `runRepositoryCheck` (`typecheck`, `lint`, `test:int`). Those tools stay inside this repository and refuse credential files. The owner key is stored only in the ignored `.env` as `PAYLOAD_MCP_API_KEY`.
+
+Personal ChatGPT reaches this private endpoint through OpenAI Secure MCP Tunnel when the account can create one. `tunnel-client` runs on this Mac and adds the owner key locally with `MCP_EXTRA_HEADERS`. The key is not entered in ChatGPT. There is no separate approval step.
 
 ## Checks
 
