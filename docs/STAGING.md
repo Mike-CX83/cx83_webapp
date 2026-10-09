@@ -19,7 +19,8 @@ Do not raise those limits or resize the droplet without checking the live memory
 | Postgres data | `/opt/cx83-webapp/postgres` |
 | Media uploads | `/opt/cx83-webapp/media` |
 | Git checkout used by the code tools | `/opt/cx83-webapp/repo` |
-| Tunnel profile and runtime key | `/opt/cx83-webapp/tunnel` |
+| Tunnel profile | `/opt/cx83-webapp/tunnel` |
+| Tunnel runtime environment | `/opt/cx83-webapp/tunnel.env` mode 600. `CONTROL_PLANE_API_KEY` and `PAYLOAD_MCP_AUTHORIZATION`. Not in Git. |
 | Staging gate password | `/opt/cx83-webapp/staging-gate.pass` |
 | Traefik route | `/data/coolify/proxy/dynamic/cx83-webapp.yaml` |
 | Backups | `/var/backups/cx83-webapp` |

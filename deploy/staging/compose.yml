@@ -44,6 +44,8 @@ services:
     image: ghcr.io/openai/tunnel-client:v0.0.16
     container_name: cx83-webapp-tunnel
     command: ['--profile', 'cx83-website', '--profile-dir', '/tunnel/profiles']
+    env_file:
+      - /opt/cx83-webapp/tunnel.env
     volumes:
       - /opt/cx83-webapp/tunnel:/tunnel
     mem_limit: 128m
