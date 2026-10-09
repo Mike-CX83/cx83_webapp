@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 
@@ -22,7 +23,7 @@ export function SiteHeader({ siteName, items }: { siteName: string; items: { hre
     <header className="cx83-site-header sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
       <div className="cx83-container flex h-[4.75rem] items-center justify-between gap-5">
         <Link className="cx83-site-wordmark inline-flex min-h-11 items-center rounded-md text-sm font-bold tracking-[0.18em] uppercase" href="/" aria-label={siteName + ', Home'} onClick={() => setOpen(false)}>
-          {siteName}
+          <Image src="/brand/logo-light.svg" alt="CX83 Labs" width={1014} height={288} priority className="cx83-site-logo h-auto w-[8.75rem] sm:w-[10.5rem]" />
         </Link>
         <nav aria-label="Primary" className="hidden items-center gap-2 md:flex">
           {nav.map(item => (
