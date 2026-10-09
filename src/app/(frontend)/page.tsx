@@ -89,7 +89,7 @@ export default async function HomePage() {
                 {showcaseMediaReady ? 'Watch a real website change' : 'See a real website change'} <span aria-hidden="true">↘</span>
               </a>
               <Link className="cx83-action cx83-action-quiet" href="/contact">
-                Start a conversation
+                Discuss your project
               </Link>
             </div>
             <Link className="cx83-showcase-subnav" href="/services">Explore services <span aria-hidden="true">&nbsp;↗</span></Link>
