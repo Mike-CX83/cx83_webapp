@@ -248,12 +248,17 @@ function pidAlive(pid: number | undefined): boolean {
 }
 
 async function readJob(id: string): Promise<CheckJob> {
+  const file = jobPath(id)
   let text: string
 
   try {
-    text = await readFile(jobPath(id), 'utf8')
-  } catch {
-    throw new Error('No repository check has that id.')
+    text = await readFile(file, 'utf8')
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+      throw new Error('No repository check has that id.')
+    }
+
+    throw error
   }
 
   let job: CheckJob

@@ -30,6 +30,7 @@ jobs:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/cx83_webapp_ci
       PAYLOAD_SECRET: ci-test-secret
       NEXT_PUBLIC_SERVER_URL: http://localhost:3000
+      PAYLOAD_DB_PUSH: true
     steps:
       - name: Check out the repository
         uses: actions/checkout@v4

@@ -69,7 +69,7 @@ export default buildConfig({
     },
     // The local development database also holds the studio download tables and enums.
     // Automatic push tries to drop those enums, fails, and takes Payload down with it.
-    // Set PAYLOAD_DB_PUSH=true only for an empty database that belongs to this app alone.
+    // Leave this unset locally. CI and a brand-new empty database set PAYLOAD_DB_PUSH=true.
     push: process.env.PAYLOAD_DB_PUSH === 'true',
   }),
   collections: [Pages, Posts, Services, Projects, CaseStudies, Media, Categories, Users],
