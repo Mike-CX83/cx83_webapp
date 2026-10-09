@@ -27,9 +27,9 @@ export default async function AboutPage() {
       <Section>
         <ContentNotice source={site.source} />
         <div className="grid gap-10">
-          {sections.map(([title, body]) => (
-            <section key={title}>
-              <h2 className="text-2xl font-semibold tracking-tight">{title}</h2>
+          {sections.filter(([, body]) => Boolean(body)).map(([title, body]) => (
+            <section className="cx83-shared-card" key={title}>
+              <h2 className="cx83-page-section-heading">{title}</h2>
               <p className="mt-4 max-w-3xl leading-7 text-muted-foreground">{body}</p>
             </section>
           ))}
@@ -37,7 +37,7 @@ export default async function AboutPage() {
             <h2 className="text-2xl font-semibold tracking-tight">Capabilities</h2>
             <ul className="mt-4 grid gap-3 md:grid-cols-2">
               {site.copy.capabilities.map((item) => (
-                <li className="rounded-2xl border border-border bg-card px-4 py-4" key={item}>
+                <li className="cx83-shared-card" key={item}>
                   {item}
                 </li>
               ))}

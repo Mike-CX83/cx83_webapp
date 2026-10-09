@@ -18,7 +18,7 @@ export default async function WorkPage() {
   return (
     <>
       <PageHero eyebrow="Work" title="Projects and case studies.">
-        <p>Published work is edited in Payload. This page does not invent clients, results, or testimonials.</p>
+        <p>See real projects and the systems we are building. We only share work that we can demonstrate.</p>
       </PageHero>
       <Section>
         <ContentNotice source={source} />
@@ -26,11 +26,11 @@ export default async function WorkPage() {
         {projects.items.length ? (
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {projects.items.map((project) => (
-              <article className="rounded-2xl border border-border bg-card p-6" key={project.slug}>
+              <article className="cx83-shared-card" key={project.slug}>
                 <p className="text-xs tracking-[0.14em] text-muted-foreground uppercase">{project.status}</p>
                 <h3 className="mt-2 text-xl font-semibold">{project.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-muted-foreground">{project.summary}</p>
-                <Link className="mt-4 inline-block text-sm font-medium underline-offset-4 hover:underline" href={`/work/projects/${project.slug}`}>
+                <Link className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold" href={`/work/projects/${project.slug}`}>
                   View project
                 </Link>
               </article>

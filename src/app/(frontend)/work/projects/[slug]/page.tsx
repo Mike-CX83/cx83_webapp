@@ -35,7 +35,7 @@ export default async function ProjectPage({ params }: Args) {
           <ul className="mt-6 grid gap-2">
             {project.links.map((link) => (
               <li key={link.url}>
-                <a className="underline-offset-4 hover:underline" href={link.url} rel="noreferrer" target="_blank">
+                <a className="cx83-shared-text-link inline-flex min-h-11 items-center" href={link.url} rel="noreferrer" target="_blank">
                   {link.label}
                 </a>
               </li>

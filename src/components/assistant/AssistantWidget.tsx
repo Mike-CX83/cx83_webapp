@@ -56,7 +56,7 @@ function AssistantSession({ onReset }: { onReset: () => void }) {
       <button
         aria-controls="cx83-assistant"
         aria-expanded={open}
-        className="fixed right-4 bottom-4 z-50 rounded-full bg-primary px-4 py-3 text-sm font-medium text-primary-foreground cx83-shadow focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        className="cx83-assistant-launcher fixed right-4 bottom-4 z-50 rounded-full bg-primary px-4 py-3 text-sm font-medium text-primary-foreground cx83-shadow focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         onClick={() => setOpen((value) => !value)}
         type="button"
       >
@@ -65,7 +65,7 @@ function AssistantSession({ onReset }: { onReset: () => void }) {
       {open ? (
         <section
           aria-label="CX83 assistant"
-          className="fixed inset-x-3 bottom-20 z-50 flex h-[min(36rem,calc(100dvh-7rem))] flex-col overflow-hidden rounded-2xl border border-border bg-card cx83-shadow md:inset-x-auto md:right-4 md:w-[24rem]"
+          className="cx83-assistant-panel fixed inset-x-3 bottom-20 z-50 flex h-[min(36rem,calc(100dvh-7rem))] flex-col overflow-hidden rounded-2xl border border-border bg-card cx83-shadow md:inset-x-auto md:right-4 md:w-[24rem]"
           id="cx83-assistant"
           role="dialog"
         >

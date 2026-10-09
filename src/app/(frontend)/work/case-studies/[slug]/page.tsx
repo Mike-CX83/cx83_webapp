@@ -40,7 +40,7 @@ export default async function CaseStudyPage({ params }: Args) {
         <div className="grid gap-8">
           {fields.map(([label, key]) =>
             study[key] ? (
-              <section key={key}>
+              <section className="cx83-shared-card" key={key}>
                 <h2 className="text-xl font-semibold">{label}</h2>
                 <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">{study[key]}</p>
               </section>

@@ -345,3 +345,60 @@
 @media (prefers-reduced-motion: reduce) {
   .cx83-contact-form-card button[type='submit'] { transition: none; }
 }
+
+
+/* Phase 1 shared CX83 design layer, built on the existing Studio 0.8.2 palette. */
+.cx83-site-header { box-shadow: 0 5px 24px rgb(8 14 34 / 5%); }
+.cx83-site-wordmark { color: var(--cx83-text); text-decoration: none; }
+.cx83-site-wordmark:hover { color: var(--cx83-primary); }
+.cx83-site-nav-link, .cx83-site-mobile-link { display: inline-flex; align-items: center; min-height: 2.75rem; border-radius: .55rem; padding: .65rem .9rem; color: var(--cx83-muted); font-size: .9rem; font-weight: 600; text-decoration: none; transition: background-color var(--cx83-motion), color var(--cx83-motion); }
+.cx83-site-nav-link:hover, .cx83-site-mobile-link:hover, .cx83-site-menu-button:hover { background: var(--secondary); color: var(--cx83-text); }
+.cx83-site-nav-link[aria-current='page'], .cx83-site-mobile-link[aria-current='page'] { background: var(--secondary); color: var(--cx83-primary); }
+.cx83-site-mobile-link { display: flex; min-height: 3rem; font-size: 1rem; }
+.cx83-site-header :is(a, button):focus-visible, .cx83-site-footer a:focus-visible, .cx83-shared-text-link:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
+.cx83-site-footer { background: var(--cx83-midnight); color: var(--cx83-silver); }
+.cx83-site-footer p:not(.cx83-footer-heading), .cx83-footer-bottom { color: var(--cx83-hero-muted); }
+.cx83-footer-brand { color: var(--cx83-silver); }
+.cx83-footer-brand:hover, .cx83-footer-link:hover { color: var(--cx83-on-dark-accent); text-decoration: underline; }
+.cx83-footer-heading { color: var(--cx83-silver); font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.cx83-footer-link { display: inline-flex; min-height: 2.75rem; align-items: center; color: var(--cx83-silver); font-size: .875rem; text-underline-offset: 4px; transition: color var(--cx83-motion); }
+.cx83-footer-bottom { border-color: rgb(230 235 245 / 18%); }
+.cx83-shared-page-hero { background: radial-gradient(ellipse 55% 110% at 95% 0%, rgb(130 71 245 / 23%), transparent 70%), radial-gradient(ellipse 70% 90% at 0% 100%, rgb(36 107 255 / 15%), transparent 75%), var(--cx83-midnight); color: var(--cx83-silver); }
+.cx83-shared-page-hero h1 { color: var(--cx83-white); }
+.cx83-shared-eyebrow { color: var(--cx83-on-dark-accent); }
+.cx83-shared-hero-description { color: var(--cx83-silver); }
+.cx83-shared-text-link { color: var(--cx83-primary); text-decoration: underline; text-underline-offset: 4px; }
+.cx83-shared-text-link:hover { color: var(--cx83-action-hover); }
+[data-theme='dark'] .cx83-shared-text-link:hover { color: var(--cx83-on-dark-accent); }
+.cx83-shared-card { border: 1px solid var(--cx83-border); background: var(--cx83-surface); border-radius: var(--cx83-radius); padding: clamp(1.25rem, 2.3vw, 2rem); box-shadow: 0 10px 28px rgb(8 14 34 / 3%); transition: border-color var(--cx83-motion), box-shadow var(--cx83-motion), transform var(--cx83-motion); }
+.cx83-shared-card:has(a):hover, .cx83-shared-card:focus-within { border-color: var(--cx83-blue); box-shadow: var(--cx83-shadow); transform: translateY(-2px); }
+.cx83-shared-card a { color: var(--cx83-primary); text-decoration: underline; text-underline-offset: 4px; }
+.cx83-shared-card a:hover { color: var(--cx83-action-hover); }
+.cx83-shared-card a:focus-visible, .cx83-shared-card button:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
+.cx83-page-section-heading { font-size: clamp(1.65rem, 3vw, 2.35rem); font-weight: 650; line-height: 1.2; letter-spacing: -.03em; }
+@media (prefers-reduced-motion: reduce) { .cx83-site-nav-link, .cx83-site-mobile-link, .cx83-footer-link, .cx83-shared-card { transition: none; } .cx83-shared-card:has(a):hover, .cx83-shared-card:focus-within { transform: none; } }
+
+.cx83-logo-dark { display: none; }
+[data-theme='dark'] .cx83-logo-light { display: none; }
+[data-theme='dark'] .cx83-logo-dark { display: block; }
+
+
+/* Global public-page interaction consistency, including CMS-rendered content. */
+#content a:focus-visible,
+#content button:focus-visible,
+#content [role='button']:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
+#content a:not(.cx83-action):hover { text-decoration-thickness: .08em; text-underline-offset: .25em; }
+#content button:not(:disabled), #content [data-slot='button']:not(:disabled) { cursor: pointer; }
+#content button:disabled, #content [data-slot='button']:disabled { cursor: not-allowed; }
+#content button:active:not(:disabled) { transform: translateY(1px); }
+.cx83-assistant-launcher { cursor: pointer; transition: transform var(--cx83-motion), box-shadow var(--cx83-motion), filter var(--cx83-motion); }
+.cx83-assistant-launcher:hover { transform: translateY(-2px); filter: brightness(1.04); box-shadow: 0 12px 30px rgb(36 107 255 / 22%); }
+.cx83-assistant-launcher:active { transform: translateY(0); }
+.cx83-assistant-launcher:focus-visible,
+.cx83-assistant-panel :is(button, textarea):focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
+.cx83-assistant-panel button:not(:disabled) { cursor: pointer; }
+.cx83-assistant-panel button:hover:not(:disabled) { filter: brightness(1.08); }
+@media (prefers-reduced-motion: reduce) {
+  .cx83-assistant-launcher { transition: none; }
+  .cx83-assistant-launcher:hover, #content button:active:not(:disabled) { transform: none; }
+}
