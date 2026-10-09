@@ -22,6 +22,7 @@ export function InquiryForm() {
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    if (status === 'submitting') return
     setStatus('submitting')
     setErrors({})
     setMessage('')
@@ -63,10 +64,14 @@ export function InquiryForm() {
   }
 
   return (
-    <form className="grid gap-5" noValidate onSubmit={onSubmit}>
+    <form aria-busy={status === 'submitting'} className="grid gap-5" noValidate onSubmit={onSubmit}>
       <Field error={errors.name} label="Name" name="name">
         <input
           className="field"
+          aria-invalid={Boolean(errors.name)}
+          aria-describedby={errors.name ? 'name-error' : undefined}
+          disabled={status === 'submitting'}
+          maxLength={120}
           id="name"
           name="name"
           onChange={(event) => update('name', event.target.value)}
@@ -77,6 +82,10 @@ export function InquiryForm() {
       <Field error={errors.email} label="Email" name="email">
         <input
           className="field"
+          aria-invalid={Boolean(errors.email)}
+          aria-describedby={errors.email ? 'email-error' : undefined}
+          disabled={status === 'submitting'}
+          maxLength={200}
           id="email"
           name="email"
           onChange={(event) => update('email', event.target.value)}
@@ -88,6 +97,10 @@ export function InquiryForm() {
       <Field error={errors.organization} label="Organization" name="organization">
         <input
           className="field"
+          aria-invalid={Boolean(errors.organization)}
+          aria-describedby={errors.organization ? 'organization-error' : undefined}
+          disabled={status === 'submitting'}
+          maxLength={160}
           id="organization"
           name="organization"
           onChange={(event) => update('organization', event.target.value)}
@@ -97,6 +110,9 @@ export function InquiryForm() {
       <Field error={errors.inquiryType} label="Inquiry" name="inquiryType">
         <select
           className="field"
+          aria-invalid={Boolean(errors.inquiryType)}
+          aria-describedby={errors.inquiryType ? 'inquiryType-error' : undefined}
+          disabled={status === 'submitting'}
           id="inquiryType"
           name="inquiryType"
           onChange={(event) => update('inquiryType', event.target.value)}
@@ -109,6 +125,10 @@ export function InquiryForm() {
       <Field error={errors.message} label="Message" name="message">
         <textarea
           className="field min-h-36"
+          aria-invalid={Boolean(errors.message)}
+          aria-describedby={errors.message ? 'message-error' : undefined}
+          disabled={status === 'submitting'}
+          maxLength={5000}
           id="message"
           name="message"
           onChange={(event) => update('message', event.target.value)}
@@ -143,7 +163,7 @@ function Field({
     <label className="grid gap-2 text-sm" htmlFor={name}>
       <span className="font-medium">{label}</span>
       {children}
-      {error ? <span className="text-destructive">{error}</span> : null}
+      {error ? <span className="text-destructive" id={name + '-error'}>{error}</span> : null}
     </label>
   )
 }

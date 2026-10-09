@@ -232,10 +232,10 @@ export default async function HomePage() {
           <div>
             <p className="cx83-home-eyebrow">Your next useful step</p>
             <h2>What could work better<br />in your business?</h2>
-            <p>Tell me what is slow, disconnected, or still being done by hand. We can start there.</p>
+            <p>Tell us what is slow, disconnected, or still being done by hand. We can start there.</p>
           </div>
           <Link className="cx83-action cx83-action-primary" href="/contact">
-            Tell me about your project <span aria-hidden="true">↗</span>
+            Tell us about your project <span aria-hidden="true">↗</span>
           </Link>
         </div>
       </Section>
