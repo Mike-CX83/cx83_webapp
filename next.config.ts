@@ -23,6 +23,10 @@ const nextConfig: NextConfig = {
       {
         pathname: '/api/media/file/**',
       },
+      {
+        pathname: '/brand/cx83-labs-hero.avif',
+        search: '',
+      },
     ],
     qualities: [100],
     remotePatterns: [

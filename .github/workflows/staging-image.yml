@@ -1,13 +1,84 @@
-name: Staging image
+name: Staging
+
+# Staging only. A push to staging-host runs tests, builds the website image,
+# and deploys that image to the existing server. Pull requests run tests and
+# do not deploy. This workflow does not publish a public production release.
 
 on:
   workflow_dispatch:
   push:
     branches:
       - staging-host
+  pull_request:
+    branches:
+      - staging-host
+
+concurrency:
+  group: cx83-staging-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: cx83_webapp_ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d cx83_webapp_ci"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      CI: true
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/cx83_webapp_ci
+      PAYLOAD_SECRET: ci-test-secret
+      NEXT_PUBLIC_SERVER_URL: http://localhost:3000
+      PAYLOAD_DB_PUSH: true
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.28.5
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies from the lockfile
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm exec tsc --noEmit
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Install the Playwright browser
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run automated tests
+        run: pnpm test
+
+      - name: Build
+        run: pnpm build
+
   image:
+    needs: check
+    if: github.ref == 'refs/heads/staging-host' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repository
@@ -20,6 +91,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
+          platforms: linux/amd64
           push: false
           load: true
           tags: cx83-webapp:staging
@@ -35,3 +107,42 @@ jobs:
           name: cx83-webapp-staging
           path: cx83-webapp-staging.tar.gz
           retention-days: 7
+
+  deploy:
+    needs: image
+    if: github.ref == 'refs/heads/staging-host' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Download the image
+        uses: actions/download-artifact@v4
+        with:
+          name: cx83-webapp-staging
+          path: image
+
+      - name: Deploy the image to staging
+        env:
+          STAGING_DEPLOY_SSH_KEY: ${{ secrets.STAGING_DEPLOY_SSH_KEY }}
+          STAGING_DEPLOY_HOST: ${{ secrets.STAGING_DEPLOY_HOST }}
+          STAGING_DEPLOY_USER: ${{ secrets.STAGING_DEPLOY_USER }}
+        run: |
+          test -n "$STAGING_DEPLOY_SSH_KEY"
+          test -n "$STAGING_DEPLOY_HOST"
+          test -n "$STAGING_DEPLOY_USER"
+          install -m 700 -d "$RUNNER_TEMP/ssh"
+          printf '%s\n' "$STAGING_DEPLOY_SSH_KEY" > "$RUNNER_TEMP/ssh/key"
+          chmod 600 "$RUNNER_TEMP/ssh/key"
+          set -o pipefail
+          gzip -dc image/cx83-webapp-staging.tar.gz | ssh \
+            -i "$RUNNER_TEMP/ssh/key" \
+            -o IdentitiesOnly=yes \
+            -o StrictHostKeyChecking=yes \
+            -o UserKnownHostsFile="$GITHUB_WORKSPACE/deploy/staging/known_hosts" \
+            -o BatchMode=yes \
+            -o ServerAliveInterval=30 \
+            "$STAGING_DEPLOY_USER@$STAGING_DEPLOY_HOST" \
+            "deploy $GITHUB_SHA" | tee "$RUNNER_TEMP/deploy-output.txt"
+          grep -q 'STAGING DEPLOY SUCCESS' "$RUNNER_TEMP/deploy-output.txt"
