@@ -7,7 +7,7 @@ test.describe('Frontend', () => {
     const heading = page.locator('h1').first()
     await expect(heading).toHaveText(/Your website\.\s*Your AI\.\s*Just ask\./)
     await expect(page.getByRole('link', { name: 'Start a conversation', exact: false })).toHaveAttribute('href', '/contact')
-    await expect(page.getByRole('link', { name: 'Watch a real website change', exact: false })).toHaveAttribute('href', '#website-demo')
+    await expect(page.getByRole('link', { name: 'See a real website change', exact: false })).toHaveAttribute('href', '#website-proof')
     await expect(page.getByRole('link', { name: 'Explore services', exact: true })).toHaveAttribute('href', '/services')
     await expect(page.getByText('Published projects will appear here. None are published yet.')).toHaveCount(0)
   })
