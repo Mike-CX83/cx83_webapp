@@ -1,44 +1,35 @@
 # Branding bridge
 
-The CX83 brand system is unfinished. Do not edit `brand_studio` from this website project.
+The public website is a design draft. The Client Brand Studio package is still being repaired and has not been approved as a finished release. Do not edit `brand_studio` from this website project.
 
-## Where values go
+## Active website colors
 
-All lasting color, type, radius, shadow, and layout tokens are in `src/app/(frontend)/globals.css` inside `:root`.
+`src/app/(frontend)/cx83-brand.css` is imported immediately after `globals.css` in the frontend root layout. It overrides the original neutral placeholder colors and is the active public website brand layer. It does not style Payload's separate admin layout.
 
-| Token | Current value | Status |
-| --- | --- | --- |
-| `--cx83-primary` | `#101216` | Supplied in `brand_studio/projects/cx83-labs/client-spec.json` |
-| `--cx83-secondary` | `#3d4450` | Temporary |
-| `--cx83-accent` | `#8a8175` | Temporary |
-| `--cx83-background` | `#f7f6f3` | Temporary |
-| `--cx83-surface` | `#ffffff` | Temporary |
-| `--cx83-text` | `#101216` | Uses the supplied primary |
-| `--cx83-muted` | `#5c6370` | Temporary |
-| `--cx83-border` | `#e4e0d8` | Temporary |
-| `--cx83-radius` | `0.75rem` | Temporary |
-| `--cx83-shadow` | soft shadow using `16 18 22` | Temporary |
-| `--cx83-container` | `72rem` | Temporary |
-| `--cx83-motion` | `180ms` | Temporary |
+Source palette from `CX83_Studio_082_Brand_Assets_DRAFT.zip` and `CX83_Website_Brand_START_HERE.md`:
 
-shadcn variables such as `--primary`, `--background`, and `--border` point at those tokens. Components should use the shadcn or `cx83-*` utilities, not new hex values.
+| Role | Value |
+| :--- | :--- |
+| Electric Blue | `#246BFF` |
+| Midnight | `#080E22` |
+| Violet | `#8247F5` |
+| Silver | `#E6EBF5` |
+| White | `#FFFFFF` |
 
-The public site stays on the light token set. Dark theme variables remain in the same file for a later brand decision.
+Source supporting tones include `#A4B6D3`, `#B6EAFF`, and `#F5F7FF`. Website semantic tones such as `#174ED4` for readable links and `#515D76` for muted text are deliberate derived colors, not new logo gradient stops. White on Electric Blue has approximately 4.54:1 contrast; the darker link tone is used on pale surfaces.
+
+The same semantic variables feed buttons, forms, cards, and the assistant. Both existing light and dark theme states are supported. Spacing, radius, and motion remain adjustable through the existing base tokens. The homepage's scoped `cx83-home-*` classes also live in the brand stylesheet.
 
 ## Assets
 
-Put approved files in `public/brand/`:
+`public/brand/cx83-labs-hero.avif` is the existing banner selected by Mike. Its bytes, source path, and aspect ratio are unchanged by the October 9 homepage pass. Next.js already permits this asset in `next.config.js`; preserve that configuration.
 
-- `logo.svg`
-- `icon.svg`
-- `og.png` at 1200 by 630
+The Studio package includes separate light and dark SVG logo treatments. The header still uses the existing text site name in this first pass; no replacement artwork or imitation logo font has been introduced. Do not treat the custom logo lettering name in Studio tokens as an installable webfont.
 
-The header in `src/components/site/SiteHeader.tsx` currently renders the site name as text. Replace that wordmark with `logo.svg` after the mark is approved.
+## Type and editing
 
-## Type
+The existing Geist fonts remain in use until website typography is approved. No new font or component dependency was installed.
 
-`src/app/(frontend)/layout.tsx` loads Geist Sans and Geist Mono as temporary fonts. Geist is the open source font shipped by the Payload template. Replace those font loaders, then point `--font-sans` and `--font-mono` in `globals.css` at the approved families. Do not add a paid font.
+Edit the homepage tagline, overview, and contact email in Payload Site settings. Edit service names, summaries, descriptions, and calls to action in the Services collection. The homepage reads published services. Published projects appear automatically; the homepage hides the work section when none exist rather than displaying a development placeholder.
 
-## Buttons, cards, and chat
-
-Buttons use `src/components/ui/button.tsx`. Cards and sections use the border, surface, and radius tokens. The assistant panel uses the same tokens, so a brand update in `:root` changes the chat with the rest of the site.
+The headline, section structure, process explanation, and presentation are currently maintained in `src/app/(frontend)/page.tsx`. No schema migration was needed for this pass.

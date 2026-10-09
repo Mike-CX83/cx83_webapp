@@ -73,6 +73,15 @@ jobs:
       - name: Run automated tests
         run: pnpm test
 
+      - name: Save homepage browser review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: homepage-review-${{ github.run_id }}
+          path: test-results/**/homepage-*.png
+          if-no-files-found: ignore
+          retention-days: 7
+
       - name: Build
         run: pnpm build
 
