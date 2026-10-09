@@ -57,8 +57,8 @@ export default async function HomePage() {
               Just ask.
             </h1>
             <p className="cx83-showcase-lead">
-              CX83 connects your website to the AI tools you already use. Describe a change in everyday language,
-              and the connected system can make real updates for you to review and publish.
+              CX83 connects your website to supported AI tools you already use. Ask for a change in everyday language,
+              and the connected system can make real updates you can review and publish.
             </p>
             <div className="cx83-showcase-actions">
               <a className="cx83-action cx83-action-primary" href="#website-demo">
@@ -70,7 +70,7 @@ export default async function HomePage() {
             </div>
             <Link className="cx83-showcase-subnav" href="/services">Explore services <span aria-hidden="true">&nbsp;↗</span></Link>
             <p className="cx83-showcase-status">
-              A real website, connected AI, and ordinary publishing controls. No imaginary one-click promises.
+              The website you are visiting is itself a CX83 demonstration.
             </p>
           </div>
           <WebsiteDemoPlayer
@@ -78,7 +78,7 @@ export default async function HomePage() {
             poster="/showcase/cx83-website-showcase-poster-v2.jpg"
             source="/showcase/cx83-website-showcase-v2.mp4"
           >
-            A real request, real website changes, and the resulting page.
+            Requested through ChatGPT, changed in real software, then checked before publishing.
           </WebsiteDemoPlayer>
         </div>
       </section>
