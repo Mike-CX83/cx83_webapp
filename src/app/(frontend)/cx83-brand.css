@@ -377,3 +377,7 @@
 .cx83-shared-card a:focus-visible, .cx83-shared-card button:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
 .cx83-page-section-heading { font-size: clamp(1.65rem, 3vw, 2.35rem); font-weight: 650; line-height: 1.2; letter-spacing: -.03em; }
 @media (prefers-reduced-motion: reduce) { .cx83-site-nav-link, .cx83-site-mobile-link, .cx83-footer-link, .cx83-shared-card { transition: none; } .cx83-shared-card:has(a):hover, .cx83-shared-card:focus-within { transform: none; } }
+
+.cx83-logo-dark { display: none; }
+[data-theme='dark'] .cx83-logo-light { display: none; }
+[data-theme='dark'] .cx83-logo-dark { display: block; }
