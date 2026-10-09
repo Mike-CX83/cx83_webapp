@@ -31,7 +31,7 @@ test.describe('CX83 software catalog', () => {
   })
 
   for (const width of [320, 390, 768, 1440]) {
-    test('software pages fit ' + width + 'px without overflow', async ({ page }) => {
+    test('software pages fit ' + width + 'px without overflow', async ({ page }, testInfo) => {
       test.setTimeout(120_000)
       await page.setViewportSize({ width, height: 900 })
       for (const route of ['/software', '/software/connected-websites', '/software/client-brand-studio']) {
@@ -39,6 +39,11 @@ test.describe('CX83 software catalog', () => {
         await page.evaluate(() => document.fonts.ready)
         expect(await page.evaluate(() => document.documentElement.scrollWidth), route).toBeLessThanOrEqual(width)
         await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+        if (route === '/software' && (width === 390 || width === 1440)) {
+          const screenshot = testInfo.outputPath('homepage-software-' + width + '.png')
+          await page.screenshot({ path: screenshot, fullPage: true, animations: 'disabled' })
+          await testInfo.attach('catalog-' + width, { path: screenshot, contentType: 'image/png' })
+        }
       }
     })
   }
