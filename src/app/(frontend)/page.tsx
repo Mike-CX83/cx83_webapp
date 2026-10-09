@@ -9,6 +9,7 @@ import { showcaseMediaReady } from '@/content/showcaseMedia'
 
 import './cx83-showcase.css'
 import { loadProjects, loadServices, loadSiteCopy } from '@/content/load'
+import { softwareProducts } from '@/content/softwareCatalog'
 
 export const dynamic = 'force-dynamic'
 
@@ -182,6 +183,33 @@ export default async function HomePage() {
               It does not receive the website owner&apos;s editing permissions.
             </p>
           </article>
+        </div>
+      </Section>
+
+      <Section className="cx83-home-software" id="software">
+        <div className="cx83-home-section-heading">
+          <div>
+            <p className="cx83-home-kicker">Software in development</p>
+            <h2>Tools you can make your own.</h2>
+          </div>
+          <Link className="cx83-home-text-link" href="/software">Explore CX83 software <span aria-hidden="true">↗</span></Link>
+        </div>
+        <p className="cx83-home-software-intro">
+          Alongside our services, we are developing packaged software that makes it easier
+          to manage a website or keep your existing business brand consistent.
+          Customer installers and purchases are not available yet.
+        </p>
+        <div className="cx83-home-card-grid cx83-home-software-grid">
+          {softwareProducts.map((product) => (
+            <article className="cx83-home-service-card" key={product.slug}>
+              <span className="cx83-home-software-status">{product.releaseStatus}</span>
+              <h3>{product.name}</h3>
+              <p>{product.shortDescription}</p>
+              <Link className="cx83-home-text-link" href={`/software/${product.slug}`}>
+                Explore the software <span aria-hidden="true">↗</span>
+              </Link>
+            </article>
+          ))}
         </div>
       </Section>
 
