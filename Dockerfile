@@ -26,6 +26,7 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+RUN if [ ! -s .cx83-staging-source.bundle ]; then printf '' > .cx83-staging-source.bundle; fi
 
 ARG NEXT_PUBLIC_SERVER_URL=http://localhost:3000
 ENV NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL
@@ -47,6 +48,8 @@ FROM base AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
+ARG CX83_DEPLOYED_SHA=
+ENV CX83_DEPLOYED_SHA=$CX83_DEPLOYED_SHA
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
@@ -64,6 +67,8 @@ RUN chown nextjs:nodejs .next
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/.cx83-staging-source.bundle /app/.cx83-staging-source.bundle
+COPY --from=builder --chown=nextjs:nodejs /app/src/plugins/repositoryCheckout.ts /app/repositoryCheckout.ts
 
 RUN apk add --no-cache git ripgrep \
   && corepack enable \

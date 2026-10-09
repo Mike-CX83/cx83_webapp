@@ -92,9 +92,17 @@ jobs:
     steps:
       - name: Check out the repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+
+      - name: Bundle the deployed commit
+        run: |
+          git bundle create .cx83-staging-source.bundle HEAD
+          git bundle verify .cx83-staging-source.bundle
+          test "$(git bundle list-heads .cx83-staging-source.bundle | awk 'NR==1 {print $1}')" = "$(git rev-parse HEAD)"
 
       - name: Build the staging image
         uses: docker/build-push-action@v6
@@ -106,6 +114,7 @@ jobs:
           tags: cx83-webapp:staging
           build-args: |
             NEXT_PUBLIC_SERVER_URL=https://staging.cx83labs.com
+            CX83_DEPLOYED_SHA=${{ github.sha }}
 
       - name: Save the image
         run: docker save cx83-webapp:staging | gzip -1 > cx83-webapp-staging.tar.gz

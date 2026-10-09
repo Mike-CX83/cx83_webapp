@@ -46,6 +46,28 @@ rollback() {
   exit 1
 }
 
+sync_checkout() {
+  sync_log=$(mktemp)
+  if ! docker exec -u nextjs cx83-webapp test -f /app/repositoryCheckout.ts; then
+    log "checkout_sync=unavailable"
+    rm -f "$sync_log"
+    return 0
+  fi
+  if docker exec -u nextjs -e GIT_TERMINAL_PROMPT=0 cx83-webapp \
+    node --disable-warning=ExperimentalWarning --experimental-strip-types /app/repositoryCheckout.ts --sync \
+    >"$sync_log" 2>&1; then
+    log "checkout_sync=ok"
+  else
+    log "checkout_sync=blocked"
+  fi
+  sed -E \
+    -e 's#(https://)[^@[:space:]]+@#\1[redacted]@#g' \
+    -e 's/Bearer[[:space:]]+[A-Za-z0-9._~+/-]+/Bearer [redacted]/g' \
+    "$sync_log" | grep -E '^(decision|blocked|safeToSync|syncNeeded|dirty|branch|origin|checkoutSha|deployedSha|reason)=' || true
+  rm -f "$sync_log"
+  return 0
+}
+
 case "${SSH_ORIGINAL_COMMAND:-}" in
   deploy\ [0-9a-fA-F]*)
     sha=${SSH_ORIGINAL_COMMAND#deploy }
@@ -240,6 +262,8 @@ if [ -n "$old_previous_id" ]; then
     docker rmi "$old_previous_id" >/dev/null 2>&1 || true
   fi
 fi
+
+sync_checkout
 
 log "STAGING DEPLOY SUCCESS"
 log "sha=$sha"

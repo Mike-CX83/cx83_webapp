@@ -35,6 +35,8 @@ The GitHub Actions secrets are `STAGING_DEPLOY_SSH_KEY`, `STAGING_DEPLOY_HOST`, 
 
 The script then asks the new container for the homepage, checks that `https://staging.cx83labs.com` still asks for the staging password, and checks that the password still opens the site. If the homepage includes the banner file, that file and its optimized image must answer. If any of those checks fail, the script tags `cx83-webapp:staging-previous` back to `cx83-webapp:staging`, starts that image, and the workflow fails.
 
+After those checks pass, the script runs the guarded checkout sync inside the new container. The image carries `CX83_DEPLOYED_SHA` and a git bundle of that exact commit at `/app/.cx83-staging-source.bundle`. The sync fast-forwards `/opt/cx83-webapp/repo` to that commit when the checkout is on `staging-host`, the origin is `Mike-CX83/cx83_webapp`, and there is no uncommitted owner work. A dirty or diverged checkout is left untouched and the healthy site stays up. Replacing the image does not by itself change `/repo`; `/repo` is a separate bind mount. The sync does not reset, delete, push, or contact GitHub. The server has no GitHub credential for this repository.
+
 To return to the previous image by hand:
 
 ```bash
@@ -70,6 +72,16 @@ The checkout at `/opt/cx83-webapp/repo` has its dependencies installed so reposi
 ```text
 15 4 * * * /opt/cx83-webapp/backup.sh >> /var/log/cx83-webapp-backup.log 2>&1
 ```
+
+## Checkout tools for ChatGPT
+
+The existing CX83 Website connection exposes two more owner tools. Do not add a second app, tunnel, or plugin.
+
+`getRepositoryStatus` takes no arguments. It reports `checkoutSha`, `deployedSha`, `branch`, `dirty`, `syncNeeded`, `safeToSync`, `blocked`, `decision`, and `reason`. `blocked=true` means the checkout must not be moved. `decision=aligned` means it already matches the deployed commit. `decision=safe-to-sync` means a later sync can fast-forward. The tool does not fetch, merge, or print the remote URL.
+
+`syncRepositoryCheckout` accepts an optional `expectedSha`. Leave it empty, or pass the deployed commit from `getRepositoryStatus`. Any other commit is refused. A safe call fast-forwards `/repo` and reports `decision=aligned`. Calling it again is a no-op. It refuses uncommitted and untracked owner files, a detached HEAD, a branch other than `staging-host`, a different GitHub repository, diverged history, a bundle that is not the recorded deployment, and a repository root other than `/repo`. Generated `.pnpm-store`, `node_modules`, `.next`, and `.cx83-checks` files do not count as owner work. The public visitor chat does not receive either tool.
+
+ChatGPT keeps the tool list from the conversation that connected to the app. Start a new conversation with the existing CX83 Website app. If the new tools are absent, disconnect and reconnect that same app so ChatGPT requests the tool list again. Then call `getRepositoryStatus`. When `decision` is `aligned` or `safe-to-sync`, call `syncRepositoryCheckout`, then `readRepositoryFile` on `public/brand/logo-dark.svg` and `src/components/site/SiteHeader.tsx`.
 
 ## Repository checks
 
