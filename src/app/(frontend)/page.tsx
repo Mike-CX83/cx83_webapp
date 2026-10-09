@@ -4,6 +4,8 @@ import Link from 'next/link'
 
 import { ContentNotice, Section } from '@/components/site/Section'
 import { WebsiteDemoPlayer } from '@/components/site/WebsiteDemoPlayer'
+import { WebsiteProofPanel } from '@/components/site/WebsiteProofPanel'
+import { showcaseMediaReady } from '@/content/showcaseMedia'
 
 import './cx83-showcase.css'
 import { loadProjects, loadServices, loadSiteCopy } from '@/content/load'
@@ -61,8 +63,8 @@ export default async function HomePage() {
               and the connected system can make real updates you can review and publish.
             </p>
             <div className="cx83-showcase-actions">
-              <a className="cx83-action cx83-action-primary" href="#website-demo">
-                Watch a real website change <span aria-hidden="true">↘</span>
+              <a className="cx83-action cx83-action-primary" href={showcaseMediaReady ? "#website-demo" : "#website-proof"}>
+                {showcaseMediaReady ? 'Watch a real website change' : 'See a real website change'} <span aria-hidden="true">↘</span>
               </a>
               <Link className="cx83-action cx83-action-quiet" href="/contact">
                 Start a conversation
@@ -73,6 +75,7 @@ export default async function HomePage() {
               The website you are visiting is itself a CX83 demonstration.
             </p>
           </div>
+          {showcaseMediaReady ? (
           <WebsiteDemoPlayer
             captions="/showcase/cx83-website-showcase-v2.en.vtt"
             poster="/showcase/cx83-website-showcase-poster-v2.jpg"
@@ -80,6 +83,9 @@ export default async function HomePage() {
           >
             Requested through ChatGPT, changed in real software, then checked before publishing.
           </WebsiteDemoPlayer>
+          ) : (
+            <WebsiteProofPanel />
+          )}
         </div>
       </section>
 
