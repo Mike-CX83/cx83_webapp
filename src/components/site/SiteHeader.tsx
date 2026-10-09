@@ -31,11 +31,11 @@ export function SiteHeader({ siteName, items }: { siteName: string; items: { hre
             <Link aria-current={active(item.href) ? 'page' : undefined} className="cx83-site-nav-link" href={item.href} key={item.href}>{item.label}</Link>
           ))}
         </nav>
-        <button aria-controls={menuId} aria-expanded={open} aria-label={open ? 'Close navigation menu' : 'Open navigation menu'} className="cx83-site-menu-button inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-border px-3 text-sm font-semibold md:hidden" onClick={() => setOpen(!open)} type="button">
+        <button aria-controls={menuId} aria-expanded={open} className="cx83-site-menu-button inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-border px-3 text-sm font-semibold md:hidden" onClick={() => setOpen(!open)} type="button">
           {open ? 'Close' : 'Menu'}
         </button>
       </div>
-      <nav aria-label="Mobile" className={open ? 'cx83-site-mobile-nav border-t border-border md:hidden' : 'hidden'} id={menuId}>
+      <nav aria-label="Mobile" onKeyDown={(event) => { if (event.key === 'Escape') setOpen(false) }} className={open ? 'cx83-site-mobile-nav border-t border-border md:hidden' : 'hidden'} id={menuId}>
         <div className="cx83-container flex flex-col py-3">
           {nav.map(item => (
             <Link aria-current={active(item.href) ? 'page' : undefined} className="cx83-site-mobile-link" href={item.href} key={item.href} onClick={() => setOpen(false)}>{item.label}</Link>
