@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-test.describe('Run 1 / Catalyst X83 visual identity and CAT', () => {
+test.describe('Run 1 / Catalyst X83 visual identity and Cat', () => {
   test('desktop navigation, founder story and authentic branding', async ({ page }, testInfo) => {
     await page.setViewportSize({ width: 1440, height: 900 })
     await page.goto('http://localhost:3000/about')
@@ -10,6 +10,8 @@ test.describe('Run 1 / Catalyst X83 visual identity and CAT', () => {
     await expect(page.getByRole('heading', { name: 'Built from real work. Designed for what comes next.' })).toBeVisible()
     await expect(page.getByText(/Founder Mike Hankins came to software from a career in nursing and hospice care/)).toBeVisible()
     await expect(page.getByText(/In 2025, he founded Catalyst X83/)).toBeVisible()
+    expect((await page.locator('body').innerText()).match(/Catalyst X83/g)).toHaveLength(1)
+    await expect(page).toHaveTitle(/About CX83 Labs/)
     await expect(page.locator('.cx83-about-brand img[src="/brand/symbol-showcase.svg"]')).toHaveCount(1)
     await expect(page.getByRole('link', { name: 'Start a conversation', exact: false })).toHaveAttribute('href', '/contact')
     const screenshot = testInfo.outputPath('homepage-about-1440.png')
@@ -18,11 +20,11 @@ test.describe('Run 1 / Catalyst X83 visual identity and CAT', () => {
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(1440)
   })
 
-  test('CAT opens from desktop navigation with verified public starter paths', async ({ page }) => {
+  test('Cat opens from desktop navigation with verified public starter paths', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 })
     await page.goto('http://localhost:3000/services')
-    await page.locator('header.cx83-site-header').getByRole('button', { name: 'Ask CAT' }).click()
-    const dialog = page.getByRole('dialog', { name: /CAT/ })
+    await page.locator('header.cx83-site-header').getByRole('button', { name: 'Ask Cat' }).click()
+    const dialog = page.getByRole('dialog', { name: /Cat/ })
     await expect(dialog).toBeVisible()
     for (const starter of [
       'How can AI update a website?',
@@ -39,7 +41,7 @@ test.describe('Run 1 / Catalyst X83 visual identity and CAT', () => {
   })
 
   for (const width of [320, 390, 768]) {
-    test('mobile navigation and CAT fit ' + width + 'px', async ({ page }, testInfo) => {
+    test('mobile navigation and Cat fit ' + width + 'px', async ({ page }, testInfo) => {
       await page.setViewportSize({ width, height: 844 })
       await page.goto('http://localhost:3000')
       const firstSection = page.locator('main .cx83-home > section').first()
@@ -53,16 +55,16 @@ test.describe('Run 1 / Catalyst X83 visual identity and CAT', () => {
       await expect(menu).toHaveAttribute('aria-expanded', 'true')
       const mobile = page.getByRole('navigation', { name: 'Mobile' })
       await expect(mobile.getByRole('link', { name: 'Home' })).toBeVisible()
-      await mobile.getByRole('button', { name: 'Ask CAT' }).click()
+      await mobile.getByRole('button', { name: 'Ask Cat' }).click()
       await expect(mobile).toBeHidden()
-      const dialog = page.getByRole('dialog', { name: /CAT/ })
+      const dialog = page.getByRole('dialog', { name: /Cat/ })
       await expect(dialog).toBeVisible()
       await expect(dialog.getByRole('heading', { name: 'What can we help you explore?' })).toBeInViewport({ ratio: 1 })
       await expect(dialog.getByRole('button', { name: 'How can AI update a website?' })).toBeVisible()
       if (width === 390) {
         const screenshot = testInfo.outputPath('homepage-cat-390.png')
         await page.screenshot({ path: screenshot, fullPage: false, animations: 'disabled' })
-        await testInfo.attach('CAT-mobile', { path: screenshot, contentType: 'image/png' })
+        await testInfo.attach('Cat-mobile', { path: screenshot, contentType: 'image/png' })
       }
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width)
       await page.keyboard.press('Escape')

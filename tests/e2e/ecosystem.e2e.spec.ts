@@ -6,9 +6,9 @@ test.describe('Connected Ecosystem showcase', () => {
   test('preserves original homepage banner and shows actual logo journey', async ({ page, request }) => {
     await page.goto(host + '/')
     await expect(page.getByTestId('homepage-banner')).toHaveAttribute('src', /cx83-labs-hero/)
+    await expect(page.getByTestId('systems-map')).toHaveCount(0)
+    await page.goto(host + '/how-it-works')
     await expect(page.getByTestId('systems-map')).toBeVisible()
-    await expect(page.getByText('One request. Connected systems. Real work.')).toBeVisible()
-    await expect(page.getByRole('link', { name: /Explore all connections/ })).toHaveAttribute('href', '/how-it-works#system-map')
     for (const logo of ['openai.svg', 'github.svg']) {
       const response = await request.head(host + '/integrations/' + logo)
       expect(response.ok(), logo + ' is required').toBe(true)
@@ -36,14 +36,14 @@ test.describe('Connected Ecosystem showcase', () => {
     await expect(workflow).toHaveAttribute('aria-pressed', 'true')
     await expect(page.getByTestId('ecosystem-step')).toContainText('Illustrative or developing route')
     await expect(page.getByText('Notification automation and email delivery remain unverified.')).toBeVisible()
-    await page.getByTestId('systems-layer').filter({ hasText: 'Visitor CAT' }).click()
+    await page.getByTestId('systems-layer').filter({ hasText: 'Visitor Cat' }).click()
     await expect(page.getByTestId('systems-active-detail')).toContainText('Cannot edit source')
   })
 
-  test('a separate public CAT lane never implies owner access', async ({ page }) => {
+  test('a separate public Cat lane never implies owner access', async ({ page }) => {
     await page.goto(host + '/how-it-works')
     await expect(page.getByTestId('visitor-lane')).toContainText('It has no link to private editing')
-    await page.getByTestId('ecosystem-scenario').filter({ hasText: 'Ask visitor CAT' }).click()
+    await page.getByTestId('ecosystem-scenario').filter({ hasText: 'Ask visitor Cat' }).click()
     await expect(page.getByTestId('ecosystem-step')).toContainText('Step 1 of 4')
     const tools = page.getByRole('button', { name: 'Authorized tools' })
     await tools.focus()

@@ -9,7 +9,7 @@ export async function POST(req: Request) {
   const config = await getAssistantRuntimeConfig()
 
   if (!config.enabled) {
-    return Response.json({ error: 'CAT is currently unavailable. Please use the contact form.' }, { status: 503 })
+    return Response.json({ error: 'Cat is currently unavailable. Please use the contact form.' }, { status: 503 })
   }
 
   let body: { messages?: UIMessage[] } = {}
@@ -22,7 +22,7 @@ export async function POST(req: Request) {
   const messages = Array.isArray(body.messages) ? body.messages.slice(-historyLimit) : []
 
   if (config.configurationError) {
-    return Response.json({ error: 'CAT is temporarily unavailable. Please use the contact form.' }, { status: 503 })
+    return Response.json({ error: 'Cat is temporarily unavailable. Please use the contact form.' }, { status: 503 })
   }
 
   try {

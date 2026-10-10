@@ -19,7 +19,7 @@ test.describe('Run 3 CX83 launch consistency gate', () => {
     const disclosure = page.getByText('Can an AI actually update my website?')
     await disclosure.focus()
     await page.keyboard.press('Enter')
-    await expect(page.getByText(/CAT, the visitor assistant on this website, cannot edit or deploy code/)).toBeVisible()
+    await expect(page.getByText(/Cat, the visitor assistant on this website, cannot edit or deploy code/)).toBeVisible()
     await expect(page.getByText(/There is no customer installer available yet/)).toHaveCount(1)
   })
 

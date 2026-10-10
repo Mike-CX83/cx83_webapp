@@ -62,7 +62,7 @@ export default async function SoftwareDetailPage({ params }: Args) {
         <Section className="cx83-run2-product-story">
           <p className="cx83-run2-eyebrow">Actual example: this CX83 website</p>
           <h2 className="cx83-run2-section-title">A change request became real, tested pages.</h2>
-          <p className="cx83-run2-lead">This existing website uses connected owner tools. The October 9 update changed the actual brand presentation, public CAT assistant and About page, then passed checks before staging publication.</p>
+          <p className="cx83-run2-lead">This existing website uses connected owner tools. The October 9 update changed the actual brand presentation, public Cat assistant and About page, then passed checks before staging publication.</p>
           <div className="cx83-run2-verified-path">
             <div><span>01 / Request</span><h3>Describe the change</h3><p>Keep the original banner and improve the identity and visitor interface.</p></div>
             <div><span>02 / Verify</span><h3>Run the tests</h3><p>29 integration and 46 browser tests passed at the verified Run 1 gate.</p></div>

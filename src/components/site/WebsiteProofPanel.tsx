@@ -12,7 +12,7 @@ export function WebsiteProofPanel() {
         </p>
         <ol className="cx83-showcase-proof-stages">
           <li><span>01 / BEFORE</span><p>The interior pages and assistant needed consistent CX83 identity, navigation and release language.</p></li>
-          <li><span>02 / REQUEST</span><p>Preserve the original homepage banner, unify the page design and create the CAT visitor experience.</p></li>
+          <li><span>02 / REQUEST</span><p>Preserve the original homepage banner, unify the page design and create the Cat visitor experience.</p></li>
           <li><span>03 / AFTER</span><p>The actual website changed, passed automated checks and deployed to protected staging with its original banner intact.</p></li>
         </ol>
         <div className="cx83-run2-proof-metrics">

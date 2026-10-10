@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 
 test.describe('CX83 original homepage banner preservation', () => {
-  for (const width of [320, 390, 768, 1440]) {
+  for (const width of [320, 390, 768, 1440, 2560, 3440]) {
     test(`banner remains original at ${width}px`, async ({ page }, testInfo) => {
       await page.setViewportSize({ width, height: 900 })
       await page.goto('http://localhost:3000')
@@ -16,10 +16,13 @@ test.describe('CX83 original homepage banner preservation', () => {
       await expect(banner).toHaveAttribute('alt', 'CX83 Labs illuminated logo in electric blue, silver, and violet')
       await expect(banner).toHaveAttribute('width', '960')
       await expect(banner).toHaveAttribute('height', '319')
-      await expect(banner).toHaveAttribute('sizes', '(min-width: 1024px) 1024px, 100vw')
+      await expect(banner).toHaveAttribute('sizes', '(min-width: 768px) 720px, 100vw')
       await expect(banner).toHaveAttribute('src', /cx83-labs-hero\.avif/)
       await expect.poll(() => banner.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true)
 
+      const band = await bannerWrapper.boundingBox()
+      expect(band?.width).toBe(width)
+      if (width >= 768) expect(band?.height).toBeLessThanOrEqual(260)
       const rect = await banner.boundingBox()
       expect(rect).not.toBeNull()
       if (!rect) throw new Error('Original CX83 banner did not render')

@@ -21,7 +21,7 @@ export function WebsiteDemoPlayer({ source, poster, captions, children }: Props)
           preload="none"
         >
           <source src={source} type="video/mp4" />
-          <track default kind="captions" label="English captions" src={captions} srcLang="en" />
+          <track kind="captions" label="English captions" src={captions} srcLang="en" />
           Your browser does not support embedded video.
         </video>
       </div>

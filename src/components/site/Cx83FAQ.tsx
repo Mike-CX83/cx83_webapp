@@ -5,7 +5,7 @@ const questions = [
   },
   {
     question: 'Can an AI actually update my website?',
-    answer: 'With an authorized integration, the owner can request changes through a connected AI tool. The underlying workflow still needs permission checks, version control, tests and a configured publishing step. CAT, the visitor assistant on this website, cannot edit or deploy code.',
+    answer: 'With an authorized integration, the owner can request changes through a connected AI tool. The underlying workflow still needs permission checks, version control, tests and a configured publishing step. Cat, the visitor assistant on this website, cannot edit or deploy code.',
   },
   {
     question: 'Will we own the software?',

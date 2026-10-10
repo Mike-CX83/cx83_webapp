@@ -1,3 +1,5 @@
+> Current owner direction, October 10, 2026: CX83_HOMEPAGE_REFINEMENT_EXECUTION_PLAN_2026_10_10.md supersedes the banner layout freeze and earlier homepage composition below. Preserve original asset bytes and 960:319 proportions. Use a thinner full width visual band, five homepage sections, optional captions, concise services/process, compact footer and Cat casing. Detailed map, software and permissions remain on dedicated pages. Older instructions below are historical wherever they conflict with this update. See CX83_CAT_RUN3_HANDOFF_2026_10_10.md for the current refinement checkpoint.
+
 # CX83 Labs | CAT Website Creative and Execution Blueprint
 
 **Company:** CX83 Labs, meaning **Catalyst X83**  

@@ -55,7 +55,7 @@ describe('CX83 connected ecosystem source of truth', () => {
     expect(findEdge('n8n', 'gmail')?.status).toBe('illustrative')
   })
 
-  it('keeps CAT independent of owner execution and deployment', () => {
+  it('keeps Cat independent of owner execution and deployment', () => {
     const cat = ecosystemScenarios.find((item) => item.id === 'cat')!
     expect(cat.path).toEqual(['visitor', 'cat', 'public', 'contact'])
     expect(cat.path).not.toContain('github')

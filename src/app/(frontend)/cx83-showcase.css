@@ -273,3 +273,15 @@
   font-size: .75rem;
   line-height: 1.55;
 }
+
+/* The actual footage leads; supporting explanation remains below the player. */
+.cx83-showcase-home .cx83-showcase-hero-grid { grid-template-columns: 1fr; gap: 1.5rem; padding-block: clamp(2rem, 4vw, 3.5rem); }
+.cx83-showcase-home .cx83-showcase-intro { max-width: 55rem; }
+.cx83-showcase-home .cx83-showcase-hero h2 { max-width: none; font-size: clamp(1.8rem, 3vw, 2.8rem); }
+.cx83-showcase-home .cx83-showcase-lead { max-width: 68ch; margin-top: .8rem; font-size: 1rem; }
+.cx83-showcase-home .cx83-showcase-player { width: 100%; max-width: 58rem; justify-self: center; }
+.cx83-showcase-home .cx83-showcase-player-caption { font-size: .875rem; padding-block: .85rem .25rem; }
+@media (max-width: 47.99rem) {
+  .cx83-showcase-home .cx83-showcase-player { padding: .5rem; border-radius: .85rem; }
+  .cx83-showcase-home .cx83-showcase-video-transcript { padding: .5rem .3rem; }
+}
