@@ -94,7 +94,7 @@ export default async function ContactPage() {
             </div>
             <InquiryForm />
             <p className="cx83-contact-form-note">
-              Please leave passwords, patient information, and other sensitive records out of your message.
+              Your details are stored by CX83 to review and respond to your inquiry, not shared with the public CAT assistant. Please leave passwords, patient information, and other sensitive records out of your message.
             </p>
           </div>
         </div>

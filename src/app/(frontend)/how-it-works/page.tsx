@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { PageHero, Section } from '@/components/site/Section'
 import { SystemsMap } from '@/components/site/SystemsMap'
+import { Cx83FAQ } from '@/components/site/Cx83FAQ'
 
 export const metadata: Metadata = {
   title: 'How CX83 Works',
@@ -55,6 +56,9 @@ export default function HowItWorksPage() {
           <Link className="cx83-run2-text-link" href="/about">Explore the updated About page <span aria-hidden="true">↗</span></Link>
           <Link className="cx83-run2-text-link" href="/software">Explore the software pages <span aria-hidden="true">↗</span></Link>
         </div>
+      </Section>
+      <Section className="cx83-run3-faq-section" id="questions">
+        <Cx83FAQ />
       </Section>
       <Section className="cx83-run2-closing">
         <div>

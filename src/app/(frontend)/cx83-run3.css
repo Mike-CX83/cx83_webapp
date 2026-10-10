@@ -1,0 +1,32 @@
+/* Run 3 uses the existing CX83 Midnight / Electric Blue / Violet / Silver tokens.
+   The protected original home hero and its image treatments are untouched. */
+.cx83-inquiry-honeypot { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+.cx83-inquiry-error, .cx83-field-error { color: #ffbdbd; line-height: 1.5; }
+.cx83-inquiry-success { border-radius: .9rem; padding: 1.5rem; background: var(--cx83-surface); border: 1px solid var(--cx83-blue); color: var(--cx83-silver); line-height: 1.65; }
+.cx83-inquiry-success strong { display: block; font-size: 1.15rem; color: var(--cx83-white); margin-bottom: .5rem; }
+.cx83-inquiry-small { margin-top: .75rem; color: var(--cx83-muted); font-size: .85rem; }
+.cx83-contact .field { width: 100%; min-height: 2.9rem; border: 1px solid var(--cx83-border); background: var(--cx83-midnight); color: var(--cx83-white); border-radius: .55rem; padding: .65rem .85rem; }
+.cx83-contact textarea.field { min-height: 9rem; }
+.cx83-contact .field:focus-visible { outline: 3px solid var(--cx83-on-dark-accent); outline-offset: 3px; }
+.cx83-contact .field[aria-invalid='true'] { border-color: #ffbdbd; }
+.cx83-contact .field:disabled { opacity: .68; cursor: progress; }
+.cx83-contact select.field { color-scheme: dark; }
+.cx83-contact-form-note { line-height: 1.65; }
+.cx83-faq { color: var(--cx83-silver); }
+.cx83-faq-list { display: grid; gap: .8rem; margin-top: 2rem; }
+.cx83-faq-item { border: 1px solid var(--cx83-border); background: var(--cx83-surface); border-radius: .85rem; }
+.cx83-faq-item[open] { border-color: var(--cx83-blue); }
+.cx83-faq-item summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 3.5rem; padding: 1rem 1.25rem; font-weight: 600; color: var(--cx83-white); }
+.cx83-faq-item summary::-webkit-details-marker { display: none; }
+.cx83-faq-item summary:hover { color: var(--cx83-on-dark-accent); }
+.cx83-faq-item summary:focus-visible { outline: 3px solid var(--cx83-on-dark-accent); outline-offset: 3px; border-radius: .65rem; }
+.cx83-faq-plus { display: inline-flex; justify-content: center; align-items: center; flex: 0 0 1.5rem; font-size: 1.5rem; font-weight: 400; color: var(--cx83-on-dark-accent); }
+.cx83-faq-item[open] .cx83-faq-plus { transform: rotate(45deg); }
+.cx83-faq-item p { max-width: 75ch; padding: 0 1.25rem 1.25rem; color: var(--cx83-muted); line-height: 1.75; }
+.cx83-run3-faq-section { background: var(--cx83-midnight); border-block: 1px solid var(--cx83-border); }
+.cx83-run3-not-found-links { display: flex; flex-wrap: wrap; gap: 1rem; padding-block: 2rem; }
+.cx83-run3-not-found-links .cx83-action-quiet { color: var(--cx83-silver); border-color: var(--cx83-border); }
+.cx83-work-proof { border: 1px solid var(--cx83-border); border-radius: 1rem; padding: 1.5rem; background: var(--cx83-surface); margin-top: 1.25rem; }
+.cx83-work-proof a { color: var(--cx83-on-dark-accent); text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 26rem) { .cx83-run3-not-found-links { flex-direction: column; } .cx83-run3-not-found-links a { width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .cx83-faq-plus { transition: none; } }

@@ -18,6 +18,7 @@ import { draftMode } from 'next/headers'
 import './globals.css'
 import './cx83-brand.css'
 import './cx83-run2.css'
+import './cx83-run3.css'
 import { getServerSideURL } from '@/utilities/getURL'
 
 export const dynamic = 'force-dynamic'
@@ -61,6 +62,7 @@ export const metadata: Metadata = {
   },
   description: 'CX83 Labs focuses on AI systems, automation, software, and business integration.',
   openGraph: mergeOpenGraph(),
+  robots: process.env.CX83_PUBLIC_LAUNCH_APPROVED === 'true' && !getServerSideURL().includes('staging.') ? undefined : { index: false, follow: false },
   twitter: {
     card: 'summary_large_image',
   },
