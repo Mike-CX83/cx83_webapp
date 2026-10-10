@@ -4,7 +4,7 @@
 **Public assistant:** **CAT**, the CX83 Labs AI Assistant  
 **Prepared:** October 9, 2026, Tulsa, Oklahoma  
 **Document type:** Owner-directed creative brief and executable website runbook  
-**Implementation status:** **Run 1 complete and Run 2 core scope verified on password-protected staging at `99b44a5`.** The Run 2 mobile visual QA correction merged as `4effd65` and has a separate staging gate. Run 3 is next after that release and its proof wording review. See Sections 12 and 13 and the handoff. No public production, payment or customer software release is approved.  
+**Implementation status:** **RUNS 1 AND 2 COMPLETE AND VERIFIED on password-protected staging, October 9, 2026.** Run 2 final verified application and staging source `fc3b4073792824bd238599757df3dc1b467c29cf`. Run 3 is next. See Section 13, the GitHub deployment receipt and the saved Run 2 handoff. No public production, payments, or customer software release is approved.  
 **Website repository:** `Mike-CX83/cx83_webapp`  
 **Verified starting staging commit:** `161bf0fcdb972a337aec41f5299326bb495ccd11` (refresh HEAD before executing)  
 **Existing staging:** `https://staging.cx83labs.com`, protected by authentication  
@@ -198,7 +198,7 @@ Treat these as **three implementation contexts**, not eleven small phases. Each 
 
 ### RUN 2 | Showcase, systems map, ownership and Brand Studio launch
 
-**Execution state October 9:** **Run 2 core scope COMPLETE on protected staging** at `99b44a5be0989a015a8ddfa93f8e96a0bed6ceb7` after full check and deploy workflow `38017456787`. Mobile visual QA PR #26 merged as `4effd65ff256191f8ef9587a96a0a6b1ae6cb329`; verify its own staging workflow before treating that additional fix as deployed. See Section 13.
+**Execution state October 9: RUN 2 COMPLETE AND DEPLOYED.** The final source `fc3b4073792824bd238599757df3dc1b467c29cf` passed the consolidated tests, image build and protected staging deploy in [workflow 38019633361](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38019633361). Both the mobile correction and ChatGPT proof wording are included in that deployed SHA. See Section 13.
 
 **Goal:** The website must be its own convincing demonstration of what CX83 builds and the business ownership philosophy.
 
@@ -286,7 +286,7 @@ ARTIFACTS: PR, commit, screenshots, tests, staging deployment, changed documents
 
 **Already on staging when this blueprint was prepared:** Phase 1 global CX83 identity, restored protected original home banner, a factual working AI demonstration panel, informational software catalog/product pages, Phase 4 release readiness foundation without payments, a branded contact form with Payload storage, and home software discovery. The original v2 video is still withheld because playback bytes and captions have not been verified.
 
-**Recommended next action:** After verifying the latest Run 2 mobile and proof release gate, execute **Run 3** as written using [the saved handoff](./CX83_CAT_RUN2_HANDOFF_2026_10_09.md). Preserve the original hero, CAT permissions and all working CMS integration. Do not reopen completed Run 1 work, mislabel Studio as released or publish public production.
+**Recommended next action:** **Run 3**, using the verified [Run 2 handoff](./CX83_CAT_RUN2_HANDOFF_2026_10_09.md), starting with a fresh `staging-host` HEAD and authenticated staging confirmation. Keep the original hero, real logo and CAT access boundaries. Run 3 owns inquiry notification delivery, spam controls and final launch polish. Do not publish public production, initiate payments or portray unreleased software as ready.
 ## 12. RUN 1 verified implementation receipt | October 9, 2026
 
 **Status:** RUN 1 COMPLETE on protected staging. No public-production publication, payments, or new customer communications.
@@ -308,7 +308,7 @@ ARTIFACTS: PR, commit, screenshots, tests, staging deployment, changed documents
 
 ## 13. RUN 2 implementation and protected staging checkpoint | October 9, 2026
 
-**Status:** RUN 2 COMPLETE for the approved core scope at `99b44a5be0989a015a8ddfa93f8e96a0bed6ceb7`, with protected staging checks passed and original on-dark wordmark contrast visually reviewed. A small Studio mobile index QA correction merged via PR #26 at `4effd65`, and the explicit ChatGPT proof wording in this documentation revision must pass subsequent staging gates before Run 3 begins. No public production or product launch is approved.
+**Status: RUN 2 COMPLETE on protected staging.** All Run 2 implementation, including Studio mobile index correction and explicit source-backed ChatGPT proof wording, is deployed at `fc3b4073792824bd238599757df3dc1b467c29cf`. Its password gate, original hero assets and source checkout were verified; no public production or product launch is approved. The separate documentation-only receipt commit will advance GitHub HEAD and must have its own successful staging workflow before anyone claims that later SHA is deployed.
 
 **Source:** [Merged Run 2 PR #24](https://github.com/Mike-CX83/cx83_webapp/pull/24), merge `fad102a367e1e1f44b31b3f4580f38854e3efaca`. First protected Run 2 staging workflow [38017311073](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38017311073) succeeded with `STAGING DEPLOY SUCCESS`, gate 401 without password, authenticated site and both banner image responses 200, `checkout_sync=ok`, and matching checkout/deployed SHA `fad102a367e1e1f44b31b3f4580f38854e3efaca`. Follow-up on-dark logo correction `99b44a5be0989a015a8ddfa93f8e96a0bed6ceb7` passed [CI 38017459958](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38017459958), including typecheck, lint, 29 integration tests, 53 Playwright browser tests and production build. Its [Staging workflow 38017456787](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38017456787) completed successfully, confirming unauthenticated 401, authenticated website and original/optimized hero image 200, `checkout_sync=ok`, identical checkout and deployed SHA `99b44a5be0989a015a8ddfa93f8e96a0bed6ceb7`, and `STAGING DEPLOY SUCCESS`. The stored desktop/mobile screenshot artifact confirms the authentic on-dark CX83 wordmark is legible.
 
@@ -321,3 +321,12 @@ ARTIFACTS: PR, commit, screenshots, tests, staging deployment, changed documents
 **Remaining separate boundaries:** No accepted customer installer, customer license, payments, outgoing inquiry email or public production release. Run 3 owns verified inquiry delivery, spam/idempotency and final trust review. The owner-facing connector remains separate from the visitor CAT.
 
 **Next handoff:** [docs/CX83_CAT_RUN2_HANDOFF_2026_10_09.md](./CX83_CAT_RUN2_HANDOFF_2026_10_09.md). Refresh `staging-host` HEAD and the final staging workflow before starting Run 3.
+
+### Final Run 2 staging release receipt | October 9, 2026
+
+**PROJECT:** CX83 Labs website, Catalyst X83. **RUN:** 2 of 3.  
+**HEAD:** Final tested application SHA `fc3b4073792824bd238599757df3dc1b467c29cf`; same exact **deployed staging SHA**. GitHub PR [#27](https://github.com/Mike-CX83/cx83_webapp/pull/27) merged the explicit ChatGPT demonstration record, evidence, blueprint and Run 3 handoff after Run 2 visual QA PR [#26](https://github.com/Mike-CX83/cx83_webapp/pull/26).  
+**COMPLETED:** [Successful staging workflow 38019633361](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38019633361) proved typecheck, lint, 29 Vitest integration tests, 54 Playwright browser tests ultimately passing, production Next.js build, image generation and `STAGING DEPLOY SUCCESS`. One preexisting contact-form validation browser test initially flaked during an asynchronous submission and passed on retry; log this for Run 3 stabilization rather than claiming a clean first attempt. Live checks returned password gate HTTP 401, authenticated website HTTP 200, static and optimized original banner images HTTP 200, `checkout_sync=ok`, and identical `checkoutSha` and `deployedSha` of `fc3b4073792824bd238599757df3dc1b467c29cf`. Desktop/mobile screenshot artifact `homepage-review-38019633361` is attached to that workflow (retention applies). Original first homepage hero remained byte-identical and AVIF blob `3afb58548ceed0dab3c814991d5894ce09c16d5a` was retained.  
+**BLOCKED:** Original v2 video source, poster and captions remain unverified and unpublished; use the functioning evidence panel. Studio 0.8.4 is still an unreleased draft. No outbound inquiry email, customer license, checkout or public production release was activated.  
+**NEXT:** Run 3, starting with the latest staging source and the [Run 2 handoff](./CX83_CAT_RUN2_HANDOFF_2026_10_09.md); fix contact-form test timing while implementing verified durable inquiry delivery and complete accessibility/trust review.  
+**ARTIFACTS:** PR [#24](https://github.com/Mike-CX83/cx83_webapp/pull/24), PR [#26](https://github.com/Mike-CX83/cx83_webapp/pull/26), PR [#27](https://github.com/Mike-CX83/cx83_webapp/pull/27), [Run 2 final staging workflow](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38019633361), `docs/CX83_RUN2_MEDIA_EVIDENCE.md`, `docs/CX83_CAT_RUN2_HANDOFF_2026_10_09.md`.
