@@ -65,6 +65,12 @@ The public site asks for the staging gate user `cx83` and the password in `stagi
 
 The checkout at `/opt/cx83-webapp/repo` has its dependencies installed so repository checks can run the same commands as CI. One tunnel client is already running for tunnel `tunnel_6ac83333598c81919c842108753202e9`. The server profile points MCP at `http://cx83-webapp:3000/api/mcp` and injects the owner bearer with `extra_headers`. Do not start a second client for that tunnel.
 
+## Run 3 protected inquiry notifications
+
+All submitted contact inquiries remain stored in existing Payload `form-submissions` records. A separately authorized server-side Google Workspace grant may send notifications only from the verified business mailbox `mike@cx83labs.com` to itself. The connected ChatGPT Gmail account proves mailbox ownership for this workflow but does not provide a website runtime grant. Do not copy connector tokens, invent `hello@` addresses, expose credentials or report inbox delivery based only on mock tests.
+
+See `docs/CX83_RUN3_MAIL_DELIVERY.md` for variable names in `deploy/staging/env.example` and the controlled activation procedure. Keep actual values solely in `/opt/cx83-webapp/.env` (mode 600), and ensure public launch remains unapproved with `CX83_PUBLIC_LAUNCH_APPROVED=false`. A successful submission reports saved storage independently from provider notification. Owner-only manual dispatch requires a dedicated bearer and handles at most ten pending records per request; nothing is scheduled to send on its own. The protected gate, original banner and image rollback procedure remain unchanged.
+
 ## Backups
 
 `deploy/staging/backup.sh` writes a database dump and a media archive to `/var/backups/cx83-webapp` and deletes files older than 14 days. The server cron entry is:

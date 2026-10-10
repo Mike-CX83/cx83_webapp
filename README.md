@@ -78,11 +78,11 @@ Payload stores uploads in `public/media` during development. Production hosting 
 
 ## Branding
 
-Temporary tokens live in `:root` inside `src/app/(frontend)/globals.css`. The only supplied brand color is `#101216`. Typography is Geist until a typeface is approved. The header uses a text wordmark. See `docs/BRANDING.md`.
+CX83's dark-first brand system and shared surfaces live in `src/app/(frontend)/cx83-brand.css` and related site CSS. Genuine logo SVGs originate from the owner's draft Studio assets and are documented in `public/brand/PROVENANCE.md`. The existing illuminated homepage AVIF and first hero section remain protected and unchanged. See `docs/BRANDING.md`.
 
 ## Forms
 
-The contact page posts to `/api/inquiries`. The server validates the fields and, when PostgreSQL is connected, stores the submission in Payload's form submissions collection under the form titled `CX83 inquiry`. The owner reads submissions in the admin panel. Email, CRM, and scheduling delivery are not connected.
+The contact page posts to `/api/inquiries`. It validates fields and, when PostgreSQL is connected, stores an inquiry in Payload's `CX83 inquiry` form submissions. A saved record includes a request ID and durable notification state. A separately authorized Google Workspace Gmail adapter can notify the exact business mailbox `mike@cx83labs.com`, but it is disabled until website-owned OAuth credentials are deliberately configured. The form confirms **saved**, never claims inbox delivery. An owner-only manual dispatch route supports recovery; a dedicated bearer secret is required. Abuse and duplicate protections are designed for single-replica protected staging, not a public multi-replica guarantee. See `docs/CX83_RUN3_MAIL_DELIVERY.md`.
 
 ## Assistant
 
