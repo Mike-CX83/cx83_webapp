@@ -46,7 +46,7 @@ test.describe('CX83 branded intake', () => {
     await page.getByRole('textbox', { name: 'Email' }).fill('retry@example.invalid')
     await page.getByRole('textbox', { name: 'Message' }).fill('Synthetic failure for testing only.')
     await page.getByRole('button', { name: 'Send inquiry' }).click()
-    await expect(page.getByRole('alert')).toContainText('storage unavailable')
+    await expect(page.locator('form [role="alert"]')).toContainText('storage unavailable')
     await expect(page.getByRole('textbox', { name: 'Name' })).toHaveValue('Synthetic Retry')
     await expect(page.getByRole('status')).toHaveCount(0)
   })
