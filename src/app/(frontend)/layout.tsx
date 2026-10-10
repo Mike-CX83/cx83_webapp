@@ -20,6 +20,7 @@ import './cx83-brand.css'
 import './cx83-run2.css'
 import './cx83-run3.css'
 import './cx83-ecosystem.css'
+import './cx83-connections.css'
 import { getServerSideURL } from '@/utilities/getURL'
 
 export const dynamic = 'force-dynamic'

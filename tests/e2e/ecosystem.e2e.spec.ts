@@ -8,6 +8,7 @@ test.describe('Connected Ecosystem showcase', () => {
     await expect(page.getByTestId('homepage-banner')).toHaveAttribute('src', /cx83-labs-hero/)
     await expect(page.getByTestId('systems-map')).toHaveCount(0)
     await page.goto(host + '/how-it-works')
+    await page.locator('.cx83-technical-disclosure > summary').click()
     await expect(page.getByTestId('systems-map')).toBeVisible()
     for (const logo of ['openai.svg', 'github.svg']) {
       const response = await request.head(host + '/integrations/' + logo)
@@ -18,6 +19,7 @@ test.describe('Connected Ecosystem showcase', () => {
 
   test('traces a verified website request with manual steps and source proof', async ({ page }) => {
     await page.goto(host + '/how-it-works')
+    await page.locator('.cx83-technical-disclosure > summary').click()
     await expect(page.getByTestId('systems-layer')).toHaveCount(7)
     await expect(page.getByTestId('ecosystem-provider').first()).toBeVisible()
     await expect(page.getByTestId('ecosystem-step')).toContainText('Step 1 of 7')
@@ -31,6 +33,7 @@ test.describe('Connected Ecosystem showcase', () => {
 
   test('distinguishes illustrative automation and unavailable email delivery', async ({ page }) => {
     await page.goto(host + '/how-it-works')
+    await page.locator('.cx83-technical-disclosure > summary').click()
     const workflow = page.getByTestId('ecosystem-scenario').filter({ hasText: 'Route a customer inquiry' })
     await workflow.click()
     await expect(workflow).toHaveAttribute('aria-pressed', 'true')
@@ -42,6 +45,7 @@ test.describe('Connected Ecosystem showcase', () => {
 
   test('a separate public Cat lane never implies owner access', async ({ page }) => {
     await page.goto(host + '/how-it-works')
+    await page.locator('.cx83-technical-disclosure > summary').click()
     await expect(page.getByTestId('visitor-lane')).toContainText('It has no link to private editing')
     await page.getByTestId('ecosystem-scenario').filter({ hasText: 'Ask visitor Cat' }).click()
     await expect(page.getByTestId('ecosystem-step')).toContainText('Step 1 of 4')
@@ -56,6 +60,7 @@ test.describe('Connected Ecosystem showcase', () => {
     test('ecosystem stays usable at ' + width + 'px', async ({ page }) => {
       await page.setViewportSize({ width, height: 850 })
       await page.goto(host + '/how-it-works')
+    await page.locator('.cx83-technical-disclosure > summary').click()
       await expect(page.getByTestId('ecosystem-step')).toBeVisible()
       await expect(page.getByTestId('visitor-lane')).toBeVisible()
       if (width === 390) {

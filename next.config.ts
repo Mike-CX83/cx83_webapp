@@ -27,6 +27,14 @@ const nextConfig: NextConfig = {
         pathname: '/brand/cx83-labs-hero.avif',
         search: '',
       },
+      {
+        pathname: '/brand/cx83-atmosphere-wide.webp',
+        search: '',
+      },
+      {
+        pathname: '/connections/*.webp',
+        search: '',
+      },
     ],
     qualities: [100],
     remotePatterns: [

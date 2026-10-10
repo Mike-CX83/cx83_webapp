@@ -20,7 +20,11 @@ test.describe('CX83 original homepage banner preservation', () => {
       await expect(banner).toHaveAttribute('src', /cx83-labs-hero\.avif/)
       await expect.poll(() => banner.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true)
 
+      const atmosphere = bannerWrapper.getByTestId('banner-atmosphere')
+      await expect.poll(() => atmosphere.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true)
+      const atmosphereBox = await atmosphere.boundingBox()
       const band = await bannerWrapper.boundingBox()
+      expect(atmosphereBox?.width).toBe(band?.width)
       expect(band?.width).toBe(await page.evaluate(() => document.documentElement.clientWidth))
       if (width >= 768) expect(band?.height).toBeLessThanOrEqual(260)
       const rect = await banner.boundingBox()
