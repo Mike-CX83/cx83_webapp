@@ -4,7 +4,7 @@
 **Public assistant:** **CAT**, the CX83 Labs AI Assistant  
 **Prepared:** October 9, 2026, Tulsa, Oklahoma  
 **Document type:** Owner-directed creative brief and executable website runbook  
-**Implementation status:** Planning document. Nothing in this document is a claim that a proposed feature has shipped.  
+**Implementation status:** **RUN 1 implementation complete and verified on password-protected staging, October 9, 2026.** Runs 2 and 3 remain planned. See Section 12 and the Run 1 handoff for evidence. This does not authorize public production, payments, or a customer software release.  
 **Website repository:** `Mike-CX83/cx83_webapp`  
 **Verified starting staging commit:** `161bf0fcdb972a337aec41f5299326bb495ccd11` (refresh HEAD before executing)  
 **Existing staging:** `https://staging.cx83labs.com`, protected by authentication  
@@ -26,7 +26,7 @@
 9. **Final testing at the END of each run.** Build the run's components and content first, then execute one consolidated typecheck, lint, automated test, build and desktop/mobile review gate. Fix failures and rerun necessary checks. Do not run the entire suite after every tiny edit. Do not skip the final gate or declare a failed deployment successful.
 10. **Public production, payments, sending email and irreversible actions are separate boundaries.** Routine code and content work can deploy directly to protected staging. Only ship a feature that works and reflects verified owner permissions. Live sales, unapproved customer messages, irreversible spend and public production release require the relevant authorization and operational evidence.
 
-## 1. Verified existing foundation
+## 1. Verified existing foundation (historical baseline before Run 1)
 
 | Existing piece | Verified state | What to improve |
 | :--- | :--- | :--- |
@@ -284,4 +284,21 @@ ARTIFACTS: PR, commit, screenshots, tests, staging deployment, changed documents
 
 **Already on staging when this blueprint was prepared:** Phase 1 global CX83 identity, restored protected original home banner, a factual working AI demonstration panel, informational software catalog/product pages, Phase 4 release readiness foundation without payments, a branded contact form with Payload storage, and home software discovery. The original v2 video is still withheld because playback bytes and captions have not been verified.
 
-**Recommended next action:** **Run 1** as written, covering CAT, the founder story, premium dark-first polish, reusable interior banners, mobile navigation and shared site consistency in a single build and deployment run. Then automatically progress through Runs 2 and 3 as capacity and authorized sources allow. Do not restart the site or replan the foundations.
+**Recommended next action:** **Run 2** as written. Run 1 implementation has been completed, tested, and deployed to protected staging. Reuse its verified CSS, CAT interface, real brand masters, original hero and existing pipeline. Do not repeat Run 1 or turn unaccepted software into a released product. Run 3 remains separate.
+## 12. RUN 1 verified implementation receipt | October 9, 2026
+
+**Status:** RUN 1 COMPLETE on protected staging. No public-production publication, payments, or new customer communications.
+
+**Code delivered:** [Run 1 merged PR #22](https://github.com/Mike-CX83/cx83_webapp/pull/22), implementation merge `0180eef47f66559c8f84904acb223e7e8323f144`. After the initial staging gate caught a CAT hydration race, the corrective staging commit `cdae3ebab225cbe2bb362a1109da1d439abb3421` stabilized CAT open handling and the mobile welcome position, and extended browser coverage.
+
+**Verified first deployed Run 1 SHA:** `cdae3ebab225cbe2bb362a1109da1d439abb3421`, proven by the [successful Staging workflow](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38015054550). The remote deployment reported `STAGING DEPLOY SUCCESS`, password gate 401 without credentials, authenticated site 200, `checkout_sync=ok`, and identical `checkoutSha` and `deployedSha`. A later documentation-only commit may advance `staging-host`; refresh HEAD and verify its Actions run before any new work.
+
+**Checks:** TypeScript passed; lint passed; 29 Vitest integration tests passed; 46 Playwright browser tests passed; production Next.js build passed. Browser coverage includes desktop and mobile pages, header navigation, CAT interaction, accessibility focus/escape, original banner regression and layout overflow at 320, 390, 768 and 1440px. [Browser screenshots artifact](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38015054550/artifacts/11654824942) includes the desktop About page, CAT mobile panel, home banner and Software page (workflow retention applies).
+
+**Source preservation:** Original homepage source blob `de691a44d2fabbba708f472397fb45a33125f408` and original AVIF banner blob `3afb58548ceed0dab3c814991d5894ce09c16d5a` were identical before and after implementation. The first full homepage hero section was not changed. Real CX83 logos and CMS integrations remain in place.
+
+**Completed UI/content:** Consistent Midnight-first tokens and enhanced public surfaces, shared interior banners, About and Software dark cards, selected header/footer identity, explicit Home link, accessible three-line mobile menu, founder story and origin, verified mission and approach saved in Payload, and CAT naming/launcher/interface/starter prompts/public product knowledge/contact path. CAT has only visitor privileges; owner editing tools remain separate. The existing inquiry storage, services and unreleased software catalog were preserved.
+
+**Remaining work is assigned, not represented as shipped:** RUN 2 owns real source-video acceptance, interactive systems map, first-party proof and ownership/product launch narrative. RUN 3 owns business inquiry delivery, spam protection and complete launch polish. No customer installer, approved license, verified outgoing inquiry email or new third-party payment flow was activated. An authenticated live provider conversation was not independently exercised by this workflow; the CAT server transport, approved knowledge builder and staging CMS settings were inspected and preserved.
+
+**Durable next-run handoff:** [docs/CX83_CAT_RUN1_HANDOFF_2026_10_09.md](./CX83_CAT_RUN1_HANDOFF_2026_10_09.md). RUN 2 begins at Section 8, using Sections 5 through 7 for its source and design requirements.
