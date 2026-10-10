@@ -122,7 +122,6 @@ function AssistantSession({
               <Image src="/brand/symbol-showcase.svg" alt="" aria-hidden="true" width={37} height={37} />
             </span>
             <div className="cx83-cat-heading">
-              <p className="cx83-cat-eyebrow">CX83 Labs</p>
               <h2 id="cx83-assistant-title">Cat <span> / CX83 Labs AI Assistant</span></h2>
               <p className="cx83-cat-status" role="status">
                 <span aria-hidden="true" className={'cx83-cat-status-dot cx83-cat-status-' + status} />
