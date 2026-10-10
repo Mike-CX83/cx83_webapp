@@ -31,7 +31,7 @@ const canvasNodeIds = [
 ] as const
 const previewNodeIds = ['owner', 'chatgpt', 'cx83', 'github', 'checks', 'staging'] as const
 const visitorNodeIds = ['visitor', 'cat', 'public', 'contact'] as const
-const otherNodeIds = ['wordpress', 'studio'] as const
+const otherNodeIds = ['claude', 'gemini', 'wordpress', 'studio'] as const
 
 function Logo({ node, large = false }: { node: EcosystemNode; large?: boolean }) {
   if (node.logo) {
@@ -107,7 +107,7 @@ function NodeButton({ node, current, related, onSelect, compact = false }: {
 export function SystemsMap({ variant = 'full' }: { variant?: MapVariant }) {
   const [scenarioId, setScenarioId] = useState<string | null>('website')
   const [stepIndex, setStepIndex] = useState(0)
-  const [selectedNode, setSelectedNode] = useState<string | null>('chatgpt')
+  const [selectedNode, setSelectedNode] = useState<string | null>('owner')
   const [selectedLayer, setSelectedLayer] = useState<string | null>(null)
   const [playing, setPlaying] = useState(false)
   const scenario = ecosystemScenarios.find((item) => item.id === scenarioId)
