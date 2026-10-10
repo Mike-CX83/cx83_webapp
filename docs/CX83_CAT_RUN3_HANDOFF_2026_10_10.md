@@ -1,3 +1,31 @@
+# Cat header visual refinement completion, October 10, 2026
+
+PROJECT: CX83 Labs website, `Mike-CX83/cx83_webapp`, protected staging.  
+STATUS: Complete. Scoped application deployment independently verified. No public production promotion.
+
+SOURCE AND DEPLOYMENT: Starting staging HEAD `5c4d22326ea154e5506b35307b521e90be61dc1d`. [PR #36](https://github.com/Mike-CX83/cx83_webapp/pull/36) merged into `staging-host` as application commit `f685df2acb3d51032f893390155b1e41f6a87134`. The protected [Staging workflow 38094534248](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38094534248) finished with successful check, image and deploy jobs. The deployment job verified remote `checkoutSha` and `deployedSha` both equal `f685df2acb3d51032f893390155b1e41f6a87134`, and printed `STAGING DEPLOY SUCCESS`. A later documentation receipt SHA must not be described as this application deployment.
+
+COMPLETED:
+1. Removed the duplicate CX83 Labs eyebrow from the Cat header. The remaining title is `Cat / CX83 Labs AI Assistant`, with Cat visually emphasized and the subtitle quieter.
+2. Removed the added rounded tinted box behind the original `/brand/symbol-showcase.svg` symbol without modifying its asset. Centered symbol, title, status and separate close button and reduced header padding slightly.
+3. Retained the configured, checking and unavailable status logic, dot indicator and close button treatment. Left the welcome area, starters, messages, composer, footer, connection transport and visitor permissions unchanged.
+4. Left the completed homepage, responsive banner, connection visuals, logo assets and video untouched.
+
+VALIDATED:
+1. PR validation [Staging run 38093853758](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38093853758) passed TypeScript, lint, 43 integration tests, 84 Playwright browser tests and production build.
+2. Added focused Playwright tests in `tests/e2e/catHeaderRefinement.e2e.spec.ts` at 320, 390 and 1440 pixel viewports. These check a single title, absent eyebrow and logo box, content/close separation, status, original symbol, message entry, Escape close, focus return, and an unavailable status without a false configured label.
+3. Independently inspected the 390 pixel screenshot captured in the passing CI browser artifact. It shows the original symbol without the box, readable Cat title, balanced close button and a correctly displayed amber unavailable state from the test fixture. This fixture is not evidence of a live production assistant outage.
+4. Merge [CI workflow 38094537113](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38094537113) passed. Deployment verified gate without password 401, authenticated page 200, static image 200 and optimized image 200. Deployment and server checkout returned the exact merged application SHA.
+5. No new external model request or visitor conversation was sent solely for this visual change. Interaction coverage is automated; the assistant server behavior and permission boundary were not modified.
+
+BLOCKED: None for the scoped Cat header refinement. Existing video audio/embedded graphics and server inquiry mail OAuth follow-ups remain separate.
+
+NEXT: Mike can review `https://staging.cx83labs.com/` on mobile and desktop. No homepage or other chatbot redesign is authorized by this completion receipt.
+
+RECOVERY: Revert the scoped PR #36 application changes through the protected staging workflow if required, without resetting other website work. This completion note is documentation; publishing the note advances repository HEAD but does not alter the verified application commit recorded above.
+
+---
+
 # Visual integration delivery checkpoint, October 10, 2026
 
 STATUS: Complete and independently verified on protected staging. No public production release.
