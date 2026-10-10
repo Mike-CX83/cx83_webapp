@@ -17,9 +17,9 @@ export default function HowItWorksPage() {
         <p>From an everyday request to real software operations, with each access boundary and publishing step explained.</p>
       </PageHero>
       <Section className="cx83-run2-map-section" id="system-map">
-        <p className="cx83-run2-eyebrow">Explore the architecture</p>
-        <h2 className="cx83-run2-section-title">Seven layers. Two separate AI roles.</h2>
-        <p className="cx83-run2-lead">Choose any layer to see what it does, what it can access and where control stays with the business.</p>
+        <p className="cx83-run2-eyebrow">Explore the connected ecosystem</p>
+        <h2 className="cx83-run2-section-title">See how CX83 connects the tools behind your business.</h2>
+        <p className="cx83-run2-lead">Select a tool or choose a workflow to explore. Every branch shows how a request becomes action, what it can access and whether that connection has actually been demonstrated.</p>
         <SystemsMap />
       </Section>
       <Section className="cx83-run2-ownership" id="ownership">
