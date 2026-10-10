@@ -27,16 +27,28 @@ describe('CX83 inquiry Gmail provider', () => {
   it('records provider acceptance, not assumed inbox delivery', async () => {
     const send = vi.fn()
       .mockResolvedValueOnce(Response.json({ access_token: 'synthetic-access' }))
+      .mockResolvedValueOnce(Response.json({ emailAddress: 'mike@cx83labs.com' }))
       .mockResolvedValueOnce(Response.json({ id: 'synthetic-gmail-accepted-id' }))
     const result = await sendInquiryEmail(data, 18, env, send as unknown as typeof fetch)
     expect(result).toEqual({ state: 'accepted', providerId: 'synthetic-gmail-accepted-id' })
     expect(String(send.mock.calls[0][0])).toContain('oauth2.googleapis.com')
-    expect(String(send.mock.calls[1][0])).toContain('gmail.googleapis.com')
-    const request = JSON.parse(send.mock.calls[1][1].body)
+    expect(String(send.mock.calls[1][0])).toContain('/profile')
+    expect(String(send.mock.calls[2][0])).toContain('/messages/send')
+    const request = JSON.parse(send.mock.calls[2][1].body)
     const decoded = Buffer.from(request.raw, 'base64url').toString('utf8')
     expect(decoded).toContain('To: mike@cx83labs.com')
     expect(decoded).toContain('Synthetic test only')
     expect(decoded).not.toContain('synthetic-secret')
+  })
+
+  it('refuses to send when the OAuth grant belongs to a different mailbox', async () => {
+    const send = vi.fn()
+      .mockResolvedValueOnce(Response.json({ access_token: 'synthetic-access' }))
+      .mockResolvedValueOnce(Response.json({ emailAddress: 'other@example.com' }))
+    expect(await sendInquiryEmail(data, 20, env, send as unknown as typeof fetch)).toEqual({
+      state: 'failed', reason: 'The Google Workspace sender is not the authorized CX83 mailbox.',
+    })
+    expect(send).toHaveBeenCalledTimes(2)
   })
 
   it('does not claim acceptance when the provider rejects', async () => {
