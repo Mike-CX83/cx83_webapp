@@ -11,7 +11,7 @@ test.describe('Cat header visual refinement', () => {
       )
       await page.goto(host + '/')
 
-      const launcher = page.getByRole('button', { name: 'Ask Cat' })
+      const launcher = page.locator('button.cx83-assistant-launcher')
       await launcher.click()
       const dialog = page.getByRole('dialog', { name: 'Cat, the CX83 Labs AI assistant' })
       await expect(dialog).toBeVisible()
@@ -65,7 +65,7 @@ test.describe('Cat header visual refinement', () => {
       route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ configured: false, enabled: true }) }),
     )
     await page.goto(host + '/')
-    await page.getByRole('button', { name: 'Ask Cat' }).click()
+    await page.locator('button.cx83-assistant-launcher').click()
     const dialog = page.getByRole('dialog', { name: 'Cat, the CX83 Labs AI assistant' })
     await expect(dialog.getByText('Assistant temporarily unavailable')).toBeVisible()
     await expect(dialog.getByText('Assistant configured')).toHaveCount(0)
