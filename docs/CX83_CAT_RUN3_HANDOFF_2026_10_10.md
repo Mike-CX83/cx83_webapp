@@ -1,3 +1,13 @@
+# Connection visual asset checkpoint, October 10, 2026
+
+Mike positively reviewed the four generated connection visuals and requested durable GitHub storage. Saved under design/connection-visuals/v1 on the design/connection-visuals-20261010 branch. PNG hashes checked against the creation manifest. Original homepage application remains unchanged.
+
+Placement discussion and the requested future correction to the banner's abrupt image edges are recorded in design/connection-visuals/REVIEW-NOTES.md with Mike's screenshot. Recommendation is the existing How it works page for the connection examples and a homepage demonstration linking into Software with clear development status. These are recommendations, not approved page modifications.
+
+NEXT: Resolve placement with Mike, then implement the selected responsive presentation. Preserve the central original banner artwork when extending its surrounding background.
+
+---
+
 # Homepage refinement checkpoint, October 10, 2026
 
 PROJECT: CX83 Labs website, Mike-CX83/cx83_webapp. Protected staging only.
