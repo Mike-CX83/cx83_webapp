@@ -8,118 +8,170 @@ import {
   ThreadPrimitive,
 } from '@assistant-ui/react'
 import { MarkdownTextPrimitive } from '@assistant-ui/react-markdown'
-import { useEffect, useState } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
 import remarkGfm from 'remark-gfm'
+
+const starters = [
+  'How can AI update a website?',
+  'What is Client Brand Studio?',
+  'Can CX83 connect my current tools?',
+  'How do I start a project?',
+] as const
 
 export function AssistantWidget() {
   const [session, setSession] = useState(0)
+  const [open, setOpen] = useState(false)
 
-  return <AssistantSession key={session} onReset={() => setSession((value) => value + 1)} />
+  return (
+    <AssistantSession
+      key={session}
+      open={open}
+      onOpenChange={setOpen}
+      onReset={() => setSession((value) => value + 1)}
+    />
+  )
 }
 
-function AssistantSession({ onReset }: { onReset: () => void }) {
+function AssistantSession({
+  open,
+  onOpenChange,
+  onReset,
+}: {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  onReset: () => void
+}) {
   const runtime = useChatRuntime({
     transport: new AssistantChatTransport({ api: '/api/chat' }),
   })
-  const [open, setOpen] = useState(false)
-  const [status, setStatus] = useState<'unknown' | 'live' | 'unconfigured'>('unknown')
-  const [statusDetail, setStatusDetail] = useState('Checking assistant status.')
+  const launcherRef = useRef<HTMLButtonElement>(null)
+  const closeRef = useRef<HTMLButtonElement>(null)
+  const [status, setStatus] = useState<'checking' | 'configured' | 'unavailable'>('checking')
 
   useEffect(() => {
-    let cancelled = false
-    fetch('/api/assistant-status')
-      .then((response) => response.json())
-      .then((result: { configured?: boolean; configurationError?: string | null }) => {
-        if (cancelled) return
-        if (result.configured) {
-          setStatus('live')
-          setStatusDetail('Connected through the server.')
-          return
-        }
-        setStatus('unconfigured')
-        setStatusDetail(result.configurationError || 'The selected AI provider is not configured.')
+    const controller = new AbortController()
+    fetch('/api/assistant-status', { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error('CAT status check failed')
+        return response.json()
+      })
+      .then((result: { configured?: boolean; enabled?: boolean }) => {
+        setStatus(result.configured && result.enabled ? 'configured' : 'unavailable')
       })
       .catch(() => {
-        if (!cancelled) {
-          setStatus('unconfigured')
-          setStatusDetail('Assistant status could not be checked.')
-        }
+        if (!controller.signal.aborted) setStatus('unavailable')
       })
-
-    return () => {
-      cancelled = true
-    }
+    return () => controller.abort()
   }, [])
+
+  useEffect(() => {
+    const openFromNavigation = () => onOpenChange(true)
+    window.addEventListener('cx83:open-cat', openFromNavigation)
+    return () => window.removeEventListener('cx83:open-cat', openFromNavigation)
+  }, [onOpenChange])
+
+  useEffect(() => {
+    if (!open) return
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        onOpenChange(false)
+        launcherRef.current?.focus()
+      }
+    }
+    document.addEventListener('keydown', closeOnEscape)
+    closeRef.current?.focus()
+    return () => document.removeEventListener('keydown', closeOnEscape)
+  }, [open, onOpenChange])
+
+  const close = () => {
+    onOpenChange(false)
+    launcherRef.current?.focus()
+  }
 
   return (
     <AssistantRuntimeProvider runtime={runtime}>
       <button
+        ref={launcherRef}
         aria-controls="cx83-assistant"
         aria-expanded={open}
-        className="cx83-assistant-launcher fixed right-4 bottom-4 z-50 rounded-full bg-primary px-4 py-3 text-sm font-medium text-primary-foreground cx83-shadow focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-        onClick={() => setOpen((value) => !value)}
+        aria-label={open ? 'Close CAT' : 'Ask CAT'}
+        className="cx83-assistant-launcher"
+        onClick={() => onOpenChange(!open)}
         type="button"
       >
-        {open ? 'Close chat' : 'Ask CX83'}
+        <Image src="/brand/symbol-showcase.svg" alt="" aria-hidden="true" width={25} height={25} />
+        <span>{open ? 'Close CAT' : 'Ask CAT'}</span>
       </button>
       {open ? (
         <section
-          aria-label="CX83 assistant"
-          className="cx83-assistant-panel fixed inset-x-3 bottom-20 z-50 flex h-[min(36rem,calc(100dvh-7rem))] flex-col overflow-hidden rounded-2xl border border-border bg-card cx83-shadow md:inset-x-auto md:right-4 md:w-[24rem]"
+          aria-label="CAT, CX83 Labs AI Assistant"
+          aria-labelledby="cx83-assistant-title"
+          aria-modal="false"
+          className="cx83-assistant-panel"
           id="cx83-assistant"
           role="dialog"
         >
-          <header className="flex items-start justify-between gap-3 border-b border-border px-4 py-3">
-            <div>
-              <p className="text-sm font-semibold">CX83 assistant</p>
-              <p className="text-xs text-muted-foreground">{status === 'unknown' ? 'Checking assistant status.' : statusDetail}</p>
+          <header className="cx83-cat-header">
+            <span className="cx83-cat-symbol">
+              <Image src="/brand/symbol-showcase.svg" alt="" aria-hidden="true" width={37} height={37} />
+            </span>
+            <div className="cx83-cat-heading">
+              <p className="cx83-cat-eyebrow">Catalyst X83</p>
+              <h2 id="cx83-assistant-title">CAT <span> / CX83 Labs AI Assistant</span></h2>
+              <p className="cx83-cat-status" role="status">
+                <span aria-hidden="true" className={'cx83-cat-status-dot cx83-cat-status-' + status} />
+                {status === 'checking' ? 'Checking connection' : status === 'configured' ? 'Assistant configured' : 'Assistant temporarily unavailable'}
+              </p>
             </div>
-            <button
-              className="text-xs text-muted-foreground underline-offset-4 hover:underline"
-              onClick={onReset}
-              type="button"
-            >
-              Reset
-            </button>
+            <button ref={closeRef} aria-label="Close CAT" className="cx83-cat-close" onClick={close} type="button">×</button>
           </header>
-          <ThreadPrimitive.Root className="flex min-h-0 flex-1 flex-col">
-            <ThreadPrimitive.Viewport className="flex-1 space-y-4 overflow-y-auto px-4 py-4">
+          <ThreadPrimitive.Root className="cx83-cat-thread">
+            <ThreadPrimitive.Viewport className="cx83-cat-messages">
               <ThreadPrimitive.Empty>
-                <p className="text-sm leading-6 text-muted-foreground">
-                  Ask what CX83 Labs builds, describe a business problem, or ask how to start a project.
-                </p>
+                <div className="cx83-cat-welcome">
+                  <p className="cx83-cat-welcome-label">Welcome to CX83</p>
+                  <h3>What can we help you explore?</h3>
+                  <p>Hi, I’m CAT. I can explain our website, the software we are developing, and how CX83 connects business tools. I cannot change this website or access private business data.</p>
+                  <div aria-label="Conversation starters" className="cx83-cat-starters">
+                    {starters.map((prompt) => (
+                      <ThreadPrimitive.Suggestion className="cx83-cat-starter" key={prompt} prompt={prompt} send>
+                        {prompt} <span aria-hidden="true">↗</span>
+                      </ThreadPrimitive.Suggestion>
+                    ))}
+                  </div>
+                  {status === 'unavailable' ? <p className="cx83-cat-unavailable" role="status">CAT cannot respond right now. You can still reach CX83 through the contact page.</p> : null}
+                </div>
               </ThreadPrimitive.Empty>
-              <ThreadPrimitive.Messages
-                components={{
-                  UserMessage: UserMessage,
-                  AssistantMessage: AssistantMessage,
-                }}
-              />
+              <ThreadPrimitive.Messages components={{ UserMessage, AssistantMessage }} />
               <ThreadPrimitive.If running>
-                <p className="text-xs text-muted-foreground">CX83 is responding.</p>
+                <p className="cx83-cat-typing" role="status">CAT is composing a reply…</p>
               </ThreadPrimitive.If>
             </ThreadPrimitive.Viewport>
-            <ComposerPrimitive.Root className="border-t border-border p-3">
+            <ComposerPrimitive.Root className="cx83-cat-composer">
               <ComposerPrimitive.Input
-                aria-label="Message"
-                className="field max-h-32 min-h-12 resize-y"
-                placeholder="Ask about a service or a project"
+                aria-label="Message CAT"
+                className="cx83-cat-input"
+                placeholder="Ask CAT about CX83…"
                 rows={2}
               />
-              <div className="mt-2 flex justify-end gap-2">
+              <div className="cx83-cat-composer-actions">
+                <button className="cx83-cat-reset" onClick={onReset} type="button">New conversation</button>
                 <ThreadPrimitive.If running>
-                  <ComposerPrimitive.Cancel className="rounded-md border border-border px-3 py-2 text-sm" type="button">
-                    Stop
-                  </ComposerPrimitive.Cancel>
+                  <ComposerPrimitive.Cancel className="cx83-cat-stop" type="button">Stop</ComposerPrimitive.Cancel>
                 </ThreadPrimitive.If>
                 <ThreadPrimitive.If running={false}>
-                  <ComposerPrimitive.Send className="rounded-md bg-primary px-3 py-2 text-sm text-primary-foreground disabled:opacity-50">
-                    Send
-                  </ComposerPrimitive.Send>
+                  <ComposerPrimitive.Send className="cx83-cat-send">Send <span aria-hidden="true">↗</span></ComposerPrimitive.Send>
                 </ThreadPrimitive.If>
               </div>
             </ComposerPrimitive.Root>
           </ThreadPrimitive.Root>
+          <footer className="cx83-cat-footer">
+            <span>CAT shares public information, not account access.</span>
+            <Link href="/contact" onClick={() => onOpenChange(false)}>Contact CX83 <span aria-hidden="true">↗</span></Link>
+          </footer>
         </section>
       ) : null}
     </AssistantRuntimeProvider>
@@ -128,7 +180,7 @@ function AssistantSession({ onReset }: { onReset: () => void }) {
 
 function UserMessage() {
   return (
-    <MessagePrimitive.Root className="ml-8 rounded-2xl bg-secondary px-3 py-2 text-sm">
+    <MessagePrimitive.Root className="cx83-cat-user-message">
       <MessagePrimitive.Content />
     </MessagePrimitive.Root>
   )
@@ -136,11 +188,11 @@ function UserMessage() {
 
 function AssistantMessage() {
   return (
-    <MessagePrimitive.Root className="mr-6 text-sm leading-6">
+    <MessagePrimitive.Root className="cx83-cat-assistant-message">
       <MessagePrimitive.Content components={{ Text: AssistantMarkdown }} />
       <MessagePrimitive.Error>
-        <p className="mt-2 text-xs text-destructive" role="alert">
-          The assistant could not complete that reply.
+        <p className="cx83-cat-unavailable" role="alert">
+          CAT could not complete that reply. Please retry, or contact CX83 using the link below.
         </p>
       </MessagePrimitive.Error>
     </MessagePrimitive.Root>
@@ -148,5 +200,5 @@ function AssistantMessage() {
 }
 
 function AssistantMarkdown() {
-  return <MarkdownTextPrimitive className="prose prose-sm max-w-none" remarkPlugins={[remarkGfm]} />
+  return <MarkdownTextPrimitive className="prose prose-sm prose-invert max-w-none" remarkPlugins={[remarkGfm]} />
 }
