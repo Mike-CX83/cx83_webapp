@@ -1,3 +1,34 @@
+# Homepage refinement checkpoint, October 10, 2026
+
+PROJECT: CX83 Labs website, Mike-CX83/cx83_webapp. Protected staging only.
+STARTING HEAD: 8fbd1c4de940e49a3499ba2b5fafc3956cf5ff52, independently checked through GitHub and isolated clone. Older Mac checkout 17b40c3 and its unrelated changes preserved.
+STATUS: Implemented; final CI and staging verification pending. The Run 3 record below is historical.
+
+COMPLETED:
+* Read the saved homepage refinement plan and written assessment. Connected Library Page search did not expose the requested files; local deliverables copies provided the complete source. Supplementary audio not transcribed.
+* Five homepage sections: opening, actual video, three service summaries, one practical process, closing invitation. Two Start a conversation links to /contact, one Services link, one How it works link and one evidence link inside the expandable transcript.
+* Full width visual banner band with proportional original artwork, desktop artwork height about 239px. Original AVIF blob remains 3afb58548ceed0dab3c814991d5894ce09c16d5a. No media or logo bytes changed.
+* Optional video captions, native controls, inline playback, existing poster/source and explanation below footage retained. Audio untouched.
+* Cat casing across UI, public pages, accessibility names, prompt and error messages. Internal identifiers and visitor permission restrictions preserved.
+* Compact footer navigation, verified email and copyright; no repeated sales invitation or company origin label.
+* About metadata/headings identify CX83 Labs. Single origin mention in published site-settings and fallback founder paragraph includes meaningful practical change; nursing, hospice, software transition and 2025 founding preserved.
+* Dedicated Software retains both products and Studio spotlight. How it works retains map, authority boundaries, ownership costs and real proof. Work retains published records. No dedicated page redesign.
+* Existing banner, frontend, catalog, naming and showcase tests adapted to superseded expectations. Active blueprint and brand context now declare the latest direction first.
+
+VALIDATION SO FAR:
+* Starting staging baseline: 2560x1000, 7834px page height; 390x844, 12066px. Baseline body contains 23 links, including hidden transcript evidence.
+* Local TypeScript and lint passed; 43 integration tests passed (local API database test follows its unconfigured database branch). Production build passed. Final GitHub validation supplies configured Postgres and full browser coverage.
+* Desktop local layout inspected with fallback CMS content. Final published-content screenshots and viewport measurements pending.
+
+BLOCKED / EXISTING LIMITATIONS:
+* Video audio improvement remains a separate media pass. Embedded footage text needs a playback check before final receipt.
+* Inquiry outbound server OAuth remains the prior Run 3 limitation; this refinement does not activate mail.
+
+NEXT: Finish browser review and CI, merge scoped PR into staging-host, verify deployed commit and gate, record final measurements, screenshots and workflow receipts here.
+RECOVERY: Revert scoped implementation commit through staging workflow; restore founder wording from the historical record below if reverting this copy correction. Never reset unrelated changes.
+
+---
+
 # CX83 Labs website | Run 3 final completion handoff
 
 Prepared October 10, 2026, Tulsa. **Status: Run 3 source and protected staging delivery verified; final corrected Gmail scope deployment confirmed by [successful protected Staging workflow 38026834617](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38026834617) with unauthenticated HTTP 401, authenticated HTTP 200, original and optimized hero images HTTP 200, `checkout_sync=ok`, matching `checkoutSha=deployedSha=5c04e4092b7ed5d757ef058ceb46588dfaf5a2fd`, and `STAGING DEPLOY SUCCESS`; site-originated outbound notification remains blocked on missing authorized server OAuth.** No public release.

@@ -40,7 +40,7 @@ export function SiteHeader({ siteName, items }: { siteName: string; items: { hre
 
   const openCat = () => {
     setOpen(false)
-    // Preserve the request until the separately hydrated CAT widget is listening.
+    // Preserve the request until the separately hydrated Cat widget is listening.
     document.documentElement.dataset.cx83CatRequested = 'true'
     window.dispatchEvent(new Event('cx83:open-cat'))
   }
@@ -60,7 +60,7 @@ export function SiteHeader({ siteName, items }: { siteName: string; items: { hre
               </Link>
             ))}
           </nav>
-          <button className="cx83-site-cat-button" onClick={openCat} type="button">Ask CAT <span aria-hidden="true">↗</span></button>
+          <button className="cx83-site-cat-button" onClick={openCat} type="button">Ask Cat <span aria-hidden="true">↗</span></button>
         </div>
         <button
           ref={menuButton}
@@ -92,7 +92,7 @@ export function SiteHeader({ siteName, items }: { siteName: string; items: { hre
               {item.label}
             </Link>
           ))}
-          <button className="cx83-site-cat-button cx83-mobile-cat" onClick={openCat} type="button">Ask CAT <span aria-hidden="true">↗</span></button>
+          <button className="cx83-site-cat-button cx83-mobile-cat" onClick={openCat} type="button">Ask Cat <span aria-hidden="true">↗</span></button>
         </div>
       </nav>
     </header>

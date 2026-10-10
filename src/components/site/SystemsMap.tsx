@@ -18,11 +18,11 @@ type MapVariant = 'preview' | 'full'
 const layers = [
   { id: 'owner', label: 'Business owner', number: '01', node: 'owner', category: 'people', heading: 'A real request starts with the owner.', example: 'Please improve the service page and check its links.', boundary: 'A conversation cannot override account permissions.' },
   { id: 'ai', label: 'Connected AI', number: '02', node: 'chatgpt', category: 'ai', heading: 'Your supported AI turns an idea into a task.', example: 'ChatGPT uses an authorized connector.', boundary: 'Another AI provider needs its own verified configuration.' },
-  { id: 'tools', label: 'Authorized tools', number: '03', node: 'cx83', category: 'cx83', heading: 'The software does the real work.', example: 'An approved operation updates actual code or CMS content.', boundary: 'Owner connections cannot grant CAT editing access.' },
+  { id: 'tools', label: 'Authorized tools', number: '03', node: 'cx83', category: 'cx83', heading: 'The software does the real work.', example: 'An approved operation updates actual code or CMS content.', boundary: 'Owner connections cannot grant Cat editing access.' },
   { id: 'workflows', label: 'Business workflows', number: '04', node: 'n8n', category: 'automation', heading: 'Optional workflows join your existing systems.', example: 'A saved inquiry could trigger an approved business process.', boundary: 'Automation and outbound email are not automatically included.' },
   { id: 'checks', label: 'Checks and staging', number: '05', node: 'checks', category: 'control', heading: 'Verification separates a request from a release.', example: 'The website passes tests before protected staging is updated.', boundary: 'Staging verification does not authorize public production.' },
   { id: 'control', label: 'Your accounts and data', number: '06', node: 'postgres', category: 'records', heading: 'Keep your accounts and records under defined control.', example: 'Website form entries have a designated system of record.', boundary: 'Data and licensing rights follow each actual configuration.' },
-  { id: 'cat', label: 'Visitor CAT', number: '07', node: 'cat', category: 'visitor', heading: 'CAT helps visitors without owner access.', example: 'CAT explains public services and how to contact CX83.', boundary: 'Cannot edit source, deploy software, bill or read private inquiries.' },
+  { id: 'cat', label: 'Visitor Cat', number: '07', node: 'cat', category: 'visitor', heading: 'Cat helps visitors without owner access.', example: 'Cat explains public services and how to contact CX83.', boundary: 'Cannot edit source, deploy software, bill or read private inquiries.' },
 ] as const
 
 const canvasNodeIds = [
@@ -92,12 +92,12 @@ function NodeButton({ node, current, related, onSelect, compact = false }: {
       data-related={related}
       data-status={node.status}
       aria-pressed={current}
-      aria-label={(node.id === 'cat' ? 'CAT assistant' : node.name) + '. ' + ecosystemStatusLabels[node.status] + '. Select for details'}
+      aria-label={(node.id === 'cat' ? 'Cat assistant' : node.name) + '. ' + ecosystemStatusLabels[node.status] + '. Select for details'}
       onClick={onSelect}
     >
       <Logo node={node} large={node.id === 'cx83'} />
       <span className="cx83-ecosystem-provider-text">
-        <strong>{node.id === 'cat' ? 'CAT' : node.name}</strong>
+        <strong>{node.id === 'cat' ? 'Cat' : node.name}</strong>
         <Status node={node} />
       </span>
     </button>
@@ -290,7 +290,7 @@ export function SystemsMap({ variant = 'full' }: { variant?: MapVariant }) {
       <section className="cx83-ecosystem-visitor" data-testid="visitor-lane" aria-label="Separate public visitor assistant permission boundary">
         <div>
           <p className="cx83-ecosystem-overline">Different access, different purpose</p>
-          <h3>CAT is for visitors, not website administration.</h3>
+          <h3>Cat is for visitors, not website administration.</h3>
           <p>The visitor route reads approved public CX83 information and leads to ordinary public pages. It has no link to private editing, deployments, billing or customer records.</p>
         </div>
         <ol className="cx83-ecosystem-visitor-rail">

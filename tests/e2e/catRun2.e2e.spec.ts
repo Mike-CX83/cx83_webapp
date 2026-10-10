@@ -10,17 +10,19 @@ test.describe('Run 2 connected systems and proof', () => {
     await page.locator('#website-demo summary').click()
     await expect(page.locator('#website-demo')).toContainText('ChatGPT')
     await expect(page.getByRole('link', { name: /Read the evidence record/ })).toHaveAttribute('href', '/how-it-works#real-proof')
-    await expect(page.getByTestId('systems-map')).toBeVisible()
+    await expect(page.getByTestId('systems-map')).toHaveCount(0)
+    await page.goto(host + '/software')
     await expect(page.getByTestId('brand-studio-spotlight')).toContainText('0.8.4')
     await expect(page.getByRole('img', { name: 'Authentic CX83 Labs logo' })).toHaveAttribute('src', /logo-dark.svg/)
-    await expect(page.getByRole('link', { name: /Explore the system in detail/ })).toHaveAttribute('href', '/how-it-works')
+    await page.goto(host + '/how-it-works')
+    await expect(page.getByTestId('systems-map')).toBeVisible()
   })
 
-  test('seven interactive layers keep CAT outside owner authority', async ({ page }) => {
+  test('seven interactive layers keep Cat outside owner authority', async ({ page }) => {
     await page.goto(host + '/how-it-works')
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Your work. Connected tools. Clear control.')
     await expect(page.getByTestId('systems-layer')).toHaveCount(7)
-    const cat = page.getByRole('button', { name: /Visitor CAT/ })
+    const cat = page.getByRole('button', { name: /Visitor Cat/ })
     await cat.click()
     await expect(cat).toHaveAttribute('aria-pressed', 'true')
     await expect(page.getByTestId('systems-active-detail')).toContainText('Cannot edit source')

@@ -8,11 +8,10 @@ test.describe('CX83 genuine website demonstration media', () => {
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Systems for work that should not stay manual.')
     await expect(page.getByRole('heading', { level: 2, name: /Your website.*Your AI.*Just ask/s })).toBeVisible()
     await expect(page.getByTestId('homepage-banner')).toHaveAttribute('src', /cx83-labs-hero\.avif/)
-    await expect(page.getByRole('link', { name: /Watch a real website change/ })).toHaveAttribute('href', '#website-demo')
+    await expect(page.locator('#website-demo track')).not.toHaveAttribute('default')
     await expect(page.getByTestId('cx83-proof-panel')).toHaveCount(0)
     await expect(page.locator('#website-demo video')).toBeVisible()
-    await expect(page.getByRole('heading', { name: 'An AI connected to your website.' })).toBeVisible()
-    await expect(page.getByRole('heading', { name: 'An AI that helps your customers.' })).toBeVisible()
+    await expect(page.locator('#ai-roles')).toHaveCount(0)
   })
 
   test('serves verified real MP4, original poster, timed captions and text proof', async ({ page, request }) => {

@@ -5,7 +5,7 @@ export default function NotFound() {
   return (
     <div className="cx83-run3-not-found">
       <PageHero eyebrow="Page not found / 404" title="That page is not here.">
-        <p>The link may have changed, or the page may not exist. The CX83 website and CAT are still available.</p>
+        <p>The link may have changed, or the page may not exist. The CX83 website and Cat are still available.</p>
       </PageHero>
       <Section>
         <nav aria-label="Find your way" className="cx83-run3-not-found-links">

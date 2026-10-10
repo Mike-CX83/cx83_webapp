@@ -7,7 +7,7 @@ import { Cx83FAQ } from '@/components/site/Cx83FAQ'
 
 export const metadata: Metadata = {
   title: 'How CX83 Works',
-  description: 'Explore connected owner AI, public CAT, authorized tools, staging checks and customer-controlled software.',
+  description: 'Explore connected owner AI, public Cat, authorized tools, staging checks and customer-controlled software.',
 }
 
 export default function HowItWorksPage() {
@@ -45,7 +45,7 @@ export default function HowItWorksPage() {
       <Section className="cx83-run2-proof-record" id="real-proof">
         <p className="cx83-run2-eyebrow">Real first-party demonstration</p>
         <h2 className="cx83-run2-section-title">This site is the proof, not a mockup.</h2>
-        <p className="cx83-run2-lead">On October 9, 2026, the actual CX83 website received source updates for its design, navigation and public CAT experience, then passed checks and deployed to protected staging.</p>
+        <p className="cx83-run2-lead">On October 9, 2026, the actual CX83 website received source updates for its design, navigation and public Cat experience, then passed checks and deployed to protected staging.</p>
         <div className="cx83-run2-proof-facts">
           <div><span>01 / Requested</span><strong>Consistent CX83 identity and a functional public AI interface</strong></div>
           <div><span>02 / Verified</span><strong>29 integration tests and 46 browser tests passed</strong></div>

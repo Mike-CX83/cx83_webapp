@@ -54,7 +54,7 @@ function AssistantSession({
     const controller = new AbortController()
     fetch('/api/assistant-status', { signal: controller.signal })
       .then((response) => {
-        if (!response.ok) throw new Error('CAT status check failed')
+        if (!response.ok) throw new Error('Cat status check failed')
         return response.json()
       })
       .then((result: { configured?: boolean; enabled?: boolean }) => {
@@ -101,18 +101,17 @@ function AssistantSession({
         ref={launcherRef}
         aria-controls="cx83-assistant"
         aria-expanded={open}
-        aria-label={open ? 'Close CAT' : 'Ask CAT'}
+        aria-label={open ? 'Close Cat' : 'Ask Cat'}
         className="cx83-assistant-launcher"
         onClick={() => onOpenChange(!open)}
         type="button"
       >
         <Image src="/brand/symbol-showcase.svg" alt="" aria-hidden="true" width={25} height={25} />
-        <span>{open ? 'Close CAT' : 'Ask CAT'}</span>
+        <span>{open ? 'Close Cat' : 'Ask Cat'}</span>
       </button>
       {open ? (
         <section
-          aria-label="CAT, CX83 Labs AI Assistant"
-          aria-labelledby="cx83-assistant-title"
+          aria-label="Cat, the CX83 Labs AI assistant"
           aria-modal="false"
           className="cx83-assistant-panel"
           id="cx83-assistant"
@@ -123,14 +122,14 @@ function AssistantSession({
               <Image src="/brand/symbol-showcase.svg" alt="" aria-hidden="true" width={37} height={37} />
             </span>
             <div className="cx83-cat-heading">
-              <p className="cx83-cat-eyebrow">Catalyst X83</p>
-              <h2 id="cx83-assistant-title">CAT <span> / CX83 Labs AI Assistant</span></h2>
+              <p className="cx83-cat-eyebrow">CX83 Labs</p>
+              <h2 id="cx83-assistant-title">Cat <span> / CX83 Labs AI Assistant</span></h2>
               <p className="cx83-cat-status" role="status">
                 <span aria-hidden="true" className={'cx83-cat-status-dot cx83-cat-status-' + status} />
                 {status === 'checking' ? 'Checking connection' : status === 'configured' ? 'Assistant configured' : 'Assistant temporarily unavailable'}
               </p>
             </div>
-            <button ref={closeRef} aria-label="Close CAT" className="cx83-cat-close" onClick={close} type="button">×</button>
+            <button ref={closeRef} aria-label="Close Cat" className="cx83-cat-close" onClick={close} type="button">×</button>
           </header>
           <ThreadPrimitive.Root className="cx83-cat-thread">
             <ThreadPrimitive.Viewport className="cx83-cat-messages" turnAnchor="top" scrollToBottomOnInitialize={false}>
@@ -138,7 +137,7 @@ function AssistantSession({
                 <div className="cx83-cat-welcome">
                   <p className="cx83-cat-welcome-label">Welcome to CX83</p>
                   <h3>What can we help you explore?</h3>
-                  <p>Hi, I’m CAT. I can explain our website, the software we are developing, and how CX83 connects business tools. I cannot change this website or access private business data.</p>
+                  <p>Hi, I’m Cat. I can explain our website, the software we are developing, and how CX83 connects business tools. I cannot change this website or access private business data.</p>
                   <div aria-label="Conversation starters" className="cx83-cat-starters">
                     {starters.map((prompt) => (
                       <ThreadPrimitive.Suggestion className="cx83-cat-starter" key={prompt} prompt={prompt} send>
@@ -146,19 +145,19 @@ function AssistantSession({
                       </ThreadPrimitive.Suggestion>
                     ))}
                   </div>
-                  {status === 'unavailable' ? <p className="cx83-cat-unavailable" role="status">CAT cannot respond right now. You can still reach CX83 through the contact page.</p> : null}
+                  {status === 'unavailable' ? <p className="cx83-cat-unavailable" role="status">Cat cannot respond right now. You can still reach CX83 through the contact page.</p> : null}
                 </div>
               </ThreadPrimitive.Empty>
               <ThreadPrimitive.Messages components={{ UserMessage, AssistantMessage }} />
               <ThreadPrimitive.If running>
-                <p className="cx83-cat-typing" role="status">CAT is composing a reply…</p>
+                <p className="cx83-cat-typing" role="status">Cat is composing a reply…</p>
               </ThreadPrimitive.If>
             </ThreadPrimitive.Viewport>
             <ComposerPrimitive.Root className="cx83-cat-composer">
               <ComposerPrimitive.Input
-                aria-label="Message CAT"
+                aria-label="Message Cat"
                 className="cx83-cat-input"
-                placeholder="Ask CAT about CX83…"
+                placeholder="Ask Cat about CX83…"
                 rows={2}
               />
               <div className="cx83-cat-composer-actions">
@@ -173,7 +172,7 @@ function AssistantSession({
             </ComposerPrimitive.Root>
           </ThreadPrimitive.Root>
           <footer className="cx83-cat-footer">
-            <span>CAT shares public information, not account access.</span>
+            <span>Cat shares public information, not account access.</span>
             <Link href="/contact" onClick={() => onOpenChange(false)}>Contact CX83 <span aria-hidden="true">↗</span></Link>
           </footer>
         </section>
@@ -196,7 +195,7 @@ function AssistantMessage() {
       <MessagePrimitive.Content components={{ Text: AssistantMarkdown }} />
       <MessagePrimitive.Error>
         <p className="cx83-cat-unavailable" role="alert">
-          CAT could not complete that reply. Please retry, or contact CX83 using the link below.
+          Cat could not complete that reply. Please retry, or contact CX83 using the link below.
         </p>
       </MessagePrimitive.Error>
     </MessagePrimitive.Root>
