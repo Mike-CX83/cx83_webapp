@@ -1,3 +1,13 @@
+# Visual integration planning checkpoint, October 10, 2026
+
+Mike approved the responsive banner appearance and requested a plan for placing the banner, homepage overview and detailed connection visuals. Saved docs/CX83_VISUAL_INTEGRATION_PLAN_2026_10_10.md. Recommended arrangement: keep five homepage sections, replace service summary cards with the overview, link to examples on the existing How it works page, and keep the demonstration video on Home with clear product development status and a link to /software/connected-websites.
+
+Verified the design branch was clean at 0e68d7468647b3937d07dbe5412836a6eb7e2fea and checked the existing homepage, How it works and Software routes. The authorized Codex project inbox was empty. Existing approved assets remain in design/connection-visuals/v1 and design/responsive-banner/v1. This checkpoint changes documentation only; no new website tests or deployment are claimed.
+
+NEXT: Implement the saved plan when Mike requests the website update. Preserve all original artwork and current functionality, check desktop/mobile layouts, then verify protected staging and its deployed application commit.
+
+---
+
 # Responsive banner asset checkpoint, October 10, 2026
 
 Mike requested a banner with the same look that adapts across screen sizes, saved before website integration. Created design/responsive-banner/v1 with an image_gen background extension, unchanged original AVIF foreground, reusable HTML/CSS, exact prompt, source hashes and static size exports.
