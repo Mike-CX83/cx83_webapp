@@ -9,6 +9,7 @@ const fallbackNav = [
   { href: '/', label: 'Home' },
   { href: '/software', label: 'Software' },
   { href: '/services', label: 'Services' },
+  { href: '/how-it-works', label: 'How it works' },
   { href: '/about', label: 'About' },
   { href: '/work', label: 'Work' },
   { href: '/contact', label: 'Contact' },
@@ -19,7 +20,7 @@ export function SiteHeader({ siteName, items }: { siteName: string; items: { hre
   const [open, setOpen] = useState(false)
   const menuButton = useRef<HTMLButtonElement>(null)
   const mobileNav = useRef<HTMLElement>(null)
-  const nav = items.length ? [fallbackNav[0], ...items.filter((item) => item.href !== '/')] : fallbackNav
+  const nav = items.length ? [...fallbackNav.filter((item) => item.href === '/' || item.href === '/how-it-works'), ...items.filter((item) => item.href !== '/' && item.href !== '/how-it-works')] : fallbackNav
   const active = (href: string) => href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(href + '/')
   const menuId = 'cx83-mobile-navigation'
 

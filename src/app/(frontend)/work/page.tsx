@@ -37,7 +37,7 @@ export default async function WorkPage() {
             ))}
           </div>
         ) : (
-          <p className="mt-4 text-muted-foreground">No projects are published yet.</p>
+          <div className="cx83-work-proof"><p>Customer projects are not published yet. You can explore real first-party evidence from the CX83 website itself instead.</p><Link href="/how-it-works#real-proof">View verified website demonstration</Link></div>
         )}
         <h2 className="mt-14 text-2xl font-semibold tracking-tight">Case studies</h2>
         {caseStudies.items.length ? (
@@ -53,7 +53,7 @@ export default async function WorkPage() {
             ))}
           </div>
         ) : (
-          <p className="mt-4 text-muted-foreground">No case studies are published yet.</p>
+          <p className="mt-4 text-muted-foreground">No customer case studies have been authorized for publication. We do not substitute illustrative client results.</p>
         )}
       </Section>
     </>
