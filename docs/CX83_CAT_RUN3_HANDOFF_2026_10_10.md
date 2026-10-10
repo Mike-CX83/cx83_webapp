@@ -2,7 +2,7 @@
 
 PROJECT: CX83 Labs website, Mike-CX83/cx83_webapp. Protected staging only.
 STARTING HEAD: 8fbd1c4de940e49a3499ba2b5fafc3956cf5ff52, independently checked through GitHub and isolated clone. Older Mac checkout 17b40c3 and its unrelated changes preserved.
-STATUS: Implemented; final CI and staging verification pending. The Run 3 record below is historical.
+STATUS: Completed and independently verified on protected staging. The Run 3 record below is historical.
 
 COMPLETED:
 * Read the saved homepage refinement plan and written assessment. Connected Library Page search did not expose the requested files; local deliverables copies provided the complete source. Supplementary audio not transcribed.
@@ -15,16 +15,22 @@ COMPLETED:
 * Dedicated Software retains both products and Studio spotlight. How it works retains map, authority boundaries, ownership costs and real proof. Work retains published records. No dedicated page redesign.
 * Existing banner, frontend, catalog, naming and showcase tests adapted to superseded expectations. Active blueprint and brand context now declare the latest direction first.
 
-VALIDATION SO FAR:
+FINAL VALIDATION:
 * Starting staging baseline: 2560x1000, 7834px page height; 390x844, 12066px. Baseline body contains 23 links, including hidden transcript evidence.
 * Local TypeScript and lint passed; 43 integration tests passed (local API database test follows its unconfigured database branch). Production build passed. Final GitHub validation supplies configured Postgres and full browser coverage.
-* Desktop local layout inspected with fallback CMS content. Final published-content screenshots and viewport measurements pending.
+* Merged PR #34: https://github.com/Mike-CX83/cx83_webapp/pull/34. Application deployment 1d6d21b4594e81d1b1cce554c2a5b7f009ebdd42 verified by Staging workflow 38084452566 and independent live container and server checkout reads. Workflow passed TypeScript, lint, 43 integration tests, 73 browser tests and production build.
+* Independent gate checks: unauthenticated 401, authenticated homepage 200, original and optimized hero 200, video, poster and caption files 200. Workflow: https://github.com/Mike-CX83/cx83_webapp/actions/runs/38084452566.
+* Real Chrome measured viewport widths 320, 390, 768, 1440, 2560 and 3440. Each has scrollWidth equal to clientWidth, no horizontal overflow, five homepage sections and proportional full width banner band. At 390x844 the page fell from 12066px to 4299px (64.4% shorter); at 2560x1000 it fell from 7834px to 3587px (54.2% shorter). Full page screenshots inspected at every width.
+* Live mobile menu opens/closes, Cat opens/closes and its input/close controls fit 320px. A real public Cat question returned the three approved service areas. Live links reached Contact, Services and How it works. Software retains both products and Studio spotlight. About has exactly one Catalyst X83 mention with preserved founder facts.
+* Staging video played and advanced, duration 49.411995 seconds, English text track disabled by default. Transcript disclosure opens/closes with existing evidence link. Baked-in video graphics around 17 seconds are separate from optional caption overlays.
+* Published assistant-settings welcomeMessage and extraGuidance corrected to Cat casing; existing model and visitor permissions unchanged. Readback confirmed.
+* Evidence saved in Mike's local CX83 project deliverables/CX83_Homepage_Refinement_20261010: before/after screenshots, responsive-metrics.json and verification report. Local Playwright could not launch because browser installation was incomplete; these attempts are not counted as passing tests. Configured GitHub browser suite passed.
 
 BLOCKED / EXISTING LIMITATIONS:
-* Video audio improvement remains a separate media pass. Embedded footage text needs a playback check before final receipt.
+* Separate media follow-up: improve existing video audio and revise baked-in footage graphics (observed around 17 seconds). Original media bytes were preserved; this scoped website refinement does not regenerate the recording.
 * Inquiry outbound server OAuth remains the prior Run 3 limitation; this refinement does not activate mail.
 
-NEXT: Finish browser review and CI, merge scoped PR into staging-host, verify deployed commit and gate, record final measurements, screenshots and workflow receipts here.
+NEXT: Mike reviews protected staging. Homepage scope is complete. Media audio/embedded graphics and the prior server mail OAuth limitation remain separate follow-ups. This documentation-only receipt may advance repository HEAD; application deployment above is independently verified and must not be confused with a later receipt SHA.
 RECOVERY: Revert scoped implementation commit through staging workflow; restore founder wording from the historical record below if reverting this copy correction. Never reset unrelated changes.
 
 ---
