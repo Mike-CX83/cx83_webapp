@@ -10,8 +10,7 @@ const fallbackNav = [
   { href: '/software', label: 'Software' },
   { href: '/services', label: 'Services' },
   { href: '/about', label: 'About' },
-  { href: '/work', label: 'Work' },
-  { href: '/contact', label: 'Contact' },
+    { href: '/contact', label: 'Contact' },
 ]
 
 export function SiteHeader({ siteName, items }: { siteName: string; items: { href: string; label: string }[] }) {

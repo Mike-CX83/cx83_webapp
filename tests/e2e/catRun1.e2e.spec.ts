@@ -59,6 +59,12 @@ test.describe('Run 1 / Catalyst X83 visual identity and CAT', () => {
       await expect(dialog).toBeVisible()
       await expect(dialog.getByRole('button', { name: 'How can AI update a website?' })).toBeVisible()
       if (width === 390) {
+        const greetingIsInViewport = await dialog.getByText('Welcome to CX83').evaluate((element) => {
+          const viewport = element.closest('.cx83-cat-messages')?.getBoundingClientRect()
+          const greeting = element.getBoundingClientRect()
+          return Boolean(viewport && greeting.top >= viewport.top - 2 && greeting.bottom <= viewport.bottom + 2)
+        })
+        expect(greetingIsInViewport).toBe(true)
         const screenshot = testInfo.outputPath('homepage-cat-390.png')
         await page.screenshot({ path: screenshot, fullPage: false, animations: 'disabled' })
         await testInfo.attach('CAT-mobile', { path: screenshot, contentType: 'image/png' })

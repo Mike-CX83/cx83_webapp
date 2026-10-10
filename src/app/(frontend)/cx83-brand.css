@@ -581,3 +581,20 @@ body { background: var(--cx83-background); color: var(--cx83-text); }
 @media (prefers-reduced-motion: reduce) {
   .cx83-menu-icon span, .cx83-site-cat-button, .cx83-cat-starter { transition: none; }
 }
+
+/* Small-screen CAT: keep the greeting in view even when a provider is offline.
+   Conversation content still scrolls within the panel at 320px and below. */
+@media (max-width: 40rem) {
+  .cx83-cat-header { padding: .68rem .85rem; gap: .55rem; }
+  .cx83-cat-heading h2 { font-size: 1rem; }
+  .cx83-cat-heading h2 span { font-size: .64rem; }
+  .cx83-cat-messages { padding: .65rem .85rem; }
+  .cx83-cat-welcome h3 { margin-top: .32rem; font-size: 1.27rem; line-height: 1.2; }
+  .cx83-cat-welcome > p:not(.cx83-cat-welcome-label) { margin-top: .45rem; font-size: .78rem; line-height: 1.55; }
+  .cx83-cat-starters { gap: .38rem; margin-top: .68rem; }
+  .cx83-cat-starter { min-height: 2.7rem; padding: .46rem .54rem; font-size: .72rem; }
+  .cx83-cat-composer { padding: .58rem .85rem; }
+  .cx83-cat-input { min-height: 2.55rem; max-height: 5rem; }
+  .cx83-cat-composer-actions { margin-top: .38rem; }
+  .cx83-cat-footer { padding: .42rem .85rem; }
+}
