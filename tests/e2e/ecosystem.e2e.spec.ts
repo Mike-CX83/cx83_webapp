@@ -21,6 +21,7 @@ test.describe('Connected Ecosystem showcase', () => {
     await expect(page.getByTestId('systems-layer')).toHaveCount(7)
     await expect(page.getByTestId('ecosystem-provider').first()).toBeVisible()
     await expect(page.getByTestId('ecosystem-step')).toContainText('Step 1 of 7')
+    await expect(page.getByTestId('systems-active-detail')).toContainText('Business owner')
     await page.getByRole('button', { name: 'Next step' }).click()
     await expect(page.getByTestId('ecosystem-step')).toContainText('Step 2 of 7')
     await expect(page.getByRole('link', { name: /See the actual proof record/ })).toHaveAttribute('href', '/how-it-works#real-proof')
@@ -57,6 +58,10 @@ test.describe('Connected Ecosystem showcase', () => {
       await page.goto(host + '/how-it-works')
       await expect(page.getByTestId('ecosystem-step')).toBeVisible()
       await expect(page.getByTestId('visitor-lane')).toBeVisible()
+      if (width === 390) {
+        await expect(page.getByRole('button', { name: /Claude\. Example integration/ })).toBeVisible()
+        await expect(page.getByRole('button', { name: /Gemini\. Example integration/ })).toBeVisible()
+      }
       await page.getByRole('button', { name: 'Next step' }).click()
       await expect(page.getByTestId('ecosystem-step')).toContainText('Step 2 of 7')
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width)
