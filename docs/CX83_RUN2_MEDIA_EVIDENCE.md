@@ -19,3 +19,7 @@ Client Brand Studio status on October 9: 0.8.4 development draft, source f2b37df
 ## Follow-up
 
 Before enabling media, obtain original playable files, inspect privacy and rights, verify real CX83 identity and footage, produce and review captions, and test actual playback and responsive controls. An optional motion explainer must share verified system data and accessible captions. The missing media does not block independent Run 3 inquiry delivery and trust work.
+
+## Additional Run 2 source check
+
+Connected Google Drive searches for the exact filenames `CX83_Website_Showcase_v2`, `CX83_Website_Showcase_Poster_v2` and `CX83_Website_Showcase_v2_Website_Pack` returned no matching files during the October 9 execution. Preserve original poster and footage provenance before any future enabling of the player.
