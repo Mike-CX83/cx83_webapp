@@ -4,7 +4,7 @@
 **Public assistant:** **CAT**, the CX83 Labs AI Assistant  
 **Prepared:** October 9, 2026, Tulsa, Oklahoma  
 **Document type:** Owner-directed creative brief and executable website runbook  
-**Implementation status:** **RUN 1 implementation complete and verified on password-protected staging, October 9, 2026.** Runs 2 and 3 remain planned. See Section 12 and the Run 1 handoff for evidence. This does not authorize public production, payments, or a customer software release.  
+**Implementation status:** **RUN 1 complete and verified; RUN 2 implementation merged, with first-stage verification successful.** Final mobile QA commit `4effd65ff256191f8ef9587a96a0a6b1ae6cb329` is awaiting its protected staging deployment. Run 3 remains planned. See Sections 12 and 13 plus the handoff files for evidence. This does not authorize public production, payments, or a customer software release.  
 **Website repository:** `Mike-CX83/cx83_webapp`  
 **Verified starting staging commit:** `161bf0fcdb972a337aec41f5299326bb495ccd11` (refresh HEAD before executing)  
 **Existing staging:** `https://staging.cx83labs.com`, protected by authentication  
@@ -284,7 +284,7 @@ ARTIFACTS: PR, commit, screenshots, tests, staging deployment, changed documents
 
 **Already on staging when this blueprint was prepared:** Phase 1 global CX83 identity, restored protected original home banner, a factual working AI demonstration panel, informational software catalog/product pages, Phase 4 release readiness foundation without payments, a branded contact form with Payload storage, and home software discovery. The original v2 video is still withheld because playback bytes and captions have not been verified.
 
-**Recommended next action:** **Run 2** as written. Run 1 implementation has been completed, tested, and deployed to protected staging. Reuse its verified CSS, CAT interface, real brand masters, original hero and existing pipeline. Do not repeat Run 1 or turn unaccepted software into a released product. Run 3 remains separate.
+**Recommended next action:** Finish the queued Run 2 mobile QA staging gate, then begin **Run 3**. Run 2 implementation and its genuine evidence, interactive systems map, ownership narrative and Brand Studio 0.8.4 development presentation are committed and tested. Preserve the original banner and existing services, CAT, CMS and staging pipeline. Run 3 owns verified inquiry notification, abuse controls and complete launch polish. Do not present unreleased software or unapproved customer email as live.
 ## 12. RUN 1 verified implementation receipt | October 9, 2026
 
 **Status:** RUN 1 COMPLETE on protected staging. No public-production publication, payments, or new customer communications.
@@ -302,3 +302,18 @@ ARTIFACTS: PR, commit, screenshots, tests, staging deployment, changed documents
 **Remaining work is assigned, not represented as shipped:** RUN 2 owns real source-video acceptance, interactive systems map, first-party proof and ownership/product launch narrative. RUN 3 owns business inquiry delivery, spam protection and complete launch polish. No customer installer, approved license, verified outgoing inquiry email or new third-party payment flow was activated. An authenticated live provider conversation was not independently exercised by this workflow; the CAT server transport, approved knowledge builder and staging CMS settings were inspected and preserved.
 
 **Durable next-run handoff:** [docs/CX83_CAT_RUN1_HANDOFF_2026_10_09.md](./CX83_CAT_RUN1_HANDOFF_2026_10_09.md). RUN 2 begins at Section 8, using Sections 5 through 7 for its source and design requirements.
+
+
+## 13. RUN 2 implementation and staging receipt | October 9, 2026
+
+**Status:** Main Run 2 implementation verified on password-protected staging. Final mobile visual QA source merged and awaiting deployment. No public production, payments, customer email delivery or product release.
+
+**Code and staging:** [Run 2 implementation PR #24](https://github.com/Mike-CX83/cx83_webapp/pull/24) and source `fad102a367e1e1f44b31b3f4580f38854e3efaca` deployed through [Staging workflow 38017311073](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38017311073) with gate 401, authenticated page 200, image delivery 200, `checkout_sync=ok` and identical deployed/checkout SHA. Correct authentic on-dark logo source `99b44a5be0989a015a8ddfa93f8e96a0bed6ceb7` was deployed through [workflow 38017456787](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38017456787) with the same health and source sync results. Mobile visual QA [PR #26](https://github.com/Mike-CX83/cx83_webapp/pull/26) merged as `4effd65ff256191f8ef9587a96a0a6b1ae6cb329`, with its final staging workflow pending.
+
+**Verification:** TypeScript and lint passed; 29 Vitest integration tests and 54 Playwright browser tests passed on the final merged mobile QA branch; Next.js build passed ([workflow 38018037788](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38018037788)). Browser coverage checked native system map layers, CAT privilege separation, real first-party proof, unreleased product paths and responsive layouts. Screenshot review detected and corrected mobile Brand Studio step-number wrapping and selected the true on-dark CX83 logo.
+
+**Delivered content:** Honest Before / Request / After first-party evidence; interactive seven-layer systems map with owner and public CAT separation; full `/how-it-works` explanation; software ownership and external-cost qualifications; Connected Website Platform workflow illustration; Client Brand Studio 0.8.4 development spotlight with authentic original CX83 assets. No fabricated customer screenshots, sales, perpetual licenses or trial links.
+
+**Asset protection and media:** Original first homepage hero markup is exactly unchanged; `/brand/cx83-labs-hero.avif` blob `3afb58548ceed0dab3c814991d5894ce09c16d5a` remains unchanged. The original v2 video, poster and captions could not be reviewed from raw accessible bytes, so the functioning source-backed proof fallback remains and playback stays disabled. See `docs/CX83_RUN2_MEDIA_EVIDENCE.md`.
+
+**Handoff:** [docs/CX83_CAT_RUN2_HANDOFF_2026_10_09.md](./CX83_CAT_RUN2_HANDOFF_2026_10_09.md) is the Run 3 starting point. It must be updated to exact latest tested and staging-deployed SHA after the final Run 2 gate clears. Run 3 owns real company inbox and form notification verification, spam protection, trust and responsive polish; production/public release remains separate.
