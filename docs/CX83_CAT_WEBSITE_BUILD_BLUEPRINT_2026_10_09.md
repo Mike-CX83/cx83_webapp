@@ -4,7 +4,7 @@
 **Public assistant:** **CAT**, the CX83 Labs AI Assistant  
 **Prepared:** October 9, 2026, Tulsa, Oklahoma  
 **Document type:** Owner-directed creative brief and executable website runbook  
-**Implementation status:** **RUNS 1 AND 2 COMPLETE AND VERIFIED on password-protected staging, October 9, 2026.** Run 2 final verified application and staging source `fc3b4073792824bd238599757df3dc1b467c29cf`. Run 3 is next. See Section 13, the GitHub deployment receipt and the saved Run 2 handoff. No public production, payments, or customer software release is approved.  
+**Implementation status:** **RUNS 1 AND 2 COMPLETE. RUN 3 IMPLEMENTED AND FIRST DEPLOY VERIFIED ON PASSWORD-PROTECTED STAGING.** Run 3 initial deployment `eec1a5335f636dc568a861a7bef02219bfc992ad` passed workflow 38025874771; the send-only Gmail correction is merged as `5c04e4092b7ed5d757ef058ceb46588dfaf5a2fd` and its final staging verification is PENDING_CORRECTED_STAGE_PROOF. Outbound inquiry email activation still requires a separately authorized Google Workspace server credential. No public production, payments or customer software release is approved. See Section 14 and the Run 3 handoff.  
 **Website repository:** `Mike-CX83/cx83_webapp`  
 **Verified starting staging commit:** `161bf0fcdb972a337aec41f5299326bb495ccd11` (refresh HEAD before executing)  
 **Existing staging:** `https://staging.cx83labs.com`, protected by authentication  
@@ -217,6 +217,9 @@ Treat these as **three implementation contexts**, not eleven small phases. Each 
 
 ### RUN 3 | Contact delivery, trust, launch polish and complete website pass
 
+**Implementation checkpoint October 10:** Run 3 PR [#29](https://github.com/Mike-CX83/cx83_webapp/pull/29) merged and deployed to protected staging at `eec1a5335f636dc568a861a7bef02219bfc992ad`, with 37 integration and 64 browser tests on its PR gate; first deployment workflow [38025874771](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38025874771) verified password gate 401, authenticated 200, original/optimized hero images 200, `checkout_sync=ok`, and matching deployed and checkout SHA. Follow-up [PR #30](https://github.com/Mike-CX83/cx83_webapp/pull/30) corrected send-only Gmail authorization and uncertain provider outcomes. Its full gate [38026253840](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38026253840) passed 38 integration tests, 64 browser tests and build. Corrected staging deploy is PENDING_CORRECTED_STAGE_PROOF. Actual inbox notification is blocked by missing server-owned OAuth; the connected Gmail account's synthetic self-mail is not website mail proof. See Section 14.
+
+
 **Goal:** Turn attention into a dependable CX83 business conversation and finish sitewide consistency.
 
 **Build together in one context:**
@@ -286,7 +289,7 @@ ARTIFACTS: PR, commit, screenshots, tests, staging deployment, changed documents
 
 **Already on staging when this blueprint was prepared:** Phase 1 global CX83 identity, restored protected original home banner, a factual working AI demonstration panel, informational software catalog/product pages, Phase 4 release readiness foundation without payments, a branded contact form with Payload storage, and home software discovery. The original v2 video is still withheld because playback bytes and captions have not been verified.
 
-**Recommended next action:** **Run 3**, using the verified [Run 2 handoff](./CX83_CAT_RUN2_HANDOFF_2026_10_09.md), starting with a fresh `staging-host` HEAD and authenticated staging confirmation. Keep the original hero, real logo and CAT access boundaries. Run 3 owns inquiry notification delivery, spam controls and final launch polish. Do not publish public production, initiate payments or portray unreleased software as ready.
+**Current next action:** Run 3 website source and staging implementation have been delivered. The next separate operational acceptance item is server-owned Google Workspace send-only OAuth plus a synthetic website-submission-to-recipient-inbox delivery proof; until then the visitor receives a truthful saved confirmation and the owner can see the durable Payload record. The original hero, real logos, visitor CAT permissions and unreleased product statuses stay protected. Public production, licensing and payments remain unapproved.
 ## 12. RUN 1 verified implementation receipt | October 9, 2026
 
 **Status:** RUN 1 COMPLETE on protected staging. No public-production publication, payments, or new customer communications.
@@ -330,3 +333,18 @@ ARTIFACTS: PR, commit, screenshots, tests, staging deployment, changed documents
 **BLOCKED:** Original v2 video source, poster and captions remain unverified and unpublished; use the functioning evidence panel. Studio 0.8.4 is still an unreleased draft. No outbound inquiry email, customer license, checkout or public production release was activated.  
 **NEXT:** Run 3, starting with the latest staging source and the [Run 2 handoff](./CX83_CAT_RUN2_HANDOFF_2026_10_09.md); fix contact-form test timing while implementing verified durable inquiry delivery and complete accessibility/trust review.  
 **ARTIFACTS:** PR [#24](https://github.com/Mike-CX83/cx83_webapp/pull/24), PR [#26](https://github.com/Mike-CX83/cx83_webapp/pull/26), PR [#27](https://github.com/Mike-CX83/cx83_webapp/pull/27), [Run 2 final staging workflow](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38019633361), `docs/CX83_RUN2_MEDIA_EVIDENCE.md`, `docs/CX83_CAT_RUN2_HANDOFF_2026_10_09.md`.
+
+
+## 14. RUN 3 implementation and protected staging checkpoint | October 10, 2026
+
+**PROJECT:** CX83 Labs website, Catalyst X83. **RUN:** 3 of 3.
+
+**HEAD:** Run 3 first verified implementation/staging commit `eec1a5335f636dc568a861a7bef02219bfc992ad`. Follow-up tested correction merged at `5c04e4092b7ed5d757ef058ceb46588dfaf5a2fd`. **Corrected staging deployed SHA:** PENDING_CORRECTED_DEPLOYED_SHA. **Final workflow:** PENDING_CORRECTED_WORKFLOW.
+
+**COMPLETED:** [Run 3 PR #29](https://github.com/Mike-CX83/cx83_webapp/pull/29) delivered the saved-to-notified inquiry outbox in existing Payload submission records, bounded request ID deduplication, single-instance rate limiting and bot field, safe field validation, clear saved versus delivery states and retry uncertainty, project/service/software inquiry types, contact privacy copy, launch FAQ, 404, noindex staging controls, route/keyboard/mobile checks and the visual evidence manifest. The existing CMS form was updated and verified. [PR #30](https://github.com/Mike-CX83/cx83_webapp/pull/30) restricted Google mail notification to the verified `mike@cx83labs.com` mailbox using the Gmail send-only scope and exact mailbox user ID; unknown provider outcomes require owner reconciliation. The first staging deployment [workflow 38025874771](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38025874771) succeeded with gate 401/200, original and optimized banner 200 and matching source/deployed commit. The corrected follow-up PR gate [38026253840](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38026253840) passed typecheck, lint, 38 integration tests, 64 browser tests and production build. Screenshot artifact `homepage-review-38026253840` includes contact desktop/mobile and How it works mobile. Protected first homepage hero and AVIF blob `3afb58548ceed0dab3c814991d5894ce09c16d5a` remain unchanged.
+
+**BLOCKED:** Google Workspace sender OAuth credentials are not configured in the website runtime; a direct synthetic connected-Gmail self-mail proves the business mailbox, not website form-to-inbox delivery. Required send-only OAuth grant and real end-to-end inbox proof are specified in [Run 3 mail delivery](./CX83_RUN3_MAIL_DELIVERY.md). No false customer email or paid releases were activated. Original v2 showcase footage, captions and Studio customer approval remain separate outstanding asset/release boundaries.
+
+**NEXT:** Authorize and configure only the existing business mailbox on the protected staging server, then exercise a clearly synthetic website inquiry and verify persisted Payload status, Google provider acceptance and actual received mailbox message. For production, separately approve hosting/licensing/payment, shared abuse resistance and stronger multi-replica deduplication. Do not perform public production release implicitly.
+
+**ARTIFACTS:** [PR #29](https://github.com/Mike-CX83/cx83_webapp/pull/29), [PR #30](https://github.com/Mike-CX83/cx83_webapp/pull/30), Run 3 full tests [38026253840](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38026253840), first verified staging [38025874771](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38025874771), corrected staging PENDING_CORRECTED_WORKFLOW, [Run 3 visual manifest](./CX83_RUN3_VISUAL_EVIDENCE_MANIFEST.md), [Run 3 mail evidence](./CX83_RUN3_MAIL_DELIVERY.md), [Run 3 completion handoff](./CX83_CAT_RUN3_HANDOFF_2026_10_10.md).

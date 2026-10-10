@@ -49,6 +49,6 @@ The verified business Gmail account sent a synthetic message to itself, and the 
 * The single-instance rate limiter is a staging-level control. Future public production requires shared abuse defenses and a stronger persistent unique index.
 * The protected original CX83 homepage banner, authentic logo, media gating, unreleased products and existing staging pipeline remain unchanged.
 
-## Evidence to append after CI and staging
+## Implementation and staging verification
 
-Record the tested commit, complete CI run, screenshot artifact, staging deploy SHA and 401/200 protected gate results in the final Run 3 handoff. Do not invent a staging receipt or outbound inbox delivery proof.
+PR #29 merged its tested source as `eec1a5335f636dc568a861a7bef02219bfc992ad`. Protected staging workflow [38025874771](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38025874771) passed CI, built and deployed the image, confirmed unauthenticated 401, authenticated 200, original and optimized hero images 200, `checkout_sync=ok`, and equal deployed/checkout SHA. The CX83 Website owner connection subsequently read the new outbox source and live CMS form options. PR #30 follow-up [workflow 38026253840](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38026253840) passed 38 integration tests, 64 browser tests, TypeScript, lint and production build. Its corrected staging deployment is PENDING_CORRECTED_STAGE_PROOF. No website-originated Gmail mail acceptance or recipient delivery has been proven; this is an explicit operational blocker, not a failed saved submission.
