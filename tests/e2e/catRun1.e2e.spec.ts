@@ -57,6 +57,7 @@ test.describe('Run 1 / Catalyst X83 visual identity and CAT', () => {
       await expect(mobile).toBeHidden()
       const dialog = page.getByRole('dialog', { name: /CAT/ })
       await expect(dialog).toBeVisible()
+      await expect(dialog.getByRole('heading', { name: 'What can we help you explore?' })).toBeInViewport({ ratio: 1 })
       await expect(dialog.getByRole('button', { name: 'How can AI update a website?' })).toBeVisible()
       if (width === 390) {
         const screenshot = testInfo.outputPath('homepage-cat-390.png')

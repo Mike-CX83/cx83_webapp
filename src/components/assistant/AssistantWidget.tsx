@@ -67,8 +67,12 @@ function AssistantSession({
   }, [])
 
   useEffect(() => {
-    const openFromNavigation = () => onOpenChange(true)
+    const openFromNavigation = () => {
+      delete document.documentElement.dataset.cx83CatRequested
+      onOpenChange(true)
+    }
     window.addEventListener('cx83:open-cat', openFromNavigation)
+    if (document.documentElement.dataset.cx83CatRequested === 'true') openFromNavigation()
     return () => window.removeEventListener('cx83:open-cat', openFromNavigation)
   }, [onOpenChange])
 
@@ -129,7 +133,7 @@ function AssistantSession({
             <button ref={closeRef} aria-label="Close CAT" className="cx83-cat-close" onClick={close} type="button">×</button>
           </header>
           <ThreadPrimitive.Root className="cx83-cat-thread">
-            <ThreadPrimitive.Viewport className="cx83-cat-messages">
+            <ThreadPrimitive.Viewport className="cx83-cat-messages" turnAnchor="top" scrollToBottomOnInitialize={false}>
               <ThreadPrimitive.Empty>
                 <div className="cx83-cat-welcome">
                   <p className="cx83-cat-welcome-label">Welcome to CX83</p>

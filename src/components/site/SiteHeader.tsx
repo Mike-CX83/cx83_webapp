@@ -39,6 +39,8 @@ export function SiteHeader({ siteName, items }: { siteName: string; items: { hre
 
   const openCat = () => {
     setOpen(false)
+    // Preserve the request until the separately hydrated CAT widget is listening.
+    document.documentElement.dataset.cx83CatRequested = 'true'
     window.dispatchEvent(new Event('cx83:open-cat'))
   }
 

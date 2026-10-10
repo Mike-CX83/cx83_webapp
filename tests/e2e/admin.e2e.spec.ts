@@ -6,6 +6,8 @@ test.describe('Admin Panel', () => {
   let page: Page
 
   test.beforeAll(async ({ browser }, _testInfo) => {
+    // Payload may warm up slowly on the shared CI runner; keep the hook bounded.
+    test.setTimeout(120_000)
     await seedTestUser()
 
     const context = await browser.newContext()
