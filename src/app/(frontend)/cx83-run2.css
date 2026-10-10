@@ -84,3 +84,5 @@
 }
 @media (max-width: 24rem) { .cx83-systems-owner-nodes { grid-template-columns: 1fr; } .cx83-systems-map { padding: .8rem; } }
 @media (prefers-reduced-motion: reduce) { .cx83-systems-node { transition: none; } .cx83-systems-node:hover { transform: none; } }
+
+.cx83-studio-artwork-inner img.cx83-studio-logo { width: min(100%, 13rem); height: auto; }

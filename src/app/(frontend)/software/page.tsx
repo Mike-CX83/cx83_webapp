@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { PageHero, Section } from '@/components/site/Section'
 import { softwareProducts } from '@/content/softwareCatalog'
+import { BrandStudioSpotlight } from '@/components/site/BrandStudioSpotlight'
 
 import './software.css'
 
@@ -43,6 +44,7 @@ export default function SoftwareCatalogPage() {
             </article>
           ))}
         </div>
+        <BrandStudioSpotlight />
       </Section>
       <Section className="cx83-software-next">
         <div className="cx83-software-contact">
