@@ -7,6 +7,7 @@ test.describe('Run 2 connected systems and proof', () => {
     await page.goto(host + '/')
     await expect(page.getByTestId('homepage-banner')).toHaveAttribute('src', /cx83-labs-hero/)
     await expect(page.getByTestId('cx83-proof-panel')).toContainText('Before. Request. After.')
+    await expect(page.getByTestId('cx83-proof-panel')).toContainText('through ChatGPT using authorized, connected CX83 website tools')
     await expect(page.getByRole('link', { name: /Read the evidence record/ })).toHaveAttribute('href', '/how-it-works#real-proof')
     await expect(page.getByTestId('systems-map')).toBeVisible()
     await expect(page.getByTestId('brand-studio-spotlight')).toContainText('0.8.4')

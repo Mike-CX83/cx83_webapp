@@ -8,7 +8,7 @@ export function WebsiteProofPanel() {
         <p className="cx83-showcase-kicker">A real change to the site you are viewing</p>
         <h2>Before. Request. After.</h2>
         <p className="cx83-showcase-proof-intro">
-          CX83 updated its own real website through a connected, authorized AI workflow. This is a source-backed record, not a simulated marketing animation.
+          CX83 updated this actual website through ChatGPT using authorized, connected CX83 website tools. The source changes were tested and deployed to protected staging. This is a documented first-party build, not a simulated customer installation.
         </p>
         <ol className="cx83-showcase-proof-stages">
           <li><span>01 / BEFORE</span><p>The interior pages and assistant needed consistent CX83 identity, navigation and release language.</p></li>
