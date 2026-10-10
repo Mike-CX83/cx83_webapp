@@ -25,9 +25,12 @@ Provider examples, not claims of a live CX83 website route: Claude, Gemini, Word
 
 ## Media gate
 
-Previous raw files `CX83_Website_Showcase_v2.mp4`, `CX83_Website_Showcase_Poster_v2.jpg`, the v2 Website Pack, captions and checksum are not available as validated playable assets in the accessible Library. The candidate was not replaced with an imitation, unverified static sequence or synthetic chat UI. `src/content/showcaseMedia.ts` remains false. The authentic `WebsiteProofPanel` fallback stays available, as required by `docs/CX83_RUN2_MEDIA_EVIDENCE.md`.
+October 10 media recovery closes the former original-source blocker. The actual generated `CX83_Website_Showcase_v2.mp4` and matching JPEG poster were recovered from the owner Library, copied to connected Google Drive `CX83 Labs / Website / Showcase`, and inspected in the current execution session. Source: 7,487,167 byte H.264/AAC, 1920x1080, 49.4 second first-party video; SHA256 `2e1bcc97aba75ff4363c3b67c42c69a04218c0f572b586c2bf68eb35cba05ed2`. Poster original SHA256 `b185734f01ea39bb5c7a4324348f9056073d93629ed02f99501055d48e00a5cb`.
 
-Owner acceptance of privacy, rights, exact edited video, poster and captions is still needed before publishing playback. A recorded future video is a separate task from the working accessible interactive ecosystem.
+The website now carries a genuine web-optimized MP4 derived only from this video (1280x720, 2,037,276 bytes, SHA256 `9b7e0f8c9d43ccbea5bf40907a8282f2c745950408a7bd0729d4d5151797f754`), the original poster and visible-screen timed English VTT. `showcaseMediaReady` is enabled only after actual source verification and asset addition. A text-based summary and link to the existing source-backed proof remain in the accessible player; the written `WebsiteProofPanel` component remains the fallback if media is disabled again.
+
+Media provenance, exact links, review scope and security exclusions are in `public/showcase/README.md`. The video depicts the first-party CX83 Contact page before, an owner ChatGPT request/result, and the after design, not a customer production deployment. No new simulated video, invented customer success or repurposed flyer was added. Explicit owner handoff authorizes this actual file for existing protected staging only.
+
 
 ## Visitor acceptance
 

@@ -233,3 +233,43 @@
 .cx83-home-software-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .cx83-home-software-status { display: inline-flex; width: fit-content; padding: .25rem .8rem; margin-bottom: 1.2rem; border: 1px solid var(--cx83-border); border-radius: 100rem; color: var(--cx83-primary); background: var(--cx83-background); font-size: .73rem; line-height: 1.6; font-weight: 700; }
 @media (max-width: 47.99rem) { .cx83-home-software-grid { grid-template-columns: 1fr; } }
+
+
+/* Genuine CX83 v2 footage: accessible text proof beneath the actual player. */
+.cx83-showcase-video-transcript {
+  margin-top: .4rem;
+  padding: .85rem 1rem 1.2rem;
+  border-top: 1px solid rgb(230 235 245 / 16%);
+  color: var(--cx83-silver);
+}
+.cx83-showcase-video-transcript summary {
+  min-height: 2.8rem;
+  display: flex;
+  align-items: center;
+  color: var(--cx83-on-dark-accent);
+  font-size: .88rem;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: disclosure-closed;
+}
+.cx83-showcase-video-transcript[open] summary { margin-bottom: .75rem; }
+.cx83-showcase-video-transcript summary:focus-visible {
+  outline: 3px solid var(--cx83-on-dark-accent);
+  outline-offset: 3px;
+}
+.cx83-showcase-video-transcript ol {
+  margin: .6rem 0 1rem 1.4rem;
+  padding-left: .3rem;
+  list-style: decimal;
+}
+.cx83-showcase-video-transcript li {
+  margin-bottom: .65rem;
+  font-size: .84rem;
+  line-height: 1.65;
+}
+.cx83-showcase-video-transcript p {
+  margin-top: .7rem;
+  color: var(--cx83-hero-muted);
+  font-size: .75rem;
+  line-height: 1.55;
+}
