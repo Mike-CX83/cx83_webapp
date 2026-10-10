@@ -66,6 +66,8 @@ export async function ensureInquiryForm(payload: Payload): Promise<number> {
           options: [
             { label: 'General contact', value: 'general' },
             { label: 'Project inquiry', value: 'project' },
+            { label: 'Services and integrations', value: 'services' },
+            { label: 'Software in development', value: 'software' },
           ],
         },
         { blockType: 'textarea', name: 'message', label: 'Message', required: true, width: 100 },
