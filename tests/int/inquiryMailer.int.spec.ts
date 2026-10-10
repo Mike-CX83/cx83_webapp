@@ -51,6 +51,16 @@ describe('CX83 inquiry Gmail provider', () => {
     expect(String(send.mock.calls[1][0])).toContain('mike%40cx83labs.com')
   })
 
+  it('marks ambiguous Google server responses as unconfirmed, never accepted', async () => {
+    const send = vi.fn()
+      .mockResolvedValueOnce(Response.json({ access_token: 'synthetic-access' }))
+      .mockResolvedValueOnce(new Response('Transient server error', { status: 503 }))
+    expect(await sendInquiryEmail(data, 21, env, send as unknown as typeof fetch)).toEqual({
+      state: 'failed',
+      reason: 'Delivery result could not be confirmed; check Sent before retrying.',
+    })
+  })
+
   it('does not claim acceptance when the provider rejects', async () => {
     const send = vi.fn().mockResolvedValueOnce(new Response('Unauthorized', { status: 401 }))
     expect(await sendInquiryEmail(data, 19, env, send as unknown as typeof fetch))

@@ -16,7 +16,7 @@ The same saved record includes an opaque request ID, a content digest, and durab
 * `sending`: claim persisted before the Google API request.
 * `accepted`: Google Gmail API supplied a message ID. Provider acceptance is NOT independent inbox delivery.
 * `failed`: provider returned a definite failure.
-* `uncertain`: network interruption means the provider might already have received the message. Requires human reconciliation before retry.
+* `uncertain`: a network interruption, ambiguous provider server failure, or missing acceptance identifier means the provider might already have received the message. Requires human reconciliation against Gmail Sent before retry.
 
 Client retries with the same request ID are deduplicated among the latest 200 submissions in the single staging web replica. This is a bounded, not globally transactionally unique guarantee. Do not scale to multiple replicas or portray this as strict exactly-once delivery without a database unique constraint and a provider-backed delivery reconciliation design.
 

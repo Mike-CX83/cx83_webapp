@@ -88,6 +88,7 @@ export async function sendInquiryEmail(
       body: JSON.stringify({ raw: encodedMessage(data, recordId) }),
       signal: AbortSignal.timeout(12000),
     })
+    if (response.status >= 500) return { state: 'failed', reason: 'Delivery result could not be confirmed; check Sent before retrying.' }
     if (!response.ok) return { state: 'failed', reason: 'Google Workspace rejected the message.' }
 
     const result = (await response.json()) as { id?: string }
