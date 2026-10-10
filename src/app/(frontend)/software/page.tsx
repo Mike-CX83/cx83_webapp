@@ -3,6 +3,8 @@ import Link from 'next/link'
 
 import { PageHero, Section } from '@/components/site/Section'
 import { softwareProducts } from '@/content/softwareCatalog'
+import { BrandStudioFeature } from '@/components/site/BrandStudioFeature'
+import { OwnershipSection } from '@/components/site/OwnershipSection'
 
 import './software.css'
 
@@ -43,6 +45,12 @@ export default function SoftwareCatalogPage() {
             </article>
           ))}
         </div>
+      </Section>
+      <Section className="cx83-run2-studio-band">
+        <BrandStudioFeature />
+      </Section>
+      <Section className="cx83-ownership-section">
+        <OwnershipSection />
       </Section>
       <Section className="cx83-software-next">
         <div className="cx83-software-contact">

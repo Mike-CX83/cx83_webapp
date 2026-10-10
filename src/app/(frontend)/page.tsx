@@ -5,6 +5,9 @@ import Link from 'next/link'
 import { ContentNotice, Section } from '@/components/site/Section'
 import { WebsiteDemoPlayer } from '@/components/site/WebsiteDemoPlayer'
 import { WebsiteProofPanel } from '@/components/site/WebsiteProofPanel'
+import { SystemMap } from '@/components/site/SystemMap'
+import { OwnershipSection } from '@/components/site/OwnershipSection'
+import { BrandStudioFeature } from '@/components/site/BrandStudioFeature'
 import { showcaseMediaReady } from '@/content/showcaseMedia'
 
 import './cx83-showcase.css'
@@ -184,6 +187,10 @@ export default async function HomePage() {
         </ol>
       </Section>
 
+      <Section className="cx83-systems-spotlight" id="inside-the-system">
+        <SystemMap />
+      </Section>
+
       <Section className="cx83-showcase-roles" id="ai-roles">
         <p className="cx83-home-kicker">Two kinds of help, different permissions</p>
         <h2 className="cx83-showcase-proof-title">Your AI runs the tools.<br />Your customers get answers.</h2>
@@ -205,6 +212,10 @@ export default async function HomePage() {
             </p>
           </article>
         </div>
+      </Section>
+
+      <Section className="cx83-ownership-section" id="what-you-own">
+        <OwnershipSection />
       </Section>
 
       <Section className="cx83-home-software" id="software">
@@ -234,6 +245,10 @@ export default async function HomePage() {
             </article>
           ))}
         </div>
+      </Section>
+
+      <Section className="cx83-run2-studio-band">
+        <BrandStudioFeature />
       </Section>
 
       {projects.items.length ? (

@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation'
 
 import { PageHero, Section } from '@/components/site/Section'
 import { getSoftwareProduct, softwareProducts } from '@/content/softwareCatalog'
+import { BrandStudioFeature } from '@/components/site/BrandStudioFeature'
+import { SystemMap } from '@/components/site/SystemMap'
 
 import '../software.css'
 
@@ -62,6 +64,15 @@ export default async function SoftwareDetailPage({ params }: Args) {
           ))}
         </div>
       </Section>
+      {product.slug === 'client-brand-studio' ? (
+        <Section className="cx83-run2-studio-band">
+          <BrandStudioFeature />
+        </Section>
+      ) : (
+        <Section className="cx83-systems-spotlight">
+          <SystemMap />
+        </Section>
+      )}
       <Section>
         <p className="cx83-software-eyebrow">Before you install</p>
         <h2 className="cx83-software-detail-heading">What to expect from a supported release.</h2>

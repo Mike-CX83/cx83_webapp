@@ -1,31 +1,66 @@
 import Link from 'next/link'
 
+const evidence = [
+  {
+    label: 'Before',
+    title: 'Useful components, inconsistent presentation',
+    detail: 'CX83 already had a Next.js and Payload website, real service routes and a working inquiry storage path. The public design and CAT experience needed a coherent identity.',
+  },
+  {
+    label: 'Request',
+    title: 'Make the real CX83 website work and look like CX83',
+    detail: 'The owner directed connected AI work on the authentic logo, dark-first pages, accessible mobile navigation and a separate visitor assistant, while protecting the original homepage banner.',
+  },
+  {
+    label: 'After',
+    title: 'Source changed, checked and deployed to staging',
+    detail: 'The updated website passed its integration and browser tests, retained the complete original homepage hero, and shipped to password-protected staging with an exact source receipt.',
+  },
+] as const
+
 /**
- * Authentic, text-based proof while the source video package is not available.
- * This refers to changes documented in CX83's October 9 staging PR and CI.
+ * First-party, source-backed demonstration until the approved MP4,
+ * poster, caption and media rights can actually be reviewed.
  */
 export function WebsiteProofPanel() {
   return (
     <figure className="cx83-showcase-player" id="website-proof" data-testid="cx83-proof-panel">
-      <div className="cx83-showcase-proof-feature">
-        <p className="cx83-showcase-kicker">Built on the website you are viewing</p>
+      <div className="cx83-showcase-proof-feature cx83-run2-proof-feature">
+        <div className="cx83-run2-proof-heading">
+          <p className="cx83-showcase-kicker">A real CX83 website change</p>
+          <span className="cx83-run2-proof-status">Staging verified / Oct 9, 2026</span>
+        </div>
         <h2>One request. Real website updates.</h2>
         <p className="cx83-showcase-proof-intro">
-          CX83&apos;s own pages were updated through an AI connected to the actual application.
-          The result is the site you can explore here.
+          The CX83 site you are viewing was improved through connected AI and actual website development tools.
+          This is a documented first-party build, not a simulated customer installation.
         </p>
-        <ol className="cx83-showcase-proof-stages">
-          <li><span>01 / THE REQUEST</span><p>Bring the real CX83 identity and interactions together across the website.</p></li>
-          <li><span>02 / THE CHANGE</span><p>Apply shared logos, page layouts, working links, and responsive navigation.</p></li>
-          <li><span>03 / THE RESULT</span><p>Run automated checks and publish the verified update to the staging website.</p></li>
+        <ol className="cx83-run2-proof-timeline">
+          {evidence.map((item, index) => (
+            <li key={item.label}>
+              <span className="cx83-run2-proof-index">{String(index + 1).padStart(2, '0')} / {item.label}</span>
+              <h3>{item.title}</h3>
+              <p>{item.detail}</p>
+            </li>
+          ))}
         </ol>
-        <Link href="/services" className="cx83-showcase-proof-explore">
-          Explore the updated website <span aria-hidden="true">↗</span>
-        </Link>
+        <div className="cx83-run2-proof-metrics" aria-label="Run 1 verified checks">
+          <div><strong>29</strong><span>Integration tests passed</span></div>
+          <div><strong>46</strong><span>Browser tests passed</span></div>
+          <div><strong>1</strong><span>Original banner protected</span></div>
+        </div>
+        <div className="cx83-run2-proof-links">
+          <Link href="/services" className="cx83-showcase-proof-explore">
+            Explore the updated website <span aria-hidden="true">↗</span>
+          </Link>
+          <Link href="/how-it-works" className="cx83-showcase-proof-explore">
+            See how it connects <span aria-hidden="true">↗</span>
+          </Link>
+        </div>
       </div>
       <figcaption className="cx83-showcase-player-caption">
-        <span className="cx83-showcase-player-caption-label">CX83 real build</span>
-        Website update documented October 9, 2026. Video walkthrough to follow.
+        <span className="cx83-showcase-player-caption-label">Verified first-party build</span>
+        Run 1 staging source cdae3ebab225. Original showcase video remains withheld until genuine media and captions are accepted.
       </figcaption>
     </figure>
   )
