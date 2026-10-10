@@ -20,7 +20,7 @@ describe('CX83 inquiry Gmail provider', () => {
   it('does not send with missing or unverified configuration', async () => {
     const send = vi.fn()
     expect(gmailDeliveryConfigured({ ...env, CX83_INQUIRY_TO: 'unknown@example.com' })).toBe(false)
-    expect(await sendInquiryEmail(data, 1, {} as NodeJS.ProcessEnv, send as unknown as typeof fetch)).toEqual({ state: 'unconfigured' })
+    expect(await sendInquiryEmail(data, 1, {}, send as unknown as typeof fetch)).toEqual({ state: 'unconfigured' })
     expect(send).not.toHaveBeenCalled()
   })
 
@@ -28,7 +28,7 @@ describe('CX83 inquiry Gmail provider', () => {
     const send = vi.fn()
       .mockResolvedValueOnce(Response.json({ access_token: 'synthetic-access' }))
       .mockResolvedValueOnce(Response.json({ id: 'synthetic-gmail-accepted-id' }))
-    const result = await sendInquiryEmail(data, 18, env as NodeJS.ProcessEnv, send as unknown as typeof fetch)
+    const result = await sendInquiryEmail(data, 18, env, send as unknown as typeof fetch)
     expect(result).toEqual({ state: 'accepted', providerId: 'synthetic-gmail-accepted-id' })
     expect(String(send.mock.calls[0][0])).toContain('oauth2.googleapis.com')
     expect(String(send.mock.calls[1][0])).toContain('gmail.googleapis.com')
@@ -41,7 +41,7 @@ describe('CX83 inquiry Gmail provider', () => {
 
   it('does not claim acceptance when the provider rejects', async () => {
     const send = vi.fn().mockResolvedValueOnce(new Response('Unauthorized', { status: 401 }))
-    expect(await sendInquiryEmail(data, 19, env as NodeJS.ProcessEnv, send as unknown as typeof fetch))
+    expect(await sendInquiryEmail(data, 19, env, send as unknown as typeof fetch))
       .toEqual({ state: 'failed', reason: 'Google Workspace authorization failed.' })
   })
 })

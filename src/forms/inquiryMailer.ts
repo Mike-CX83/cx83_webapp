@@ -15,7 +15,7 @@ export type DeliveryResult =
 
 export const verifiedInquiryMailbox = 'mike@cx83labs.com'
 
-export function gmailDeliveryConfigured(env: NodeJS.ProcessEnv = process.env): boolean {
+export function gmailDeliveryConfigured(env: Record<string, string | undefined> = process.env): boolean {
   return Boolean(
     env.CX83_GMAIL_CLIENT_ID &&
     env.CX83_GMAIL_CLIENT_SECRET &&
@@ -58,7 +58,7 @@ function encodedMessage(data: InquiryInput, recordId: number | string): string {
 export async function sendInquiryEmail(
   data: InquiryInput,
   recordId: number | string,
-  env: NodeJS.ProcessEnv = process.env,
+  env: Record<string, string | undefined> = process.env,
   fetcher: typeof fetch = fetch,
 ): Promise<DeliveryResult> {
   if (!gmailDeliveryConfigured(env)) return { state: 'unconfigured' }
