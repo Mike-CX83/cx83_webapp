@@ -76,15 +76,14 @@ export default async function HomePage() {
       <section className="cx83-showcase-hero" aria-labelledby="showcase-title">
         <div className="cx83-container cx83-showcase-hero-grid">
           <div className="cx83-showcase-intro">
-            <p className="cx83-showcase-kicker">{site.copy.tagline}</p>
+            <p className="cx83-showcase-kicker">Real CX83 website demonstration</p>
             <h2 id="showcase-title">
               Your website.<br />
               <span>Your AI.</span><br />
               Just ask.
             </h2>
             <p className="cx83-showcase-lead">
-              CX83 connects your website to supported AI tools you already use. Ask for a change in everyday language,
-              and the connected system can make real updates you can review and publish.
+              See how a request made in ChatGPT becomes an actual change to the CX83 website, using approved connections, real checks, and a verified staging result.
             </p>
             <div className="cx83-showcase-actions">
               <a className="cx83-action cx83-action-primary" href={showcaseMediaReady ? "#website-demo" : "#website-proof"}>
@@ -94,7 +93,7 @@ export default async function HomePage() {
                 Discuss your project
               </Link>
             </div>
-            <Link className="cx83-showcase-subnav" href="/services">Explore services <span aria-hidden="true">&nbsp;↗</span></Link>
+            <Link className="cx83-showcase-subnav" href="/how-it-works#system-map">Explore how CX83 connects your tools <span aria-hidden="true">&nbsp;↗</span></Link>
             <p className="cx83-showcase-status">
               The website you are visiting is itself a CX83 demonstration.
             </p>
@@ -140,10 +139,10 @@ export default async function HomePage() {
       </Section>
 
       <Section className="cx83-systems-home" id="system-map">
-        <p className="cx83-run2-eyebrow">Inside the CX83 system</p>
-        <h2 className="cx83-run2-section-title">See where conversation becomes real work.</h2>
-        <p className="cx83-run2-lead">An AI with owner permissions can improve software. The separate CAT assistant helps visitors without editing access or private records.</p>
-        <SystemsMap />
+        <p className="cx83-run2-eyebrow">How the pieces connect</p>
+        <h2 className="cx83-run2-section-title">One request. Connected systems. Real work.</h2>
+        <p className="cx83-run2-lead">Your approved AI can pass a request to the right connected tools, then follow the steps needed to review, test and apply a change. CAT uses a separate public visitor role.</p>
+        <SystemsMap variant="preview" />
         <Link className="cx83-run2-text-link" href="/how-it-works">Explore the system in detail <span aria-hidden="true">↗</span></Link>
       </Section>
 
