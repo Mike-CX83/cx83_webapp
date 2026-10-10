@@ -37,6 +37,10 @@ CX83_INQUIRY_DISPATCH_SECRET=
 
 An authenticated recovery endpoint, `POST /api/inquiries/dispatch`, uses ONLY the dedicated dispatch bearer. It processes at most ten unresolved submissions per invocation, excluding in-flight and uncertain records. No cron or automatic retry scheduler is installed. Operators inspect uncertain records and Google Sent before manually intervening.
 
+## Controlled mailbox proof, October 9
+
+The verified business Gmail account sent a synthetic message to itself, and the same account displayed matching SENT and INBOX identifiers. Subject: CX83 Run 3 synthetic mailbox verification | October 9, 2026. Gmail message ID: 1a1240ebc0536235. This proves the owner-managed mailbox and does not prove that the website backend has Gmail authorization.
+
 ## Safety and test constraints
 
 * Requests, answers, customer submissions and API keys are not passed to public CAT.
