@@ -35,7 +35,17 @@ test.describe('Run 1 / Catalyst X83 visual identity and CAT', () => {
     await expect(dialog.getByRole('link', { name: /Contact CX83/ })).toHaveAttribute('href', '/contact')
     await page.keyboard.press('Escape')
     await expect(dialog).toBeHidden()
+    await expect(page).not.toHaveURL(/#ask-cat$/)
     await expect(page.locator('.cx83-assistant-launcher')).toBeFocused()
+  })
+
+  test('a deep link safely opens CAT even before visitor UI hydration', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 })
+    await page.goto('http://localhost:3000/software#ask-cat')
+    await expect(page.getByRole('dialog', { name: /CAT/ })).toBeVisible()
+    await expect(page.getByRole('button', { name: 'Close CAT' }).last()).toBeVisible()
+    await page.keyboard.press('Escape')
+    await expect(page.getByRole('dialog', { name: /CAT/ })).toBeHidden()
   })
 
   for (const width of [320, 390, 768]) {

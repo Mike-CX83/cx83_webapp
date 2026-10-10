@@ -20,6 +20,13 @@ const starters = [
   'How do I start a project?',
 ] as const
 
+// The URL fragment preserves an Ask CAT request made while React is still hydrating.
+function clearCatHash() {
+  if (window.location.hash === '#ask-cat') {
+    window.history.replaceState(window.history.state, '', window.location.pathname + window.location.search)
+  }
+}
+
 export function AssistantWidget() {
   const [session, setSession] = useState(0)
   const [open, setOpen] = useState(false)
@@ -68,8 +75,17 @@ function AssistantSession({
 
   useEffect(() => {
     const openFromNavigation = () => onOpenChange(true)
+    const openFromHash = () => {
+      if (window.location.hash === '#ask-cat') onOpenChange(true)
+    }
     window.addEventListener('cx83:open-cat', openFromNavigation)
-    return () => window.removeEventListener('cx83:open-cat', openFromNavigation)
+    window.addEventListener('hashchange', openFromHash)
+    // Header events can fire before this component finishes hydrating.
+    openFromHash()
+    return () => {
+      window.removeEventListener('cx83:open-cat', openFromNavigation)
+      window.removeEventListener('hashchange', openFromHash)
+    }
   }, [onOpenChange])
 
   useEffect(() => {
@@ -78,6 +94,7 @@ function AssistantSession({
       if (event.key === 'Escape') {
         event.preventDefault()
         onOpenChange(false)
+        clearCatHash()
         launcherRef.current?.focus()
       }
     }
@@ -88,6 +105,7 @@ function AssistantSession({
 
   const close = () => {
     onOpenChange(false)
+    clearCatHash()
     launcherRef.current?.focus()
   }
 
@@ -99,7 +117,10 @@ function AssistantSession({
         aria-expanded={open}
         aria-label={open ? 'Close CAT' : 'Ask CAT'}
         className="cx83-assistant-launcher"
-        onClick={() => onOpenChange(!open)}
+        onClick={() => {
+          if (open) clearCatHash()
+          onOpenChange(!open)
+        }}
         type="button"
       >
         <Image src="/brand/symbol-showcase.svg" alt="" aria-hidden="true" width={25} height={25} />

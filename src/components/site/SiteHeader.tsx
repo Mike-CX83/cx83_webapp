@@ -38,6 +38,7 @@ export function SiteHeader({ siteName, items }: { siteName: string; items: { hre
 
   const openCat = () => {
     setOpen(false)
+    window.location.hash = 'ask-cat'
     window.dispatchEvent(new Event('cx83:open-cat'))
   }
 
