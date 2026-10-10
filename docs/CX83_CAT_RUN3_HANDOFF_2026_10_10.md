@@ -1,3 +1,47 @@
+# Visual integration implementation checkpoint, October 10, 2026
+
+STATUS: Implemented locally. Protected staging validation and deployment pending.
+
+Mike authorized execution of the saved visual integration plan in this thread. Starting application baseline staging-host 1d791ebfbb745053a1c3e612f22142021fe1b769; saved design/plan HEAD 66c001d33a9800e281283d02c904a932f30be55f. Read the project inbox and connected website handoff. Sent scoped intent to the existing coordinator in thr-3d5ad289.
+
+CHANGED: Homepage uses the approved layered banner with unchanged original AVIF, overview instead of service cards, and demonstration development label linking to /software/connected-websites. How it works adds three example visuals with live mobile text, keeps the existing map in a keyboard accessible disclosure, and retains ownership, FAQ and historical proof. Five homepage sections, original headline/process/contact copy, video and visitor permissions remain. New assets are optimized WebP derivatives; full approved sources remain in design/. Active styles: cx83-brand.css and cx83-connections.css.
+
+VALIDATION SO FAR: Local typecheck, lint, 43 integration tests and production build passed. Local API database test follows the unconfigured database branch; configured database and browser suite run in GitHub. Local dev watcher hit the Mac open-file limit; switched to the successful production build for rendered checks. No application deployment claimed at this checkpoint.
+
+NEXT: Finish desktop/mobile review and GitHub checks, merge through the existing protected staging workflow, independently verify deployed SHA and pages, then append delivery evidence here. Existing video audio/embedded graphics and server inquiry-mail OAuth remain separate follow-ups.
+
+---
+
+# Visual integration planning checkpoint, October 10, 2026
+
+Mike approved the responsive banner appearance and requested a plan for placing the banner, homepage overview and detailed connection visuals. Saved docs/CX83_VISUAL_INTEGRATION_PLAN_2026_10_10.md. Recommended arrangement: keep five homepage sections, replace service summary cards with the overview, link to examples on the existing How it works page, and keep the demonstration video on Home with clear product development status and a link to /software/connected-websites.
+
+Verified the design branch was clean at 0e68d7468647b3937d07dbe5412836a6eb7e2fea and checked the existing homepage, How it works and Software routes. The authorized Codex project inbox was empty. Existing approved assets remain in design/connection-visuals/v1 and design/responsive-banner/v1. This checkpoint changes documentation only; no new website tests or deployment are claimed.
+
+NEXT: Implement the saved plan when Mike requests the website update. Preserve all original artwork and current functionality, check desktop/mobile layouts, then verify protected staging and its deployed application commit.
+
+---
+
+# Responsive banner asset checkpoint, October 10, 2026
+
+Mike requested a banner with the same look that adapts across screen sizes, saved before website integration. Created design/responsive-banner/v1 with an image_gen background extension, unchanged original AVIF foreground, reusable HTML/CSS, exact prompt, source hashes and static size exports.
+
+Verified the original AVIF bytes match the existing banner. Real Chrome checks at 320, 390, 768, 1440, 2560 and 3440px showed loaded artwork, complete proportional logo, full available width and no horizontal overflow. The new blue/violet atmosphere continues across wide screens. No live homepage or deployed assets changed.
+
+NEXT: Mike reviews the assembled banner, then authorizes or requests its incorporation into the homepage. Detailed usage and evidence are in design/responsive-banner/v1/README.md.
+
+---
+
+# Connection visual asset checkpoint, October 10, 2026
+
+Mike positively reviewed the four generated connection visuals and requested durable GitHub storage. Saved under design/connection-visuals/v1 on the design/connection-visuals-20261010 branch. PNG hashes checked against the creation manifest. Original homepage application remains unchanged.
+
+Placement discussion and the requested future correction to the banner's abrupt image edges are recorded in design/connection-visuals/REVIEW-NOTES.md with Mike's screenshot. Recommendation is the existing How it works page for the connection examples and a homepage demonstration linking into Software with clear development status. These are recommendations, not approved page modifications.
+
+NEXT: Resolve placement with Mike, then implement the selected responsive presentation. Preserve the central original banner artwork when extending its surrounding background.
+
+---
+
 # Homepage refinement checkpoint, October 10, 2026
 
 PROJECT: CX83 Labs website, Mike-CX83/cx83_webapp. Protected staging only.

@@ -1,3 +1,5 @@
+> Latest owner direction, October 10, 2026: implement CX83_VISUAL_INTEGRATION_PLAN_2026_10_10.md. Preserve the original logo artwork within the approved responsive atmosphere. Replace homepage service cards with the connection overview; put Customers, Marketing and Operations examples on How it works, with the existing map under optional technical details. Keep the homepage demonstration and link to Connected websites with clear development status. This supersedes conflicting placement guidance below.
+
 > Current owner direction, October 10, 2026: CX83_HOMEPAGE_REFINEMENT_EXECUTION_PLAN_2026_10_10.md supersedes the banner layout freeze and earlier homepage composition below. Preserve original asset bytes and 960:319 proportions. Use a thinner full width visual band, five homepage sections, optional captions, concise services/process, compact footer and Cat casing. Detailed map, software and permissions remain on dedicated pages. Older instructions below are historical wherever they conflict with this update. See CX83_CAT_RUN3_HANDOFF_2026_10_10.md for the current refinement checkpoint.
 
 # CX83 Labs | CAT Website Creative and Execution Blueprint

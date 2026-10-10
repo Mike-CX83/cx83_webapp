@@ -15,11 +15,13 @@ test.describe('Run 2 connected systems and proof', () => {
     await expect(page.getByTestId('brand-studio-spotlight')).toContainText('0.8.4')
     await expect(page.getByRole('img', { name: 'Authentic CX83 Labs logo' })).toHaveAttribute('src', /logo-dark.svg/)
     await page.goto(host + '/how-it-works')
+    await page.locator('.cx83-technical-disclosure > summary').click()
     await expect(page.getByTestId('systems-map')).toBeVisible()
   })
 
   test('seven interactive layers keep Cat outside owner authority', async ({ page }) => {
     await page.goto(host + '/how-it-works')
+    await page.locator('.cx83-technical-disclosure > summary').click()
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Your work. Connected tools. Clear control.')
     await expect(page.getByTestId('systems-layer')).toHaveCount(7)
     const cat = page.getByRole('button', { name: /Visitor Cat/ })

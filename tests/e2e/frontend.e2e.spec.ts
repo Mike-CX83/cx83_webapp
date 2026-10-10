@@ -10,7 +10,7 @@ test.describe('Frontend', () => {
     await expect(page.locator('main .cx83-home > section')).toHaveCount(5)
     await expect(page.locator('main').getByRole('link', { name: /Start a conversation/ })).toHaveCount(2)
     await expect(page.locator('main a')).toHaveCount(5)
-    await expect(page.locator('#services').getByRole('link', { name: /Explore services/ })).toHaveAttribute('href', '/services')
+    await expect(page.locator('#connections').getByRole('link', { name: /Explore the connections/ })).toHaveAttribute('href', '/how-it-works#examples')
     await expect(page.getByText('Published projects will appear here. None are published yet.')).toHaveCount(0)
   })
 

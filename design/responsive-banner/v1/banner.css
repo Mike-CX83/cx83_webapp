@@ -1,0 +1,27 @@
+.cx83-responsive-banner {
+  position: relative;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+  width: 100%;
+  overflow: hidden;
+  background: #030b22;
+}
+.cx83-responsive-banner__atmosphere {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+.cx83-responsive-banner__original {
+  display: block;
+  width: min(100%, 720px);
+  height: auto;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 20%, #000 80%, transparent), linear-gradient(to bottom, transparent, #000 27%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, #000 20%, #000 80%, transparent), linear-gradient(to bottom, transparent, #000 27%);
+  mask-composite: intersect;
+}

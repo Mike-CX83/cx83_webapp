@@ -2,25 +2,38 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { PageHero, Section } from '@/components/site/Section'
+import { ConnectionExamples } from '@/components/site/ConnectionVisuals'
 import { SystemsMap } from '@/components/site/SystemsMap'
 import { Cx83FAQ } from '@/components/site/Cx83FAQ'
 
 export const metadata: Metadata = {
   title: 'How CX83 Works',
-  description: 'Explore connected owner AI, public Cat, authorized tools, staging checks and customer-controlled software.',
+  description: 'Explore examples of connected customer follow ups, marketing and operations, with your team in control.',
 }
 
 export default function HowItWorksPage() {
   return (
     <div className="cx83-run2-page">
-      <PageHero eyebrow="Inside the CX83 system" title="Your work. Connected tools. Clear control.">
-        <p>From an everyday request to real software operations, with each access boundary and publishing step explained.</p>
+      <PageHero eyebrow="Possibilities for your business" title="Your work. Connected tools. Clear control.">
+        <p>Start with the tools you already use. Connect the steps that slow you down, and keep your team in control of what happens next.</p>
       </PageHero>
+      <Section className="cx83-connection-examples" id="examples">
+        <p className="cx83-run2-eyebrow">A few ways it could work</p>
+        <h2 className="cx83-run2-section-title">Connect the work behind your business.</h2>
+        <p className="cx83-run2-lead">Customers, marketing and operations are three places to start. Each example brings familiar tools together around a useful result.</p>
+        <p className="cx83-connection-note">Example connections. We choose and test tools for each client.</p>
+        <ConnectionExamples />
+      </Section>
       <Section className="cx83-run2-map-section" id="system-map">
+        <details className="cx83-technical-disclosure">
+          <summary>Explore the technical details</summary>
+          <div className="cx83-technical-disclosure-content">
         <p className="cx83-run2-eyebrow">Explore the connected ecosystem</p>
         <h2 className="cx83-run2-section-title">See how CX83 connects the tools behind your business.</h2>
         <p className="cx83-run2-lead">Select a tool or choose a workflow to explore. Every branch shows how a request becomes action, what it can access and whether that connection has actually been demonstrated.</p>
         <SystemsMap />
+          </div>
+        </details>
       </Section>
       <Section className="cx83-run2-ownership" id="ownership">
         <div className="cx83-run2-ownership-grid">

@@ -1,0 +1,158 @@
+[
+  {
+    "banner": {
+      "bottom": 106.328125,
+      "height": 106.328125,
+      "left": 0,
+      "right": 320,
+      "top": 0,
+      "width": 320,
+      "x": 0,
+      "y": 0
+    },
+    "clientWidth": 320,
+    "loaded": true,
+    "original": {
+      "bottom": 106.328125,
+      "height": 106.328125,
+      "left": 0,
+      "right": 320,
+      "top": 0,
+      "width": 320,
+      "x": 0,
+      "y": 0
+    },
+    "scrollWidth": 320,
+    "width": 320
+  },
+  {
+    "banner": {
+      "bottom": 129.59375,
+      "height": 129.59375,
+      "left": 0,
+      "right": 390,
+      "top": 0,
+      "width": 390,
+      "x": 0,
+      "y": 0
+    },
+    "clientWidth": 390,
+    "loaded": true,
+    "original": {
+      "bottom": 129.59375,
+      "height": 129.59375,
+      "left": 0,
+      "right": 390,
+      "top": 0,
+      "width": 390,
+      "x": 0,
+      "y": 0
+    },
+    "scrollWidth": 390,
+    "width": 390
+  },
+  {
+    "banner": {
+      "bottom": 239.25,
+      "height": 239.25,
+      "left": 0,
+      "right": 768,
+      "top": 0,
+      "width": 768,
+      "x": 0,
+      "y": 0
+    },
+    "clientWidth": 768,
+    "loaded": true,
+    "original": {
+      "bottom": 239.25,
+      "height": 239.25,
+      "left": 24,
+      "right": 744,
+      "top": 0,
+      "width": 720,
+      "x": 24,
+      "y": 0
+    },
+    "scrollWidth": 768,
+    "width": 768
+  },
+  {
+    "banner": {
+      "bottom": 239.25,
+      "height": 239.25,
+      "left": 0,
+      "right": 1440,
+      "top": 0,
+      "width": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "clientWidth": 1440,
+    "loaded": true,
+    "original": {
+      "bottom": 239.25,
+      "height": 239.25,
+      "left": 360,
+      "right": 1080,
+      "top": 0,
+      "width": 720,
+      "x": 360,
+      "y": 0
+    },
+    "scrollWidth": 1440,
+    "width": 1440
+  },
+  {
+    "banner": {
+      "bottom": 239.25,
+      "height": 239.25,
+      "left": 0,
+      "right": 2560,
+      "top": 0,
+      "width": 2560,
+      "x": 0,
+      "y": 0
+    },
+    "clientWidth": 2560,
+    "loaded": true,
+    "original": {
+      "bottom": 239.25,
+      "height": 239.25,
+      "left": 920,
+      "right": 1640,
+      "top": 0,
+      "width": 720,
+      "x": 920,
+      "y": 0
+    },
+    "scrollWidth": 2560,
+    "width": 2560
+  },
+  {
+    "banner": {
+      "bottom": 239.25,
+      "height": 239.25,
+      "left": 0,
+      "right": 3440,
+      "top": 0,
+      "width": 3440,
+      "x": 0,
+      "y": 0
+    },
+    "clientWidth": 3440,
+    "loaded": true,
+    "original": {
+      "bottom": 239.25,
+      "height": 239.25,
+      "left": 1360,
+      "right": 2080,
+      "top": 0,
+      "width": 720,
+      "x": 1360,
+      "y": 0
+    },
+    "scrollWidth": 3440,
+    "width": 3440
+  }
+]

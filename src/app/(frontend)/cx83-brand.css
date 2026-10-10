@@ -69,11 +69,20 @@
 .cx83-home section[id] { scroll-margin-top: 5rem; }
 .cx83-home-hero { background: var(--cx83-midnight); color: var(--cx83-white); }
 .cx83-home-banner {
-  width: 100%; display: flex; align-items: center; justify-content: center;
-  background: radial-gradient(ellipse at 20% 50%, rgb(36 107 255 / 12%), transparent 55%), radial-gradient(ellipse at 80% 50%, rgb(130 71 245 / 12%), transparent 55%), #080e22;
+  position: relative; display: grid; place-items: center; isolation: isolate;
+  width: 100%; overflow: hidden; background: #030b22;
   border-bottom: 1px solid rgb(182 234 255 / 10%);
 }
-.cx83-home-banner img { width: min(100%, 45rem); height: auto; mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent); }
+.cx83-home-banner .cx83-home-banner-atmosphere {
+  z-index: -1; object-fit: fill; pointer-events: none;
+}
+.cx83-home-banner-original {
+  display: block; width: min(100%, 720px); height: auto;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 20%, #000 80%, transparent), linear-gradient(to bottom, transparent, #000 27%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, #000 20%, #000 80%, transparent), linear-gradient(to bottom, transparent, #000 27%);
+  mask-composite: intersect;
+}
 .cx83-home-hero-copy { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: center; gap: 3.5rem; padding-block: 1.75rem 4.5rem; }
 .cx83-home-eyebrow { color: var(--cx83-on-dark-accent); font-size: 0.72rem; font-weight: 600; line-height: 1.7; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.1rem; }
 .cx83-home-hero h1 { font-size: clamp(2.15rem, 4.6vw, 4rem); font-weight: 600; line-height: 1.08; letter-spacing: -0.045em; text-wrap: balance; max-width: 17ch; }
@@ -606,7 +615,6 @@ body { background: var(--cx83-background); color: var(--cx83-text); }
 .cx83-assistant-launcher, .cx83-cat-heading h2 { text-transform: none; }
 .cx83-cat-send, .cx83-cat-stop { min-height: 2.75rem; }
 @media (max-width: 47.99rem) {
-  .cx83-home-banner { min-height: 7rem; }
   .cx83-home-hero-copy { padding-block: 1.5rem 2rem; gap: 1.25rem; }
   .cx83-home-section-heading { margin-bottom: 1.25rem; }
   .cx83-home-service-card { padding: 1.1rem; }

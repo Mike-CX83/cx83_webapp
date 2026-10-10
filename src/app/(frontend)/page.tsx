@@ -3,12 +3,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { ContentNotice, Section } from '@/components/site/Section'
+import { ConnectionOverview } from '@/components/site/ConnectionVisuals'
 import { WebsiteDemoPlayer } from '@/components/site/WebsiteDemoPlayer'
 import { WebsiteProofPanel } from '@/components/site/WebsiteProofPanel'
 import { showcaseMediaReady } from '@/content/showcaseMedia'
 
 import './cx83-showcase.css'
-import { loadServices, loadSiteCopy } from '@/content/load'
+import { loadSiteCopy } from '@/content/load'
 
 export const dynamic = 'force-dynamic'
 
@@ -37,28 +38,29 @@ const process = [
 ]
 
 export default async function HomePage() {
-  const [site, services] = await Promise.all([loadSiteCopy(), loadServices()])
-  const summaries = [
-    { title: 'AI systems', slug: 'ai-setup-and-workflows' },
-    { title: 'Automation and business integration', slug: 'automation-and-integrations' },
-    { title: 'Software', slug: 'websites-and-business-tools' },
-  ].map((group) => ({
-    ...group,
-    service: services.items.find((service) => service.slug === group.slug),
-  }))
+  const site = await loadSiteCopy()
 
   return (
     <div className="cx83-home cx83-showcase-home" data-testid="cx83-homepage">
       <section className="cx83-home-hero" aria-labelledby="home-title">
         <div className="cx83-home-banner" aria-label="CX83 Labs banner">
           <Image
+            src="/brand/cx83-atmosphere-wide.webp"
+            alt=""
+            fill
+            sizes="100vw"
+            preload
+            className="cx83-home-banner-atmosphere"
+            data-testid="banner-atmosphere"
+          />
+          <Image
             src="/brand/cx83-labs-hero.avif"
             alt="CX83 Labs illuminated logo in electric blue, silver, and violet"
             width={960}
             height={319}
             sizes="(min-width: 768px) 720px, 100vw"
-            priority
-            className="block h-auto w-full"
+            preload
+            className="cx83-home-banner-original"
             data-testid="homepage-banner"
           />
         </div>
@@ -91,6 +93,12 @@ export default async function HomePage() {
               See how a request made in ChatGPT becomes an actual change to the CX83 website, using
               approved connections, real checks, and a verified staging result.
             </p>
+            <p className="cx83-demo-product">
+              <span>Software in development</span>
+              <Link href="/software/connected-websites">
+                Explore connected websites <span aria-hidden="true">↗</span>
+              </Link>
+            </p>
           </div>
           {showcaseMediaReady ? (
             <WebsiteDemoPlayer
@@ -106,40 +114,21 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <Section id="services">
+      <Section id="connections">
         <ContentNotice source={site.source} />
         <div className="cx83-home-section-heading">
           <div>
-            <p className="cx83-home-kicker">01 / What we do</p>
-            <h2>
-              Less friction.
-              <br />
-              More useful systems.
-            </h2>
+            <p className="cx83-home-kicker">01 / What we can connect</p>
+            <h2>Your tools. Working together.</h2>
           </div>
           <p>
-            AI is one part of the answer. The real work is making your information, applications,
-            and processes work together.
+            Explore a few ways AI, automation and software can connect the tools your business
+            already uses.
           </p>
         </div>
-        <ContentNotice source={services.source} />
-        <div className="cx83-home-card-grid">
-          {summaries.map(({ title, slug, service }, index) => (
-            <article className="cx83-home-service-card" key={slug} data-testid="service-card">
-              <span className="cx83-home-card-number" aria-hidden="true">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <h3>{title}</h3>
-              <p>
-                {service?.shortDescription ||
-                  services.items[index]?.shortDescription ||
-                  'Describe the workflow you want to improve, and we can define the right starting point together.'}
-              </p>
-            </article>
-          ))}
-        </div>
-        <Link className="cx83-home-text-link" href="/services">
-          Explore services <span aria-hidden="true">↗</span>
+        <ConnectionOverview />
+        <Link className="cx83-home-text-link" href="/how-it-works#examples">
+          Explore the connections <span aria-hidden="true">↗</span>
         </Link>
       </Section>
 
@@ -169,9 +158,6 @@ export default async function HomePage() {
             </li>
           ))}
         </ol>
-        <Link className="cx83-home-text-link" href="/how-it-works">
-          How it works <span aria-hidden="true">↗</span>
-        </Link>
       </Section>
 
       <Section id="start">
