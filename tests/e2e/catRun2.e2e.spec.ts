@@ -44,6 +44,20 @@ test.describe('Run 2 connected systems and proof', () => {
     await expect(page.getByRole('link', { name: /See the real site workflow/ })).toHaveAttribute('href', '/how-it-works#real-proof')
   })
 
+
+  test('Studio step numbers stay on one line and the authentic logo loads at mobile width', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 850 })
+    await page.goto(host + '/software/client-brand-studio')
+    const numbers = page.locator('.cx83-studio-steps strong')
+    await expect(numbers).toHaveCount(3)
+    for (const number of await numbers.all()) {
+      const height = await number.evaluate((element) => element.getBoundingClientRect().height)
+      expect(height, 'Studio step number must not wrap').toBeLessThan(25)
+    }
+    const logo = page.getByRole('img', { name: 'Authentic CX83 Labs logo' })
+    await expect.poll(() => logo.evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth > 0)).toBe(true)
+  })
+
   for (const width of [320, 390, 768, 1440]) {
     test('map and product fit ' + width + 'px viewport', async ({ page }) => {
       await page.setViewportSize({ width, height: 900 })
