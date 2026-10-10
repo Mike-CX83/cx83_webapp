@@ -35,7 +35,7 @@ test.describe('Connected Ecosystem showcase', () => {
     await expect(workflow).toHaveAttribute('aria-pressed', 'true')
     await expect(page.getByTestId('ecosystem-step')).toContainText('Illustrative or developing route')
     await expect(page.getByText('Notification automation and email delivery remain unverified.')).toBeVisible()
-    await page.getByRole('button', { name: 'Visitor CAT' }).click()
+    await page.getByTestId('systems-layer').filter({ hasText: 'Visitor CAT' }).click()
     await expect(page.getByTestId('systems-active-detail')).toContainText('Cannot edit source')
   })
 
