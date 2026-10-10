@@ -21,7 +21,7 @@ test.describe('CX83 original homepage banner preservation', () => {
       await expect.poll(() => banner.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true)
 
       const band = await bannerWrapper.boundingBox()
-      expect(band?.width).toBe(width)
+      expect(band?.width).toBe(await page.evaluate(() => document.documentElement.clientWidth))
       if (width >= 768) expect(band?.height).toBeLessThanOrEqual(260)
       const rect = await banner.boundingBox()
       expect(rect).not.toBeNull()

@@ -112,7 +112,6 @@ function AssistantSession({
       {open ? (
         <section
           aria-label="Cat, the CX83 Labs AI assistant"
-          aria-labelledby="cx83-assistant-title"
           aria-modal="false"
           className="cx83-assistant-panel"
           id="cx83-assistant"
