@@ -35,7 +35,7 @@ test.describe('Run 1 / Catalyst X83 visual identity and CAT', () => {
     await expect(dialog.getByRole('link', { name: /Contact CX83/ })).toHaveAttribute('href', '/contact')
     await page.keyboard.press('Escape')
     await expect(dialog).toBeHidden()
-    await expect(page.getByRole('button', { name: 'Ask CAT', exact: true })).toBeFocused()
+    await expect(page.locator('.cx83-assistant-launcher')).toBeFocused()
   })
 
   for (const width of [320, 390, 768]) {
@@ -67,5 +67,5 @@ test.describe('Run 1 / Catalyst X83 visual identity and CAT', () => {
       await page.keyboard.press('Escape')
       await expect(dialog).toBeHidden()
     })
-  })
+  }
 })
