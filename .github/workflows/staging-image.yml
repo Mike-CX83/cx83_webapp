@@ -13,9 +13,11 @@ on:
     branches:
       - staging-host
 
+# A newer PR commit may cancel only its older PR checks. Never cancel a staging
+# push workflow: that can interrupt image upload, deployment, or rollback.
 concurrency:
   group: cx83-staging-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
   contents: read
