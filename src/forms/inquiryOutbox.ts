@@ -5,13 +5,12 @@
  */
 import { createHash } from 'node:crypto'
 import type { Payload } from 'payload'
+import type { FormSubmission } from '@/payload-types'
+import { gmailDeliveryConfigured } from '@/forms/inquiryMailer'
 import type { InquiryInput } from '@/forms/inquiry'
 import { sendInquiryEmail } from '@/forms/inquiryMailer'
 
-type StoredInquiry = Awaited<ReturnType<Payload['create']>> & {
-  id: number | string
-  submissionData?: { field: string; value: string }[] | null
-}
+type StoredInquiry = FormSubmission
 
 type Entry = { field: string; value: string }
 
@@ -136,11 +135,21 @@ export async function dispatchInquiry(
   const attemptCount = Number(fieldValue(submission, 'cx83-delivery-attempts') || 0)
   if (attemptCount >= 3) return 'skipped'
 
+  if (!gmailDeliveryConfigured()) {
+    await payload.update({
+      collection: 'form-submissions',
+      id: submission.id,
+      overrideAccess: true,
+      data: { submissionData: updateEntries(submission, { 'cx83-delivery-status': 'unconfigured' }) },
+    })
+    return 'unconfigured'
+  }
+
   // Persist the delivery claim before any external call. Never automatically
   // re-send a "sending" row after a crash; reconcile it against Sent first.
   const claimed = await payload.update({
     collection: 'form-submissions',
-    id: submission.id as number,
+    id: submission.id,
     overrideAccess: true,
     data: { submissionData: updateEntries(submission, {
       'cx83-delivery-status': 'sending',

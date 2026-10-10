@@ -69,7 +69,7 @@ export async function POST(req: Request) {
       }
       const latest = duplicate
         ? submission
-        : (await payload.findByID({ collection: 'form-submissions', id: submission.id as number, overrideAccess: true }))
+        : (await payload.findByID({ collection: 'form-submissions', id: submission.id, overrideAccess: true }))
       return Response.json({
         ok: true,
         saved: true,
