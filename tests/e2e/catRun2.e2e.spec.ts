@@ -10,6 +10,7 @@ test.describe('Run 2 connected systems and proof', () => {
     await expect(page.getByRole('link', { name: /Read the evidence record/ })).toHaveAttribute('href', '/how-it-works#real-proof')
     await expect(page.getByTestId('systems-map')).toBeVisible()
     await expect(page.getByTestId('brand-studio-spotlight')).toContainText('0.8.4')
+    await expect(page.getByRole('img', { name: 'Authentic CX83 Labs logo' })).toHaveAttribute('src', /logo-dark.svg/)
     await expect(page.getByRole('link', { name: /Explore the system in detail/ })).toHaveAttribute('href', '/how-it-works')
   })
 

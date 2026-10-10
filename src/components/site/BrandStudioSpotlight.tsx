@@ -19,7 +19,7 @@ export function BrandStudioSpotlight() {
       <div className="cx83-studio-artwork" aria-label="Authentic CX83 source symbol and color roles">
         <div className="cx83-studio-artwork-inner">
           <Image src="/brand/symbol-showcase.svg" alt="Original CX83 geometric brand symbol" width={160} height={160} />
-          <div><Image className="cx83-studio-logo" src="/brand/logo-light.svg" alt="Authentic CX83 Labs logo" width={1014} height={288} /><span>Source brand identity, not a generated replacement</span></div>
+          <div><Image className="cx83-studio-logo" src="/brand/logo-dark.svg" alt="Authentic CX83 Labs logo" width={1014} height={288} /><span>Source brand identity, not a generated replacement</span></div>
         </div>
         <div className="cx83-studio-swatch-row" aria-hidden="true"><span /><span /><span /><span /></div>
         <p className="cx83-studio-artwork-note">Authentic CX83 source artwork. Editorial illustration, not a Studio screenshot or approved customer export.</p>
