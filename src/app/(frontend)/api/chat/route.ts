@@ -1,32 +1,15 @@
-import { convertToModelMessages, createUIMessageStream, createUIMessageStreamResponse, streamText, type UIMessage } from 'ai'
+import { convertToModelMessages, streamText, type UIMessage } from 'ai'
 
 import { buildApprovedKnowledge, buildSystemPrompt, getAssistantRuntimeConfig } from '@/ai/assistant'
 import { getLanguageModel } from '@/ai/model'
 
 const historyLimit = 12
 
-function mockResponse(text: string) {
-  const stream = createUIMessageStream({
-    execute({ writer }) {
-      const id = 'mock'
-      writer.write({ type: 'start' })
-      writer.write({ type: 'start-step' })
-      writer.write({ type: 'text-start', id })
-      writer.write({ type: 'text-delta', id, delta: text })
-      writer.write({ type: 'text-end', id })
-      writer.write({ type: 'finish-step' })
-      writer.write({ type: 'finish', finishReason: 'stop' })
-    },
-  })
-
-  return createUIMessageStreamResponse({ stream })
-}
-
 export async function POST(req: Request) {
   const config = await getAssistantRuntimeConfig()
 
   if (!config.enabled) {
-    return mockResponse('Mock response. The CX83 assistant is turned off. This is not a live model reply.')
+    return Response.json({ error: 'CAT is currently unavailable. Please use the contact form.' }, { status: 503 })
   }
 
   let body: { messages?: UIMessage[] } = {}
@@ -39,7 +22,7 @@ export async function POST(req: Request) {
   const messages = Array.isArray(body.messages) ? body.messages.slice(-historyLimit) : []
 
   if (config.configurationError) {
-    return Response.json({ error: config.configurationError }, { status: 503 })
+    return Response.json({ error: 'CAT is temporarily unavailable. Please use the contact form.' }, { status: 503 })
   }
 
   try {

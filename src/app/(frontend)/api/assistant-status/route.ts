@@ -5,9 +5,6 @@ export async function GET() {
 
   return Response.json({
     enabled: config.enabled,
-    provider: config.provider,
-    model: config.model,
     configured: config.configured,
-    configurationError: config.configurationError,
   })
 }
