@@ -20,6 +20,10 @@ This is the durable brief for ChatGPT, Cursor, and other authorized CX83 website
 
 Do not convert a draft, preference, screenshot, prototype, or passing test into a product release or a performance claim.
 
+### October 9 owner update: Catalyst X83 and CAT
+
+The owner has selected **Catalyst X83** as the expanded name behind CX83, and **CAT** as the public assistant name. The detailed creative direction, actual original architecture infographic source, founder story copy, dark-first visual direction, protected original homepage banner, three consolidated implementation runs and build-through-staging instructions are in [CX83 CAT Website Build Blueprint](./CX83_CAT_WEBSITE_BUILD_BLUEPRINT_2026_10_09.md). **Read that document before planning future website enhancements.** Its three grouped RUN sections supersede suggestions to break the same website enhancements into many small phases. The original full-width homepage banner must remain unchanged. This existing context remains the authority for verified repository history and prior implementation details.
+
 ## 1. What CX83 Labs is
 
 **Brand name:** CX83 Labs  
