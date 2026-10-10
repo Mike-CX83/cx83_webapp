@@ -65,6 +65,8 @@ export function InquiryForm() {
   }
 
   function update(name: FieldName, value: string) {
+    // A changed inquiry is a new submission; a retry without edits keeps its old ID.
+    requestId.current = null
     setValues((current) => ({ ...current, [name]: value }))
     if (errors[name]) setErrors((current) => ({ ...current, [name]: undefined }))
   }
