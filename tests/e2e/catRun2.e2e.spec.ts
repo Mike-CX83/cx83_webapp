@@ -44,6 +44,20 @@ test.describe('Run 2 connected systems and proof', () => {
     await expect(page.getByRole('link', { name: /See the real site workflow/ })).toHaveAttribute('href', '/how-it-works#real-proof')
   })
 
+  test('Brand Studio step indices remain single-line on narrow screens', async ({ page }) => {
+    for (const width of [320, 390]) {
+      await page.setViewportSize({ width, height: 900 })
+      await page.goto(host + '/software/client-brand-studio')
+      const indices = page.locator('.cx83-studio-steps strong')
+      await expect(indices).toHaveText(['01', '02', '03'])
+      const whiteSpace = await indices.evaluateAll((nodes) =>
+        nodes.map((node) => window.getComputedStyle(node).whiteSpace),
+      )
+      expect(whiteSpace).toEqual(['nowrap', 'nowrap', 'nowrap'])
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width)
+    }
+  })
+
   for (const width of [320, 390, 768, 1440]) {
     test('map and product fit ' + width + 'px viewport', async ({ page }) => {
       await page.setViewportSize({ width, height: 900 })
