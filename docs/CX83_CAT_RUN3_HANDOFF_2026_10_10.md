@@ -1,3 +1,32 @@
+# Visual integration delivery checkpoint, October 10, 2026
+
+STATUS: Complete and independently verified on protected staging. No public production release.
+
+APPLICATION COMMIT: 68e37c49c0424c8bc44b2a14e26417e632df7e7c, merged PR #35. Verified running container CX83_DEPLOYED_SHA and server checkout both match this exact commit. A later documentation receipt SHA is not this verified application deployment.
+
+COMPLETED:
+* Installed the approved responsive banner using a full width blue/violet atmosphere behind the unchanged original AVIF. Original blob remains 3afb58548ceed0dab3c814991d5894ce09c16d5a, including an independent check of the file delivered by staging.
+* Replaced homepage service cards with the approved overview and one Explore the connections link to /how-it-works#examples. Homepage remains five sections. Kept the real video, added Software in development context and a working link to /software/connected-websites.
+* Added Customers, Marketing and Operations visuals to How it works with readable live text on phones/tablets. The existing interactive map remains available through a keyboard accessible technical disclosure. Ownership, historical evidence, FAQ and visitor permissions remain intact.
+* Original PNGs and banner package remain in design/connection-visuals/v1 and design/responsive-banner/v1. Optimized derivatives are in public/connections and public/brand/cx83-atmosphere-wide.webp. Current styling is in cx83-brand.css and cx83-connections.css; diagram text lives in src/components/site/ConnectionVisuals.tsx.
+
+VERIFIED:
+* Local typecheck, lint, 43 integration tests and production build passed. Both the PR gate and the merged staging gate passed typecheck, lint, 43 integration tests, 80 browser tests and build with configured Postgres. PR gate: https://github.com/Mike-CX83/cx83_webapp/actions/runs/38089884986. Successful deployment: https://github.com/Mike-CX83/cx83_webapp/actions/runs/38090589866.
+* Real Chrome desktop viewport emulation on both local production build and authenticated staging at 320, 390, 768, 1440, 2560 and 3440px. Inner widths matched requests; scrollbar/client widths recorded separately. No horizontal overflow, loaded imagery, proportional original logo and full width atmosphere at every width. Desktop, phone, tablet and ultrawide screenshots inspected. These are Chrome emulation checks, not physical-device or Safari claims.
+* Live overview link reached the examples anchor; Software link reached Connected Website Platform with development status. Technical disclosure opened and closed using Enter. Mobile navigation returned Home; Cat opened with Assistant configured and closed; the contact link reached the actual visible form. No inquiry submitted and no new external email or model conversation initiated for this visual task.
+* Live video played through its 49.411995 second duration; optional English captions remained disabled by default. Transcript disclosure and its historical evidence link work. Video, poster and caption endpoints returned 200.
+* Independent HTTP checks: unauthenticated homepage 401; authenticated homepage, How it works, Connected websites, Contact, original banner, atmosphere, all four diagrams and representative optimized images returned 200. The independent probe initially used the lowercase username from repository documentation and got 401; corrected to the live script's uppercase CX83 username and all authenticated checks passed. No credential was changed or printed.
+* Published hero copy, process steps, closing copy and video source/poster/caption paths compare exactly with the predeployment browser capture. Original banner and video source files were not modified. Local browser error/warning log was empty.
+
+EVIDENCE: Mike's local CX83 project deliverables/CX83_Visual_Integration_20261010 contains local and staging screenshots for both pages and six widths, responsive-metrics JSON, exact copy comparisons, independent live HTTP/commit proof and delivery status. Source and approved assets are preserved in GitHub.
+
+EXISTING LIMITATIONS: Video audio/embedded footage graphics and server inquiry-mail OAuth remain separate follow-ups. The repository deploy-incoming.sh health-check template still spells the gate username lowercase while the live installed script uses uppercase CX83; runtime deployment succeeded and that script was not replaced in this visual task. The staging documentation now records the correct live casing. No remaining blocker for this visual integration.
+
+NEXT: Mike reviews https://staging.cx83labs.com/ and https://staging.cx83labs.com/how-it-works#examples. Further visual refinements can be scoped from that deployed result.
+RECOVERY: Revert the scoped PR #35 merge through the protected staging workflow, preserving unrelated changes. Preintegration application baseline: 1d791ebfbb745053a1c3e612f22142021fe1b769. Rollback was not performed during this task.
+
+---
+
 # Visual integration implementation checkpoint, October 10, 2026
 
 STATUS: Implemented locally. Protected staging validation and deployment pending.

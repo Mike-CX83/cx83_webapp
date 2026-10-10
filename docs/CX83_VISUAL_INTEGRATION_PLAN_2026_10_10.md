@@ -1,6 +1,6 @@
 # CX83 website visual integration plan
 
-October 10, 2026. Status: proposed implementation sequence. Mike has approved the banner appearance and requested this plan. No website integration or deployment is performed by this document.
+October 10, 2026. Status: implemented and independently verified on protected staging at application commit 68e37c49c0424c8bc44b2a14e26417e632df7e7c through PR #35. The plan below records the approved implementation direction. See CX83_CAT_RUN3_HANDOFF_2026_10_10.md for validation and delivery evidence.
 
 ## Page placement
 
@@ -59,4 +59,4 @@ Inspected design branch HEAD: `0e68d7468647b3937d07dbe5412836a6eb7e2fea`.
 
 Remote staging branch observed during planning: `1d791ebfbb745053a1c3e612f22142021fe1b769`. This is repository state, not a fresh claim about the running deployment.
 
-Next action: implement this page arrangement when Mike requests the website update, starting with the approved banner and homepage overview.
+Next action: Mike reviews the deployed homepage and How it works examples. Further refinements begin from the verified result recorded in the handoff.

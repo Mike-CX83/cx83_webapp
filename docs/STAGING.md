@@ -61,7 +61,7 @@ These values are already on the server. A normal image deploy does not rewrite t
 
 DNS for `staging.cx83labs.com` is an unproxied A record to `157.245.247.90` in the Cloudflare zone `cx83labs.com`. Leave it DNS-only so Traefik's existing Let's Encrypt HTTP challenge can issue the certificate. Do not proxy this name through Cloudflare unless the origin certificate setup is changed on purpose.
 
-The public site asks for the staging gate user `cx83` and the password in `staging-gate.pass`. Payload's existing owner account is unchanged. The database already has the website tables. Do not restore it as part of an image deploy.
+The public site asks for the staging gate user `CX83` and the password in `staging-gate.pass`. Payload's existing owner account is unchanged. The database already has the website tables. Do not restore it as part of an image deploy.
 
 The checkout at `/opt/cx83-webapp/repo` has its dependencies installed so repository checks can run the same commands as CI. One tunnel client is already running for tunnel `tunnel_6ac83333598c81919c842108753202e9`. The server profile points MCP at `http://cx83-webapp:3000/api/mcp` and injects the owner bearer with `extra_headers`. Do not start a second client for that tunnel.
 
@@ -98,3 +98,5 @@ Each owner tool has a boolean column on `payload_mcp_api_keys`. Staging does not
 ## Move this later
 
 To place the same staging stack on another host, copy `/opt/cx83-webapp`, the Traefik file, and the cron entry. Point DNS at the new address, load the image, and start the compose project. Keep the tunnel profile with the containers so ChatGPT does not depend on a laptop.
+
+Gate username casing verified October 10, 2026: the live installed deployment script uses `CX83`. The repository health-check template currently uses lowercase `cx83`; reconcile that template with the live script before reinstalling it. No gate credential or deployment script was changed during visual integration.
