@@ -157,7 +157,7 @@ export async function dispatchInquiry(
     }) },
   })
   const result = await sendInquiryEmail(data, submission.id)
-  const state = result.state === 'failed' && result.reason.includes('could not be confirmed')
+  const state = result.state === 'failed' && (result.reason.includes('could not be confirmed') || result.reason.includes('no acceptance identifier'))
     ? 'uncertain'
     : result.state
 
