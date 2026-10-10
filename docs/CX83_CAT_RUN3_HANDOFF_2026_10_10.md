@@ -1,3 +1,13 @@
+# Responsive banner asset checkpoint, October 10, 2026
+
+Mike requested a banner with the same look that adapts across screen sizes, saved before website integration. Created design/responsive-banner/v1 with an image_gen background extension, unchanged original AVIF foreground, reusable HTML/CSS, exact prompt, source hashes and static size exports.
+
+Verified the original AVIF bytes match the existing banner. Real Chrome checks at 320, 390, 768, 1440, 2560 and 3440px showed loaded artwork, complete proportional logo, full available width and no horizontal overflow. The new blue/violet atmosphere continues across wide screens. No live homepage or deployed assets changed.
+
+NEXT: Mike reviews the assembled banner, then authorizes or requests its incorporation into the homepage. Detailed usage and evidence are in design/responsive-banner/v1/README.md.
+
+---
+
 # Connection visual asset checkpoint, October 10, 2026
 
 Mike positively reviewed the four generated connection visuals and requested durable GitHub storage. Saved under design/connection-visuals/v1 on the design/connection-visuals-20261010 branch. PNG hashes checked against the creation manifest. Original homepage application remains unchanged.
