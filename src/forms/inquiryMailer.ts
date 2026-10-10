@@ -79,19 +79,10 @@ export async function sendInquiryEmail(
     const credentials = (await token.json()) as { access_token?: string }
     if (!credentials.access_token) return { state: 'failed', reason: 'Google Workspace did not issue an access token.' }
 
-    // Prove the refresh grant is for the authorized business mailbox.
-    // A configured recipient alone does not prove who owns the OAuth token.
-    const profileResponse = await fetcher('https://gmail.googleapis.com/gmail/v1/users/me/profile', {
-      headers: { Authorization: 'Bearer ' + credentials.access_token },
-      signal: AbortSignal.timeout(9000),
-    })
-    if (!profileResponse.ok) return { state: 'failed', reason: 'The Google Workspace sender identity could not be verified.' }
-    const profile = (await profileResponse.json()) as { emailAddress?: string }
-    if (profile.emailAddress?.toLowerCase() !== verifiedInquiryMailbox) {
-      return { state: 'failed', reason: 'The Google Workspace sender is not the authorized CX83 mailbox.' }
-    }
-
-    const response = await fetcher('https://gmail.googleapis.com/gmail/v1/users/me/messages/send', {
+    // Address the verified mailbox explicitly. Gmail's send endpoint authorizes
+    // the named userId against the OAuth subject, so gmail.send suffices.
+    // Avoid users.getProfile: it requires extra restricted read scopes.
+    const response = await fetcher('https://gmail.googleapis.com/gmail/v1/users/' + encodeURIComponent(verifiedInquiryMailbox) + '/messages/send', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + credentials.access_token },
       body: JSON.stringify({ raw: encodedMessage(data, recordId) }),

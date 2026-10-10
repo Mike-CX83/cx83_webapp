@@ -22,7 +22,7 @@ Client retries with the same request ID are deduplicated among the latest 200 su
 
 ## Required server secret setup before outbound email can be verified
 
-1. An authorized Google Workspace app must have the Gmail send OAuth scope for `mike@cx83labs.com`. ChatGPT's connected Gmail account **does not** expose or authorize reusable server OAuth credentials.
+1. An authorized Google Workspace app must have the Gmail **send-only** OAuth scope (`https://www.googleapis.com/auth/gmail.send`) for `mike@cx83labs.com`. The adapter calls the explicitly named `users/mike@cx83labs.com/messages/send` endpoint, which rejects access that the OAuth principal does not have; no extra Gmail profile/read permissions are needed. See Google's [Gmail users.messages.send reference](https://developers.google.com/workspace/gmail/api/reference/rest/v1/users.messages/send). ChatGPT's connected Gmail account **does not** expose or authorize reusable server OAuth credentials.
 2. A server administrator must add only to `/opt/cx83-webapp/.env`:
    ```
 CX83_INQUIRY_TO=mike@cx83labs.com
