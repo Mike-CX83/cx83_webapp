@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 
 import { PageHero, Section } from '@/components/site/Section'
 import { getSoftwareProduct, softwareProducts } from '@/content/softwareCatalog'
+import { BrandStudioSpotlight } from '@/components/site/BrandStudioSpotlight'
 
 import '../software.css'
 
@@ -49,6 +50,28 @@ export default async function SoftwareDetailPage({ params }: Args) {
           </aside>
         </div>
       </Section>
+
+      {product.slug === 'client-brand-studio' ? (
+        <Section className="cx83-run2-product-story">
+          <p className="cx83-run2-eyebrow">Actual development stage</p>
+          <h2 className="cx83-run2-section-title">A working draft engine, still awaiting release acceptance.</h2>
+          <p className="cx83-run2-lead">Development build 0.8.4 produces draft materials from supplied artwork and a saved brief. Human visual approval, full Office compatibility and customer packaging still need acceptance.</p>
+          <BrandStudioSpotlight />
+        </Section>
+      ) : (
+        <Section className="cx83-run2-product-story">
+          <p className="cx83-run2-eyebrow">Actual example: this CX83 website</p>
+          <h2 className="cx83-run2-section-title">A change request became real, tested pages.</h2>
+          <p className="cx83-run2-lead">This existing website uses connected owner tools. The October 9 update changed the actual brand presentation, public CAT assistant and About page, then passed checks before staging publication.</p>
+          <div className="cx83-run2-verified-path">
+            <div><span>01 / Request</span><h3>Describe the change</h3><p>Keep the original banner and improve the identity and visitor interface.</p></div>
+            <div><span>02 / Verify</span><h3>Run the tests</h3><p>29 integration and 46 browser tests passed at the verified Run 1 gate.</p></div>
+            <div><span>03 / Deploy</span><h3>Publish to staging</h3><p>Application commit cdae3eba passed the staging health and password gate.</p></div>
+          </div>
+          <Link className="cx83-run2-text-link" href="/how-it-works#real-proof">See the real site workflow <span aria-hidden="true">↗</span></Link>
+          <p className="cx83-run2-caveat">This is first-party site evidence, not a released installer or one-click commercial setup.</p>
+        </Section>
+      )}
       <Section className="cx83-software-features">
         <p className="cx83-software-eyebrow">What we are working toward</p>
         <h2>Useful features, not complexity for its own sake.</h2>

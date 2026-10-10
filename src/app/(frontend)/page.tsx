@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { ContentNotice, Section } from '@/components/site/Section'
 import { WebsiteDemoPlayer } from '@/components/site/WebsiteDemoPlayer'
 import { WebsiteProofPanel } from '@/components/site/WebsiteProofPanel'
+import { SystemsMap } from '@/components/site/SystemsMap'
+import { BrandStudioSpotlight } from '@/components/site/BrandStudioSpotlight'
 import { showcaseMediaReady } from '@/content/showcaseMedia'
 
 import './cx83-showcase.css'
@@ -137,6 +139,35 @@ export default async function HomePage() {
         </ol>
       </Section>
 
+      <Section className="cx83-systems-home" id="system-map">
+        <p className="cx83-run2-eyebrow">Inside the CX83 system</p>
+        <h2 className="cx83-run2-section-title">See where conversation becomes real work.</h2>
+        <p className="cx83-run2-lead">An AI with owner permissions can improve software. The separate CAT assistant helps visitors without editing access or private records.</p>
+        <SystemsMap />
+        <Link className="cx83-run2-text-link" href="/how-it-works">Explore the system in detail <span aria-hidden="true">↗</span></Link>
+      </Section>
+
+      <Section className="cx83-run2-ownership" id="ownership">
+        <div className="cx83-run2-ownership-grid">
+          <div>
+            <p className="cx83-run2-eyebrow">Software you can keep</p>
+            <h2 className="cx83-run2-section-title">Your software. Your AI. Your control.</h2>
+            <p>We are working toward software businesses can operate on supported customer-controlled hosting, connect to their approved AI and keep using under the license they purchase. Updates and managed services are separate choices.</p>
+            <Link className="cx83-run2-text-link" href="/how-it-works#ownership">Understand ownership and costs <span aria-hidden="true">↗</span></Link>
+          </div>
+          <div className="cx83-run2-control-facts">
+            <h3>What stays under your control?</h3>
+            <dl>
+              <div><dt>Software rights</dt><dd>Specific rights belong to the approved product license.</dd></div>
+              <div><dt>Hosting and records</dt><dd>Customer-controlled where the release supports it.</dd></div>
+              <div><dt>Connected AI</dt><dd>Only the owner-approved tools and provider accounts.</dd></div>
+              <div><dt>Ongoing costs</dt><dd>Hosting, API usage, upgrades and optional CX83 support are distinct.</dd></div>
+            </dl>
+          </div>
+        </div>
+        <p className="cx83-run2-caveat">This is a product goal, not an available perpetual license or a promise of free third-party services. Customer installers remain in development.</p>
+      </Section>
+
       <Section id="services">
         <ContentNotice source={site.source} />
         <div className="cx83-home-section-heading">
@@ -234,6 +265,7 @@ export default async function HomePage() {
             </article>
           ))}
         </div>
+        <BrandStudioSpotlight />
       </Section>
 
       {projects.items.length ? (

@@ -1,31 +1,33 @@
 import Link from 'next/link'
 
-/**
- * Authentic, text-based proof while the source video package is not available.
- * This refers to changes documented in CX83's October 9 staging PR and CI.
- */
+/** Verified first-party staging record, not invented footage or client results. */
 export function WebsiteProofPanel() {
   return (
     <figure className="cx83-showcase-player" id="website-proof" data-testid="cx83-proof-panel">
       <div className="cx83-showcase-proof-feature">
-        <p className="cx83-showcase-kicker">Built on the website you are viewing</p>
-        <h2>One request. Real website updates.</h2>
+        <p className="cx83-showcase-kicker">A real change to the site you are viewing</p>
+        <h2>Before. Request. After.</h2>
         <p className="cx83-showcase-proof-intro">
-          CX83&apos;s own pages were updated through an AI connected to the actual application.
-          The result is the site you can explore here.
+          CX83 updated its own real website through a connected, authorized AI workflow. This is a source-backed record, not a simulated marketing animation.
         </p>
         <ol className="cx83-showcase-proof-stages">
-          <li><span>01 / THE REQUEST</span><p>Bring the real CX83 identity and interactions together across the website.</p></li>
-          <li><span>02 / THE CHANGE</span><p>Apply shared logos, page layouts, working links, and responsive navigation.</p></li>
-          <li><span>03 / THE RESULT</span><p>Run automated checks and publish the verified update to the staging website.</p></li>
+          <li><span>01 / BEFORE</span><p>The interior pages and assistant needed consistent CX83 identity, navigation and release language.</p></li>
+          <li><span>02 / REQUEST</span><p>Preserve the original homepage banner, unify the page design and create the CAT visitor experience.</p></li>
+          <li><span>03 / AFTER</span><p>The actual website changed, passed automated checks and deployed to protected staging with its original banner intact.</p></li>
         </ol>
-        <Link href="/services" className="cx83-showcase-proof-explore">
-          Explore the updated website <span aria-hidden="true">↗</span>
-        </Link>
+        <div className="cx83-run2-proof-metrics">
+          <span><strong>29</strong> integration tests</span>
+          <span><strong>46</strong> browser tests</span>
+          <span><strong>October 9, 2026</strong> verified staging</span>
+        </div>
+        <div className="cx83-run2-proof-actions">
+          <Link href="/services" className="cx83-showcase-proof-explore">Explore the updated website <span aria-hidden="true">↗</span></Link>
+          <Link href="/how-it-works#real-proof" className="cx83-showcase-proof-explore">Read the evidence record <span aria-hidden="true">↗</span></Link>
+        </div>
       </div>
       <figcaption className="cx83-showcase-player-caption">
-        <span className="cx83-showcase-player-caption-label">CX83 real build</span>
-        Website update documented October 9, 2026. Video walkthrough to follow.
+        <span className="cx83-showcase-player-caption-label">Source-backed proof</span>
+        First-party staging verification. The original walkthrough video still awaits actual source files and captions.
       </figcaption>
     </figure>
   )
