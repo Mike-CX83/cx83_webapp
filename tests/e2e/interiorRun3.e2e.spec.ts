@@ -43,7 +43,22 @@ test.describe('Interior Run 3', () => {
         await page.evaluate(() => document.fonts.ready)
         await expect(page.locator('main h1')).toHaveCount(1)
         if (route === '/about') {
-          await expect(page.locator('[data-testid="approved-about-story"] p')).toHaveText(approved)
+          const story = page.locator('[data-testid="approved-about-story"]')
+          await expect(story.locator('p')).toHaveCount(5)
+          expect((await story.locator('p').allTextContents()).join(' ').replace(/\s+/g, ' ').trim()).toBe(approved.join(' ').replace(/\s+/g, ' ').trim())
+          await expect(story.locator('p').first()).toHaveCSS('text-align', 'justify')
+          expect(await story.locator('p').first().evaluate((p) => parseFloat(getComputedStyle(p).textIndent))).toBeGreaterThan(0)
+          const symbol = page.locator('.cx83-about-symbol')
+          await expect(symbol).toHaveAttribute('src', '/brand/symbol-showcase.svg')
+          await expect.poll(() => symbol.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true)
+          if (viewport.width >= 1024) {
+            const column = await page.locator('.cx83-about-brand').boundingBox()
+            const mark = await symbol.boundingBox()
+            expect(column).not.toBeNull()
+            expect(mark).not.toBeNull()
+            expect(Math.abs((column!.x + column!.width / 2) - (mark!.x + mark!.width / 2))).toBeLessThan(2)
+            expect(Math.abs((column!.y + column!.height / 2) - (mark!.y + mark!.height / 2))).toBeLessThan(2)
+          }
           await expect(page.getByRole('heading', { level: 1 })).toHaveText('About CX83 Labs')
           await expect(page).toHaveTitle('About CX83 Labs')
           await expect(page.getByRole('link', { name: 'Start a conversation' })).toHaveAttribute('href', '/contact')
