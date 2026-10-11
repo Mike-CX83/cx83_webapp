@@ -1,4 +1,73 @@
 PROJECT: CX83 Labs website, `Mike-CX83/cx83_webapp`.
+RUN: Interior Run 2.
+STATUS: DEPLOYED TO PROTECTED STAGING, AUTOMATED CHECKS PASSED, RUNTIME VERIFIED. Owner requested immediate deployment without additional checks or stops. Full visual acceptance is limited as recorded below.
+HEAD: Starting Run 1 base `dd12c886d4ff183a29c447d19fa70cd7869b7669`; tested source `027be8bf15442342b552a592e1722722330078d2`; final PR branch receipt `21528840566344dde848660e577a46727188163a`; merged and independently observed running application and clean server checkout `64c2d227cae50a829343251e0414235b6e27ccdb`. This subsequent documentation receipt is distinct from the deployed runtime.
+
+# Final staging release receipt, October 11, 2026, 12:40 AM CDT
+
+## COMPLETED
+
+Resumed existing PR 38 and saved work. Prior repairs remain unchanged. Confirmed successful PR workflow 38113452641 and that the later branch commit changed documentation only. Mike explicitly instructed continuation to deployment without additional checks or stops after the prior screenshot transfer blocker. Merged PR 38 only into staging-host and allowed the existing protected staging pipeline to finish without restarting it. No main merge or production deployment occurred.
+
+[Staging push workflow 38114564636](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38114564636) completed successfully for exact merged commit `64c2d227cae50a829343251e0414235b6e27ccdb`. Check job 114396782164, image job 114398612263 and deploy job 114399290844 all succeeded.
+
+## VALIDATION AND DEPLOYMENT EVIDENCE
+
+The merged release independently passed TypeScript, lint, 13 integration files with 79 tests, all 122 Chromium browser tests in 8.3 minutes, and the production build with 16 of 16 static pages generated. Original Run 1, Home, Cat, navigation and artwork preservation remains established by the 29 matching Git blobs in the existing preservation manifest.
+
+At 2026-10-11T05:39:22Z, the actual deployment log reported:
+
+| Observation | Result |
+| --- | --- |
+| Anonymous gate | 401 |
+| Authenticated site | 200 |
+| Original banner | present |
+| Static image | 200 |
+| Optimized image | 200 |
+| Checkout synchronization | ok, aligned, dirty=false |
+| Server branch | staging-host |
+| Server checkout | `64c2d227cae50a829343251e0414235b6e27ccdb` |
+| Running application | `64c2d227cae50a829343251e0414235b6e27ccdb` |
+| Release | STAGING DEPLOY SUCCESS |
+| Previous recovery image | present |
+
+Read the completed deployment log and exact push workflow independently. The staging branch matched the deployed commit before this documentation receipt.
+
+Opened the newly deployed Software catalog in the existing authenticated local Chrome session. The revised catalog, both product destinations, development labels, original symbol, live contact email, navigation and Cat control rendered. The authentic showcase poster finished loading successfully, with natural width 960, through the permitted optimized image URL. Inspected the actual live catalog screenshot after image completion.
+
+## VISUAL ACCEPTANCE LIMIT
+
+The six viewport CI captures and automated responsive/image assertions passed. The prior artifact transfer blocker prevented visual inspection of the full screenshot package before deployment. Mike's current instruction superseded that additional predeployment stop. Only the live Software catalog at the existing desktop viewport was visually inspected in this continuation. Full live phone, tablet, wide, landscape, both product details, Work, How it works and interaction walkthrough are not claimed as completed. This limitation does not negate the successful authorized staging deployment. Run 3 should retain the complete site acceptance pass.
+
+## CMS CHANGES
+
+None. No live inquiry, CMS record, credentials, schema, assistant settings, billing, mail or product release was changed.
+
+## ARTIFACTS
+
+* [Merged PR 38](https://github.com/Mike-CX83/cx83_webapp/pull/38).
+* [Successful exact staging release](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38114564636).
+* Merged release browser artifact 11693057451, homepage-review-38114564636, 50,619,052 bytes; captures and metrics are automated evidence, not a claimed full visual review.
+* Existing passing PR artifact 11692482733 and preservation manifest `docs/CX83_INTERIOR_RUN2_PRESERVATION_2026_10_11.json`.
+* Review: https://staging.cx83labs.com/software, /software/connected-websites, /software/client-brand-studio, /work and /how-it-works.
+
+## NEXT AND DEFERRED
+
+The requested staging deployment is finished. Run 3 remains separately authorized work and has not started. Carry the visual acceptance limit into its site-wide review. Approved About publication, Cat guidance, physical mobile keyboard behavior, video audio/embedded graphics, inquiry mail OAuth, commercial Studio packaging and public production launch retain their established separate scope.
+
+The final handoff, master ledger and continuity pointer are saved together in one documentation-only receipt with CI skipped to avoid an unnecessary second application release. The deployed runtime remains `64c2d227cae50a829343251e0414235b6e27ccdb`; the receipt's SHA belongs to repository history and must not be represented as a separately deployed runtime.
+
+## RECOVERY
+
+Revert only the scoped Run 2 application change through the established protected staging workflow if recovery is needed. Preserve Run 1 and unrelated work. No CMS or schema rollback is required. No rollback was performed.
+
+---
+
+# Earlier implementation and verification receipts
+
+The receipt above supersedes prior open-PR and not-deployed status. Earlier records below remain historical evidence.
+
+PROJECT: CX83 Labs website, `Mike-CX83/cx83_webapp`.
 RUN: Interior Run 2, continuation authorized October 11, 2026.
 STATUS: IMPLEMENTED AND AUTOMATED CHECKS PASSED. PARTIAL: required visual review blocked by session tool restrictions. NOT MERGED, NOT DEPLOYED. The owner's authorization to finish and deploy protected staging remains valid; no additional permission is required.
 HEAD: Started from saved checkpoint `0fe1ec61b112190c3c78507ca4a1d69233864143`. Exact tested branch head `027be8bf15442342b552a592e1722722330078d2`, branch `chatgpt/interior-run2-2026-10-10`, [PR 38](https://github.com/Mike-CX83/cx83_webapp/pull/38), base `staging-host`. Base remains `dd12c886d4ff183a29c447d19fa70cd7869b7669`. No merged or newly deployed application SHA exists for Run 2. This handoff is a subsequent documentation receipt, not a tested or deployed application SHA.
