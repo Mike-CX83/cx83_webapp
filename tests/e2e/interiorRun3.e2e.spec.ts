@@ -51,14 +51,31 @@ test.describe('Interior Run 3', () => {
           const symbol = page.locator('.cx83-about-symbol')
           await expect(symbol).toHaveAttribute('src', '/brand/symbol-showcase.svg')
           await expect.poll(() => symbol.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true)
+          const column = await page.locator('.cx83-about-emblem-column').boundingBox()
+          const mark = await symbol.boundingBox()
+          expect(column).not.toBeNull()
+          expect(mark).not.toBeNull()
+          // The unchanged SVG viewBox is -24 -24 288 288; its visible artwork occupies x=0..240.
+          // Symmetric 24-unit transparent padding gives the visible symbol the same center as its box.
+          const visibleLeft = mark!.x + mark!.width / 12
+          const visibleRight = mark!.x + mark!.width * 11 / 12
           if (viewport.width >= 1024) {
-            const column = await page.locator('.cx83-about-emblem-column').boundingBox()
-            const mark = await symbol.boundingBox()
-            expect(column).not.toBeNull()
-            expect(mark).not.toBeNull()
-            expect(Math.abs((column!.x + column!.width / 2) - (mark!.x + mark!.width / 2))).toBeLessThan(2)
+            // The thin divider starts at the column's left edge; the other boundary is the page edge.
+            expect(Math.abs((visibleLeft - column!.x) - (viewport.width - visibleRight))).toBeLessThan(2)
             expect(Math.abs((column!.y + column!.height / 2) - (mark!.y + mark!.height / 2))).toBeLessThan(2)
+            expect(mark!.width).toBeLessThanOrEqual(272.1)
+          } else {
+            // Mobile and tablet preserve the original size and center within the stacked column.
+            expect(Math.abs((column!.x + column!.width / 2) - (mark!.x + mark!.width / 2))).toBeLessThan(2)
+            expect(Math.abs(mark!.width - 160)).toBeLessThan(1)
           }
+          const glow = await page.locator('.cx83-about-emblem-column').evaluate((element) => ({
+            width: parseFloat(getComputedStyle(element, '::before').width),
+            originalWidth: Math.min(element.getBoundingClientRect().width, 320),
+            filter: getComputedStyle(element, '::before').filter,
+          }))
+          expect(Math.abs(glow.width / glow.originalWidth - 1.1)).toBeLessThan(0.01)
+          expect(glow.filter).toBe('blur(16px)')
           await expect(page.getByRole('heading', { level: 1 })).toHaveText('About CX83 Labs')
           await expect(page).toHaveTitle('About CX83 Labs')
           await expect(page.getByRole('link', { name: 'Start a conversation' })).toHaveAttribute('href', '/contact')
