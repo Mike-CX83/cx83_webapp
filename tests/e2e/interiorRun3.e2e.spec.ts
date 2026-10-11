@@ -133,6 +133,8 @@ test.describe('Interior Run 3', () => {
   })
   test('published CMS page and article templates have headings, recovery and real article search', async ({ page }) => {
     test.setTimeout(90_000)
+    // Fixtures run outside Next's request context; use the existing hook opt-out.
+    const fixtureContext = { disableRevalidate: true }
     const slug = 'run3-synthetic-utility'
     let pageId: number | undefined
     let postId: number | undefined
@@ -142,10 +144,10 @@ test.describe('Interior Run 3', () => {
       ] },
     ] } }
     try {
-      pageId = (await payload.create({ collection: 'pages', overrideAccess: true, data: {
+      pageId = (await payload.create({ collection: 'pages', overrideAccess: true, context: fixtureContext, data: {
         title: 'Synthetic Run 3 Page', slug, hero: { type: 'lowImpact' }, layout: [{ blockType: 'content', columns: [{ size: 'full', richText }] }], _status: 'published',
       } })).id
-      postId = (await payload.create({ collection: 'posts', overrideAccess: true, data: {
+      postId = (await payload.create({ collection: 'posts', overrideAccess: true, context: fixtureContext, data: {
         title: 'Synthetic Run 3 Article', slug, content: richText, _status: 'published',
       } })).id
       for (const width of [390, 1440]) {
@@ -164,8 +166,8 @@ test.describe('Interior Run 3', () => {
         await expect(page).toHaveURL(host + '/posts/' + slug)
       }
     } finally {
-      if (postId) await payload.delete({ collection: 'posts', id: postId, overrideAccess: true })
-      if (pageId) await payload.delete({ collection: 'pages', id: pageId, overrideAccess: true })
+      if (postId) await payload.delete({ collection: 'posts', id: postId, overrideAccess: true, context: fixtureContext })
+      if (pageId) await payload.delete({ collection: 'pages', id: pageId, overrideAccess: true, context: fixtureContext })
     }
   })
 

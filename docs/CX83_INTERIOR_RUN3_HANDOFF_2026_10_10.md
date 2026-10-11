@@ -59,3 +59,12 @@ Actual iPhone Mirroring input on the existing staging version exposed Safari zoo
 Earlier live review inspected the Run 2 catalog, both product pages, Work and loaded workflow illustrations at 390px, and customer anchor clearance (96px below viewport top, sticky header bottom 77px). Desktop About baseline was 3473px high at 1440x1000. Temporary local screenshots were lost when the owner restarted the computer; repository source and CI artifacts remained intact. Final captures must be saved anew.
 
 Artifact transfer into the earlier local sandbox failed. Complete visual acceptance will use the actual protected staging deployment after the automated gate, consistent with the owner's explicit continuation to deployment. Exact runtime and current CMS checks remain required. Real iPhone text entry was observed, but Mirroring used the Mac keyboard, so a visible mobile software keyboard is not claimed.
+
+
+## October 11, 2:10 AM CDT continuation
+
+Workflow 38119377943 passed TypeScript, lint, 83 integration tests and 131 browser tests. The one remaining failed test stopped at fixture creation because its direct Payload call invoked Next revalidation outside a server request. Both existing Page/Post hooks already support context.disableRevalidate; synthetic CI fixture creation and cleanup now use that supported context. This does not change runtime hooks or omit rendered, search or recovery assertions. One following serial test did not run. Build was skipped, so this is not a passing release.
+
+Published only staging site-settings ID 1 founder at 2026-10-11T06:58:05.848Z. Fresh readback equals all three approved paragraphs exactly; other content fields are unchanged. The approved source and fallback also compare exactly.
+
+After the owner's computer restart, the selected Chrome tab displayed 'This page has been blocked by Chrome' and ERR_BLOCKED_BY_CLIENT for staging.cx83labs.com. No protection was altered. Postdeployment visual review, real model samples and actual mobile software keyboard verification remain unverified; the owner has explicitly requested continuation through staging deployment without another stop. Preserve these acceptance limits rather than calling the full visual plan complete.
