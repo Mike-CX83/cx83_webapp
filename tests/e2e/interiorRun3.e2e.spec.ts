@@ -6,7 +6,7 @@ import config from '../../src/payload.config.js'
 
 const host = 'http://localhost:3000'
 const approved = readFileSync('docs/CX83_ABOUT_STORY_APPROVED_2026_10_10.md', 'utf8').trim().split(/\n\s*\n/).slice(1)
-const viewports = [{ width: 320, height: 740 }, { width: 390, height: 844 }, { width: 768, height: 1024 }, { width: 1440, height: 1000 }, { width: 2560, height: 1440 }, { width: 844, height: 390 }]
+const viewports = [{ width: 320, height: 740 }, { width: 390, height: 844 }, { width: 768, height: 1024 }, { width: 1024, height: 768 }, { width: 1440, height: 1000 }, { width: 2560, height: 1440 }, { width: 844, height: 390 }]
 
 function isolatedCI() {
   if (process.env.CI !== 'true' || process.env.PAYLOAD_DB_PUSH !== 'true') return false
