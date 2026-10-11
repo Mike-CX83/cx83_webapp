@@ -80,7 +80,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: homepage-review-${{ github.run_id }}
-          path: test-results/**/homepage-*.png
+          path: |
+            test-results/**/homepage-*.png
+            test-results/**/interior-*.png
+            test-results/**/interior-metrics-*.json
           if-no-files-found: ignore
           retention-days: 7
 
@@ -166,3 +169,4 @@ jobs:
             "$STAGING_DEPLOY_USER@$STAGING_DEPLOY_HOST" \
             "deploy $GITHUB_SHA" < image/cx83-webapp-staging.tar.gz | tee "$RUNNER_TEMP/deploy-output.txt"
           grep -q 'STAGING DEPLOY SUCCESS' "$RUNNER_TEMP/deploy-output.txt"
+

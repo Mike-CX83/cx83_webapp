@@ -2,7 +2,7 @@
 .cx83-showcase-home {
   overflow-wrap: anywhere;
 }
-.cx83-showcase-home section[id], #website-demo {
+.cx83-showcase-home section[id], .cx83-showcase-home #showcase-title, #website-demo {
   scroll-margin-top: 6.25rem;
 }
 .cx83-showcase-hero {

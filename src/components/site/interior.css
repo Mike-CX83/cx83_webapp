@@ -1,0 +1,291 @@
+/* Interior Run 1. Opt-in wrappers only: Home, shared navigation and Cat are unchanged.
+   Reuses existing Geist typography, 72rem content edges and CX83 color tokens. */
+.cx83-interior-root {
+  color: var(--cx83-text);
+  overflow-wrap: break-word;
+}
+.cx83-interior-root .cx83-interior-hero {
+  background:
+    radial-gradient(ellipse 50% 120% at 100% 0%, rgb(130 71 245 / 15%), transparent 75%),
+    var(--cx83-midnight);
+  border-bottom: 1px solid var(--cx83-border);
+}
+.cx83-interior-root .cx83-interior-hero-inner {
+  padding-block: clamp(2.25rem, 4.5vw, 3.75rem);
+}
+.cx83-interior-root .cx83-interior-heading {
+  max-width: 23ch;
+  margin: 0;
+  color: var(--cx83-white);
+  font-size: clamp(2rem, 4.2vw, 3.6rem);
+  font-weight: 650;
+  letter-spacing: -.04em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+.cx83-interior-root .cx83-interior-lead {
+  max-width: 66ch;
+  margin-top: 1.2rem;
+  color: var(--cx83-silver);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+.cx83-interior-root .cx83-interior-return {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  min-height: 2.75rem;
+  margin: -.65rem 0 1rem;
+  color: var(--cx83-on-dark-accent);
+  font-size: .9rem;
+  font-weight: 600;
+  text-underline-offset: .25em;
+}
+.cx83-interior-root .cx83-interior-body {
+  padding-block: clamp(2rem, 4.5vw, 3.5rem);
+}
+.cx83-interior-root :is(h2, h3) {
+  color: var(--cx83-white);
+  font-weight: 600;
+  letter-spacing: -.025em;
+  line-height: 1.25;
+}
+.cx83-interior-root h2 { font-size: clamp(1.4rem, 2.1vw, 1.9rem); }
+.cx83-interior-root :is(section[id], h2[id], #contact-form) { scroll-margin-top: 6rem; }
+.cx83-interior-root .cx83-interior-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  min-height: 2.75rem;
+  color: var(--cx83-on-dark-accent);
+  font-size: .9375rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-decoration: underline;
+  text-underline-offset: .25em;
+}
+.cx83-interior-root :is(.cx83-interior-link, .cx83-interior-return):hover {
+  color: var(--cx83-white);
+}
+.cx83-interior-root :is(a, button, input, select, textarea):focus-visible {
+  outline: 3px solid var(--cx83-on-dark-accent);
+  outline-offset: 3px;
+}
+.cx83-interior-root .cx83-service-choices { display: grid; gap: 1.25rem; }
+.cx83-interior-root .cx83-service-choice {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  border: 1px solid var(--cx83-border);
+  border-radius: var(--cx83-radius);
+  background: var(--cx83-surface);
+}
+.cx83-interior-root .cx83-service-choice h2 { font-size: 1.5rem; }
+.cx83-interior-root .cx83-service-choice-copy {
+  flex: 1;
+  margin-block: 1.1rem;
+  color: var(--cx83-muted);
+  line-height: 1.7;
+}
+.cx83-interior-root .cx83-service-choice-copy p + p { margin-top: .85rem; }
+.cx83-interior-root .cx83-service-choice .cx83-service-problem {
+  color: var(--cx83-silver);
+}
+.cx83-interior-root .cx83-service-choice .cx83-interior-link {
+  align-self: flex-start;
+  margin-top: auto;
+}
+.cx83-interior-root .cx83-interior-closing {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-top: clamp(1.75rem, 3.5vw, 2.5rem);
+  margin-top: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--cx83-border);
+}
+.cx83-interior-root .cx83-interior-closing h2 {
+  font-size: clamp(1.35rem, 2.1vw, 1.75rem);
+}
+.cx83-interior-root .cx83-interior-closing p {
+  max-width: 60ch;
+  margin-top: .7rem;
+  color: var(--cx83-muted);
+  line-height: 1.7;
+}
+.cx83-interior-root .cx83-interior-closing .cx83-action { flex-shrink: 0; }
+.cx83-interior-root .cx83-service-overview {
+  display: grid;
+  align-items: start;
+  gap: 2rem;
+}
+.cx83-interior-root .cx83-interior-reading { max-width: 68ch; }
+.cx83-interior-root .cx83-interior-reading p {
+  margin-top: 1rem;
+  color: var(--cx83-muted);
+  line-height: 1.8;
+}
+.cx83-interior-root .cx83-interior-reading .cx83-service-fit {
+  color: var(--cx83-silver);
+}
+.cx83-interior-root .cx83-service-deliverables ul { margin-top: .75rem; }
+.cx83-interior-root .cx83-service-deliverables li {
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr);
+  gap: .8rem;
+  align-items: start;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--cx83-border);
+}
+.cx83-interior-root .cx83-service-deliverables li > span {
+  color: var(--cx83-on-dark-accent);
+  font-family: var(--font-mono);
+  font-size: .8rem;
+  line-height: 1.9;
+}
+.cx83-interior-root .cx83-service-deliverables li > p {
+  color: var(--cx83-silver);
+  line-height: 1.65;
+}
+.cx83-interior-root .cx83-service-example {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  border-left: 3px solid var(--cx83-blue);
+  border-radius: 0 var(--cx83-radius) var(--cx83-radius) 0;
+  background: var(--cx83-surface);
+}
+.cx83-interior-root .cx83-service-example > div { max-width: 72ch; }
+.cx83-interior-root .cx83-service-example p,
+.cx83-interior-root .cx83-service-scope p {
+  margin-top: 1rem;
+  color: var(--cx83-muted);
+  line-height: 1.8;
+}
+.cx83-interior-root .cx83-service-example .cx83-interior-link { margin-top: .7rem; }
+.cx83-interior-root .cx83-service-example-steps {
+  display: grid;
+  gap: .75rem;
+  margin-top: 1.2rem;
+  counter-reset: example-step;
+}
+.cx83-interior-root .cx83-service-example-steps li {
+  display: flex;
+  gap: .6rem;
+  color: var(--cx83-silver);
+  font-size: .9rem;
+  line-height: 1.65;
+  counter-increment: example-step;
+}
+.cx83-interior-root .cx83-service-example-steps li::before {
+  content: counter(example-step) ".";
+  color: var(--cx83-on-dark-accent);
+}
+.cx83-interior-root .cx83-service-scope {
+  max-width: 72ch;
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+.cx83-interior-root.cx83-contact-refined .cx83-contact-layout {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.5rem;
+}
+.cx83-contact-refined .cx83-contact-form-card {
+  padding: clamp(1.15rem, 3vw, 2rem);
+  overflow: visible;
+}
+.cx83-contact-refined .cx83-contact-form-card::before {
+  border-radius: 1.2rem 1.2rem 0 0;
+}
+.cx83-contact-refined .cx83-contact-form-intro { margin-bottom: 1.5rem; }
+.cx83-contact-refined .cx83-contact-form-intro h2 {
+  margin: 0;
+  font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+}
+.cx83-contact-refined .cx83-contact-info > h2 {
+  max-width: none;
+  font-size: 1.5rem;
+}
+.cx83-contact-refined .cx83-contact-info > p {
+  max-width: 55ch;
+  margin-top: .9rem;
+  color: var(--cx83-muted);
+  line-height: 1.75;
+}
+.cx83-contact-refined .cx83-contact-direct { margin-top: 1.5rem; }
+.cx83-contact-refined .cx83-contact-direct a {
+  min-height: 2.75rem;
+  overflow-wrap: anywhere;
+}
+.cx83-contact-refined .cx83-contact-form-card form { gap: 1.1rem; }
+.cx83-contact-refined .cx83-contact-form-card .field {
+  min-width: 0;
+  min-height: 3rem;
+  background: var(--cx83-midnight);
+  color: var(--cx83-white);
+}
+.cx83-contact-refined .cx83-contact-form-card textarea.field { min-height: 8rem; }
+.cx83-contact-refined .cx83-inquiry-context {
+  display: grid;
+  gap: .65rem;
+  min-width: 0;
+}
+.cx83-contact-refined .cx83-inquiry-context-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .8rem;
+  padding: .6rem .8rem;
+  border-left: 2px solid var(--cx83-on-dark-accent);
+  background: rgb(36 107 255 / 10%);
+  color: var(--cx83-silver);
+  font-size: .85rem;
+  line-height: 1.6;
+}
+.cx83-contact-refined .cx83-inquiry-context-clear {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: .45rem .5rem;
+  flex-shrink: 0;
+  color: var(--cx83-on-dark-accent);
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+.cx83-contact-refined .cx83-inquiry-context-summary p { min-width: 0; }
+.cx83-contact-refined .cx83-contact-form-note { max-width: 72ch; }
+@media (min-width: 40rem) {
+  .cx83-contact-refined .cx83-contact-form-card form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cx83-contact-refined .cx83-contact-form-card form > * { grid-column: 1 / -1; min-width: 0; }
+  .cx83-contact-refined .cx83-contact-form-card form > label:is([for='name'], [for='email']) { grid-column: auto; }
+  .cx83-interior-root .cx83-service-example-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 48rem) and (max-width: 74.99rem) {
+  .cx83-interior-root .cx83-service-choice {
+    display: grid;
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1.25fr);
+    column-gap: 2rem;
+  }
+  .cx83-interior-root .cx83-service-choice h2 { grid-row: 1 / 3; }
+  .cx83-interior-root .cx83-service-choice-copy { margin-block: 0 .5rem; }
+  .cx83-interior-root .cx83-service-choice .cx83-interior-link { grid-column: 2; }
+}
+@media (min-width: 64rem) {
+  .cx83-interior-root .cx83-service-overview {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, .85fr);
+    gap: 4rem;
+  }
+  .cx83-interior-root.cx83-contact-refined .cx83-contact-layout {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, .85fr);
+    gap: clamp(2.5rem, 5vw, 5rem);
+  }
+  .cx83-contact-refined .cx83-contact-info { padding-top: .5rem; }
+}
+@media (min-width: 75rem) {
+  .cx83-interior-root .cx83-service-choices { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 47.99rem) {
+  .cx83-interior-root .cx83-interior-closing { align-items: stretch; flex-direction: column; gap: 1.2rem; }
+  .cx83-interior-root .cx83-interior-closing .cx83-action { align-self: flex-start; }
+  .cx83-interior-root .cx83-service-choice-copy { margin-block: .9rem; }
+  .cx83-contact-refined .cx83-contact-form-card { padding-bottom: 1.5rem; }
+}
+

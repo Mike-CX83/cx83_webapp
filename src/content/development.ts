@@ -3,37 +3,44 @@ export const suppliedPositioning =
 
 export const developmentServices = [
   {
-    name: 'AI systems',
-    slug: 'ai-systems',
-    shortDescription: 'Development placeholder for AI systems CX83 Labs can design with clients.',
-    description:
-      'This entry is development content. Replace it in Payload with an approved service description.',
-    capabilities: ['Assistant interfaces', 'Workflow support', 'Approved knowledge'],
+    "name": "Custom websites and business tools",
+    "slug": "websites-and-business-tools",
+    "shortDescription": "Build a clear online presence or a focused application, with useful AI and integrations where they belong.",
+    "description": "We build websites and business tools around a defined purpose, using established software foundations instead of reinventing every component. The scope can include editable content, forms, an API powered assistant, or a custom interface for an existing workflow.",
+    "capabilities": [
+      "Responsive websites and editable content",
+      "Business assistants and connected forms",
+      "Focused custom applications"
+    ],
+    "callToActionLabel": "Discuss your website or tool",
+    "callToActionUrl": "/contact"
   },
   {
-    name: 'Automation',
-    slug: 'automation',
-    shortDescription: 'Development placeholder for business process automation.',
-    description:
-      'This entry is development content. Replace it in Payload with an approved service description.',
-    capabilities: ['Repetitive process review', 'System handoffs', 'Operational follow-through'],
+    "name": "Business automation and integrations",
+    "slug": "automation-and-integrations",
+    "shortDescription": "Connect disconnected applications so information moves through your business without the same manual steps.",
+    "description": "We map a business process from its starting point to its outcome, then connect the applications involved. A project might link inquiry forms, customer records, email, scheduling, or reporting, with clear checks and a defined handoff.",
+    "capabilities": [
+      "Workflow mapping and application connections",
+      "Forms, notifications, and structured records",
+      "Testing, exception handling, and handoff"
+    ],
+    "callToActionLabel": "Discuss your process",
+    "callToActionUrl": "/contact"
   },
   {
-    name: 'Software',
-    slug: 'software',
-    shortDescription: 'Development placeholder for custom software.',
-    description:
-      'This entry is development content. Replace it in Payload with an approved service description.',
-    capabilities: ['Web applications', 'Internal tools', 'Integrations'],
-  },
-  {
-    name: 'Business integration',
-    slug: 'business-integration',
-    shortDescription: 'Development placeholder for connecting business systems.',
-    description:
-      'This entry is development content. Replace it in Payload with an approved service description.',
-    capabilities: ['Existing tools', 'Data handoffs', 'Practical operating workflows'],
-  },
+    "name": "AI setup and reusable workflows",
+    "slug": "ai-setup-and-workflows",
+    "shortDescription": "Make AI useful in the work you already do, with clear instructions, connected information, and workflows you can repeat.",
+    "description": "We start with a specific task, select the appropriate AI tools, connect approved business information, and build reusable instructions or skills. The scope can include setup, practical testing, documentation, and guidance for the people using the system.",
+    "capabilities": [
+      "AI tool setup and configuration",
+      "Custom instructions and reusable skills",
+      "Workflow testing and documentation"
+    ],
+    "callToActionLabel": "Discuss your workflow",
+    "callToActionUrl": "/contact"
+  }
 ]
 
 export const developmentAbout = {
@@ -48,3 +55,4 @@ export const developmentAbout = {
   schedulingUrl: '',
   schedulingLabel: 'Schedule a conversation',
 }
+

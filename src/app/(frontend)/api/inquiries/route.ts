@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto'
 import { ensureInquiryForm } from '@/forms/ensure-inquiry-form'
 import { validateInquiry } from '@/forms/inquiry'
+import { inquiryMessageWithContext } from '@/forms/inquiryContext'
 import { allowInquiryAttempt, dispatchInquiry, inquiryDeliveryLabel, isSafeRequestId, saveInquiry, withInquiryLock } from '@/forms/inquiryOutbox'
 import { databaseConfigured } from '@/lib/database'
 import { getPayloadClient } from '@/lib/payload'
@@ -54,7 +55,8 @@ export async function POST(req: Request) {
   try {
     return await withInquiryLock(id, async () => {
       const form = await ensureInquiryForm(payload)
-      const { submission, duplicate, conflict } = await saveInquiry(payload, form, data, id)
+      const storedData = { ...data, message: inquiryMessageWithContext(data.message, data.context) }
+      const { submission, duplicate, conflict } = await saveInquiry(payload, form, storedData, id)
       if (conflict) {
         return Response.json({ ok: false, error: 'This request identifier was already used for another inquiry.' }, { status: 409 })
       }
