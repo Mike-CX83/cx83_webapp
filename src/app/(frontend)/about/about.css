@@ -1,6 +1,8 @@
 /* About only. No shared navigation, footer, Home, or Cat styles. */
 .cx83-about-refined {
   background: var(--cx83-midnight);
+  /* Expanded glow can cross the viewport edge at the desktop breakpoint. Prevent a horizontal scrollbar. */
+  overflow-x: clip;
 }
 .cx83-about-refined .cx83-interior-hero {
   background:
