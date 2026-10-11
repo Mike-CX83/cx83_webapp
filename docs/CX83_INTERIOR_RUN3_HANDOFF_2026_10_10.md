@@ -68,3 +68,8 @@ Workflow 38119377943 passed TypeScript, lint, 83 integration tests and 131 brows
 Published only staging site-settings ID 1 founder at 2026-10-11T06:58:05.848Z. Fresh readback equals all three approved paragraphs exactly; other content fields are unchanged. The approved source and fallback also compare exactly.
 
 After the owner's computer restart, the selected Chrome tab displayed 'This page has been blocked by Chrome' and ERR_BLOCKED_BY_CLIENT for staging.cx83labs.com. No protection was altered. Postdeployment visual review, real model samples and actual mobile software keyboard verification remain unverified; the owner has explicitly requested continuation through staging deployment without another stop. Preserve these acceptance limits rather than calling the full visual plan complete.
+
+
+## October 11, 2:32 AM CDT article recovery repair
+
+Workflow 38120450095 passed TypeScript, lint, 83 integration tests and 131 browser tests. The fixed fixture successfully published and rendered the synthetic page and article. Its normal Back to Notes click exposed a real overlap: the existing PostHero negative top margin placed its container over the preceding link and intercepted clicks. The link now follows PostHero in normal document flow with top spacing. The regression retains its normal pointer click at 390px and 1440px; no forced click or skipped assertion is used. Search and the following serial privacy check still require a complete passing run. This workflow failed and is not release evidence.

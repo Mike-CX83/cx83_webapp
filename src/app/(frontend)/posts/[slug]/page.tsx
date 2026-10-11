@@ -68,8 +68,8 @@ export default async function Post({ params: paramsPromise }: Args) {
 
       {draft && <LivePreviewListener />}
 
-      <div className="cx83-container mb-6"><Link className="cx83-shared-text-link inline-flex min-h-11 items-center" href="/posts">Back to Notes</Link></div>
       <PostHero post={post} />
+      <div className="cx83-container mt-8"><Link className="cx83-shared-text-link inline-flex min-h-11 items-center" href="/posts">Back to Notes</Link></div>
 
       <div className="flex flex-col items-center gap-4 pt-8">
         <div className="container">
