@@ -84,6 +84,8 @@ test.describe('Interior Run 2 product and proof journeys', () => {
       await contact.click()
       await expect(page).toHaveURL(host + '/contact?context=' + product.slug + '#contact-form')
       await expect(page.locator('#context')).toHaveValue(product.slug)
+      await expect(page.locator('.cx83-contact-form-note')).toHaveText('We’ll use the details you provide to review and respond to your inquiry.')
+      await expect(page.getByRole('button', { name: /Send inquiry|Submit|Send message/i })).toBeVisible()
       await page.goto(host + '/software')
     }
     await page.goto(host + '/software/client-brand-studio')
