@@ -82,7 +82,7 @@ CX83's dark-first brand system and shared surfaces live in `src/app/(frontend)/c
 
 ## Forms
 
-The contact page posts to `/api/inquiries`. It validates fields and, when PostgreSQL is connected, stores an inquiry in Payload's `CX83 inquiry` form submissions. A saved record includes a request ID and durable notification state. A separately authorized Google Workspace Gmail adapter can notify the exact business mailbox `mike@cx83labs.com`, but it is disabled until website-owned OAuth credentials are deliberately configured. The form confirms **saved**, never claims inbox delivery. An owner-only manual dispatch route supports recovery; a dedicated bearer secret is required. Abuse and duplicate protections are designed for single-replica protected staging, not a public multi-replica guarantee. See `docs/CX83_RUN3_MAIL_DELIVERY.md`.
+The contact page posts to `/api/inquiries`. It validates fields and, when PostgreSQL is connected, stores an inquiry in Payload's `CX83 inquiry` form submissions. A saved record includes a request ID and durable notification state. A separately authorized Google Workspace Gmail adapter can notify the verified CX83 Labs public contact alias `hello@cx83labs.com`, using the existing Google Workspace OAuth principal (`users/me`); it remains disabled until website-owned OAuth credentials are deliberately configured. The form confirms **saved**, never claims inbox delivery. An owner-only manual dispatch route supports recovery; a dedicated bearer secret is required. Abuse and duplicate protections are designed for single-replica protected staging, not a public multi-replica guarantee. See `docs/CX83_RUN3_MAIL_DELIVERY.md`.
 
 ## Assistant
 

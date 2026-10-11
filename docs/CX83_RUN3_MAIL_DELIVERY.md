@@ -4,7 +4,7 @@ Prepared October 9, 2026. Scope: protected staging only. No customer launch, che
 
 ## Verified business mailbox
 
-The connected Google Workspace Gmail profile confirms ownership of `mike@cx83labs.com`. The CX83 staging CMS Site Settings publishes the same verified email. `hello@cx83labs.com` was not found as a verified mailbox and is not published or used. Agent-to-agent mailbox messaging is not an external customer inbox.
+October 11 update: the public site contact is now `hello@cx83labs.com`. An internal email sent to this alias appeared in the connected CX83 Gmail inbox, and the account has also sent messages from the hello alias. The existing Google Workspace account remains the OAuth principal; it is not the public website contact. The staging CMS Site Settings now publishes `hello@cx83labs.com`. Agent-to-agent mailbox messaging is not an external customer inbox.
 
 ## Server implementation
 
@@ -22,10 +22,10 @@ Client retries with the same request ID are deduplicated among the latest 200 su
 
 ## Required server secret setup before outbound email can be verified
 
-1. An authorized Google Workspace app must have the Gmail **send-only** OAuth scope (`https://www.googleapis.com/auth/gmail.send`) for `mike@cx83labs.com`. The adapter calls the explicitly named `users/mike@cx83labs.com/messages/send` endpoint, which rejects access that the OAuth principal does not have; no extra Gmail profile/read permissions are needed. See Google's [Gmail users.messages.send reference](https://developers.google.com/workspace/gmail/api/reference/rest/v1/users.messages/send). ChatGPT's connected Gmail account **does not** expose or authorize reusable server OAuth credentials.
+1. An authorized Google Workspace app must have the Gmail **send-only** OAuth scope (`https://www.googleapis.com/auth/gmail.send`) for the existing authorized Google Workspace account with verified send-as alias `hello@cx83labs.com`. The adapter calls `users/me/messages/send` using that OAuth principal, which rejects access the principal does not have; no extra Gmail profile/read permissions are needed. See Google's [Gmail users.messages.send reference](https://developers.google.com/workspace/gmail/api/reference/rest/v1/users.messages/send). ChatGPT's connected Gmail account **does not** expose or authorize reusable server OAuth credentials.
 2. A server administrator must add only to `/opt/cx83-webapp/.env`:
    ```
-CX83_INQUIRY_TO=mike@cx83labs.com
+CX83_INQUIRY_TO=hello@cx83labs.com
 CX83_GMAIL_CLIENT_ID=
 CX83_GMAIL_CLIENT_SECRET=
 CX83_GMAIL_REFRESH_TOKEN=
@@ -39,12 +39,12 @@ An authenticated recovery endpoint, `POST /api/inquiries/dispatch`, uses ONLY th
 
 ## Controlled mailbox proof, October 9
 
-The verified business Gmail account sent a synthetic message to itself, and the same account displayed matching SENT and INBOX identifiers. Subject: CX83 Run 3 synthetic mailbox verification | October 9, 2026. Gmail message ID: 1a1240ebc0536235. This proves the owner-managed mailbox and does not prove that the website backend has Gmail authorization.
+On October 9, the existing business Gmail account sent a synthetic message to itself, and the same account displayed matching SENT and INBOX identifiers. Subject: CX83 Run 3 synthetic mailbox verification | October 9, 2026. Gmail message ID: 1a1240ebc0536235. An additional October 11 internal synthetic message addressed to `hello@cx83labs.com` appeared with SENT and INBOX labels (Gmail message `1a12c953502f0012`). This verifies the contact alias receives mail into the connected CX83 inbox, not that the website backend has Gmail authorization.
 
 ## Safety and test constraints
 
 * Requests, answers, customer submissions and API keys are not passed to public CAT.
-* Mail body includes only the visitor-supplied inquiry and stored submission ID; sender and recipient are both the verified business mailbox.
+* Mail body includes only the visitor-supplied inquiry and stored submission ID; sender and recipient use the verified public CX83 contact alias.
 * The site's success message means saved, not inbox-delivered.
 * The single-instance rate limiter is a staging-level control. Future public production requires shared abuse defenses and a stronger persistent unique index.
 * The protected original CX83 homepage banner, authentic logo, media gating, unreleased products and existing staging pipeline remain unchanged.

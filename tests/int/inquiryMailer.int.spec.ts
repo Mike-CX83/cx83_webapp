@@ -10,7 +10,7 @@ const data = {
 }
 
 const env = {
-  CX83_INQUIRY_TO: 'mike@cx83labs.com',
+  CX83_INQUIRY_TO: 'hello@cx83labs.com',
   CX83_GMAIL_CLIENT_ID: 'synthetic-client',
   CX83_GMAIL_CLIENT_SECRET: 'synthetic-secret',
   CX83_GMAIL_REFRESH_TOKEN: 'synthetic-refresh',
@@ -24,7 +24,7 @@ describe('CX83 inquiry Gmail provider', () => {
     expect(send).not.toHaveBeenCalled()
   })
 
-  it('uses the explicitly verified mailbox with only Gmail send permission', async () => {
+  it('uses the verified public hello alias with existing Google Workspace OAuth identity', async () => {
     const send = vi.fn()
       .mockResolvedValueOnce(Response.json({ access_token: 'synthetic-access' }))
       .mockResolvedValueOnce(Response.json({ id: 'synthetic-gmail-accepted-id' }))
@@ -32,15 +32,16 @@ describe('CX83 inquiry Gmail provider', () => {
     expect(result).toEqual({ state: 'accepted', providerId: 'synthetic-gmail-accepted-id' })
     expect(send).toHaveBeenCalledTimes(2)
     expect(String(send.mock.calls[0][0])).toContain('oauth2.googleapis.com')
-    expect(String(send.mock.calls[1][0])).toContain('users/mike%40cx83labs.com/messages/send')
+    expect(String(send.mock.calls[1][0])).toContain('users/me/messages/send')
     const request = JSON.parse(send.mock.calls[1][1].body)
     const decoded = Buffer.from(request.raw, 'base64url').toString('utf8')
-    expect(decoded).toContain('To: mike@cx83labs.com')
+    expect(decoded).toContain('To: hello@cx83labs.com')
+    expect(decoded).toContain('From: CX83 Labs <hello@cx83labs.com>')
     expect(decoded).toContain('Synthetic test only')
     expect(decoded).not.toContain('synthetic-secret')
   })
 
-  it('rejects an OAuth subject that lacks access to the exact CX83 mailbox', async () => {
+  it('rejects a Google Workspace principal that lacks send permission', async () => {
     const send = vi.fn()
       .mockResolvedValueOnce(Response.json({ access_token: 'synthetic-wrong-user' }))
       .mockResolvedValueOnce(new Response('Forbidden', { status: 403 }))
@@ -48,7 +49,7 @@ describe('CX83 inquiry Gmail provider', () => {
       state: 'failed', reason: 'Google Workspace rejected the message.',
     })
     expect(send).toHaveBeenCalledTimes(2)
-    expect(String(send.mock.calls[1][0])).toContain('mike%40cx83labs.com')
+    expect(String(send.mock.calls[1][0])).toContain('users/me/messages/send')
   })
 
   it('marks ambiguous Google server responses as unconfirmed, never accepted', async () => {

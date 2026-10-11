@@ -1,5 +1,5 @@
 /**
- * CX83 inquiry notifications use the owner's verified Google Workspace mailbox.
+ * CX83 inquiry notifications use the verified CX83 Labs public contact alias and the authorized Google Workspace account.
  * ChatGPT's connected Gmail token is NOT a server credential. No mail is sent
  * until the website runtime has its own authorized Gmail OAuth grant.
  *
@@ -13,7 +13,7 @@ export type DeliveryResult =
   | { state: 'accepted'; providerId: string }
   | { state: 'failed'; reason: string }
 
-export const verifiedInquiryMailbox = 'mike@cx83labs.com'
+export const verifiedInquiryMailbox = 'hello@cx83labs.com'
 
 export function gmailDeliveryConfigured(env: Record<string, string | undefined> = process.env): boolean {
   return Boolean(
@@ -79,10 +79,11 @@ export async function sendInquiryEmail(
     const credentials = (await token.json()) as { access_token?: string }
     if (!credentials.access_token) return { state: 'failed', reason: 'Google Workspace did not issue an access token.' }
 
-    // Address the verified mailbox explicitly. Gmail's send endpoint authorizes
-    // the named userId against the OAuth subject, so gmail.send suffices.
+    // 'me' uses the existing Google Workspace OAuth principal without exposing a
+    // personal email as the public contact address. The verified hello@ alias
+    // is permitted for send-as, and Gmail send-only scope suffices.
     // Avoid users.getProfile: it requires extra restricted read scopes.
-    const response = await fetcher('https://gmail.googleapis.com/gmail/v1/users/' + encodeURIComponent(verifiedInquiryMailbox) + '/messages/send', {
+    const response = await fetcher('https://gmail.googleapis.com/gmail/v1/users/me/messages/send', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + credentials.access_token },
       body: JSON.stringify({ raw: encodedMessage(data, recordId) }),
