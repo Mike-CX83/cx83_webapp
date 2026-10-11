@@ -5,7 +5,7 @@ test.describe('Software discovery on its dedicated page', () => {
     await page.goto('http://localhost:3000')
     await expect(page.locator('main #software')).toHaveCount(0)
     await page.locator('header').getByRole('link', { name: 'Software', exact: true }).click()
-    await expect(page.getByRole('heading', { name: 'Tools you can make your own.' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Software that puts you in control.' })).toBeVisible()
     const cards = page.locator('.cx83-software-card')
     await expect(cards).toHaveCount(2)
     await expect(cards.locator('.cx83-software-status')).toHaveText([
