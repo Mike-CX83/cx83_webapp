@@ -20,7 +20,7 @@ async function capture(page: Page, testInfo: TestInfo, name: string) {
   await page.evaluate(async () => { await document.fonts.ready })
   // Full page screenshots do not reliably load assets far below the fold.
   // Inspect each real image in view before recording the visual evidence.
-  for (const asset of await page.locator('main .cx83-interior-run2 img').all()) {
+  for (const asset of await page.locator('main .cx83-interior-run2 img:visible').all()) {
     await asset.scrollIntoViewIfNeeded()
     await expect.poll(
       () => asset.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0),
