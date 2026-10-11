@@ -137,8 +137,8 @@ test.describe('Interior Run 2 product and proof journeys', () => {
     for (const id of ['examples', 'marketing', 'operations', 'system-map', 'ownership', 'real-proof', 'questions']) {
       await expect(page.locator('#' + id)).toHaveCount(1)
     }
-    const technical = page.locator('.cx83-technical-disclosure')
-    await technical.locator('summary').focus()
+    const technical = page.locator('#system-map > .cx83-technical-disclosure')
+    await technical.locator(':scope > summary').focus()
     await page.keyboard.press('Enter')
     await expect(technical).toHaveAttribute('open', '')
     await expect(page.getByTestId('systems-map')).toBeVisible()
