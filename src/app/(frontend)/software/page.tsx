@@ -29,11 +29,11 @@ export default function SoftwareCatalogPage() {
                     alt="Poster from a recorded CX83 website change demonstration" />
                 ) : (
                   <Image className="cx83-software-card-symbol" src="/brand/symbol-showcase.svg" width={160} height={160}
-                    alt="Original CX83 brand symbol" />
+                    alt="CX83 brand symbol created with Client Brand Studio" />
                 )}
                 <figcaption>{product.slug === 'connected-websites'
                   ? 'Actual CX83 website demonstration'
-                  : 'Original source artwork, not a Studio output'}</figcaption>
+                  : 'Original CX83 branding created with Client Brand Studio.'}</figcaption>
               </figure>
               <div className="cx83-software-card-copy">
                 <span className="cx83-software-status">{product.releaseStatus}</span>
