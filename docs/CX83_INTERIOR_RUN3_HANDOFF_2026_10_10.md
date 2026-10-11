@@ -49,3 +49,13 @@ Complete checks and visual acceptance, publish only the captured staging founder
 ## RECOVERY
 
 Revert only this scoped application change through the existing staging workflow. If needed restore only the captured founder field after checking for newer owner edits. Preserve unrelated work, Home, media and Cat header. No rollback has been performed.
+
+## October 11 continuation, focused validation repairs
+
+Resumed PR 39 at 92dbb11a after owner requested completion through staging deployment. Completed workflow 38117125070 passed TypeScript, lint and 83 integration tests; browser result was 128 passed, 3 failed, 1 flaky and 1 not run. Two older Cat tests asserted superseded About content, default Services starters and the former focus-return defect. Those expectations now follow the approved Run 3 contract without deleting the navigation or header regressions. The new synthetic page fixture now supplies the layout block required by the existing CMS schema. The multi-route utility journey receives a bounded 90-second budget for six cold route compilations.
+
+Actual iPhone Mirroring input on the existing staging version exposed Safari zoom on the 14px Cat input. A scoped phone rule raises only that input to 1rem; no panel/header redesign. About metadata now avoids repeating the brand through the layout title template. Both have targeted browser assertions.
+
+Earlier live review inspected the Run 2 catalog, both product pages, Work and loaded workflow illustrations at 390px, and customer anchor clearance (96px below viewport top, sticky header bottom 77px). Desktop About baseline was 3473px high at 1440x1000. Temporary local screenshots were lost when the owner restarted the computer; repository source and CI artifacts remained intact. Final captures must be saved anew.
+
+Artifact transfer into the earlier local sandbox failed. Complete visual acceptance will use the actual protected staging deployment after the automated gate, consistent with the owner's explicit continuation to deployment. Exact runtime and current CMS checks remain required. Real iPhone text entry was observed, but Mirroring used the Mac keyboard, so a visible mobile software keyboard is not claimed.

@@ -45,6 +45,7 @@ test.describe('Interior Run 3', () => {
         if (route === '/about') {
           await expect(page.locator('[data-testid="approved-about-story"] p')).toHaveText(approved)
           await expect(page.getByRole('heading', { level: 1 })).toHaveText('About CX83 Labs')
+          await expect(page).toHaveTitle('About CX83 Labs')
           await expect(page.getByRole('link', { name: 'Start a conversation' })).toHaveAttribute('href', '/contact')
         }
         const measure = await page.evaluate(() => ({ width: innerWidth, height: innerHeight, client: document.documentElement.clientWidth, scroll: document.documentElement.scrollWidth, pageHeight: document.documentElement.scrollHeight }))
@@ -105,11 +106,16 @@ test.describe('Interior Run 3', () => {
     await menu.click()
     await page.getByRole('navigation', { name: 'Mobile' }).getByRole('button', { name: 'Ask Cat' }).click()
     await expect(page.getByRole('dialog')).toContainText('Assistant temporarily unavailable')
+    const input = page.getByRole('textbox', { name: 'Message Cat' })
+    expect(await input.evaluate((element) => parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(16)
+    await input.fill('Synthetic unsent phone input.')
+    await expect(page.getByRole('dialog').getByRole('button', { name: 'Close Cat', exact: true })).toBeInViewport()
     await page.keyboard.press('Escape')
     await expect(menu).toBeFocused()
   })
 
   test('Notes search preserves and encodes the query, missing routes recover honestly', async ({ page }) => {
+    test.setTimeout(90_000) // Six initially cold Next route families are exercised in this journey.
     await page.goto(host + '/search?q=missing%20%26%20synthetic')
     await expect(page.getByRole('searchbox', { name: 'Search notes' })).toHaveValue('missing & synthetic')
     await expect(page.getByText('Search covers published articles, not every website page.')).toBeVisible()
@@ -126,6 +132,7 @@ test.describe('Interior Run 3', () => {
     }
   })
   test('published CMS page and article templates have headings, recovery and real article search', async ({ page }) => {
+    test.setTimeout(90_000)
     const slug = 'run3-synthetic-utility'
     let pageId: number | undefined
     let postId: number | undefined
@@ -136,7 +143,7 @@ test.describe('Interior Run 3', () => {
     ] } }
     try {
       pageId = (await payload.create({ collection: 'pages', overrideAccess: true, data: {
-        title: 'Synthetic Run 3 Page', slug, hero: { type: 'lowImpact' }, layout: [], _status: 'published',
+        title: 'Synthetic Run 3 Page', slug, hero: { type: 'lowImpact' }, layout: [{ blockType: 'content', columns: [{ size: 'full', richText }] }], _status: 'published',
       } })).id
       postId = (await payload.create({ collection: 'posts', overrideAccess: true, data: {
         title: 'Synthetic Run 3 Article', slug, content: richText, _status: 'published',

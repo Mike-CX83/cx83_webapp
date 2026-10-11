@@ -13,7 +13,7 @@ export const dynamic = 'force-dynamic'
 const description = 'How nursing, hospice care and software engineering shaped CX83 Labs and its commitment to practical technology and customer independence.'
 
 export const metadata: Metadata = {
-  title: approvedAboutTitle,
+  title: { absolute: approvedAboutTitle },
   description,
   openGraph: mergeOpenGraph({ title: approvedAboutTitle, description, url: '/about' }),
 }
