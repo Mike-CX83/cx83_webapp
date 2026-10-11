@@ -9,17 +9,17 @@ const products = [
 test.describe('CX83 software catalog', () => {
   test('software navigation opens the real catalog and product details', async ({ page }) => {
     await page.goto(base + '/software')
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Tools you can make your own.')
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Software that puts you in control.')
     await expect(page.locator('.cx83-software-card')).toHaveCount(2)
     await expect(page.locator('.cx83-software-card .cx83-software-status')).toHaveText(['In development', 'In development'])
     await expect(page.getByRole('navigation', { name: 'Primary' }).getByRole('link', { name: 'Software' })).toHaveAttribute('aria-current', 'page')
     for (const { slug, name } of products) {
-      await expect(page.locator('.cx83-software-card').filter({ hasText: name }).getByRole('link', { name: 'Explore the product', exact: false })).toHaveAttribute('href', '/software/' + slug)
+      await expect(page.locator('.cx83-software-card').filter({ hasText: name }).getByRole('link', { name: /^Explore / })).toHaveAttribute('href', '/software/' + slug)
       await page.goto(base + '/software/' + slug)
       await expect(page.getByRole('heading', { level: 1 })).toHaveText(name)
-      await expect(page.getByRole('heading', { name: 'Customer release not available yet.' })).toBeVisible()
-      await expect(page.getByRole('link', { name: 'Ask about this software', exact: false })).toHaveAttribute('href', '/contact')
-      await expect(page.getByRole('link', { name: 'All CX83 software', exact: false })).toHaveAttribute('href', '/software')
+      await expect(page.locator('.cx83-product-availability')).toContainText('customer installation package is not released')
+      await expect(page.getByRole('link', { name: 'Start a conversation' })).toHaveAttribute('href', '/contact?context=' + slug + '#contact-form')
+      await expect(page.getByRole('link', { name: 'Back to Software' })).toHaveAttribute('href', '/software')
       await expect(page.getByRole('link', { name: /^(Buy|Download|Checkout|Purchase)/i })).toHaveCount(0)
       await page.goto(base + '/software')
     }

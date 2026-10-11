@@ -1,0 +1,153 @@
+{
+  "project": "Mike-CX83/cx83_webapp",
+  "baseline": "dd12c886d4ff183a29c447d19fa70cd7869b7669",
+  "tested_head": "027be8bf15442342b552a592e1722722330078d2",
+  "comparison": "Git blob object IDs, protected source and media",
+  "unchanged": [
+    {
+      "path": "public/brand/PROVENANCE.md",
+      "sha": "c2a3ed301ef4e4c55899d21ecf4c9a0fdbe57075",
+      "same": true
+    },
+    {
+      "path": "public/brand/README.md",
+      "sha": "10179ca99c99d0b071333eafefa80e2b39aabef3",
+      "same": true
+    },
+    {
+      "path": "public/brand/cx83-atmosphere-wide.webp",
+      "sha": "28c0291196dca68cc65029af75109475ce779053",
+      "same": true
+    },
+    {
+      "path": "public/brand/cx83-labs-hero.avif",
+      "sha": "3afb58548ceed0dab3c814991d5894ce09c16d5a",
+      "same": true
+    },
+    {
+      "path": "public/brand/logo-dark.svg",
+      "sha": "dda8f55ffb46259dfceed4ee94f11a3496153fb7",
+      "same": true
+    },
+    {
+      "path": "public/brand/logo-light.svg",
+      "sha": "fd036c0ae3a46d8c8a70617088e5b72646894317",
+      "same": true
+    },
+    {
+      "path": "public/brand/symbol-showcase.svg",
+      "sha": "8d064852cc97abb0253c6038987489631414b4c5",
+      "same": true
+    },
+    {
+      "path": "public/connections/README.md",
+      "sha": "4089eaa354db0b84760f640dc42b15693773fe51",
+      "same": true
+    },
+    {
+      "path": "public/connections/cx83-connections-overview.webp",
+      "sha": "3e5c7c2e462d9542ce179858dccf3376a9407a56",
+      "same": true
+    },
+    {
+      "path": "public/connections/cx83-customer-connections.webp",
+      "sha": "8799b988a1509b9c01aebd8d1325e6aba27eb498",
+      "same": true
+    },
+    {
+      "path": "public/connections/cx83-marketing-connections.webp",
+      "sha": "59fcd61976ccfeaf8f716e1480b216024fd62404",
+      "same": true
+    },
+    {
+      "path": "public/connections/cx83-operations-connections.webp",
+      "sha": "40c0b5920afb5b4371e3329226e0c474d24d958b",
+      "same": true
+    },
+    {
+      "path": "public/showcase/README.md",
+      "sha": "94d30ee591bad195206307fa5cb13c495d97c861",
+      "same": true
+    },
+    {
+      "path": "public/showcase/cx83-website-showcase-poster-v2.jpg",
+      "sha": "e72924405b648d6f22a8bc9f4e101b6b85dc5723",
+      "same": true
+    },
+    {
+      "path": "public/showcase/cx83-website-showcase-v2.en.vtt",
+      "sha": "fab96a084bcf755a37e87d74ec7e3899c4403d21",
+      "same": true
+    },
+    {
+      "path": "public/showcase/cx83-website-showcase-v2.mp4",
+      "sha": "27ea8261d137add910fc156799451f4f3bd1999d",
+      "same": true
+    },
+    {
+      "path": "src/app/(frontend)/contact/page.tsx",
+      "sha": "f2ba30c608d26865667760ebb08e646f69ff5445",
+      "same": true
+    },
+    {
+      "path": "src/app/(frontend)/page.tsx",
+      "sha": "5ad8a992f6a651e1f71904e638b979754ddbeeb7",
+      "same": true
+    },
+    {
+      "path": "src/app/(frontend)/services/[slug]/page.tsx",
+      "sha": "39be68eff2499302732f6b516310429009116b80",
+      "same": true
+    },
+    {
+      "path": "src/app/(frontend)/services/page.tsx",
+      "sha": "3a365ac38a273d6aafb05ab1aab8dafc32418e35",
+      "same": true
+    },
+    {
+      "path": "src/components/assistant/AssistantWidget.tsx",
+      "sha": "37cddef8e819808651bc0293f66dcdd747bfe413",
+      "same": true
+    },
+    {
+      "path": "src/components/site/InquiryForm.tsx",
+      "sha": "ebcc04eba2542acf77ee24831a4bfb1c64de00c4",
+      "same": true
+    },
+    {
+      "path": "src/components/site/SiteFooter.tsx",
+      "sha": "b9aedce363fd24a46c4bd861889bb192c10345e8",
+      "same": true
+    },
+    {
+      "path": "src/components/site/SiteHeader.tsx",
+      "sha": "45540bab3a2362faeac935798afc011d94a3ff86",
+      "same": true
+    },
+    {
+      "path": "src/forms/ensure-inquiry-form.ts",
+      "sha": "b28c703b076709f03ce332877a687cea5cd411df",
+      "same": true
+    },
+    {
+      "path": "src/forms/inquiry.ts",
+      "sha": "8924f3705881e4d59b848637ef79d1eb4cc46729",
+      "same": true
+    },
+    {
+      "path": "src/forms/inquiryContext.ts",
+      "sha": "b8e5161b1e26067f885020ad5c703a18eb33056b",
+      "same": true
+    },
+    {
+      "path": "src/forms/inquiryMailer.ts",
+      "sha": "0b8a6723a58a408007e5ee598384420531901873",
+      "same": true
+    },
+    {
+      "path": "src/forms/inquiryOutbox.ts",
+      "sha": "88736e32eab7244d17c234cbf3c4240569935854",
+      "same": true
+    }
+  ]
+}

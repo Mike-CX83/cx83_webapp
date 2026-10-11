@@ -1,86 +1,84 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
-import { PageHero, Section } from '@/components/site/Section'
 import { ConnectionExamples } from '@/components/site/ConnectionVisuals'
-import { SystemsMap } from '@/components/site/SystemsMap'
 import { Cx83FAQ } from '@/components/site/Cx83FAQ'
+import { InteriorHero, InteriorSection } from '@/components/site/InteriorPage'
+import { SystemsMap } from '@/components/site/SystemsMap'
+
+import '../interior-run2.css'
 
 export const metadata: Metadata = {
   title: 'How CX83 Works',
-  description: 'Explore examples of connected customer follow ups, marketing and operations, with your team in control.',
+  description: 'Explore illustrative customer, marketing and operations connections, actual CX83 website evidence and customer control.',
 }
 
 export default function HowItWorksPage() {
   return (
-    <div className="cx83-run2-page">
-      <PageHero eyebrow="Possibilities for your business" title="Your work. Connected tools. Clear control.">
-        <p>Start with the tools you already use. Connect the steps that slow you down, and keep your team in control of what happens next.</p>
-      </PageHero>
-      <Section className="cx83-connection-examples" id="examples">
-        <p className="cx83-run2-eyebrow">A few ways it could work</p>
-        <h2 className="cx83-run2-section-title">Connect the work behind your business.</h2>
-        <p className="cx83-run2-lead">Customers, marketing and operations are three places to start. Each example brings familiar tools together around a useful result.</p>
-        <p className="cx83-connection-note">Example connections. We choose and test tools for each client.</p>
-        <ConnectionExamples />
-      </Section>
-      <Section className="cx83-run2-map-section" id="system-map">
-        <details className="cx83-technical-disclosure">
-          <summary>Explore the technical details</summary>
-          <div className="cx83-technical-disclosure-content">
-        <p className="cx83-run2-eyebrow">Explore the connected ecosystem</p>
-        <h2 className="cx83-run2-section-title">See how CX83 connects the tools behind your business.</h2>
-        <p className="cx83-run2-lead">Select a tool or choose a workflow to explore. Every branch shows how a request becomes action, what it can access and whether that connection has actually been demonstrated.</p>
-        <SystemsMap />
-          </div>
-        </details>
-      </Section>
-      <Section className="cx83-run2-ownership" id="ownership">
-        <div className="cx83-run2-ownership-grid">
+    <div className="cx83-interior-root cx83-interior-run2 cx83-how" data-testid="cx83-how-page">
+      <InteriorHero title="Your work. Connected tools. Clear control." id="how-title">
+        <p>Choose a practical example, see where people approve the next step, and explore the real CX83 website implementation.</p>
+      </InteriorHero>
+      <InteriorSection>
+        <section id="examples" className="cx83-connection-examples" aria-labelledby="how-examples-title">
+          <h2 id="how-examples-title">Three ways connected tools could help.</h2>
+          <p className="cx83-how-intro">These are illustrative workflows. CX83 chooses, authorizes and tests each connection for a particular project.</p>
+          <nav className="cx83-how-guide" aria-label="Jump to a business example">
+            <Link href="#customers">Customers <span aria-hidden="true">↗</span></Link>
+            <Link href="#marketing">Marketing <span aria-hidden="true">↗</span></Link>
+            <Link href="#operations">Operations <span aria-hidden="true">↗</span></Link>
+          </nav>
+          <ConnectionExamples />
+        </section>
+      </InteriorSection>
+      <InteriorSection className="cx83-how-technical-section">
+        <section id="system-map" aria-label="Technical map">
+          <details className="cx83-technical-disclosure">
+            <summary>Explore the technical details</summary>
+            <div className="cx83-technical-disclosure-content">
+              <h2>See the authorizations behind a real connection.</h2>
+              <p className="cx83-how-intro">Choose a layer or workflow to inspect the access and review boundaries. Provider logos explain possibilities, not universal live integrations or endorsements.</p>
+              <SystemsMap />
+            </div>
+          </details>
+        </section>
+      </InteriorSection>
+      <InteriorSection>
+        <section id="ownership" className="cx83-how-ownership cx83-interior-reading" aria-labelledby="how-control-title">
+          <h2 id="how-control-title">A system you understand and can control.</h2>
+          <p>We design around your accounts, data and approved permissions. Software rights depend on its actual license. Hosting, third party tools, AI usage and optional CX83 setup or managed support are separate decisions.</p>
+          <p>Customer installation packages are still being tested. The questions below explain the current boundaries in more detail.</p>
+          <Link className="cx83-interior-link" href="#questions">
+            Review common ownership questions <span aria-hidden="true">↗</span>
+          </Link>
+        </section>
+      </InteriorSection>
+      <InteriorSection className="cx83-how-proof-section">
+        <section id="real-proof" aria-labelledby="how-proof-title" className="cx83-how-proof">
           <div>
-            <p className="cx83-run2-eyebrow">What you own</p>
-            <h2 className="cx83-run2-section-title">Software you can keep. Systems you can grow.</h2>
-            <p>We are developing supported software that customers can operate on approved hosting and connect to their own supported AI. Keeping a licensed version is different from purchasing ongoing CX83 management.</p>
-            <Link className="cx83-run2-text-link" href="/software">Explore software in development <span aria-hidden="true">↗</span></Link>
+            <p className="cx83-work-kicker">Verified first party staging, October 10, 2026</p>
+            <h2 id="how-proof-title">A real change to the CX83 website.</h2>
+            <p>Actual owner requests became code changes, reviewed pages and a verified protected staging release. The October 10 interior refinement passed 77 integration tests and 111 browser tests. This is not an available customer installer or a claimed client outcome.</p>
           </div>
-          <div className="cx83-run2-control-facts">
-            <h3>Control and costs are separate decisions.</h3>
-            <dl>
-              <div><dt>Software and files</dt><dd>Actual ownership rights come from each approved release license.</dd></div>
-              <div><dt>Hosting and data</dt><dd>Customer-controlled where the release supports it, with backups and operations planned.</dd></div>
-              <div><dt>AI and third parties</dt><dd>Models, automation, email and other services may carry independent fees.</dd></div>
-              <div><dt>Optional CX83 services</dt><dd>Setup, updates, support and managed operations may be separately scoped.</dd></div>
-            </dl>
+          <Link className="cx83-interior-link" href="/work#cx83-connected-website">
+            View the dated implementation in Work <span aria-hidden="true">↗</span>
+          </Link>
+        </section>
+      </InteriorSection>
+      <InteriorSection>
+        <div id="questions" className="cx83-how-faq">
+          <Cx83FAQ />
+        </div>
+        <div className="cx83-interior-closing">
+          <div>
+            <h2>Start with one problem worth fixing.</h2>
+            <p>Tell us what your team repeats, where information gets lost or what you want to control.</p>
           </div>
+          <Link className="cx83-action cx83-action-primary" href="/contact">
+            Start a conversation <span aria-hidden="true">↗</span>
+          </Link>
         </div>
-        <p className="cx83-run2-caveat">This is a product goal, not a released perpetual license, approved hosting matrix or promise of free third-party services. Customer installers are not available yet.</p>
-      </Section>
-      <Section className="cx83-run2-proof-record" id="real-proof">
-        <p className="cx83-run2-eyebrow">Real first-party demonstration</p>
-        <h2 className="cx83-run2-section-title">This site is the proof, not a mockup.</h2>
-        <p className="cx83-run2-lead">On October 9, 2026, the actual CX83 website received source updates for its design, navigation and public Cat experience, then passed checks and deployed to protected staging.</p>
-        <div className="cx83-run2-proof-facts">
-          <div><span>01 / Requested</span><strong>Consistent CX83 identity and a functional public AI interface</strong></div>
-          <div><span>02 / Verified</span><strong>29 integration tests and 46 browser tests passed</strong></div>
-          <div><span>03 / Deployed</span><strong>Password-protected staging was verified; no public launch claimed</strong></div>
-        </div>
-        <p className="cx83-run2-caveat">Evidence: verified Run 1 staging workflow 38015054550, application commit <code>cdae3ebab225cbe2bb362a1109da1d439abb3421</code>. The underlying repository is private, so public readers are directed to working pages instead of inaccessible source links.</p>
-        <div className="cx83-run2-proof-links">
-          <Link className="cx83-run2-text-link" href="/about">Explore the updated About page <span aria-hidden="true">↗</span></Link>
-          <Link className="cx83-run2-text-link" href="/software">Explore the software pages <span aria-hidden="true">↗</span></Link>
-        </div>
-      </Section>
-      <Section className="cx83-run3-faq-section" id="questions">
-        <Cx83FAQ />
-      </Section>
-      <Section className="cx83-run2-closing">
-        <div>
-          <p className="cx83-run2-eyebrow">Ready to connect your work?</p>
-          <h2 className="cx83-run2-section-title">Start with a specific business problem.</h2>
-          <p>We can identify what already works, which connections are worth adding and what you want to control.</p>
-        </div>
-        <Link className="cx83-action cx83-action-primary" href="/contact">Talk to CX83 <span aria-hidden="true">↗</span></Link>
-      </Section>
+      </InteriorSection>
     </div>
   )
 }

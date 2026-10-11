@@ -1,12 +1,14 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-import { PageHero, Section } from '@/components/site/Section'
-import { getSoftwareProduct, softwareProducts } from '@/content/softwareCatalog'
 import { BrandStudioSpotlight } from '@/components/site/BrandStudioSpotlight'
+import { InteriorHero, InteriorSection } from '@/components/site/InteriorPage'
+import { getSoftwareProduct, softwareProducts } from '@/content/softwareCatalog'
+import { inquiryContextHref } from '@/forms/inquiryContext'
 
-import '../software.css'
+import '../../interior-run2.css'
 
 type Args = { params: Promise<{ slug: string }> }
 
@@ -27,79 +29,83 @@ export default async function SoftwareDetailPage({ params }: Args) {
   const { slug } = await params
   const product = getSoftwareProduct(slug)
   if (!product) notFound()
+  const connected = product.slug === 'connected-websites'
 
   return (
-    <div className="cx83-software">
-      <PageHero eyebrow="CX83 Software" title={product.name}>
+    <div className="cx83-interior-root cx83-interior-run2 cx83-software" data-testid="cx83-software-detail">
+      <InteriorHero
+        title={product.name}
+        id="software-product-title"
+        backHref="/software"
+        backLabel="Back to Software"
+      >
         <p>{product.shortDescription}</p>
-      </PageHero>
-      <Section>
-        <Link className="cx83-shared-text-link cx83-software-back" href="/software">← All CX83 software</Link>
-        <div className="cx83-software-detail-intro">
-          <div>
-            <p className="cx83-software-eyebrow">{product.label}</p>
-            <h2>Built to make the work easier.</h2>
-            <p>{product.overview}</p>
-          </div>
-          <aside className="cx83-software-detail-status" aria-label="Software availability">
-            <span className="cx83-software-status">{product.releaseStatus}</span>
-            <h3>Customer release not available yet.</h3>
-            <p>Development is continuing. We will share verified packages, requirements, and availability when the release is ready.</p>
-            <p className="cx83-software-updated">Verified {product.lastVerified}</p>
-            <Link href="/contact" className="cx83-software-detail-link">Ask about this software <span aria-hidden="true">↗</span></Link>
-          </aside>
-        </div>
-      </Section>
-
-      {product.slug === 'client-brand-studio' ? (
-        <Section className="cx83-run2-product-story">
-          <p className="cx83-run2-eyebrow">Actual development stage</p>
-          <h2 className="cx83-run2-section-title">A working draft engine, still awaiting release acceptance.</h2>
-          <p className="cx83-run2-lead">Development build 0.8.4 produces draft materials from supplied artwork and a saved brief. Human visual approval, full Office compatibility and customer packaging still need acceptance.</p>
-          <BrandStudioSpotlight />
-        </Section>
-      ) : (
-        <Section className="cx83-run2-product-story">
-          <p className="cx83-run2-eyebrow">Actual example: this CX83 website</p>
-          <h2 className="cx83-run2-section-title">A change request became real, tested pages.</h2>
-          <p className="cx83-run2-lead">This existing website uses connected owner tools. The October 9 update changed the actual brand presentation, public Cat assistant and About page, then passed checks before staging publication.</p>
-          <div className="cx83-run2-verified-path">
-            <div><span>01 / Request</span><h3>Describe the change</h3><p>Keep the original banner and improve the identity and visitor interface.</p></div>
-            <div><span>02 / Verify</span><h3>Run the tests</h3><p>29 integration and 46 browser tests passed at the verified Run 1 gate.</p></div>
-            <div><span>03 / Deploy</span><h3>Publish to staging</h3><p>Application commit cdae3eba passed the staging health and password gate.</p></div>
-          </div>
-          <Link className="cx83-run2-text-link" href="/how-it-works#real-proof">See the real site workflow <span aria-hidden="true">↗</span></Link>
-          <p className="cx83-run2-caveat">This is first-party site evidence, not a released installer or one-click commercial setup.</p>
-        </Section>
-      )}
-      <Section className="cx83-software-features">
-        <p className="cx83-software-eyebrow">What we are working toward</p>
-        <h2>Useful features, not complexity for its own sake.</h2>
-        <div className="cx83-software-features-grid">
-          {product.benefits.map((benefit, index) => (
-            <article key={benefit.title} className="cx83-software-benefit">
-              <span className="cx83-software-number">0{index + 1}</span>
-              <h3>{benefit.title}</h3>
-              <p>{benefit.description}</p>
-            </article>
-          ))}
-        </div>
-      </Section>
-      <Section>
-        <p className="cx83-software-eyebrow">Before you install</p>
-        <h2 className="cx83-software-detail-heading">What to expect from a supported release.</h2>
-        <dl className="cx83-software-facts">
-          <div><dt>Who it is for</dt><dd>{product.audience}</dd></div>
+      </InteriorHero>
+      <InteriorSection>
+        <p className="cx83-product-availability">
+          <strong>{product.releaseStatus}.</strong> The customer installation package is not released. We can discuss a scoped project today.
+        </p>
+        {connected ? (
+          <>
+            <div className="cx83-product-opening">
+              <div className="cx83-interior-reading">
+                <h2>Ask for a real change through your connected AI.</h2>
+                <p>With an authorized owner connection, a request can become an actual website update. The owner reviews the proposed change, and the configured checks and approvals govern publication.</p>
+                <ol className="cx83-product-steps">
+                  <li><strong>Describe</strong><span>Explain what needs to change in your own words.</span></li>
+                  <li><strong>Review</strong><span>Inspect the update and its tests before approval.</span></li>
+                  <li><strong>Publish</strong><span>Use the configured release workflow when the result is ready.</span></li>
+                </ol>
+              </div>
+              <figure className="cx83-product-proof-visual">
+                <Image src="/showcase/cx83-website-showcase-poster-v2.jpg" width={1920} height={1080}
+                  alt="Poster frame from the recorded CX83 website change walkthrough" />
+                <figcaption>Recorded first party demonstration on this website. It is not a customer installer preview.</figcaption>
+                <Link className="cx83-interior-link" href="/#showcase-title">
+                  Watch the real website demonstration <span aria-hidden="true">↗</span>
+                </Link>
+              </figure>
+            </div>
+            <div className="cx83-product-evidence-link">
+              <h2>Demonstrated here, not yet packaged for customers.</h2>
+              <p>Changes to this CX83 website have been reviewed, tested and deployed on protected staging. Customer hosting, installation and supported AI connections still require release qualification.</p>
+              <Link className="cx83-interior-link" href="/work#cx83-connected-website">
+                See the dated CX83 implementation record <span aria-hidden="true">↗</span>
+              </Link>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="cx83-interior-reading cx83-product-studio-intro">
+              <h2>From existing artwork to coordinated drafts.</h2>
+              <p>Studio uses a saved direction and authorized brand files to produce draft design materials for review. It does not replace the client&#39;s identity or publish files without human acceptance.</p>
+            </div>
+            <BrandStudioSpotlight variant="detail" />
+            <section className="cx83-product-evidence-link" id="studio-review" aria-labelledby="studio-review-title">
+              <h2 id="studio-review-title">Draft output still needs acceptance.</h2>
+              <p>Visual quality, file compatibility, supported installation and customer packaging are still being evaluated. No approved customer output or retail release is presented here. The illustration above uses original CX83 source artwork only.</p>
+            </section>
+          </>
+        )}
+      </InteriorSection>
+      <InteriorSection className="cx83-product-practical-section">
+        <h2>Fit, setup and meaningful control.</h2>
+        <dl className="cx83-product-facts">
+          <div><dt>Who it helps</dt><dd>{product.audience}</dd></div>
           <div><dt>Setup and compatibility</dt><dd>{product.setup}</dd></div>
-          <div><dt>Software and data ownership</dt><dd>{product.ownership}</dd></div>
-          <div><dt>Guidance and support</dt><dd>{product.support}</dd></div>
+          <div><dt>Software and data</dt><dd>{product.ownership}</dd></div>
+          <div><dt>Optional help</dt><dd>{product.support} Hosting, AI usage, third party fees and optional CX83 services are distinct from software licensing.</dd></div>
         </dl>
-        <div className="cx83-software-detail-final">
-          <h2>Want to talk through your project?</h2>
-          <p>We can discuss a business website or automation project without waiting for a packaged software release.</p>
-          <Link className="cx83-action cx83-action-primary" href="/contact">Contact CX83 Labs <span aria-hidden="true">↗</span></Link>
+        <div className="cx83-interior-closing">
+          <div>
+            <h2>Want to discuss this product?</h2>
+            <p>Tell us what you want to build or improve. We will distinguish what is demonstrated from what is still being prepared.</p>
+          </div>
+          <Link className="cx83-action cx83-action-primary" href={inquiryContextHref(product.slug)}>
+            Start a conversation <span aria-hidden="true">↗</span>
+          </Link>
         </div>
-      </Section>
+      </InteriorSection>
     </div>
   )
 }

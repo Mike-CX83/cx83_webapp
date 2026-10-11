@@ -1,14 +1,18 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 
-import { ContentNotice, PageHero, Section } from '@/components/site/Section'
+import { ContentNotice } from '@/components/site/Section'
+import { InteriorHero, InteriorSection } from '@/components/site/InteriorPage'
 import { loadCaseStudies, loadProjects } from '@/content/load'
+
+import '../interior-run2.css'
 
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Work',
-  description: 'Projects and case studies from CX83 Labs.',
+  description: 'See verified first party website work at CX83 Labs and authorized published projects.',
 }
 
 export default async function WorkPage() {
@@ -16,46 +20,88 @@ export default async function WorkPage() {
   const source = projects.source === 'unavailable' || caseStudies.source === 'unavailable' ? 'unavailable' : 'payload'
 
   return (
-    <>
-      <PageHero eyebrow="Work" title="Projects and case studies.">
-        <p>See real projects and the systems we are building. We only share work that we can demonstrate.</p>
-      </PageHero>
-      <Section>
+    <div className="cx83-interior-root cx83-interior-run2 cx83-work" data-testid="cx83-work-page">
+      <InteriorHero title="See what changed in the real world." id="work-title">
+        <p>Here is a verified CX83 implementation. Customer work appears only when it has been approved for publication.</p>
+      </InteriorHero>
+      <InteriorSection>
         <ContentNotice source={source} />
-        <h2 className="text-2xl font-semibold tracking-tight">Projects</h2>
+        <article id="cx83-connected-website" aria-labelledby="cx83-work-feature-title" className="cx83-work-feature">
+          <p className="cx83-work-kicker">First party implementation | CX83 website | October 2026</p>
+          <div className="cx83-work-feature-grid">
+            <div>
+              <h2 id="cx83-work-feature-title">A conversation became a verified website change.</h2>
+              <p>The CX83 website needed consistent visual identity and a Contact experience that remained usable. An authorized owner request guided real changes to the site, not an AI generated suggestion alone.</p>
+              <ol className="cx83-work-steps">
+                <li><strong>Request</strong><span>Keep the original brand identity and improve real site pages while retaining the inquiry form.</span></li>
+                <li><strong>Implementation</strong><span>Connected owner tools changed the actual CX83 code. The resulting pages and user journeys were reviewed.</span></li>
+                <li><strong>Verification</strong><span>Automated checks passed and the application was deployed to password protected staging, where the code and running release were checked.</span></li>
+              </ol>
+              <Link className="cx83-interior-link" href="/#showcase-title">
+                Watch the recorded website demonstration <span aria-hidden="true">↗</span>
+              </Link>
+            </div>
+            <figure className="cx83-work-figure">
+              <Image src="/showcase/cx83-website-showcase-poster-v2.jpg" width={1920} height={1080}
+                alt="Authentic poster for the recorded CX83 website update demonstration" />
+              <figcaption>The original recording shows an actual CX83 website change. The video is on Home and is not a customer installation demonstration.</figcaption>
+            </figure>
+          </div>
+          <div className="cx83-work-result">
+            <h3>What was actually demonstrated</h3>
+            <p>On October 10, 2026, the Services and Contact refinement passed 77 integration tests, 111 browser tests, TypeScript, lint and the production build. The merged application was verified on protected staging. This is CX83 internal implementation evidence, not a client testimonial, revenue claim or finished customer installer.</p>
+            <details className="cx83-work-evidence">
+              <summary>Read the dated engineering record</summary>
+              <p>Interior Run 1, October 10, 2026. Repository: Mike-CX83/cx83_webapp, PR 37. Validated application commit <code>f67a118cb9c3438d1b8877276d5506b42dab9210</code>. Protected staging application deployment workflow <code>38105293745</code>. Authenticated page review passed later that evening and is recorded in the repository handoff. A documentation only receipt is not the same as the application version.</p>
+            </details>
+          </div>
+        </article>
         {projects.items.length ? (
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
-            {projects.items.map((project) => (
-              <article className="cx83-shared-card" key={project.slug}>
-                <p className="text-xs tracking-[0.14em] text-muted-foreground uppercase">{project.status}</p>
-                <h3 className="mt-2 text-xl font-semibold">{project.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-muted-foreground">{project.summary}</p>
-                <Link className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold" href={`/work/projects/${project.slug}`}>
-                  View project
-                </Link>
-              </article>
-            ))}
-          </div>
-        ) : (
-          <div className="cx83-work-proof"><p>Customer projects are not published yet. You can explore real first-party evidence from the CX83 website itself instead.</p><Link href="/how-it-works#real-proof">View verified website demonstration</Link></div>
-        )}
-        <h2 className="mt-14 text-2xl font-semibold tracking-tight">Case studies</h2>
+          <section aria-labelledby="published-projects-title" className="cx83-work-published">
+            <h2 id="published-projects-title">Published projects</h2>
+            <div className="cx83-work-list">
+              {projects.items.map((project) => (
+                <article key={project.slug}>
+                  <p className="cx83-work-kicker">{project.status || 'Project'}</p>
+                  <h3>{project.title}</h3>
+                  <p>{project.summary}</p>
+                  <Link className="cx83-interior-link" href={'/work/projects/' + project.slug}>
+                    View the project <span aria-hidden="true">↗</span>
+                  </Link>
+                </article>
+              ))}
+            </div>
+          </section>
+        ) : null}
         {caseStudies.items.length ? (
-          <div className="mt-6 grid gap-4">
-            {caseStudies.items.map((study) => (
-              <article className="rounded-2xl border border-border bg-card p-6" key={study.slug}>
-                <h3 className="text-xl font-semibold">{study.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-muted-foreground">{study.summary}</p>
-                <Link className="mt-4 inline-block text-sm font-medium underline-offset-4 hover:underline" href={`/work/case-studies/${study.slug}`}>
-                  Read case study
-                </Link>
-              </article>
-            ))}
+          <section aria-labelledby="published-cases-title" className="cx83-work-published">
+            <h2 id="published-cases-title">Published case studies</h2>
+            <div className="cx83-work-list">
+              {caseStudies.items.map((study) => (
+                <article key={study.slug}>
+                  <h3>{study.title}</h3>
+                  <p>{study.summary}</p>
+                  <Link className="cx83-interior-link" href={'/work/case-studies/' + study.slug}>
+                    Read the case study <span aria-hidden="true">↗</span>
+                  </Link>
+                </article>
+              ))}
+            </div>
+          </section>
+        ) : null}
+        {!projects.items.length && !caseStudies.items.length ? (
+          <p className="cx83-work-publication-note">No customer projects or case studies have been approved for publication here yet.</p>
+        ) : null}
+        <div className="cx83-interior-closing">
+          <div>
+            <h2>Have a similar challenge?</h2>
+            <p>We can discuss a scoped improvement to your website or connected workflow.</p>
           </div>
-        ) : (
-          <p className="mt-4 text-muted-foreground">No customer case studies have been authorized for publication. We do not substitute illustrative client results.</p>
-        )}
-      </Section>
-    </>
+          <Link className="cx83-action cx83-action-primary" href="/contact">
+            Start a conversation <span aria-hidden="true">↗</span>
+          </Link>
+        </div>
+      </InteriorSection>
+    </div>
   )
 }

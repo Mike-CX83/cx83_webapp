@@ -35,6 +35,10 @@ const nextConfig: NextConfig = {
         pathname: '/connections/*.webp',
         search: '',
       },
+      {
+        pathname: '/showcase/cx83-website-showcase-poster-v2.jpg',
+        search: '',
+      },
     ],
     qualities: [100],
     remotePatterns: [
