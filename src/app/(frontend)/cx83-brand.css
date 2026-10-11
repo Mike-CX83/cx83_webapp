@@ -585,6 +585,8 @@ body { background: var(--cx83-background); color: var(--cx83-text); }
 @media (max-width: 40rem) {
   .cx83-assistant-panel { right: .75rem; left: .75rem; bottom: 5.5rem; width: auto; height: min(40rem, calc(100dvh - 7rem)); border-radius: 1rem; }
   .cx83-assistant-launcher { right: .75rem; bottom: .75rem; }
+  /* Prevent iOS focused-input zoom from obscuring Cat's existing header. */
+  .cx83-cat-input { font-size: 1rem; }
 }
 @media (max-width: 24rem) {
   .cx83-cat-starters { grid-template-columns: 1fr; }

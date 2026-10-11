@@ -1,0 +1,75 @@
+PROJECT: CX83 Labs website, Mike-CX83/cx83_webapp.
+RUN: Interior Run 3.
+STATUS: IMPLEMENTED ON ISOLATED BRANCH. Full checks, visual acceptance, CMS publication and protected staging release pending.
+HEAD: Starting staging-host 3ce50476ae87bcd999ea891967713549ac6fd400. Prior observed Run 2 runtime 64c2d227cae50a829343251e0414235b6e27ccdb. Tested, merged and deployed SHAs will be recorded only after observation.
+
+## COMPLETED
+
+Read the current master, full Run 1 and Run 2 receipts, repository instructions and personal chatgpt-cx83-website inbox. Sent scoped intent to codex-cx83-website in thread thr-3d5ad289. Run 2's incomplete visual acceptance is carried into this review.
+
+Prepared exact approved About title and three paragraphs using the existing founder textarea, with identical fallback content. No schema migration. About uses the established compact interior layout, a 68ch reading measure and one human inquiry action. Removes the superseded founder narrative, name origin, repeated mission/capabilities and public asset provenance.
+
+Cat uses exact public pathname keys for the existing four starter positions on Services and both product details. Every question is self-contained; no query string, fields or hidden state are sent. Knowledge shares the five canonical inquiry links, actual example anchors, first party evidence and truthful development status. Provider, model, transport, tokens, permissions and header markup remain unchanged.
+
+Confirmed live focus defect before editing: opening through the header then closing returned focus to the launcher. Scoped repair restores the initiating control, with a visible mobile menu fallback when its originating control is hidden.
+
+Notes/Search now identify article-only coverage and useful empty-state recovery. Search preserves and safely encodes submitted queries. Custom CMS pages lacking a rich text H1 gain their existing title; article details gain a Notes return link. CMS metadata URLs point to their actual route family.
+
+## CMS CHANGES
+
+Pending: site-settings ID 1 founder only will receive the exact approved three paragraphs. Current founder value captured from connected staging and retained in the prior source/fallback and this branch's parent. All other settings remain unchanged. Assistant settings were inspected and already describe visitor-only assistance, development products and human Contact. No contradiction requires settings mutation.
+
+Environment: docs/STAGING.md identifies the connected owner tunnel as the existing protected staging stack; live browser and read-only CMS content agree. No production mutation authorized.
+
+## VALIDATION
+
+Pending full TypeScript, lint, integration/browser suites, production build, visual inspection and live postdeployment checks. New tests cover exact full story from fallback and CMS loader, actual isolated CMS publication, route starters, focus restoration, utilities, article search, templates and private data access.
+
+Required local Next.js guide read through the source connector was refused as outside its available path. Read the official Next.js v16.3.3 Link and usePathname guides from the matching upstream tag instead. No dependency changes.
+
+## ARTIFACTS
+
+Run branch: chatgpt/interior-run3-2026-10-11.
+Approved unchanged source: docs/CX83_ABOUT_STORY_APPROVED_2026_10_10.md.
+Internal note: docs/CX83_INTERIOR_RUN3_PRIVACY_READINESS_2026_10_11.md.
+CI screenshots will use interior-run3 names under the existing browser artifact.
+
+## BLOCKED
+
+Actual mobile software keyboard testing requires a suitable device capability. Desktop Chrome viewport emulation is available and is not an actual phone keyboard. Determine the precise remaining capability after completing all available work; do not claim this check passed.
+
+## DEFERRED
+
+Existing holds remain: video audio/embedded graphics, mail OAuth and delivery, commercial product packaging/release, approved Studio outputs, identifiable client publication, privacy/retention decisions and public production launch. Published Staging check ID 5 remains untouched pending owner decision.
+
+## NEXT
+
+Complete checks and visual acceptance, publish only the captured staging founder field, verify both saved and rendered exact copy, merge through existing protected staging workflow after gates pass, independently read deploy SHA and checkout SHA, perform live customer journeys and update this receipt.
+
+## RECOVERY
+
+Revert only this scoped application change through the existing staging workflow. If needed restore only the captured founder field after checking for newer owner edits. Preserve unrelated work, Home, media and Cat header. No rollback has been performed.
+
+## October 11 continuation, focused validation repairs
+
+Resumed PR 39 at 92dbb11a after owner requested completion through staging deployment. Completed workflow 38117125070 passed TypeScript, lint and 83 integration tests; browser result was 128 passed, 3 failed, 1 flaky and 1 not run. Two older Cat tests asserted superseded About content, default Services starters and the former focus-return defect. Those expectations now follow the approved Run 3 contract without deleting the navigation or header regressions. The new synthetic page fixture now supplies the layout block required by the existing CMS schema. The multi-route utility journey receives a bounded 90-second budget for six cold route compilations.
+
+Actual iPhone Mirroring input on the existing staging version exposed Safari zoom on the 14px Cat input. A scoped phone rule raises only that input to 1rem; no panel/header redesign. About metadata now avoids repeating the brand through the layout title template. Both have targeted browser assertions.
+
+Earlier live review inspected the Run 2 catalog, both product pages, Work and loaded workflow illustrations at 390px, and customer anchor clearance (96px below viewport top, sticky header bottom 77px). Desktop About baseline was 3473px high at 1440x1000. Temporary local screenshots were lost when the owner restarted the computer; repository source and CI artifacts remained intact. Final captures must be saved anew.
+
+Artifact transfer into the earlier local sandbox failed. Complete visual acceptance will use the actual protected staging deployment after the automated gate, consistent with the owner's explicit continuation to deployment. Exact runtime and current CMS checks remain required. Real iPhone text entry was observed, but Mirroring used the Mac keyboard, so a visible mobile software keyboard is not claimed.
+
+
+## October 11, 2:10 AM CDT continuation
+
+Workflow 38119377943 passed TypeScript, lint, 83 integration tests and 131 browser tests. The one remaining failed test stopped at fixture creation because its direct Payload call invoked Next revalidation outside a server request. Both existing Page/Post hooks already support context.disableRevalidate; synthetic CI fixture creation and cleanup now use that supported context. This does not change runtime hooks or omit rendered, search or recovery assertions. One following serial test did not run. Build was skipped, so this is not a passing release.
+
+Published only staging site-settings ID 1 founder at 2026-10-11T06:58:05.848Z. Fresh readback equals all three approved paragraphs exactly; other content fields are unchanged. The approved source and fallback also compare exactly.
+
+After the owner's computer restart, the selected Chrome tab displayed 'This page has been blocked by Chrome' and ERR_BLOCKED_BY_CLIENT for staging.cx83labs.com. No protection was altered. Postdeployment visual review, real model samples and actual mobile software keyboard verification remain unverified; the owner has explicitly requested continuation through staging deployment without another stop. Preserve these acceptance limits rather than calling the full visual plan complete.
+
+
+## October 11, 2:32 AM CDT article recovery repair
+
+Workflow 38120450095 passed TypeScript, lint, 83 integration tests and 131 browser tests. The fixed fixture successfully published and rendered the synthetic page and article. Its normal Back to Notes click exposed a real overlap: the existing PostHero negative top margin placed its container over the preceding link and intercepted clicks. The link now follows PostHero in normal document flow with top spacing. The regression retains its normal pointer click at 390px and 1440px; no forced click or skipped assertion is used. Search and the following serial privacy check still require a complete passing run. This workflow failed and is not release evidence.

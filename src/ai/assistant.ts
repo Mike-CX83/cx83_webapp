@@ -1,5 +1,6 @@
 import { loadCaseStudies, loadProjects, loadServices, loadSiteCopy } from '@/content/load'
 import { getPayloadClient } from '@/lib/payload'
+import { publicNavigationKnowledge } from '@/content/assistantNavigation'
 import { softwareProducts } from '@/content/softwareCatalog'
 
 const defaultOpenAIModel = 'gpt-6-luna'
@@ -102,9 +103,9 @@ export async function buildApprovedKnowledge(): Promise<string> {
       ? `Scheduling: ${site.copy.schedulingLabel} at ${site.copy.schedulingUrl}`
       : 'Scheduling: a scheduling link has not been published yet. Direct visitors to the contact form.',
     '',
-    'Brand: CX83 Labs. Direct questions about the name origin to /about. Our founder is Mike Hankins, whose nursing and hospice operations background informed the company founded in 2025.',
+    'Brand: CX83 Labs. Use the approved About story above for founder information; do not add a name-origin explanation or founding date.',
     'Cat is the CX83 Labs public visitor assistant. Cat can only explain approved public information; it cannot administer, edit, deploy, bill or access customer records. The owner AI is separate and works only through authorized owner tools.',
-    'Public routes: / (website demonstration), /about (founder and mission), /services (scoped work), /software (products being developed), /work (published projects and case studies only), /contact (business inquiry form). Link to the matching route in answers.',
+    publicNavigationKnowledge,
     'Ownership philosophy: CX83 is working toward customer-controlled and supported self-hosted software; licensing, supported hosting, updates and third-party usage costs are not yet approved for customer releases. Do not promise a free or perpetual license.',
     '',
     'Software products, all currently in development and not released for download, trial or purchase:',
@@ -113,14 +114,14 @@ export async function buildApprovedKnowledge(): Promise<string> {
     'Services:',
     ...services.items.map(
       (service) =>
-        `- ${service.name}: ${service.shortDescription} ${service.description} Capabilities: ${service.capabilities.join(', ')}`,
+        `- ${service.name} (/services/${service.slug}): ${service.shortDescription} ${service.description} Capabilities: ${service.capabilities.join(', ')}`,
     ),
     '',
     projects.items.length
       ? `Projects:\n${projects.items
           .map(
             (project) =>
-              `- ${project.title} (${project.status || 'status not set'}): ${project.summary} ${project.description} Technology: ${project.technologies.join(', ')}`,
+              `- ${project.title} (/work/projects/${project.slug}, ${project.status || 'status not set'}): ${project.summary} ${project.description} Technology: ${project.technologies.join(', ')}`,
           )
           .join('\n')}`
       : 'Projects: none published.',
@@ -129,13 +130,12 @@ export async function buildApprovedKnowledge(): Promise<string> {
       ? `Case studies:\n${caseStudies.items
           .map(
             (study) =>
-              `- ${study.title}: ${study.summary} Problem: ${study.problem || 'not published'} Outcome: ${study.outcome || 'not published'}`,
+              `- ${study.title} (/work/case-studies/${study.slug}): ${study.summary} Problem: ${study.problem || 'not published'} Outcome: ${study.outcome || 'not published'}`,
           )
           .join('\n')}`
       : 'Case studies: none published.',
     '',
-    'How to start: use the contact form at /contact. Ask a short clarifying question before recommending a next step.',
-    `Content source for this request: ${site.source === 'payload' ? 'Payload' : 'development fallback because PostgreSQL is not connected'}.`,
+    'How to start: choose the specific inquiry destination above when the visitor names a service or product. Ask one short clarifying question only when needed.',
   ]
 
   return lines.join('\n')
@@ -147,7 +147,7 @@ export function buildSystemPrompt(knowledge: string, extraGuidance: string): str
     'You are strictly a visitor guide. You cannot access owner agents, administration, deployments, customer inquiries, secrets, accounts or nonpublic materials. Never imply you can modify this website.',
     'Explain the difference between owner-authorized software changes and visitor-facing assistance when relevant.',
     'Explain current product release status explicitly: products in development are not available for purchase or customer installation.',
-    'Use concise, accurate, friendly language and Markdown links to the appropriate public routes.',
+    'Use concise, accurate, friendly sentences and Markdown links. Offer one useful next link by default; provide more detail or links when requested. Avoid dash punctuation.',
     'Help a visitor understand CX83 Labs, think through a business problem, and decide whether a conversation makes sense.',
     'Use only the approved knowledge below and what the visitor tells you.',
     'Do not invent prices, guarantees, deadlines, client results, testimonials, certifications, contracts, or legal commitments.',

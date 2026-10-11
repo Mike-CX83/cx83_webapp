@@ -1,0 +1,9 @@
+/* About only. Preserve Home, shared navigation and Cat. */
+.cx83-about-refined .cx83-about-story {
+  max-width: 68ch;
+  color: var(--cx83-silver);
+  font-size: 1.0625rem;
+  line-height: 1.85;
+}
+.cx83-about-refined .cx83-about-story p + p { margin-top: 1.5rem; }
+.cx83-about-refined .cx83-about-story-action { margin-top: 2rem; }

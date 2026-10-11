@@ -7,12 +7,13 @@ test.describe('Run 1 / Catalyst X83 visual identity and Cat', () => {
     const primary = page.getByRole('navigation', { name: 'Primary' })
     await expect(primary.getByRole('link', { name: 'Home' })).toHaveAttribute('href', '/')
     await expect(primary.getByRole('link', { name: 'About' })).toHaveAttribute('aria-current', 'page')
-    await expect(page.getByRole('heading', { name: 'Built from real work. Designed for what comes next.' })).toBeVisible()
-    await expect(page.getByText(/Founder Mike Hankins came to software from a career in nursing and hospice care/)).toBeVisible()
-    await expect(page.getByText(/In 2025, he founded Catalyst X83/)).toBeVisible()
-    expect((await page.locator('body').innerText()).match(/Catalyst X83/g)).toHaveLength(1)
-    await expect(page).toHaveTitle(/About CX83 Labs/)
-    await expect(page.locator('.cx83-about-brand img[src="/brand/symbol-showcase.svg"]')).toHaveCount(1)
+    // Interior Run 3 replaces the former origin narrative with Mike's locked story.
+    await expect(page.getByRole('heading', { level: 1, name: 'About CX83 Labs' })).toBeVisible()
+    await expect(page.getByTestId('approved-about-story').locator('p')).toHaveCount(3)
+    await expect(page.getByTestId('approved-about-story')).toContainText('Our founder, Mike Hankins, spent nearly two decades in nursing and hospice care')
+    await expect(page.locator('main')).not.toContainText('Catalyst X83')
+    await expect(page).toHaveTitle('About CX83 Labs')
+    await expect(page.locator('header.cx83-site-header').getByRole('link', { name: 'CX83 Labs, Home' })).toBeVisible()
     await expect(page.getByRole('link', { name: 'Start a conversation', exact: false })).toHaveAttribute('href', '/contact')
     const screenshot = testInfo.outputPath('homepage-about-1440.png')
     await page.screenshot({ path: screenshot, fullPage: true, animations: 'disabled' })
@@ -27,17 +28,17 @@ test.describe('Run 1 / Catalyst X83 visual identity and Cat', () => {
     const dialog = page.getByRole('dialog', { name: /Cat/ })
     await expect(dialog).toBeVisible()
     for (const starter of [
-      'How can AI update a website?',
-      'What is Client Brand Studio?',
+      'Which CX83 service fits my business?',
       'Can CX83 connect my current tools?',
-      'How do I start a project?',
+      'What does an AI setup include?',
+      'How do I discuss a website project?',
     ]) {
       await expect(dialog.getByRole('button', { name: starter })).toBeVisible()
     }
     await expect(dialog.getByRole('link', { name: /Contact CX83/ })).toHaveAttribute('href', '/contact')
     await page.keyboard.press('Escape')
     await expect(dialog).toBeHidden()
-    await expect(page.locator('.cx83-assistant-launcher')).toBeFocused()
+    await expect(page.locator('header.cx83-site-header').getByRole('button', { name: 'Ask Cat' })).toBeFocused()
   })
 
   for (const width of [320, 390, 768]) {
