@@ -97,7 +97,6 @@ test.describe('Interior Run 2 product and proof journeys', () => {
     await expect(page.locator('.cx83-work-evidence')).toHaveAttribute('open', '')
     const response = await request.head(host + '/showcase/cx83-website-showcase-poster-v2.jpg')
     expect(response.status()).toBe(200)
-    await demo.evaluate(() => {}) // Keep the declared media link in the interaction path.
     await page.goto(host + '/#showcase-title')
     await expect(page.locator('#website-demo video')).toHaveAttribute('poster', '/showcase/cx83-website-showcase-poster-v2.jpg')
     await expect(page.locator('#website-demo track')).not.toHaveAttribute('default')
