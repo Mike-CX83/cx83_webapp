@@ -12,7 +12,7 @@ test.describe('Run 2 connected systems and proof', () => {
     await expect(page.getByRole('link', { name: /Read the evidence record/ })).toHaveAttribute('href', '/how-it-works#real-proof')
     await expect(page.getByTestId('systems-map')).toHaveCount(0)
     await page.goto(host + '/software')
-    await expect(page.getByTestId('brand-studio-spotlight')).toContainText('0.8.4')
+    await expect(page.getByTestId('brand-studio-spotlight')).toContainText('source artwork')
     await expect(page.getByRole('img', { name: 'Authentic CX83 Labs logo' })).toHaveAttribute('src', /logo-dark.svg/)
     await page.goto(host + '/how-it-works')
     await page.locator('.cx83-technical-disclosure > summary').click()
@@ -39,15 +39,15 @@ test.describe('Run 2 connected systems and proof', () => {
 
   test('products show source-led visuals without premature sales', async ({ page }) => {
     await page.goto(host + '/software')
-    await expect(page.getByTestId('brand-studio-spotlight')).toContainText('actual brand')
+    await expect(page.getByTestId('brand-studio-spotlight')).toContainText('source artwork')
     await page.goto(host + '/software/client-brand-studio')
     await expect(page.getByTestId('brand-studio-spotlight')).toBeVisible()
-    await expect(page.getByRole('heading', { name: 'Customer release not available yet.' })).toBeVisible()
-    await expect(page.getByText('development build 0.8.4').first()).toBeVisible()
+    await expect(page.locator('.cx83-product-availability')).toContainText('not released')
+    await expect(page.getByRole('heading', { name: 'Draft output still needs acceptance.' })).toBeVisible()
     await expect(page.getByRole('link', { name: /Buy now|Download now|Start trial/i })).toHaveCount(0)
     await page.goto(host + '/software/connected-websites')
     await expect(page.getByText('Actual example: this CX83 website')).toBeVisible()
-    await expect(page.getByRole('link', { name: /See the real site workflow/ })).toHaveAttribute('href', '/how-it-works#real-proof')
+    await expect(page.getByRole('link', { name: /See the dated CX83 implementation record/ })).toHaveAttribute('href', '/work#cx83-connected-website')
   })
 
 
