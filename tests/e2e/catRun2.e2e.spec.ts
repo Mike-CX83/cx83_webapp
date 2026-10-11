@@ -13,7 +13,7 @@ test.describe('Run 2 connected systems and proof', () => {
     await expect(page.getByTestId('systems-map')).toHaveCount(0)
     await page.goto(host + '/software')
     await expect(page.getByTestId('brand-studio-spotlight')).toContainText('source artwork')
-    await expect(page.getByRole('img', { name: 'Authentic CX83 Labs logo' })).toHaveAttribute('src', /logo-dark.svg/)
+    await expect(page.getByRole('img', { name: 'Original CX83 brand symbol' })).toHaveAttribute('src', /symbol-showcase.svg/)
     await page.goto(host + '/how-it-works')
     await page.locator('.cx83-technical-disclosure > summary').click()
     await expect(page.getByTestId('systems-map')).toBeVisible()
@@ -46,7 +46,7 @@ test.describe('Run 2 connected systems and proof', () => {
     await expect(page.getByRole('heading', { name: 'Draft output still needs acceptance.' })).toBeVisible()
     await expect(page.getByRole('link', { name: /Buy now|Download now|Start trial/i })).toHaveCount(0)
     await page.goto(host + '/software/connected-websites')
-    await expect(page.getByText('Actual example: this CX83 website')).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Ask for a real change through your connected AI.' })).toBeVisible()
     await expect(page.getByRole('link', { name: /See the dated CX83 implementation record/ })).toHaveAttribute('href', '/work#cx83-connected-website')
   })
 
