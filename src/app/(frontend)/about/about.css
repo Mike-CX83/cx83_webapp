@@ -26,7 +26,7 @@
   text-align: justify;
   text-align-last: left;
   text-indent: 2em;
-  hyphens: auto;
+  hyphens: manual;
 }
 .cx83-about-refined .cx83-about-story p + p { margin-top: 1.2rem; }
 .cx83-about-refined .cx83-about-story strong {
@@ -52,6 +52,7 @@
   background:
     radial-gradient(ellipse at 35% 65%, rgb(0 115 255 / 12%), transparent 60%),
     radial-gradient(ellipse at 65% 35%, rgb(130 71 245 / 11%), transparent 60%);
+  filter: blur(16px);
   z-index: -1;
   pointer-events: none;
 }
@@ -78,4 +79,8 @@
     width: min(80%, 17rem);
   }
   .cx83-about-refined .cx83-about-story-action { grid-column: 1; }
+}
+
+@media (max-width: 39.99rem) {
+  .cx83-about-refined .cx83-about-story p { hyphens: auto; }
 }
