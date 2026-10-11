@@ -1,8 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { inquiryContextHref } from '@/forms/inquiryContext'
-
 type Props = { variant: 'catalog' | 'detail' }
 
 /** Only the approved CX83 source artwork is pictured, never a fictional Studio export. */
