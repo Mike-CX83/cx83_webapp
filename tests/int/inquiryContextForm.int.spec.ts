@@ -11,9 +11,9 @@ afterEach(() => {
 })
 
 function fillVisitor() {
-  fireEvent.change(screen.getByRole('textbox', { name: 'Name', exact: true }), { target: { value: 'Synthetic Visitor' } })
-  fireEvent.change(screen.getByRole('textbox', { name: 'Email', exact: true }), { target: { value: 'visitor@example.invalid' } })
-  fireEvent.change(screen.getByRole('textbox', { name: 'Message', exact: true }), { target: { value: 'Keep my exact typed message.' } })
+  fireEvent.change(screen.getByRole('textbox', { name: 'Name' }), { target: { value: 'Synthetic Visitor' } })
+  fireEvent.change(screen.getByRole('textbox', { name: 'Email' }), { target: { value: 'visitor@example.invalid' } })
+  fireEvent.change(screen.getByRole('textbox', { name: 'Message' }), { target: { value: 'Keep my exact typed message.' } })
 }
 
 describe('inquiry form query updates', () => {
@@ -22,7 +22,7 @@ describe('inquiry form query updates', () => {
     vi.stubGlobal('fetch', fetchMock)
     const view = render(createElement(InquiryForm, { initialContext: parseInquiryContext('websites-and-business-tools') }))
     fillVisitor()
-    const messageInput = screen.getByRole('textbox', { name: 'Message', exact: true })
+    const messageInput = screen.getByRole('textbox', { name: 'Message' })
     fireEvent.click(screen.getByRole('button', { name: 'Send inquiry' }))
     await waitFor(() => expect(screen.getByRole('alert').textContent).toContain('could not confirm the save'))
 
@@ -33,7 +33,7 @@ describe('inquiry form query updates', () => {
       ['client-brand-studio', 'software'],
     ]) {
       view.rerender(createElement(InquiryForm, { initialContext: parseInquiryContext(token) }))
-      expect(screen.getByRole('textbox', { name: 'Message', exact: true })).toBe(messageInput)
+      expect(screen.getByRole('textbox', { name: 'Message' })).toBe(messageInput)
       expect((messageInput as HTMLTextAreaElement).value).toBe('Keep my exact typed message.')
       expect((screen.getByLabelText('What can we help with?') as HTMLSelectElement).value).toBe(category)
       expect((screen.getByLabelText('Specific interest (optional)') as HTMLSelectElement).value).toBe(token)
@@ -61,7 +61,7 @@ describe('inquiry form query updates', () => {
     view.rerender(createElement(InquiryForm, { initialContext: parseInquiryContext('client-brand-studio') }))
     expect(screen.queryByRole('status')).toBeNull()
     expect((screen.getByLabelText('Specific interest (optional)') as HTMLSelectElement).value).toBe('client-brand-studio')
-    expect((screen.getByRole('textbox', { name: 'Message', exact: true }) as HTMLTextAreaElement).value).toBe('')
+    expect((screen.getByRole('textbox', { name: 'Message' }) as HTMLTextAreaElement).value).toBe('')
   })
 
   it('ignores a pending response from the previous Contact query', async () => {
@@ -75,6 +75,6 @@ describe('inquiry form query updates', () => {
     await act(async () => { finish?.(Response.json({ saved: true })) })
     expect(screen.queryByRole('status')).toBeNull()
     expect((screen.getByLabelText('Specific interest (optional)') as HTMLSelectElement).value).toBe('ai-setup-and-workflows')
-    expect((screen.getByRole('textbox', { name: 'Message', exact: true }) as HTMLTextAreaElement).value).toBe('Keep my exact typed message.')
+    expect((screen.getByRole('textbox', { name: 'Message' }) as HTMLTextAreaElement).value).toBe('Keep my exact typed message.')
   })
 })
