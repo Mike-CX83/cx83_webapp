@@ -18,6 +18,16 @@ const products = [
 
 async function capture(page: Page, testInfo: TestInfo, name: string) {
   await page.evaluate(async () => { await document.fonts.ready })
+  // Full page screenshots do not reliably load assets far below the fold.
+  // Inspect each real image in view before recording the visual evidence.
+  for (const asset of await page.locator('main .cx83-interior-run2 img').all()) {
+    await asset.scrollIntoViewIfNeeded()
+    await expect.poll(
+      () => asset.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0),
+      { message: 'Original image loaded before visual capture', timeout: 15000 },
+    ).toBe(true)
+  }
+  await page.evaluate(() => window.scrollTo(0, 0))
   const metrics = await page.evaluate(() => {
     const root = document.documentElement
     const clipped = [...document.querySelectorAll<HTMLElement>(
@@ -29,10 +39,17 @@ async function capture(page: Page, testInfo: TestInfo, name: string) {
       clientWidth: root.clientWidth,
       scrollWidth: root.scrollWidth,
       clipped,
+      overflowing: [...document.querySelectorAll<HTMLElement>('main *')]
+        .filter((element) => {
+          const rect = element.getBoundingClientRect()
+          return rect.width > 0 && rect.right > root.clientWidth + 1
+        })
+        .slice(0, 12)
+        .map((element) => ({ tag: element.tagName, className: element.className, right: element.getBoundingClientRect().right })),
       headings: [...document.querySelectorAll('main h1, main h2')].map((h) => h.textContent?.trim()),
     }
   })
-  expect(metrics.scrollWidth, name + ' must not overflow').toBeLessThanOrEqual(metrics.clientWidth + 1)
+  expect(metrics.scrollWidth, name + ' must not overflow: ' + JSON.stringify(metrics.overflowing)).toBeLessThanOrEqual(metrics.clientWidth + 1)
   expect(metrics.clipped, name + ' has no clipped scoped elements').toEqual([])
   const filename = testInfo.outputPath('interior-' + name + '.png')
   await page.screenshot({ path: filename, fullPage: true, animations: 'disabled' })
