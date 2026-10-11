@@ -42,7 +42,7 @@ export default async function AboutPage() {
           <article aria-labelledby="about-title" className="cx83-about-story" data-testid="approved-about-story">
             {paragraphs.map((paragraph, index) => <p key={index}>{emphasize(paragraph)}</p>)}
           </article>
-          <div className="cx83-about-brand" aria-hidden="true">
+          <div className="cx83-about-emblem-column" aria-hidden="true">
             <Image className="cx83-about-symbol" src="/brand/symbol-showcase.svg" alt="" width={288} height={288} />
           </div>
           <div className="cx83-about-story-action">
