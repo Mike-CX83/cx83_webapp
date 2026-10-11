@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useLayoutEffect, useRef, useState, type ReactNode } from 'react'
 import { Button } from '@/components/ui/button'
 import { validateInquiry, type InquiryErrors, type InquiryInput } from '@/forms/inquiry'
 import { INQUIRY_CONTEXTS, parseInquiryContext, type InquiryContext } from '@/forms/inquiryContext'
@@ -35,7 +35,7 @@ export function InquiryForm({ initialContext = null }: { initialContext?: Inquir
   const latestIncomingToken = useRef(incomingToken)
   const selectedContext = parseInquiryContext(values.context)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (latestIncomingToken.current !== incomingToken) {
       latestIncomingToken.current = incomingToken
       // A response to the previous Contact query cannot replace the new form.
