@@ -53,7 +53,7 @@ export const softwareProducts: readonly SoftwareProduct[] = [
       { title: 'Review before release', description: 'Outputs and application compatibility undergo testing and human acceptance before customer delivery.' },
     ],
     audience: 'Businesses and creators who want their real brand to look consistent across files and digital spaces.',
-    setup: 'A 0.8.4 development build and automated tests exist, but the complete customer package is not approved or released.',
+    setup: 'A development workflow and automated tests exist, but operating system compatibility, review requirements and the customer installer have not been approved.',
     ownership: 'Customers supply their own authorized source artwork. Distribution rights and licensing terms will be published with a verified release.',
     support: 'Supported operating systems, office document compatibility and installation guidance remain part of release qualification.',
     releaseStatus: 'In development',
