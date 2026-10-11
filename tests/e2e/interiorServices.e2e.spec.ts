@@ -65,16 +65,21 @@ async function touchTarget(control: Locator): Promise<void> {
 async function captureInterior(page: Page, testInfo: TestInfo, name: string) {
   await page.evaluate(async () => { await document.fonts.ready })
   const metrics = await page.evaluate(() => {
-    const rectangle = (element: Element) => {
-      const rect = element.getBoundingClientRect()
-      return { x: rect.x, y: rect.y, width: rect.width, height: rect.height, right: rect.right, bottom: rect.bottom }
-    }
     const root = document.documentElement
-    const cards = [...document.querySelectorAll('.cx83-service-choice')].map((element) => ({
-      ...rectangle(element),
-      heading: element.querySelector('h2')?.textContent?.trim() || '',
-      children: [...element.children].map(rectangle),
-    }))
+    const cards = [...document.querySelectorAll('.cx83-service-choice')].map((element) => {
+      const rect = element.getBoundingClientRect()
+      return {
+        x: rect.x, y: rect.y, width: rect.width, height: rect.height, right: rect.right, bottom: rect.bottom,
+        heading: element.querySelector('h2')?.textContent?.trim() || '',
+        children: [...element.children].map((child) => {
+          const childRect = child.getBoundingClientRect()
+          return {
+            x: childRect.x, y: childRect.y, width: childRect.width, height: childRect.height,
+            right: childRect.right, bottom: childRect.bottom,
+          }
+        }),
+      }
+    })
     const clipped = [...document.querySelectorAll<HTMLElement>(
       '.cx83-interior-root, .cx83-interior-heading, .cx83-service-choice, .cx83-contact-form-card, .cx83-inquiry-context-summary',
     )].filter((element) => element.clientWidth > 0 && element.scrollWidth > element.clientWidth + 1)

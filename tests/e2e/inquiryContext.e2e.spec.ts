@@ -29,8 +29,8 @@ test.describe('contact interest continuity', () => {
   for (const context of approved) {
     test('shows the approved interest for ' + context.token, async ({ page }) => {
       await page.goto(host + '/contact?context=' + context.token)
-      await expect(page.getByLabel('What can we help with?', { exact: true })).toHaveValue(context.inquiryType)
-      await expect(page.getByLabel('Specific interest (optional)', { exact: true })).toHaveValue(context.token)
+      await expect(page.getByLabel('What can we help with?')).toHaveValue(context.inquiryType)
+      await expect(page.getByLabel('Specific interest (optional)')).toHaveValue(context.token)
       await expect(page.locator('.cx83-inquiry-context-summary')).toContainText(context.label)
       await expect(page.getByRole('button', { name: 'Remove selected interest' })).toBeVisible()
       await expect(page.getByRole('textbox', { name: 'Message', exact: true })).toHaveValue('')
@@ -45,8 +45,8 @@ test.describe('contact interest continuity', () => {
   ]) {
     test('starts neutral for /contact' + query, async ({ page }) => {
       await page.goto(host + '/contact' + query)
-      await expect(page.getByLabel('What can we help with?', { exact: true })).toHaveValue('general')
-      await expect(page.getByLabel('Specific interest (optional)', { exact: true })).toHaveValue('')
+      await expect(page.getByLabel('What can we help with?')).toHaveValue('general')
+      await expect(page.getByLabel('Specific interest (optional)')).toHaveValue('')
       await expect(page.locator('.cx83-inquiry-context-summary')).toHaveCount(0)
       await expect(page.getByRole('textbox', { name: 'Message', exact: true })).toHaveValue('')
     })
@@ -55,8 +55,8 @@ test.describe('contact interest continuity', () => {
   test('lets visitors change or remove interest while keeping their message and autofill hints', async ({ page }) => {
     await page.goto(host + '/contact?context=automation-and-integrations')
     await fillInquiry(page)
-    const category = page.getByLabel('What can we help with?', { exact: true })
-    const interest = page.getByLabel('Specific interest (optional)', { exact: true })
+    const category = page.getByLabel('What can we help with?')
+    const interest = page.getByLabel('Specific interest (optional)')
     const message = page.getByRole('textbox', { name: 'Message', exact: true })
     await expect(page.getByRole('textbox', { name: 'Name', exact: true })).toHaveAttribute('autocomplete', 'name')
     await expect(page.getByRole('textbox', { name: 'Email', exact: true })).toHaveAttribute('autocomplete', 'email')
@@ -102,7 +102,7 @@ test.describe('contact interest continuity', () => {
     await page.getByRole('button', { name: 'Send inquiry' }).click()
     await expect(page.locator('form [role="alert"]')).toContainText('could not confirm the save')
     await expect(page.getByRole('textbox', { name: 'Message', exact: true })).toHaveValue(visitorMessage)
-    await expect(page.getByLabel('Specific interest (optional)', { exact: true })).toHaveValue('connected-websites')
+    await expect(page.getByLabel('Specific interest (optional)')).toHaveValue('connected-websites')
     await page.getByRole('button', { name: 'Send inquiry' }).click()
     await expect(page.getByRole('status')).toContainText('Inquiry saved')
     await expect(page.getByRole('status')).not.toContainText(/email delivered|email sent/i)
@@ -125,7 +125,7 @@ test.describe('contact interest continuity', () => {
     await submit.click()
     await expect(page.locator('form [role="alert"]')).toContainText('could not confirm the save')
 
-    await page.getByLabel('Specific interest (optional)', { exact: true }).selectOption('ai-setup-and-workflows')
+    await page.getByLabel('Specific interest (optional)').selectOption('ai-setup-and-workflows')
     await submit.click()
     await expect.poll(() => submissions.length).toBe(2)
     await expect(page.locator('form [role="alert"]')).toContainText('could not confirm the save')
@@ -152,8 +152,8 @@ test.describe('contact interest continuity', () => {
     await expect(contactLink).toHaveAttribute('href', '/contact')
     await contactLink.click()
     await expect(page).toHaveURL(host + '/contact')
-    await expect(page.getByLabel('What can we help with?', { exact: true })).toHaveValue('general')
-    await expect(page.getByLabel('Specific interest (optional)', { exact: true })).toHaveValue('')
+    await expect(page.getByLabel('What can we help with?')).toHaveValue('general')
+    await expect(page.getByLabel('Specific interest (optional)')).toHaveValue('')
     await expect(page.getByRole('textbox', { name: 'Message', exact: true })).toHaveValue(visitorMessage)
   })
 
