@@ -46,13 +46,14 @@
 .cx83-about-refined .cx83-about-emblem-column::before {
   content: '';
   position: absolute;
-  width: min(100%, 20rem);
+  width: min(110%, 22rem);
   aspect-ratio: 1;
   border-radius: 50%;
   background:
     radial-gradient(ellipse at 35% 65%, rgb(0 115 255 / 12%), transparent 60%),
     radial-gradient(ellipse at 65% 35%, rgb(130 71 245 / 11%), transparent 60%);
   filter: blur(16px);
+  transform: translateX(var(--cx83-about-optical-shift, 0px));
   z-index: -1;
   pointer-events: none;
 }
@@ -60,6 +61,7 @@
   display: block;
   width: 10rem;
   height: auto;
+  transform: translateX(var(--cx83-about-optical-shift, 0px));
 }
 .cx83-about-refined .cx83-about-story-action { margin-top: 1.75rem; }
 @media (min-width: 64rem) {
@@ -74,6 +76,9 @@
     padding: 0;
     border-top: 0;
     border-left: 1px solid var(--cx83-border);
+    /* Shift by half the outer content gutter: center the visible mark between divider and page edge.
+       The SVG's 24-unit transparent margins are symmetrical, so the image and visible mark share a center. */
+    --cx83-about-optical-shift: max(0.625rem, calc((100vw - var(--cx83-container)) / 4));
   }
   .cx83-about-refined .cx83-about-symbol {
     width: min(80%, 17rem);
