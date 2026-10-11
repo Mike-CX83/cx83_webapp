@@ -1,4 +1,65 @@
 PROJECT: CX83 Labs website, `Mike-CX83/cx83_webapp`.
+RUN: Interior Run 1, remaining authenticated live staging review.
+STATUS: COMPLETE. Required live review passed October 10, 2026, 10:06 PM CDT.
+HEAD: Application implementation `f67a118cb9c3438d1b8877276d5506b42dab9210`; prior documentation receipt and freshly verified runtime/clean checkout `22510c53928c103ef5bc84963ccadec40f4d2ed3`. This new documentation receipt is separate and is not claimed as runtime verified.
+
+# Authenticated live review completion
+
+## COMPLETED
+
+Mike approved this bounded Work continuation. Read the existing handoff, master ledger, current staging branch, repository instructions and the established Codex project inbox. Used the existing authenticated local Chrome session on Mike's Mac. No new credential, access grant, implementation rebuild or production promotion was needed.
+
+Reviewed Services, all three details and Contact with current published service wording. Services, AI detail and Contact cover measured 320×740, 390×844, 768×1024, 1440×1000, 2560×1440 and 844×390. Website and automation details cover phone and desktop. All three choices, returns and contextual Contact actions worked. Live CMS names, descriptions, capabilities and closing headings match unchanged published records 3, 2 and 1. Live contact email is `mike@cx83labs.com`.
+
+All five canonical context queries select their expected interest and category. Direct, unknown and repeated query entry are neutral. Removal and category/interest changes retain synthetic unsent text and clear incompatible interest. Empty submission displays readable Name, Email and Message errors and “Nothing has been sent” on desktop and phone. No completed live inquiry was written or notification sent.
+
+Keyboard Tab displays the visible 3px light blue outline. Enter activates service navigation and Remove. Escape closes Cat and restores launcher focus. Chrome touch emulation opens the mobile menu and activates Contact. The physical mobile keyboard remains outside this Run 1 review, as assigned to Run 3. Temporary touch and viewport overrides were restored.
+
+## VALIDATION
+
+No horizontal overflow was measured in the recorded route states: document width equals client width, accounting for scrollbar width. Compositions and wrapping remain readable across the matrix. The full selected interest wraps below narrow native selects. New service links measure 44 CSS pixels high.
+
+The existing fixed Cat launcher still overlaps content at some viewport folds, including the first Services link at 320px. Scrolling moves the link clear; its center then hits the intended anchor and activation opens the correct detail. This preserved existing overlay is explicitly accepted for this bounded review, rather than claiming zero overlays at every scroll position. No Run 1 repair was identified.
+
+The demonstration heading lands approximately 100px below the viewport top with the sticky header bottom at 77px on desktop and phone. The customer example lands approximately 96px with the same header clearance. Homepage banner, atmosphere, demonstration video/poster, connection overview and the original Cat symbol/header, single Cat title, status and separate close button remain intact. Lazy artwork was scrolled into view and confirmed loaded. Live console inspection returned no warnings or errors. These are desktop Chrome viewport/touch emulation results, not physical phone results.
+
+The application runtime and clean checkout were independently read as `f67a118cb9c3438d1b8877276d5506b42dab9210` during review. The previously pending receipt [Staging workflow 38106443253](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38106443253) completed successfully during review. Its deployment log records gate 401, authenticated site 200, checkout sync OK and matching checkout/runtime `22510c53928c103ef5bc84963ccadec40f4d2ed3`. Independent server read confirmed both SHAs and a clean checkout. That receipt changes exactly the three documentation files, so reviewed application/assets are identical. Services was freshly reopened after it completed. Independent anonymous HTTP returned 401.
+
+Existing application validation remains 77 integration tests, 111 browser tests, TypeScript, lint and build passing in the runs retained below. No application changes were made during this continuation, so no new implementation test run was required.
+
+## CMS CHANGES
+
+None. The connected service collection was read only. No inquiry, assistant, site setting, schema or other CMS record was changed.
+
+## ARTIFACTS
+
+27 live PNGs, viewport/query measurements, review README and SHA256 manifest are saved separately from CI under `output/playwright/interior-run1-live/` in Mike's local CX83 Labs project mirror.
+
+Durable local package: `/Users/mike/.codex/.chatgpt-projects/g-p-6ac453e177bc81919bb5e752a8e64421/output/playwright/CX83_INTERIOR_RUN1_LIVE_REVIEW_2026_10_10.zip`, 3,551,416 bytes, SHA256 `0d6dea1e585116a3f27fda142c7dfb3ce9155bae55c221791f352634b24fb395`. This local package has not been uploaded to the cloud Library. Full page captures can show sticky controls at the captured scroll position; viewport inspection and geometry establish anchor clearance.
+
+## BLOCKED
+
+None for Run 1. The earlier cloud browser URL-policy block is resolved by the approved authenticated local browser continuation.
+
+## DEFERRED
+
+Run 2 and Run 3 remain unstarted. All previously declared mail, media, privacy, client publication and production holds remain.
+
+## NEXT
+
+Wait for Mike's separate Run 2 instruction. Continue from this complete Run 1 handoff and the master ledger. This new receipt changes documentation only; its later staging workflow must be identified separately before claiming its SHA is runtime verified.
+
+## RECOVERY
+
+No application repair or rollback occurred. Preserve the original scoped recovery procedure in the historical record below.
+
+---
+
+# Historical implementation and deployment record
+
+The partial state and browser blocker below describe the original receipt before this successful live continuation. They are retained as history; the COMPLETE receipt above is current.
+
+PROJECT: CX83 Labs website, `Mike-CX83/cx83_webapp`.
 RUN: Interior Run 1, Services and inquiry journey.
 STATUS: PARTIAL. Services, all three details, Contact and scoped styles are implemented, tested, visually reviewed in CI and deployed to protected staging. PR 37 is merged, and the merged application runtime and checkout are verified. Authenticated live browser review remains blocked by the current cloud browser URL policy.
 HEAD: Starting and previously verified runtime `72f26fa1d92ce86735c874b608ba1397418f8ac0`; tested run branch `chatgpt/interior-run1-2026-10-10` at `f652316a54de11c0268abbe209dbc4eec864bbe4`; merged application, verified runtime and verified checkout `f67a118cb9c3438d1b8877276d5506b42dab9210`. This later documentation receipt is identified separately in GitHub history, PR 37 and the authorized project completion note.
