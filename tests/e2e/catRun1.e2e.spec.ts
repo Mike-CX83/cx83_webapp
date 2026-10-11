@@ -9,7 +9,7 @@ test.describe('Run 1 / Catalyst X83 visual identity and Cat', () => {
     await expect(primary.getByRole('link', { name: 'About' })).toHaveAttribute('aria-current', 'page')
     // Interior Run 3 replaces the former origin narrative with Mike's locked story.
     await expect(page.getByRole('heading', { level: 1, name: 'About CX83 Labs' })).toBeVisible()
-    await expect(page.getByTestId('approved-about-story').locator('p')).toHaveCount(3)
+    await expect(page.getByTestId('approved-about-story').locator('p')).toHaveCount(5)
     await expect(page.getByTestId('approved-about-story')).toContainText('Our founder, Mike Hankins, spent nearly two decades in nursing and hospice care')
     await expect(page.locator('main')).not.toContainText('Catalyst X83')
     await expect(page).toHaveTitle('About CX83 Labs')
