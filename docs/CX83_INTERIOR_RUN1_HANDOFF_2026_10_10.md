@@ -1,23 +1,24 @@
-# CX83 interior Run 1 execution handoff
-
 PROJECT: CX83 Labs website, `Mike-CX83/cx83_webapp`.
 RUN: Interior Run 1, Services and inquiry journey.
-STATUS: PARTIAL checkpoint, October 10, 2026 at 9:08 PM CDT. Implementation is committed in PR 37. Typecheck and lint passed. The full test stage in Staging run 38102465237 has remained active for nearly thirty minutes without a completed job log; screenshots, build, merge and deployment remain unverified. The cloud browser also cannot open live staging under its URL policy.
-HEAD: Starting and verified baseline runtime `72f26fa1d92ce86735c874b608ba1397418f8ac0`. Run branch `chatgpt/interior-run1-2026-10-10`. Original planning documents copied at `5cd74a1c89dfd72d684007b93386558543f95cc9`. Current application and test source before this documentation checkpoint: `d62b96d366b7ae4eb99c47b6752ec5e1c4542dd9`, [PR 37](https://github.com/Mike-CX83/cx83_webapp/pull/37). This later documentation checkpoint changes no application files. No Run 1 application merge or deployment is claimed.
+STATUS: PARTIAL. Services, all three details, Contact and scoped styles are implemented, tested, visually reviewed in CI and deployed to protected staging. PR 37 is merged, and the merged application runtime and checkout are verified. Authenticated live browser review remains blocked by the current cloud browser URL policy.
+HEAD: Starting and previously verified runtime `72f26fa1d92ce86735c874b608ba1397418f8ac0`; tested run branch `chatgpt/interior-run1-2026-10-10` at `f652316a54de11c0268abbe209dbc4eec864bbe4`; merged application, verified runtime and verified checkout `f67a118cb9c3438d1b8877276d5506b42dab9210`. This later documentation receipt is identified separately in GitHub history, PR 37 and the authorized project completion note.
+
+# CX83 interior Run 1 execution handoff
 
 ## COMPLETED
 
-1. Read the authoritative Library plan and unchanged approved About companion, current staging HEAD, latest Cat header handoff, project instructions and established `chatgpt-cx83-website` inbox. Sent scoped intent to `codex-cx83-website` in `thr-3d5ad289`.
-2. Saved the exact master and approved companion in `docs/`. The companion SHA256 is `9c96b68e61c664f787a5cfb6f2d2250b7da1e08efa4b0dc0fe9a94d000b75547`. The About route is not changed in Run 1.
-3. Implemented compact opt-in interior components, balanced Services choices and a consistent three-service detail sequence with fit, CMS deliverables, truthful examples, scope and one contextual inquiry action.
-4. Implemented Contact with a short opening, form first in document and phone order, supporting explanation beside it on desktop, optional Organization and autofill hints. Implemented all five validated context identifiers without a CMS schema migration.
-5. Reconciled the unavailable-database service fallback to the three current published service identities. Preserved the separate About fallback and every populated service copy field.
-6. Added the existing homepage `#showcase-title` heading to the existing 6.25rem scroll-margin selector. This fixes the new service demonstration link beneath the sticky header without changing homepage layout, copy, media or artwork.
-7. Added focused integration and browser coverage, measured screenshot captures, and a minimal addition to the existing review artifact paths. No deployment permissions, infrastructure, credentials or mail configuration changed.
+1. Read the authoritative Library plan, unchanged approved About companion, current staging HEAD, newest Cat header handoff, repository instructions, Payload skill and the established `chatgpt-cx83-website` inbox before editing. Sent scoped intent to `codex-cx83-website` in thread `thr-3d5ad289`; the later inbox read found no newer overlapping work.
+2. Saved the original master and approved About companion exactly in `docs/` at `5cd74a1c89dfd72d684007b93386558543f95cc9`, and independently read both back from GitHub. The companion SHA256 remains `9c96b68e61c664f787a5cfb6f2d2250b7da1e08efa4b0dc0fe9a94d000b75547`. The About page was not edited.
+3. Completed Services and all three existing details. The index has three balanced choices and one closing inquiry action. Details combine fit and CMS deliverables, a truthful example, scope and handoff, a return link and one contextual Contact action.
+4. Completed Contact continuity for all five approved identifiers, form-first phone order, a desktop supporting aside, optional Organization, autofill hints, visible selected interest and a clear Remove action. Client and server validation, persistence and retry protections remain.
+5. Added opt-in interior components and styles using the existing typography, palette and content width. Reconciled the unavailable-database Services fallback to the current three published identities while preserving the separate About fallback.
+6. Added the existing homepage `#showcase-title` heading to the existing scroll-margin selector so the new demonstration link clears the sticky header. Home's component, copy, layout, artwork and media are unchanged.
+7. Added focused integration tests, browser journeys, measured captures and an isolated PostgreSQL save/readback test. The only workflow change adds the new interior screenshots and metrics to the existing review artifact.
+8. Passed the full PR check and visually reviewed all 25 new interior screenshots plus Home at 390/1440 and the open Cat drawer at 390. Merged [PR 37](https://github.com/Mike-CX83/cx83_webapp/pull/37) through the existing staging process. The merged tree `793632d28b67b795d33a3791cb4a1399876c2241` exactly equals the tested branch tree.
 
 ## CMS CHANGES
 
-None. The connected service records were read only. CMS names, short descriptions, descriptions and capability labels render unchanged. Each original `callToAction.label` is retained as the detail page's closing invitation heading. Its existing `/contact` destination is enriched with the validated interest and existing form anchor; the visible human action is consistently Start a conversation.
+None. Connected service records and site settings were read only. The implementation preserves CMS names, summaries, descriptions and capabilities. Source checks and isolated CI fixtures cover that rendering; live CMS rendering remains pending. Each original CTA label remains the closing invitation heading, with a consistent visible Start a conversation link. Existing `/contact` destinations gain the approved interest and `#contact-form`; a different future CMS destination is preserved.
 
 | Record ID | Published slug | Previous and new CMS values |
 | :--- | :--- | :--- |
@@ -25,11 +26,11 @@ None. The connected service records were read only. CMS names, short description
 | 2 | `automation-and-integrations` | Unchanged |
 | 1 | `ai-setup-and-workflows` | Unchanged |
 
-Site settings contact email `mike@cx83labs.com` remains the approved alternative. Scheduling URL was empty and no calendar action was added. No public page record, inquiry record, assistant setting, product record or global setting was changed through the connector.
+The approved site-settings contact email remains `mike@cx83labs.com`. Scheduling URL was empty; no calendar action was added. No live inquiry, public page, product, assistant setting or global record was mutated. No schema migration or generated Payload type change was needed.
 
 ## IMPLEMENTED CONTRACT FOR RUN 2
 
-`src/forms/inquiryContext.ts` is the single canonical interest map. Its `inquiryContextHref` helper returns the Contact query plus `#contact-form`. Contact parses the server page's asynchronous `searchParams`; unknown and repeated values produce a neutral general inquiry. Client and server validate the selected token and compatible category. Selected interest is shown before submission and stored as a canonical context line in the existing message field. The visitor's message remains separate while editing.
+`src/forms/inquiryContext.ts` is the single canonical interest map. Its `inquiryContextHref` helper returns Contact with the approved query and form anchor.
 
 | Context identifier | Stored inquiry category |
 | :--- | :--- |
@@ -39,32 +40,94 @@ Site settings contact email `mike@cx83labs.com` remains the approved alternative
 | `connected-websites` | `software` |
 | `client-brand-studio` | `software` |
 
-Changing category clears an incompatible interest. Selecting or clearing an interest retains the typed visitor fields. An unchanged ambiguous retry reuses its request ID; a changed inquiry receives a different ID. Existing server locking, persistence, honeypot, field limits, rate limits and truthful saved confirmation remain. Notification delivery is a separate existing operation and has not been enabled.
+Contact parses asynchronous page search parameters on the server. Unknown or repeated query values produce a neutral general inquiry. Changing category clears an incompatible interest. Selecting or clearing an interest retains the visitor's typed fields, including through normal Contact soft navigation. The selected canonical label is visible before submission and prepended to the stored message; the visitor's editable message remains separate.
+
+Client and server reject invalid or mismatched context. An unchanged ambiguous retry reuses its request ID; a changed inquiry gets a new ID. Existing server locking, honeypot, field limits, rate limits, duplicate prevention and truthful saved confirmation remain. The real isolated CI POST test returned 201 for the first save, 200 for the retry and read back exactly one inquiry containing the canonical label and visitor message. Notification delivery remains a separate unconfigured operation.
 
 ### Reusable presentation
 
-Use `InteriorHero` and `InteriorSection` from `src/components/site/InteriorPage.tsx` inside `cx83-interior-root`. The imported `interior.css` requires explicit interior or refined Contact classes. It reuses existing Geist, palette, 72rem content edges and action styles. Introductions have a 66ch measure and longer explanations use about 68 to 72ch. It does not change `Section`, `PageHero`, the root layout, Home or Cat.
+Use `InteriorHero` and `InteriorSection` from `src/components/site/InteriorPage.tsx` inside `cx83-interior-root`. The imported `interior.css` requires an explicit interior or refined Contact class. It reuses Geist, the existing colors and 72rem content edges, with bounded paragraph measures. It does not change shared Section, PageHero, root layout, Home or Cat.
 
-Services use three equal columns from 1200px, full-width cards with two internal columns at tablet sizes, and concise stacked cards on phones. Contact places the form first and uses a side explanation from 1024px. New or changed controls target at least 44 CSS pixels. No new font, component library, asset or animation framework was added.
+Services has three columns from 1200px, full-width cards with two internal columns at tablet widths, and stacked choices on phones. Contact puts the form first and uses a supporting aside from 1024px. New or changed controls target at least 44 CSS pixels. No new font, component library, asset or animation framework was added.
 
 ## VALIDATION
 
-Baseline only: Staging workflow [38095487840](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38095487840), deploy job `114342435869`, established runtime and checkout at the starting SHA with unauthenticated 401 and authenticated page/media 200. This is not Run 1 deployment evidence.
+### Complete PR check
 
-Run 1 validation: TypeScript (`pnpm exec tsc --noEmit`) and lint (`pnpm lint`) passed in [Staging run 38102465237](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38102465237), check job `114361052856`, for source `d62b96d366b7ae4eb99c47b6752ec5e1c4542dd9`. Its `pnpm test` step began at 01:39:30 UTC and was still active at 02:08 UTC. The previous baseline test stage took 5m05s. The active job log endpoint returned 404 and the check had no diagnostic annotations. A pending test stage is not a pass. The full integration/browser results, screenshot review and production build remain pending. New browser tests use copies of current published service wording only in guarded local CI PostgreSQL, plus a neutral fallback loader test. They are not actual protected staging screenshots. Required viewports are 320x740, 390x844, 768x1024, 1440x1000, 2560x1440 and 844x390. All service detail journeys are exercised on phone and desktop.
+[Staging PR run 38104430822](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38104430822), check job `114366853170`, attempt 1, passed for branch head `f652316a54de11c0268abbe209dbc4eec864bbe4`. GitHub checked synthetic merge `5053588afeeb211eea047ab6ca4542f69983d748` against baseline `72f26fa1d92ce86735c874b608ba1397418f8ac0`.
 
-Independent source review identified and resolved query-navigation state synchronization, pending-response timing, form-anchor continuity and narrow selected-interest layout before the current CI run. The initial check at `56cb276dfd1a6c59a9cadd61a76db3a00ceae6b7` failed on unsupported Testing Library role options in the new component tests; those options were corrected at `d62b96d366b7ae4eb99c47b6752ec5e1c4542dd9`. No confirmed source defect explains the current prolonged test stage. Actual screenshot inspection and exact test counts must be entered after a completed run. The current application tree preserves all 20 baseline asset and component hashes listed below. Both original planning copies were read back from GitHub and match the Library text exactly.
+| Command or check | Result |
+| :--- | :--- |
+| `pnpm exec tsc --noEmit` | Pass |
+| `pnpm lint` | Pass |
+| `pnpm test`, integration | 12 files, 77 tests passed |
+| `pnpm test`, Chromium browser | 111 passed, zero failed or flaky; 9.3 minutes |
+| `pnpm build` | Pass; 16 of 16 static pages generated |
+| Original artwork/component Git blob comparison | All 20 preserved entries match |
+| Original master and approved About copy readback | Exact original copies verified |
+
+Browser coverage includes all five contexts, direct general entry, unknown and repeated queries, category/context changes, retained text, soft navigation, validation, ambiguous retries, request ID reuse/change, actual persistence/readback, all service choices and returns, Contact actions, and demonstration/example anchor clearance. Original Home and Cat regressions remain intact. No existing tests were weakened.
+
+The browser runs use the established isolated local CI PostgreSQL database with `CI=true`, `PAYLOAD_DB_PUSH=true` and database name `cx83_webapp_ci`. Published service fixtures copy the current approved wording, are guarded against nonlocal/non-CI databases and are cleaned up. The fallback loader and published CMS path have separate passing checks.
+
+### Rendered review
+
+All 25 new interior PNGs were inspected. Services, representative AI detail and selected Contact cover 320×740, 390×844, 768×1024, 1440×1000, 2560×1440 and 844×390. All three details also have dedicated 390/1440 journey captures, and direct Contact has a 390 capture. Home at 390/1440 and the open Cat drawer at 390 were inspected for preservation.
+
+The scoped compositions are accepted. Services uses balanced desktop columns and readable tablet rows. Detail sections follow a natural phone order and use a clear two-column opening on desktop. Contact's form precedes next-step copy on phones and shares a balanced desktop layout with the aside. All 24 serialized route states have viewport-matching document width and no clipped scoped containers. The direct Contact capture also passed overflow assertions but has no separate JSON report.
+
+The closed native select shortens long option text on narrow screens; the full selected canonical label wraps visibly in the summary below it. Remove remains separate and readable.
+
+The existing fixed Ask Cat launcher overlaps some scrollable content near the captured viewport fold, including part of the first Services link at 320px and description text in the AI 320px image. The content can scroll clear. This is recorded rather than claiming every capture has zero overlays. Its existing styling and the Cat header are preserved. Live scroll/tap continuity remains part of the bounded live review.
+
+The CI Next development indicator is visible, including its issue-count variant. The passing log contains database connection timeout messages and recoverable React hydration warnings whose recorded differences involve caret-color attributes. All tests and the build passed; these development log observations are not live staging health evidence. The CI settings leave the footer email area empty, so these screenshots do not verify the approved live CMS email.
+
+### Resolved test issues
+
+The first component check rejected unsupported Testing Library role options; those new test options were corrected. Completed run `38102465237` then passed 77 integration and 85 browser tests but failed 26 new browser cases. Ten exact select-label locators could not match wrapped option text, and a named function inside Playwright evaluation introduced a missing `__name` serialization helper. Commit `f652316a54de11c0268abbe209dbc4eec864bbe4` corrected only those two test files. It retained every behavior assertion and layout measurement. The successful complete rerun supersedes those failures; no failed check was bypassed.
+
+### Protected staging release
+
+The exact merged application was released by [push Staging run 38105293745](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38105293745), event `push`, branch `staging-host`, head `f67a118cb9c3438d1b8877276d5506b42dab9210`. Check job `114369423002`, image job `114371472888` and deploy job `114372074132` all completed successfully.
+
+Root independently read the completed check and deploy logs. The merged commit again passed TypeScript, lint, all 12 integration files and 77 integration tests, all 111 browser tests with zero failures or flaky results, and the production build with all 16 static pages. The browser suite took 8.9 minutes.
+
+At October 10, 2026, 9:46:23 PM CDT, the deployment log confirmed:
+
+| Release check | Observed result |
+| :--- | :--- |
+| Unauthenticated gate | `gate_without_password=401` |
+| Authenticated site | `site_with_password=200` |
+| Original banner | `banner=present` |
+| Static image | `static_image=200` |
+| Optimized image | `optimized_image=200` |
+| Checkout synchronization | `checkout_sync=ok`, `decision=aligned`, `dirty=false` |
+| Server branch | `staging-host` |
+| Server checkout SHA | `f67a118cb9c3438d1b8877276d5506b42dab9210` |
+| Deployed application SHA | `f67a118cb9c3438d1b8877276d5506b42dab9210` |
+| Release marker | `STAGING DEPLOY SUCCESS` |
+| Recovery image | `previous_image=present` |
+
+Root independently verified the workflow event, exact head, successful conclusion and matching staging branch at October 10, 2026, 9:47:50 PM CDT. The merged tree `793632d28b67b795d33a3791cb4a1399876c2241` exactly matches the tested branch tree.
+
+These release checks establish the deployed commit and protected HTTP health. Authenticated rendered checks of the five affected routes with current live CMS content still require the bounded continuation below. No production promotion occurred.
+
+### Documentation receipt
+
+This handoff is a later documentation receipt. Its exact commit ID is available from this file's GitHub history and is also recorded in PR 37 and the authorized project completion note. It changes only this handoff, the master's historical status qualifier and Run 1 ledger, and the current continuity pointer. The normal workflow triggered by that receipt is separate from application release `38105293745`; its observed initial status is recorded with the receipt SHA. A newer documentation SHA must not be described as runtime verified without reading its own deployment result.
 
 ## ARTIFACTS
 
-1. `docs/CX83_WEBSITE_INTERIOR_REFINEMENT_EXECUTION_PLAN_2026_10_10.md`.
-2. `docs/CX83_ABOUT_STORY_APPROVED_2026_10_10.md`.
-3. [PR 37](https://github.com/Mike-CX83/cx83_webapp/pull/37), run branch `chatgpt/interior-run1-2026-10-10`, and [current validation run 38102465237](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38102465237).
-4. Existing GitHub browser review artifact will include `interior-*.png` and `interior-metrics-*.json` in addition to the preserved homepage captures.
+- [PR 37](https://github.com/Mike-CX83/cx83_webapp/pull/37), branch `chatgpt/interior-run1-2026-10-10`.
+- [Passing PR check 38104430822](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38104430822).
+- [Application push release 38105293745](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38105293745).
+- Original GitHub review artifact `11689715498`, `homepage-review-38104430822`, 35,375,496 bytes, SHA256 `2163bb51350c556954dabdb83aa3f7fb15b79cf2570d20d84a5faa3690287f09`. Downloaded bytes were verified.
+- Durable review file `CX83_INTERIOR_RUN1_REVIEW_2026_10_10.zip`, 8,388,262 bytes, SHA256 `32c1888427d338aff17de1a273b7ac26197f085159695b17d5d1549ae9eac785`, Library identity `libfile_02f0de828a5c81919a0e6eba29514da3`. It contains 25 interior PNGs, three Home/Cat PNGs, 12 original JSON reports, README and source/hash manifest. Image bytes are unchanged.
+- `docs/CX83_WEBSITE_INTERIOR_REFINEMENT_EXECUTION_PLAN_2026_10_10.md` and unchanged `docs/CX83_ABOUT_STORY_APPROVED_2026_10_10.md`.
 
 ### Preserved baseline Git blob hashes
 
-These Git SHA1 blob identifiers come from the actual starting tree. They must compare unchanged against the final application tree.
+The 20 starting-tree identifiers below all match the tested tree. The merged application uses that identical tree.
 
 | Path | Git blob SHA1 | Bytes |
 | :--- | :--- | ---: |
@@ -91,20 +154,24 @@ These Git SHA1 blob identifiers come from the actual starting tree. They must co
 
 ## BLOCKED
 
-Validation is unresolved while the full test step remains active and its detailed log is unavailable. Saving this checkpoint uses the existing PR concurrency behavior, which supersedes an older PR run when the branch advances. Inspect that completed or canceled run for actual failure details, correct only evidenced defects, and obtain a full passing run for the eventual merge head. Do not bypass a failed or incomplete check.
+The required authenticated live staging walkthrough is incomplete. Opening staging in the current cloud browser returned `ERR_BLOCKED_BY_CLIENT`, followed by an explicit URL-policy rejection. No further, indirect or alternative attempt to that blocked browser action was made. Existing CI renders its own local application and does not have the live gate credential; the restricted deployment identity cannot be repurposed for a browser or remote shell.
 
-The cloud browser attempt to open protected staging returned `ERR_BLOCKED_BY_CLIENT`, followed by an explicit browser URL policy rejection. No further or indirect attempt to that blocked browser action is authorized. Existing GitHub CI can validate its local application and expose screenshots, but it does not possess the live staging gate credential. The restricted deployment identity only runs the existing deployment operation and cannot be repurposed for remote commands.
-
-The remaining specific capability is an authenticated browser walkthrough of the deployed staging commit using existing access. Obtain Mike's approval for Work only for that step if it is still required after all connected-tool work. Keep this run partial until the defined live review passes. Do not infer live rendering or model behavior from fixtures or source reads.
+Under the master's sections 3 and 10, obtain Mike's approval to continue in Work only for the authenticated live browser step. No tool in this chat can open Work directly. The implementation, test proof, reviewed images and deployment record are preserved; do not restart Run 1.
 
 ## DEFERRED
 
-Run 2 and Run 3 are not started. Video audio and embedded recording graphics, server inquiry email OAuth, privacy/retention decisions, production launch, payments, client publishing permissions and customer installers retain the master's explicit holds.
+Run 2 and Run 3 have not started. The About publication, Software, Work and How it works refinement, Cat guidance changes and final site-wide pass remain in their assigned runs. Video audio and embedded recording graphics, server inquiry-mail OAuth, privacy/retention decisions, production launch, payments, client publishing permissions and customer installers keep their explicit holds.
 
-## NEXT
+## NEXT: BOUNDED WORK CONTINUATION
 
-Inspect the superseded run log as soon as it is available, resolve any concrete test failure and complete the consolidated CI. Inspect actual downloaded screenshots, then merge only the exact passing source and verify the existing protected staging push workflow and matching deployed/checkout SHA. Then finish the bounded live browser review or preserve its exact checkpoint for Mike's approved Work continuation. Record the PR, application SHA, screenshots and actual results here and update the master ledger and current pointer.
+1. Read the current staging HEAD, this handoff and the master's Run 1 ledger. Distinguish the verified application merge from any later documentation receipt or newer owner work. Preserve all newer work and use existing authorized staging access.
+2. Open `https://staging.cx83labs.com/services` in an authenticated capable browser. Review current CMS content at 390 and 1440 widths, plus 320, 768, 2560 and 844×390 for Services, representative AI detail and Contact. Verify the other two details on phone and desktop.
+3. Follow each service choice, Back to Services, the homepage demonstration `/#showcase-title`, the automation example `/how-it-works#customers`, and each context-specific Contact action. Confirm sticky-header clearance and live contact email.
+4. Check the five approved context queries, direct neutral Contact, invalid/repeated neutral entry, clear/change behavior and retained typed text using clearly synthetic unsent text. Check form error readability with empty-field validation. Persistence and duplicate prevention already passed in isolated CI; a live inquiry write is not needed simply to demonstrate layout.
+5. Check navigation, keyboard focus/activation, scrolling around the existing fixed Cat launcher, new action targets, Home's original media and the preserved open Cat header. Review the live browser console. Do not claim real mobile keyboard behavior from viewport resizing; that separate check belongs to Run 3.
+6. Save dated live captures with the actual environment and runtime commit. Keep them distinct from this CI package. If all required live checks pass, update this handoff, the Run 1 ledger and the continuity pointer to complete, then send the authorized project completion note. If a concrete defect appears, record and fix only that scoped issue through the existing review/staging process.
+7. Wait for Mike's separate Run 2 instruction. Do not start later-run work as part of this continuation.
 
 ## RECOVERY
 
-Revert only this run's application changes through the existing protected staging process. No CMS fields require restoration because none were changed. Preserve newer unrelated work. Baseline recovery reference is `72f26fa1d92ce86735c874b608ba1397418f8ac0`; do not reset the branch to it. No rollback has been performed or tested.
+Revert only this run's application change through the established reviewed staging process, preserving newer unrelated work. Baseline reference is `72f26fa1d92ce86735c874b608ba1397418f8ac0`; do not reset the branch to it. No CMS restoration or migration rollback is required because no CMS data or schema changed. No rollback was performed or tested.

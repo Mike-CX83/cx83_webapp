@@ -1,6 +1,6 @@
-## Current interior execution checkpoint, October 10, 2026, 9:08 PM CDT
+## Current interior execution receipt, October 10, 2026, 9:47 PM CDT
 
-Interior Run 1 is implemented in [PR 37](https://github.com/Mike-CX83/cx83_webapp/pull/37), source `d62b96d366b7ae4eb99c47b6752ec5e1c4542dd9`, with passing TypeScript and lint. Full tests are still unresolved in run `38102465237`; no Run 1 screenshot review or deployment is claimed. Live staging browser review is also blocked by the current browser URL policy. Continue from `docs/CX83_INTERIOR_RUN1_HANDOFF_2026_10_10.md` and the current interior master. The historical Cat and homepage records below remain unchanged.
+Interior Run 1 is implemented in [PR 37](https://github.com/Mike-CX83/cx83_webapp/pull/37) and deployed as `f67a118cb9c3438d1b8877276d5506b42dab9210`. [Push Staging run 38105293745](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38105293745) passed TypeScript, lint, 77 integration tests, 111 browser tests, production build, image and deployment. Runtime and checkout match the application SHA; the gate is 401 without authentication and checked site/images return 200 with authentication. All 25 new interior screenshots and Home/Cat preservation captures were inspected. Run 1 remains PARTIAL because authenticated live browser review is blocked by this chat's browser URL policy. Continue from `docs/CX83_INTERIOR_RUN1_HANDOFF_2026_10_10.md` and the current interior master. PR 37 and the authorized completion note identify this later documentation receipt separately from the verified application. The historical Cat and homepage records below remain unchanged.
 
 # Cat header visual refinement completion, October 10, 2026
 

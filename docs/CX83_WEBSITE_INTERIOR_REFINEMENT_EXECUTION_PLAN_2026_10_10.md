@@ -4,7 +4,7 @@ October 10, 2026, Tulsa, Oklahoma
 
 ## 1. Status, authority and outcome
 
-This is the complete execution plan requested by Mike after reviewing the website assessment and approving every word of the About CX83 Labs story. This document does not execute website changes. The three runs below are not started. Posting a run prompt authorizes that run's defined implementation, testing and protected staging deployment, not a public launch or unrelated work.
+This is the complete execution plan requested by Mike after reviewing the website assessment and approving every word of the About CX83 Labs story. This document does not execute website changes. At preparation, the three runs below had not started. The execution ledger in section 5 records their current state. Posting a run prompt authorizes that run's defined implementation, testing and protected staging deployment, not a public launch or unrelated work.
 
 The goal is one coherent customer journey: recognize a need, understand the relevant service or software, see credible evidence, and reach the right next step. Use the completed homepage as the standard for clarity and finish, not as a template to repeat on every page. Customer independence, understandable systems and optional support connect the experience.
 
@@ -114,7 +114,7 @@ If a run exceeds the available working context, save an exact partial checkpoint
 
 ### Run status ledger
 
-Run 1: IN PROGRESS, partial checkpoint at October 10, 2026, 9:08 PM CDT. Branch `chatgpt/interior-run1-2026-10-10`, PR 37, application/test source `d62b96d366b7ae4eb99c47b6752ec5e1c4542dd9`. Services, all three details, Contact and scoped styles are implemented. Typecheck and lint passed; Staging run `38102465237` has a prolonged active test step with no completed log. Screenshots, build, merge and deployment remain pending. Live staging browser review is blocked by the current cloud browser URL policy. Starting verified runtime remains `72f26fa1d92ce86735c874b608ba1397418f8ac0`. See `docs/CX83_INTERIOR_RUN1_HANDOFF_2026_10_10.md`; do not start Run 2.
+Run 1: PARTIAL, application deployed and commit verified at October 10, 2026, 9:47 PM CDT. Branch `chatgpt/interior-run1-2026-10-10`, PR 37, tested branch `f652316a54de11c0268abbe209dbc4eec864bbe4`; merged application, verified runtime and checkout `f67a118cb9c3438d1b8877276d5506b42dab9210`. Services, all three details, Contact and scoped styles are implemented. Typecheck, lint, 77 integration tests, 111 browser tests and production build passed in PR run `38104430822` and application push run `38105293745`. All 25 new interior screenshots plus Home/Cat preservation captures were visually inspected. Protected staging check, image and deployment jobs passed; anonymous gate 401 and authenticated site/images 200. Authenticated live browser review with current CMS remains blocked by the current cloud browser URL policy, so Run 1 is not complete. The later documentation receipt SHA and its own workflow status are recorded separately in PR 37 and the authorized project completion note. See `docs/CX83_INTERIOR_RUN1_HANDOFF_2026_10_10.md` for the precise Work continuation; do not start Run 2.
 
 Run 2: NOT STARTED. Requires the verified Run 1 result. Branch, PR, application SHA, runtime verification and handoff remain to be recorded.
 
