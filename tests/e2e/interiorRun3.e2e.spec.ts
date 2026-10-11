@@ -52,7 +52,7 @@ test.describe('Interior Run 3', () => {
           await expect(symbol).toHaveAttribute('src', '/brand/symbol-showcase.svg')
           await expect.poll(() => symbol.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true)
           if (viewport.width >= 1024) {
-            const column = await page.locator('.cx83-about-brand').boundingBox()
+            const column = await page.locator('.cx83-about-emblem-column').boundingBox()
             const mark = await symbol.boundingBox()
             expect(column).not.toBeNull()
             expect(mark).not.toBeNull()
