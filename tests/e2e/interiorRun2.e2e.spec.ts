@@ -163,7 +163,7 @@ test.describe('Interior Run 2 product and proof journeys', () => {
         await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1)
         metrics.push({ path, ...(await capture(page, testInfo, 'run2-' + label + '-' + viewport.width + 'x' + viewport.height)) })
       }
-      const file = testInfo.outputPath('run2-metrics-' + viewport.width + 'x' + viewport.height + '.json')
+      const file = testInfo.outputPath('interior-metrics-run2-' + viewport.width + 'x' + viewport.height + '.json')
       await writeFile(file, JSON.stringify({ viewport, metrics, environment: 'isolated CI application with local test database' }, null, 2) + '\n', 'utf8')
       await testInfo.attach('run2-responsive-metrics', { path: file, contentType: 'application/json' })
     })
