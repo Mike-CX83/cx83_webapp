@@ -83,6 +83,10 @@ test.describe('Interior Run 3', () => {
     await trigger.click()
     const dialog = page.getByRole('dialog')
     await expect(dialog.locator('.cx83-cat-starter')).toHaveCount(4)
+    await expect(dialog).toContainText('Hi, I’m Cat. I can help you explore our services')
+    await expect(dialog).not.toContainText('I cannot change this website')
+    await expect(dialog.locator('.cx83-cat-footer')).toContainText('Have a project in mind?')
+    await expect(dialog.locator('.cx83-cat-footer a')).toHaveAttribute('href', '/contact')
     await expect(dialog).toContainText('Which CX83 service fits my business?')
     await dialog.getByRole('button', { name: 'Close Cat', exact: true }).click()
     await expect(trigger).toBeFocused()
@@ -106,6 +110,9 @@ test.describe('Interior Run 3', () => {
       await launcher.click()
       await expect(dialog.locator('.cx83-cat-starter')).toHaveCount(4)
       await expect(dialog).toContainText(text)
+      if (path === '/software/client-brand-studio') {
+        await expect(dialog).toContainText('Can I start a brand without existing artwork?')
+      }
       await dialog.getByRole('textbox', { name: 'Message Cat' }).fill('Synthetic unsent question.')
       await expect(dialog.getByRole('button', { name: 'Send', exact: true })).toBeEnabled()
       await page.keyboard.press('Escape')
