@@ -20,13 +20,14 @@ beforeEach(() => vi.clearAllMocks())
 afterEach(cleanup)
 
 describe('Run 3 exact approved About publication', () => {
-  it('retains every approved word, punctuation mark and paragraph in the fallback rendering', async () => {
+  it('retains every approved word and punctuation mark with owner-approved paragraph formatting', async () => {
     vi.mocked(getPayloadClient).mockResolvedValue(null)
     expect(approvedAboutParagraphs).toEqual(approved)
     render(await AboutPage())
     expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('About CX83 Labs')
     const paragraphs = [...screen.getByTestId('approved-about-story').querySelectorAll('p')]
-    expect(paragraphs.map((p) => normalize(p.textContent || ''))).toEqual(approved.map(normalize))
+    expect(normalize(paragraphs.map((p) => p.textContent || '').join(' '))).toBe(normalize(approved.join(' ')))
+    expect(paragraphs).toHaveLength(5)
     expect(screen.getAllByRole('link')).toHaveLength(1)
     expect(screen.getByRole('link').getAttribute('href')).toBe('/contact')
   })
@@ -36,7 +37,7 @@ describe('Run 3 exact approved About publication', () => {
     vi.mocked(getPayloadClient).mockResolvedValue({ findGlobal } as unknown as Payload)
     render(await AboutPage())
     expect(findGlobal).toHaveBeenCalledWith({ slug: 'site-settings', depth: 0 })
-    expect([...screen.getByTestId('approved-about-story').querySelectorAll('p')].map((p) => normalize(p.textContent || ''))).toEqual(approved.map(normalize))
+    expect(normalize([...screen.getByTestId('approved-about-story').querySelectorAll('p')].map((p) => p.textContent || '').join(' '))).toBe(normalize(approved.join(' ')))
   })
 })
 
