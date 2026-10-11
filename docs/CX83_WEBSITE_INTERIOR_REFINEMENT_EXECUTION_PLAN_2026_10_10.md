@@ -114,7 +114,7 @@ If a run exceeds the available working context, save an exact partial checkpoint
 
 ### Run status ledger
 
-Run 1: IN PROGRESS. Implementation branch `chatgpt/interior-run1-2026-10-10` starts from `72f26fa1d92ce86735c874b608ba1397418f8ac0`; exact plan and About companion copied in `5cd74a1c89dfd72d684007b93386558543f95cc9`. See `docs/CX83_INTERIOR_RUN1_HANDOFF_2026_10_10.md`. Consolidated checks, screenshot inspection and protected deployment are pending. Actual protected staging browser review is blocked in the current cloud browser and must be completed before this run is marked complete.
+Run 1: IN PROGRESS, partial checkpoint at October 10, 2026, 9:08 PM CDT. Branch `chatgpt/interior-run1-2026-10-10`, PR 37, application/test source `d62b96d366b7ae4eb99c47b6752ec5e1c4542dd9`. Services, all three details, Contact and scoped styles are implemented. Typecheck and lint passed; Staging run `38102465237` has a prolonged active test step with no completed log. Screenshots, build, merge and deployment remain pending. Live staging browser review is blocked by the current cloud browser URL policy. Starting verified runtime remains `72f26fa1d92ce86735c874b608ba1397418f8ac0`. See `docs/CX83_INTERIOR_RUN1_HANDOFF_2026_10_10.md`; do not start Run 2.
 
 Run 2: NOT STARTED. Requires the verified Run 1 result. Branch, PR, application SHA, runtime verification and handoff remain to be recorded.
 
