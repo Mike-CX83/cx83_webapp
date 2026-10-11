@@ -10,23 +10,20 @@ import {
 import { MarkdownTextPrimitive } from '@assistant-ui/react-markdown'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
+import { usePathname } from 'next/navigation'
+import { conversationStarters } from '@/content/assistantNavigation'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import remarkGfm from 'remark-gfm'
 
-const starters = [
-  'How can AI update a website?',
-  'What is Client Brand Studio?',
-  'Can CX83 connect my current tools?',
-  'How do I start a project?',
-] as const
-
 export function AssistantWidget() {
+  const returnFocusRef = useRef<HTMLElement | null>(null)
   const [session, setSession] = useState(0)
   const [open, setOpen] = useState(false)
 
   return (
     <AssistantSession
       key={session}
+      returnFocusRef={returnFocusRef}
       open={open}
       onOpenChange={setOpen}
       onReset={() => setSession((value) => value + 1)}
@@ -38,11 +35,15 @@ function AssistantSession({
   open,
   onOpenChange,
   onReset,
+  returnFocusRef,
 }: {
+  returnFocusRef: { current: HTMLElement | null }
   open: boolean
   onOpenChange: (open: boolean) => void
   onReset: () => void
 }) {
+  const pathname = usePathname()
+  const starters = conversationStarters(pathname)
   const runtime = useChatRuntime({
     transport: new AssistantChatTransport({ api: '/api/chat' }),
   })
@@ -69,12 +70,23 @@ function AssistantSession({
   useEffect(() => {
     const openFromNavigation = () => {
       delete document.documentElement.dataset.cx83CatRequested
+      if (!open && document.activeElement instanceof HTMLElement) returnFocusRef.current = document.activeElement
       onOpenChange(true)
     }
     window.addEventListener('cx83:open-cat', openFromNavigation)
     if (document.documentElement.dataset.cx83CatRequested === 'true') openFromNavigation()
     return () => window.removeEventListener('cx83:open-cat', openFromNavigation)
-  }, [onOpenChange])
+  }, [onOpenChange, open, returnFocusRef])
+
+  const restoreFocus = useCallback(() => {
+    const target = returnFocusRef.current
+    if (target?.isConnected && target.getClientRects().length) target.focus()
+    else {
+      const menu = document.querySelector<HTMLButtonElement>('.cx83-site-menu-button')
+      if (menu?.getClientRects().length) menu.focus()
+      else launcherRef.current?.focus()
+    }
+  }, [returnFocusRef])
 
   useEffect(() => {
     if (!open) return
@@ -82,17 +94,17 @@ function AssistantSession({
       if (event.key === 'Escape') {
         event.preventDefault()
         onOpenChange(false)
-        launcherRef.current?.focus()
+        restoreFocus()
       }
     }
     document.addEventListener('keydown', closeOnEscape)
     closeRef.current?.focus()
     return () => document.removeEventListener('keydown', closeOnEscape)
-  }, [open, onOpenChange])
+  }, [open, onOpenChange, restoreFocus])
 
   const close = () => {
     onOpenChange(false)
-    launcherRef.current?.focus()
+    restoreFocus()
   }
 
   return (
@@ -103,7 +115,13 @@ function AssistantSession({
         aria-expanded={open}
         aria-label={open ? 'Close Cat' : 'Ask Cat'}
         className="cx83-assistant-launcher"
-        onClick={() => onOpenChange(!open)}
+        onClick={(event) => {
+          if (open) close()
+          else {
+            returnFocusRef.current = event.currentTarget
+            onOpenChange(true)
+          }
+        }}
         type="button"
       >
         <Image src="/brand/symbol-showcase.svg" alt="" aria-hidden="true" width={25} height={25} />

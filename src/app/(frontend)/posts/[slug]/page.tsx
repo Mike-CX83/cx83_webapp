@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 
 import { RelatedPosts } from '@/blocks/RelatedPosts/Component'
 import { PayloadRedirects } from '@/components/PayloadRedirects'
@@ -67,6 +68,7 @@ export default async function Post({ params: paramsPromise }: Args) {
 
       {draft && <LivePreviewListener />}
 
+      <div className="cx83-container mb-6"><Link className="cx83-shared-text-link inline-flex min-h-11 items-center" href="/posts">Back to Notes</Link></div>
       <PostHero post={post} />
 
       <div className="flex flex-col items-center gap-4 pt-8">
