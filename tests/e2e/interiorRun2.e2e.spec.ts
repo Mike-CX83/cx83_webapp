@@ -34,7 +34,7 @@ async function capture(page: Page, testInfo: TestInfo, name: string) {
   })
   expect(metrics.scrollWidth, name + ' must not overflow').toBeLessThanOrEqual(metrics.clientWidth + 1)
   expect(metrics.clipped, name + ' has no clipped scoped elements').toEqual([])
-  const filename = testInfo.outputPath(name + '.png')
+  const filename = testInfo.outputPath('interior-' + name + '.png')
   await page.screenshot({ path: filename, fullPage: true, animations: 'disabled' })
   await testInfo.attach(name, { path: filename, contentType: 'image/png' })
   return metrics
