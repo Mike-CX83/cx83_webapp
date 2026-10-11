@@ -61,6 +61,10 @@ describe('Cat static public guidance', () => {
       expect(publicNavigationKnowledge).toContain(link)
     }
     expect(knowledge).toContain(approvedAboutStory)
+    expect(knowledge).toContain('The displayed CX83 branding is authentic work created through Client Brand Studio')
+    expect(knowledge).toContain('Visitors can begin with existing artwork or their own creative direction')
+    expect(knowledge).toContain('Client Brand Studio remains in development')
+    expect(knowledge).not.toContain('editorial example, not an actual generated customer output')
     const prompt = buildSystemPrompt(knowledge, '')
     expect(prompt).toContain('one useful next link')
     expect(prompt).toContain('cannot access owner agents')
