@@ -13,7 +13,7 @@ test.describe('Run 2 connected systems and proof', () => {
     await expect(page.getByTestId('systems-map')).toHaveCount(0)
     await page.goto(host + '/software')
     await expect(page.getByTestId('brand-studio-spotlight')).toContainText('source artwork')
-    await expect(page.getByRole('img', { name: 'Original CX83 brand symbol' })).toHaveAttribute('src', /symbol-showcase.svg/)
+    await expect(page.getByTestId('brand-studio-spotlight').getByRole('img', { name: 'Original CX83 brand symbol' })).toHaveAttribute('src', /symbol-showcase.svg/)
     await page.goto(host + '/how-it-works')
     await page.locator('.cx83-technical-disclosure > summary').click()
     await expect(page.getByTestId('systems-map')).toBeVisible()
