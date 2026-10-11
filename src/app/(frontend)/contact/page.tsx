@@ -33,7 +33,7 @@ export default async function ContactPage({ searchParams }: Args) {
             </div>
             <InquiryForm initialContext={initialContext} />
             <p className="cx83-contact-form-note">
-              Your details are stored by CX83 to review and respond to your inquiry, not shared with the public Cat assistant. Please leave passwords, patient information, and other sensitive records out of your message.
+              We’ll use the details you provide to review and respond to your inquiry.
             </p>
           </div>
           <aside aria-labelledby="contact-next-title" className="cx83-contact-info">
