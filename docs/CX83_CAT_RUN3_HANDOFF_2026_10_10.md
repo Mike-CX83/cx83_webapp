@@ -1,3 +1,7 @@
+# Current interior refinement checkpoint
+
+Interior Run 1 is in progress on `chatgpt/interior-run1-2026-10-10`. Read `docs/CX83_INTERIOR_RUN1_HANDOFF_2026_10_10.md` and the repository interior execution master for current status. The historical phase completion records below remain unchanged. Run 2 must wait for verified Run 1 completion.
+
 # Cat header visual refinement completion, October 10, 2026
 
 PROJECT: CX83 Labs website, `Mike-CX83/cx83_webapp`, protected staging.  

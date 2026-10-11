@@ -1,3 +1,5 @@
+import { parseInquiryContext, type InquiryContextToken } from '@/forms/inquiryContext'
+
 export type InquiryType = 'general' | 'project' | 'services' | 'software'
 
 export type InquiryInput = {
@@ -6,6 +8,7 @@ export type InquiryInput = {
   organization: string
   inquiryType: InquiryType
   message: string
+  context?: InquiryContextToken
 }
 
 export type InquiryErrors = Partial<Record<keyof InquiryInput, string>>
@@ -20,6 +23,7 @@ export function validateInquiry(value: unknown): { data?: InquiryInput; errors: 
   const organization = typeof source.organization === 'string' ? source.organization.trim() : ''
   const inquiryType = source.inquiryType
   const message = typeof source.message === 'string' ? source.message.trim() : ''
+  const context = typeof source.context === 'string' ? parseInquiryContext(source.context) : null
   const errors: InquiryErrors = {}
 
   if (!name) errors.name = 'Name is required.'
@@ -32,12 +36,24 @@ export function validateInquiry(value: unknown): { data?: InquiryInput; errors: 
 
   if (!validTypes.includes(inquiryType as InquiryType)) errors.inquiryType = 'Choose a valid inquiry category.'
 
+  if (source.context !== undefined) {
+    if (!context) errors.context = 'Choose a listed interest or remove the selection.'
+    else if (context.inquiryType !== inquiryType) errors.context = 'Choose an interest that matches your inquiry category.'
+  }
+
   if (!message) errors.message = 'Message is required.'
   else if (message.length > 5000) errors.message = 'Message must be 5000 characters or fewer.'
 
   if (Object.keys(errors).length) return { errors }
   return {
-    data: { name, email, organization, inquiryType: inquiryType as InquiryType, message },
+    data: {
+      name,
+      email,
+      organization,
+      inquiryType: inquiryType as InquiryType,
+      message,
+      ...(context ? { context: context.token } : {}),
+    },
     errors,
   }
 }
