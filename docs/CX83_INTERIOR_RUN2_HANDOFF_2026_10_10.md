@@ -1,3 +1,80 @@
+PROJECT: CX83 Labs website, `Mike-CX83/cx83_webapp`.
+RUN: Interior Run 2, continuation authorized October 11, 2026.
+STATUS: IMPLEMENTED AND AUTOMATED CHECKS PASSED. PARTIAL: required visual review blocked by session tool restrictions. NOT MERGED, NOT DEPLOYED. The owner's authorization to finish and deploy protected staging remains valid; no additional permission is required.
+HEAD: Started from saved checkpoint `0fe1ec61b112190c3c78507ca4a1d69233864143`. Exact tested branch head `027be8bf15442342b552a592e1722722330078d2`, branch `chatgpt/interior-run2-2026-10-10`, [PR 38](https://github.com/Mike-CX83/cx83_webapp/pull/38), base `staging-host`. Base remains `dd12c886d4ff183a29c447d19fa70cd7869b7669`. No merged or newly deployed application SHA exists for Run 2. This handoff is a subsequent documentation receipt, not a tested or deployed application SHA.
+
+# Run 2 continuation evidence, October 11, 2026, 12:16 AM CDT
+
+## COMPLETED
+
+Read the master execution plan and both Run 1 and Run 2 handoffs; resumed existing progress without rebuilding or creating another plan. Inspected the completed failure log for [workflow 38112151727](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38112151727), check job 114389808558. It had 79 passing integration tests, 119 passing browser tests and three browser failures; TypeScript and lint passed, while production build was skipped.
+
+Resolved all three failures in one commit and one complete CI cycle:
+
+| Failure | Focused repair |
+| --- | --- |
+| How it works map disclosure selector also found nested FAQ disclosures | Scope the technical disclosure and keyboard summary to the outer disclosure directly beneath `#system-map`. |
+| CMS case detail heading `Problem` also matched the closing question | Match the `Problem` and `Outcome` headings exactly. |
+| Existing visual integration test expected superseded connection explanation | Assert the approved Run 2 illustrative workflow wording and scope its map summary to the outer disclosure. |
+
+Only the three browser test files changed in this continuation. All behavioral, keyboard, image and layout assertions remain. No tests were deleted or skipped. No application redesign or further CMS changes were made.
+
+Compared recursive Git trees for Run 1 base and tested head: 29 protected blobs are identical, covering Home, all Assistant files, Services, Contact, the inquiry form/context, SiteHeader/SiteFooter, brand assets, connection imagery and showcase media. See the preservation manifest linked below for exact Git blob IDs.
+
+## CMS CHANGES
+
+None. No staging CMS record, inquiry, credentials, schema, assistant configuration or product record was mutated. CMS fixture tests ran only in the guarded GitHub CI database. Earlier implementation details and read-only published CMS inventory remain in the historical checkpoint below.
+
+## VALIDATION
+
+The existing PR Staging workflow [38113452641](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38113452641), check job [114393568572](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38113452641/job/114393568572), completed **successfully** at 2026-10-11T05:16:10Z for exact tested head `027be8bf15442342b552a592e1722722330078d2`.
+
+| Required check | Observed result |
+| --- | --- |
+| `pnpm exec tsc --noEmit` | Passed |
+| `pnpm lint` | Passed |
+| `pnpm test`, integration suite | 13 files, 79 tests passed |
+| `pnpm test`, Chromium Playwright suite | 122 tests passed, 10.7 minutes |
+| `pnpm build` | Passed; Next compiled successfully and generated the route table |
+| Scope preservation | 29 protected Git blobs identical to verified Run 1 base |
+
+Environment: existing GitHub workflow, Node 22, lockfile dependencies, isolated Postgres 17 CI database, guarded Payload fixtures and Chromium. Browser suite includes affected page rendering, product contact contexts, original media, historical anchors, keyboard map/FAQ disclosures, synthetic published Work records, missing slug 404, homepage/Cat regressions and the six viewport capture matrix. The production build includes `/software`, `/software/[slug]`, `/work`, both Work detail routes and `/how-it-works`.
+
+Passing image and geometry assertions and screenshot capture are **automated evidence only**. The actual screenshots have not been visually inspected and do not constitute aesthetic acceptance. No current Run 2 runtime, navigation or responsive staging review is claimed.
+
+## ARTIFACTS
+
+* [Passing workflow and job log](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38113452641).
+* [Passing browser artifact 11692482733](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38113452641/artifacts/11692482733): `homepage-review-38113452641`, 50,617,206 bytes, SHA-256 `d307b514cf60c41e771876dfa465d5f505c627dfe05fcd9ebc92bc6bdf055a24`. GitHub reports expiry 2026-10-18T05:14:29Z. Includes interior screenshots and measurements; fixture content must remain labeled as synthetic.
+* [Preservation manifest](CX83_INTERIOR_RUN2_PRESERVATION_2026_10_11.json).
+* [Existing PR 38](https://github.com/Mike-CX83/cx83_webapp/pull/38), [tested commit](https://github.com/Mike-CX83/cx83_webapp/commit/027be8bf15442342b552a592e1722722330078d2).
+
+## BLOCKED
+
+Required predeployment visual inspection could not be completed in this session. Shell execution could not resolve external download hosts and denied binding a local Next review server (`listen EPERM`). The authenticated Chrome browser works for existing protected staging, but denied the GitHub artifact storage URL and the connector's separate signed artifact transfer URL with `ERR_BLOCKED_BY_CLIENT`. Browser policy also explicitly denied local `file:` navigation. The supported file materialization tool returned a transfer URL, not a local workspace file. No protection was disabled and no denied action was bypassed.
+
+Therefore section 10's actual screenshot review gate remains unmet. PR 38 remains open; `staging-host` is unchanged. No Run 2 protected staging deployment was attempted, and no deployed commit can honestly be recorded. This is a tool capability blocker, not missing owner authorization. The earlier owner stop checkpoint is superseded by the current resume instruction; its historical details remain below.
+
+## DEFERRED
+
+About and Cat knowledge work remain Run 3. Existing video audio/embedded graphics, inquiry email OAuth/delivery, privacy/launch readiness, customer publication approvals and actual Studio release/installers remain the established separate holds. None prevents testing the website or supplies evidence of a software release.
+
+## NEXT
+
+Continue from exact tested head with no further source changes or repeated CI needed unless new defects are found. Use an available authorized review environment to inspect the passing artifact or the exact built source at 320x740, 390x844, 768x1024, 1440x1000, 2560x1440 and 844x390. Review Software, both product pages, Work and How it works, including original imagery, open map/FAQ states, navigation and contact journeys.
+
+Once that required gate passes, merge PR 38 **only into staging-host**, follow the existing Staging push workflow, verify exact merged checkout/runtime SHAs, anonymous 401 and authenticated page/media responses, then review the actual deployment with current CMS content. Save that distinct deployment result here and update the existing master ledger. Do not merge into main or deploy production. The owner's staging authorization already covers these steps.
+
+## RECOVERY
+
+No deployment rollback is needed because staging was not changed. Preserve the branch, PR and tested checkpoint. Any further repair should remain scoped to Run 2 and pass the existing checks. If a future staged Run 2 needs reversal, revert its scoped merge through the protected staging workflow and preserve Run 1 and unrelated work.
+
+---
+
+# Historical checkpoint and implementation record
+
+The following stopped checkpoint predates the owner's October 11 resume authorization and the passing verification recorded above.
+
 # STOP CHECKPOINT, October 10, 2026, 11:53 PM CDT
 
 PROJECT: CX83 Labs website, `Mike-CX83/cx83_webapp`.
