@@ -60,30 +60,30 @@ export default async function SoftwareDetailPage({ params }: Args) {
               <figure className="cx83-product-proof-visual">
                 <Image src="/showcase/cx83-website-showcase-poster-v2.jpg" width={1920} height={1080}
                   alt="Poster frame from the recorded CX83 website change walkthrough" />
-                <figcaption>Recorded first party demonstration on this website. It is not a customer installer preview.</figcaption>
+                <figcaption>Recorded demonstration of a real update to the CX83 website.</figcaption>
                 <Link className="cx83-interior-link" href="/#showcase-title">
                   Watch the real website demonstration <span aria-hidden="true">↗</span>
                 </Link>
               </figure>
             </div>
             <div className="cx83-product-evidence-link">
-              <h2>Demonstrated here, not yet packaged for customers.</h2>
-              <p>Changes to this CX83 website have been reviewed, tested and deployed on protected staging. Customer hosting, installation and supported AI connections still require release qualification.</p>
+              <h2>See our connected website in action.</h2>
+              <p>We used connected AI tools to update this CX83 website, review the results and verify the changes on protected staging. Customer installation and supported connections are still in development.</p>
               <Link className="cx83-interior-link" href="/work#cx83-connected-website">
-                See the dated CX83 implementation record <span aria-hidden="true">↗</span>
+                See the CX83 website example <span aria-hidden="true">↗</span>
               </Link>
             </div>
           </>
         ) : (
           <>
             <div className="cx83-interior-reading cx83-product-studio-intro">
-              <h2>From existing artwork to coordinated drafts.</h2>
-              <p>Studio uses a saved direction and authorized brand files to produce draft design materials for review. It does not replace the client&#39;s identity or publish files without human acceptance.</p>
+              <h2>From existing artwork or an idea to a consistent brand.</h2>
+              <p>Start with artwork you already have or describe your creative direction. Studio uses your saved brand brief to develop coordinated materials that you can review.</p>
             </div>
             <BrandStudioSpotlight variant="detail" />
             <section className="cx83-product-evidence-link" id="studio-review" aria-labelledby="studio-review-title">
-              <h2 id="studio-review-title">Draft output still needs acceptance.</h2>
-              <p>Visual quality, file compatibility, supported installation and customer packaging are still being evaluated. No approved customer output or retail release is presented here. The illustration above uses original CX83 source artwork only.</p>
+              <h2 id="studio-review-title">Real Studio work, product in development.</h2>
+              <p>The CX83 branding shown here is authentic work created through Client Brand Studio. Customer packaging, supported installation and file compatibility are still being evaluated.</p>
             </section>
           </>
         )}

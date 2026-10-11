@@ -154,7 +154,7 @@ function AssistantSession({
                 <div className="cx83-cat-welcome">
                   <p className="cx83-cat-welcome-label">Welcome to CX83</p>
                   <h3>What can we help you explore?</h3>
-                  <p>Hi, I’m Cat. I can explain our website, the software we are developing, and how CX83 connects business tools. I cannot change this website or access private business data.</p>
+                  <p>Hi, I’m Cat. I can help you explore our services, learn about the software we’re building, and understand how CX83 connects business tools. Choose a topic below or ask me anything about CX83.</p>
                   <div aria-label="Conversation starters" className="cx83-cat-starters">
                     {starters.map((prompt) => (
                       <ThreadPrimitive.Suggestion className="cx83-cat-starter" key={prompt} prompt={prompt} send>
@@ -189,7 +189,7 @@ function AssistantSession({
             </ComposerPrimitive.Root>
           </ThreadPrimitive.Root>
           <footer className="cx83-cat-footer">
-            <span>Cat shares public information, not account access.</span>
+            <span>Have a project in mind? We would like to hear about it.</span>
             <Link href="/contact" onClick={() => onOpenChange(false)}>Contact CX83 <span aria-hidden="true">↗</span></Link>
           </footer>
         </section>

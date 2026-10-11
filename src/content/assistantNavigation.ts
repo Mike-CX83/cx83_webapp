@@ -24,7 +24,7 @@ const routeStarters: Record<string, readonly string[]> = {
   '/software/client-brand-studio': [
     'What does Client Brand Studio do?',
     'Is Client Brand Studio available?',
-    'Is the Studio illustration an actual output?',
+    'Can I start a brand without existing artwork?',
     'How do I ask about Client Brand Studio?',
   ],
 }
@@ -36,10 +36,10 @@ export function conversationStarters(pathname: string): readonly string[] {
 export const publicNavigationKnowledge = [
   'Public routes: / (Home), /services (service selection), /software (two products in development), /about (approved company story), /work (evidence), /contact (human inquiry).',
   'How it works: /how-it-works. Illustrative examples: /how-it-works#customers, /how-it-works#marketing, /how-it-works#operations. Ownership: /how-it-works#ownership. FAQ: /how-it-works#questions.',
-  'Actual website demonstration video: /#showcase-title. Substantial dated CX83 internal implementation evidence: /work#cx83-connected-website. Historical proof pointer: /how-it-works#real-proof.',
+  'Actual CX83 website demonstration video: /#showcase-title. Real CX83 website update: /work#cx83-connected-website. More details: /how-it-works#real-proof.',
   'The CX83 internal website demonstrates authorized owner requests, implementation, review and protected staging. It is not a customer release or proof of automatic email delivery. Workflow diagrams are illustrative.',
   'Connected Website Platform: /software/connected-websites. Client Brand Studio: /software/client-brand-studio. Both remain in development, with no download, trial, checkout or customer installer.',
-  'The Studio source artwork illustration is an editorial example, not an actual generated customer output or interface screenshot.',
+  'The displayed CX83 branding is authentic work created through Client Brand Studio, as confirmed by the CX83 owner. Visitors can begin with existing artwork or their own creative direction. Client Brand Studio remains in development and is not released for customer installation.',
   ...INQUIRY_CONTEXTS.map((context) => {
     const prefix = context.inquiryType === 'software' ? '/software/' : '/services/'
     return context.label + ': detail ' + prefix + context.token + '; specific human inquiry ' + inquiryContextHref(context.token)

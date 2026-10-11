@@ -56,12 +56,12 @@ export default function HowItWorksPage() {
       <InteriorSection className="cx83-how-proof-section">
         <section id="real-proof" aria-labelledby="how-proof-title" className="cx83-how-proof">
           <div>
-            <p className="cx83-work-kicker">Verified first party staging, October 10, 2026</p>
+            <p className="cx83-work-kicker">Real CX83 website example</p>
             <h2 id="how-proof-title">A real change to the CX83 website.</h2>
-            <p>Actual owner requests became code changes, reviewed pages and a verified protected staging release. The October 10 interior refinement passed 77 integration tests and 111 browser tests. This is not an available customer installer or a claimed client outcome.</p>
+            <p>See how an owner request became an actual website update, with the results reviewed and verified through the existing release process.</p>
           </div>
           <Link className="cx83-interior-link" href="/work#cx83-connected-website">
-            View the dated implementation in Work <span aria-hidden="true">↗</span>
+            Explore the CX83 website example <span aria-hidden="true">↗</span>
           </Link>
         </section>
       </InteriorSection>
