@@ -1,3 +1,43 @@
+# STOP CHECKPOINT, October 10, 2026, 11:53 PM CDT
+
+PROJECT: CX83 Labs website, `Mike-CX83/cx83_webapp`.
+RUN: Interior Run 2.
+STATUS: PARTIAL, implementation saved, verification FAILED, NOT MERGED, NOT DEPLOYED. OWNER REQUESTED STOP. Resume only on Mike's explicit instruction.
+HEAD: Isolated implementation branch `chatgpt/interior-run2-2026-10-10`, current precheckpoint head `ac7664505242f5ebacd345e7d8fb81f60aa06eb9`. PR 38 remains open against `staging-host`. The documentation commit carrying this checkpoint is a later receipt, not a tested application SHA.
+
+## COMPLETED AND SAVED
+
+The full Run 2 source work is preserved on this branch: Software catalog, both product details, Work and existing project/case detail templates, How it works, scoped responsive styling, reuse of Run 1 validated inquiry contexts, authentic original artwork and showcase poster, and new browser/integration tests. Run 1 COMPLETE base is `dd12c886d4ff183a29c447d19fa70cd7869b7669`. Published Work CMS Projects and Case Studies were read only and each returned zero records at initiation. First party website evidence was used; no client case was invented. Approved Studio product status was cross-checked against the owning repository `plugins/client-brand-studio/STATUS.md` on branch `client-brand-studio-completion`: 0.8.4 is an unreleased, unapproved internal draft, not a commercial release.
+
+Independent before/after Git blob comparisons established that Home, Cat, SiteHeader, SiteFooter, authentic symbol/logo, original banner, showcase video/captions/poster and all three connection visuals remained unchanged. No CMS, production, product, schema, credentials, outbound email or billing changes were made.
+
+## VERIFICATION TRUTH AND WHY EXECUTION STALLED
+
+The isolated GitHub PR workflow has passed TypeScript and lint repeatedly, but the full suite has NOT passed. Earlier run `38108991003` failed with 96 browser tests passing and 26 failing. Its captured job logs demonstrated a concrete application defect introduced by Run 2: use of the real `/showcase/cx83-website-showcase-poster-v2.jpg` in `next/image` was rejected by `images.localPatterns`, causing HTTP 500 on affected pages. That exact path was added to `next.config.ts` without modifying the image itself. Another failure showed a 320px viewport measuring 322px on How it works; the new proof link was adjusted for reflow. Screenshot artifact naming, lazy image capture handling, and one stale test expectation were also repaired.
+
+After those fixes, another commit amended image inspection to consider visible artwork only. The latest full PR check is [workflow 38112151727](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38112151727). Its check job reports **failure** at the automated test step, with TypeScript and lint successful and production build skipped. Its final failure causes and exact test list have **NOT** been inspected or resolved. Do not assume the image fix or 2px overflow fix was sufficient. No green PR gate exists; no merge, staging deployment, screenshot acceptance or live staging verification has occurred. Earlier PR checks were canceled when newer branch commits superseded them, which repeatedly restarted the full CI suite and increased elapsed time. The long suite and iterative failures are demonstrated obstacles; no evidence establishes a ChatGPT context window failure.
+
+## ARTIFACTS AND EXACT RESUME POINT
+
+PR: https://github.com/Mike-CX83/cx83_webapp/pull/38
+Branch: `chatgpt/interior-run2-2026-10-10`
+Application head before this documentation checkpoint: `ac7664505242f5ebacd345e7d8fb81f60aa06eb9`
+Latest failing workflow: https://github.com/Mike-CX83/cx83_webapp/actions/runs/38112151727
+Prior inspected error workflow: https://github.com/Mike-CX83/cx83_webapp/actions/runs/38108991003
+Earlier failed run 38108991003 visual artifact ID 11690827596 (failed CI evidence, not approved visual review). Do not treat it as a successful screenshot pass.
+
+## BLOCKED
+
+1. Exact latest CI failure must be diagnosed from completed job logs, without guessing.
+2. Passing full browser/integration suite, production build and visual comparison still required.
+3. Protected staging deploy and exact running application SHA verification, then authenticated live page review still required. Ask Mike for a *specific bounded* Work continuation only if the authenticated browser capability is the actual remaining blocker, rather than restarting Run 2.
+
+## NEXT, WHEN MIKE EXPLICITLY RESUMES
+
+Inspect completed workflow 38112151727 test failure log first, make focused repairs on the same Run 2 branch, and avoid repeated full CI triggers while edits are incomplete. Run complete verification once changes stabilize. Inspect the actual screenshots including 320, 390, 768, 1440, 2560 and 844 by 390, check media and anchors, then follow the existing PR merge and protected staging process only after all gates pass. Update this handoff and the master ledger with exact verified results. Preserve Run 1 and all unrelated work. **No actions are authorized after saving this checkpoint until Mike gives another instruction.**
+
+---
+
 PROJECT: CX83 Labs website, `Mike-CX83/cx83_webapp`.
 RUN: Interior Run 2, Software, Work and How it works.
 STATUS: IMPLEMENTED ON ISOLATED BRANCH. Tests, visual review, merge and protected staging verification PENDING.
