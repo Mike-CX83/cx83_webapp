@@ -27,7 +27,7 @@ export default async function WorkPage() {
       <InteriorSection>
         <ContentNotice source={source} />
         <article id="cx83-connected-website" aria-labelledby="cx83-work-feature-title" className="cx83-work-feature">
-          <p className="cx83-work-kicker">First party implementation | CX83 website | October 2026</p>
+          <p className="cx83-work-kicker">Real CX83 website implementation</p>
           <div className="cx83-work-feature-grid">
             <div>
               <h2 id="cx83-work-feature-title">A conversation became a verified website change.</h2>
@@ -35,7 +35,7 @@ export default async function WorkPage() {
               <ol className="cx83-work-steps">
                 <li><strong>Request</strong><span>Keep the original brand identity and improve real site pages while retaining the inquiry form.</span></li>
                 <li><strong>Implementation</strong><span>Connected owner tools changed the actual CX83 code. The resulting pages and user journeys were reviewed.</span></li>
-                <li><strong>Verification</strong><span>Automated checks passed and the application was deployed to password protected staging, where the code and running release were checked.</span></li>
+                <li><strong>Verification</strong><span>We tested the updated experience and verified the live changes on protected staging.</span></li>
               </ol>
               <Link className="cx83-interior-link" href="/#showcase-title">
                 Watch the recorded website demonstration <span aria-hidden="true">↗</span>
@@ -44,16 +44,12 @@ export default async function WorkPage() {
             <figure className="cx83-work-figure">
               <Image src="/showcase/cx83-website-showcase-poster-v2.jpg" width={1920} height={1080}
                 alt="Authentic poster for the recorded CX83 website update demonstration" />
-              <figcaption>The original recording shows an actual CX83 website change. The video is on Home and is not a customer installation demonstration.</figcaption>
+              <figcaption>The original recording shows an actual change to the CX83 website. Watch it on Home.</figcaption>
             </figure>
           </div>
           <div className="cx83-work-result">
-            <h3>What was actually demonstrated</h3>
-            <p>On October 10, 2026, the Services and Contact refinement passed 77 integration tests, 111 browser tests, TypeScript, lint and the production build. The merged application was verified on protected staging. This is CX83 internal implementation evidence, not a client testimonial, revenue claim or finished customer installer.</p>
-            <details className="cx83-work-evidence">
-              <summary>Read the dated engineering record</summary>
-              <p>Interior Run 1, October 10, 2026. Repository: Mike-CX83/cx83_webapp, PR 37. Validated application commit <code>f67a118cb9c3438d1b8877276d5506b42dab9210</code>. Protected staging application deployment workflow <code>38105293745</code>. Authenticated page review passed later that evening and is recorded in the repository handoff. A documentation only receipt is not the same as the application version.</p>
-            </details>
+            <h3>The result</h3>
+            <p>A request became a real website update. Using our connected AI tools, we made changes to the CX83 website, reviewed the results, and verified the updated experience.</p>
           </div>
         </article>
         {projects.items.length ? (
