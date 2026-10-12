@@ -14,6 +14,7 @@ import { beforeSyncWithSearch } from '@/search/beforeSync'
 import { Page, Post } from '@/payload-types'
 import { repositoryTools } from '@/plugins/repositoryTools'
 import { getServerSideURL } from '@/utilities/getURL'
+import { expireCatSubmissionRead, protectCatSubmissionCreate } from '@/ai/catSubmissions'
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
   return doc?.title ? `${doc.title} | CX83 Labs` : 'CX83 Labs'
@@ -104,6 +105,10 @@ export const plugins: Plugin[] = [
     generateURL,
   }),
   formBuilderPlugin({
+    formSubmissionOverrides: {
+      access: { create: protectCatSubmissionCreate },
+      hooks: { beforeRead: [expireCatSubmissionRead] },
+    },
     fields: {
       payment: false,
     },
@@ -139,3 +144,4 @@ export const plugins: Plugin[] = [
     },
   }),
 ]
+

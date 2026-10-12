@@ -32,6 +32,16 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'], channel: 'chromium' },
     },
+    {
+      name: 'cat-android-chromium',
+      testMatch: /catRepair\.e2e\.spec\.ts/,
+      use: { ...devices['Pixel 7'], browserName: 'chromium' },
+    },
+    {
+      name: 'cat-iphone-webkit',
+      testMatch: /catRepair\.e2e\.spec\.ts/,
+      use: { ...devices['iPhone 13'], browserName: 'webkit' },
+    },
   ],
   webServer: {
     command: 'pnpm dev',
@@ -39,3 +49,4 @@ export default defineConfig({
     url: 'http://localhost:3000',
   },
 })
+

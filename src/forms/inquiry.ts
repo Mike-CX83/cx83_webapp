@@ -9,6 +9,7 @@ export type InquiryInput = {
   inquiryType: InquiryType
   message: string
   context?: InquiryContextToken
+  source?: 'cat-plan'
 }
 
 export type InquiryErrors = Partial<Record<keyof InquiryInput, string>>
@@ -57,3 +58,4 @@ export function validateInquiry(value: unknown): { data?: InquiryInput; errors: 
     errors,
   }
 }
+
