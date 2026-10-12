@@ -14,7 +14,11 @@ import { randomUUID } from 'node:crypto'
 
 // Only the existing authenticated owner's repository check on the protected staging host.
 // CI and ordinary developer machines never spend provider tokens or touch a live database.
-const enabled = !process.env.CI && Boolean(process.env.CX83_REPO_ROOT) && /staging/.test(process.env.DATABASE_URL || '') && Boolean(process.env.CX83_DEPLOYED_SHA)
+function stagingDatabase(): boolean {
+  try { return new URL(process.env.DATABASE_URL || '').pathname === '/cx83_webapp_staging' }
+  catch { return false }
+}
+const enabled = !process.env.CI && Boolean(process.env.CX83_REPO_ROOT) && stagingDatabase() && Boolean(process.env.CX83_DEPLOYED_SHA)
 const results: Record<string, unknown>[] = []
 let configured: Awaited<ReturnType<typeof getAssistantRuntimeConfig>> | undefined
 const report = () => ({ timestamp: new Date().toISOString(), deployedSha: process.env.CX83_DEPLOYED_SHA, provider: configured?.provider, configuredModel: configured?.model,

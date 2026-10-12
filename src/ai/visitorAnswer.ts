@@ -16,7 +16,9 @@ export function safeAssistantHref(href: string | undefined): string | null {
 
 // Narrow classifier/serialization signatures, not ordinary explanations about safety.
 export function isInternalAnswer(text: string): boolean {
-  return /(?:^|\n)\s*(?:user\s+safety|safety\s+classification|safety\s+categories|debug|system\s+prompt|owner\s+guidance|approved\s+CX83\s+knowledge|providerMetadata)\s*:/i.test(text)
+  return /\bUser\s+Safety\s*:/i.test(text)
+    || /"(?:User Safety|classification|providerMetadata)"\s*:/i.test(text)
+    || /(?:^|\n)\s*(?:user\s+safety|safety\s+classification|safety\s+categories|debug|system\s+prompt|owner\s+guidance|approved\s+CX83\s+knowledge|providerMetadata)\s*:/i.test(text)
     || /(?:^|\n)\s*(?:You are Cat, the CX83 Labs AI assistant|You are strictly a visitor guide)/i.test(text)
     || /<\/?(?:think|analysis|system|tool_call)>/i.test(text)
     || /^\s*\{\s*"(?:safety|classification|providerMetadata|system)"\s*:/i.test(text)
@@ -31,6 +33,11 @@ export function formatVisitorAnswer(text: string, finishReason: string): { text:
   const ordinarySafetyReply = finishReason === 'content-filter' && text.length <= 1200 && /[.!?]$/.test(text.trim()) && /\b(cannot|can't|won't|unable|do not|don't|should not)\b/i.test(text)
   if ((!ordinarySafetyReply && finishReason !== 'stop') || !text.trim() || text.length > 8000 || isInternalAnswer(text)) return { text: CAT_FALLBACK, rejected: true }
   let answer = text.trim()
+  answer = answer.replace(/\[[^\]]+\]\(https?:\/\/hello@cx83labs\.com\)/gi, CAT_EMAIL)
+  answer = answer.replace(/<?https?:\/\/hello@cx83labs\.com>?(?![\w-]|\.[a-z0-9])/gi, CAT_EMAIL)
+  answer = answer.replace(/`((?:https:\/\/(?:www\.)?cx83labs\.com)?\/contact(?:\?context=[a-z-]+)?(?:#contact-form)?)`/g, (_, path: string) => {
+    return '[Contact CX83](' + (safeAssistantHref(path) || '/contact#contact-form') + ')'
+  })
   // Repair bare contact paths without touching a Markdown destination or label.
   answer = answer.replace(/(?<![\w\[\](])(?:https:\/\/(?:www\.)?cx83labs\.com)?\/contact(?:\?context=[a-z-]+)?(?:#contact-form)?/g, (path) => {
     const href = safeAssistantHref(path)

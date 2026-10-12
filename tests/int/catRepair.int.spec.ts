@@ -62,6 +62,9 @@ describe('confirmed Cat failures and the real HTTP/SSE boundary', () => {
   it('rejects model regurgitation of an instruction envelope', () => {
     expect(formatVisitorAnswer('You are Cat, the CX83 Labs AI assistant.\nApproved CX83 knowledge: hidden fixture', 'stop').rejected).toBe(true)
   })
+  it.each(['Classification result: User Safety: safe', '```json\n{"User Safety":"safe"}\n```'])('blocks inline and fenced classifier envelopes %#', (text) => {
+    expect(formatVisitorAnswer(text, 'stop').rejected).toBe(true)
+  })
   it('does not deliver the screenshot partial answer when the token budget ends', async () => {
     vi.mocked(getLanguageModel).mockReturnValue(fakeModel('Next step: the best way forward is', 'length'))
     const r = await POST(request({ messages: [uiMessage('Help me with a complex project')] }))
@@ -74,6 +77,12 @@ describe('confirmed Cat failures and the real HTTP/SSE boundary', () => {
   it('keeps an existing valid Markdown link intact', () => {
     const s = '[Ask about websites](/contact?context=websites-and-business-tools#contact-form)'
     expect(formatVisitorAnswer(s, 'stop').text).toBe(s)
+  })
+  it('converts a bare route inside inline code into a usable contact link', () => {
+    expect(formatVisitorAnswer('Use `/contact?context=connected-websites#contact-form`.', 'stop').text).toBe('Use [Contact CX83](/contact?context=connected-websites#contact-form).')
+  })
+  it.each(['<https://hello@cx83labs.com>', '[Email](https://hello@cx83labs.com)'])('repairs the malformed email URL observed in the live baseline %#', (text) => {
+    expect(formatVisitorAnswer(text, 'stop').text).toBe('[hello@cx83labs.com](mailto:hello@cx83labs.com)')
   })
   it('retains ordinary relevant safety explanations', () => {
     const s = 'For safety, do not send patient records or passwords in this chat.'
