@@ -1,0 +1,59 @@
+name: Production image
+
+# Builds the public production image for https://cx83labs.com.
+# This workflow does not deploy and does not change staging.
+# Load the artifact on the server with the existing root SSH key.
+
+on:
+  workflow_dispatch:
+    inputs:
+      git_sha:
+        description: Application commit to build
+        required: true
+        default: fe89b67cc0f06ef71452fab166d756bd5ab6fa12
+
+permissions:
+  contents: read
+
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out the application commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.git_sha }}
+          fetch-depth: 0
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Bundle the deployed commit
+        run: |
+          git bundle create .cx83-staging-source.bundle HEAD
+          git bundle verify .cx83-staging-source.bundle
+          test "$(git bundle list-heads .cx83-staging-source.bundle | awk 'NR==1 {print $1}')" = "$(git rev-parse HEAD)"
+          test "$(git rev-parse HEAD)" = "${{ inputs.git_sha }}"
+
+      - name: Build the production image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64
+          push: false
+          load: true
+          tags: cx83-webapp:production
+          build-args: |
+            NEXT_PUBLIC_SERVER_URL=https://cx83labs.com
+            CX83_DEPLOYED_SHA=${{ inputs.git_sha }}
+
+      - name: Save the image
+        run: docker save cx83-webapp:production | gzip -1 > cx83-webapp-production.tar.gz
+
+      - name: Upload the image
+        uses: actions/upload-artifact@v4
+        with:
+          name: cx83-webapp-production
+          path: cx83-webapp-production.tar.gz
+          retention-days: 7

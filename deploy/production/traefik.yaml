@@ -1,0 +1,45 @@
+# Public production routes. Copied to /data/coolify/proxy/dynamic/cx83-webapp-production.yaml
+# when DNS for cx83labs.com points at this server. Staging keeps its own file and password gate.
+http:
+  middlewares:
+    cx83-prod-https:
+      redirectScheme:
+        scheme: https
+        permanent: true
+    cx83-prod-www:
+      redirectRegex:
+        regex: ^https://www\.cx83labs\.com(.*)
+        replacement: https://cx83labs.com${1}
+        permanent: true
+  routers:
+    cx83-prod-http:
+      entryPoints:
+        - http
+      middlewares:
+        - cx83-prod-https
+      rule: Host(`cx83labs.com`) || Host(`www.cx83labs.com`)
+      service: cx83-prod
+      priority: 100
+    cx83-prod-www:
+      entryPoints:
+        - https
+      middlewares:
+        - cx83-prod-www
+      rule: Host(`www.cx83labs.com`)
+      service: cx83-prod
+      priority: 110
+      tls:
+        certResolver: letsencrypt
+    cx83-prod-https:
+      entryPoints:
+        - https
+      rule: Host(`cx83labs.com`)
+      service: cx83-prod
+      priority: 100
+      tls:
+        certResolver: letsencrypt
+  services:
+    cx83-prod:
+      loadBalancer:
+        servers:
+          - url: http://cx83-webapp-prod:3000
