@@ -4,7 +4,7 @@ import { buildApprovedKnowledge, buildSystemPrompt, getAssistantRuntimeConfig } 
 import { getLanguageModel } from '@/ai/model'
 import { parseChatMessages } from '@/ai/chatProtocol'
 import { allowCatAttempt, readPublicJSON, PublicRequestError, publicFailure } from '@/ai/publicRequest'
-import { contactShortcut, formatVisitorAnswer, privateInstructionShortcut } from '@/ai/visitorAnswer'
+import { CAT_FALLBACK, contactShortcut, formatVisitorAnswer, privateInstructionShortcut } from '@/ai/visitorAnswer'
 import { recordCatOutcome } from '@/ai/catDiagnostics'
 
 export const runtime = 'nodejs'
@@ -20,20 +20,29 @@ export async function POST(req: Request) {
     let answer = privateInstructionShortcut(last) || contactShortcut(last)
     if (!answer) {
       const knowledge = await buildApprovedKnowledge()
-      const result = await generateText({
-        model: getLanguageModel(config),
-        system: buildSystemPrompt(knowledge, config.extraGuidance),
-        messages,
-        maxOutputTokens: config.maxOutputTokens,
-        maxRetries: 0,
-        abortSignal: AbortSignal.any([req.signal, AbortSignal.timeout(35_000)]),
-      })
-      const checked = formatVisitorAnswer(result.text, result.finishReason)
-      recordCatOutcome({ provider: config.provider, configuredModel: config.model, responseModel: result.response.modelId, finishReason: result.finishReason, rejected: checked.rejected })
-      answer = checked.text
-      if (checked.rejected) console.warn('CX83 Cat reply rejected by output validation.')
+      const model = getLanguageModel(config)
+      const system = buildSystemPrompt(knowledge, config.extraGuidance)
+      const signal = AbortSignal.any([req.signal, AbortSignal.timeout(35_000)])
+      // One bounded recovery for a classifier/empty/truncated result. The
+      // configured provider, model and output cap stay unchanged. No rejected
+      // output enters visitor history or the recovery prompt.
+      for (let attempt = 0; attempt < 2; attempt++) {
+        const result = await generateText({
+          model,
+          system: system + (attempt ? '\nRecovery: answer the visitor in one or two complete sentences. Do not output analysis or classifications. Include a useful next action.' : ''),
+          messages,
+          maxOutputTokens: config.maxOutputTokens,
+          maxRetries: 0,
+          abortSignal: signal,
+        })
+        const checked = formatVisitorAnswer(result.text, result.finishReason)
+        recordCatOutcome({ provider: config.provider, configuredModel: config.model, responseModel: result.response.modelId, finishReason: result.finishReason, rejected: checked.rejected })
+        answer = checked.text
+        if (!checked.rejected) break
+        if (attempt === 1) console.warn('CX83 Cat reply rejected by output validation.')
+      }
     }
-    const text = answer
+    const text = answer || CAT_FALLBACK
     return createUIMessageStreamResponse({
       headers: { 'Cache-Control': 'no-store' },
       stream: createUIMessageStream({

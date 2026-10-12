@@ -54,7 +54,14 @@ function AssistantSession({
   const pathname = usePathname()
   const starters = conversationStarters(pathname)
   const runtime = useChatRuntime({
-    transport: new AssistantChatTransport({ api: '/api/chat' }),
+    transport: new AssistantChatTransport({
+      api: '/api/chat',
+      // Keep the full conversation available for scrolling in the browser,
+      // and send only the recent window the server already uses.
+      prepareSendMessagesRequest: ({ body, id, messages, trigger, messageId, requestMetadata }) => ({
+        body: { ...body, id, messages: messages.slice(-12), trigger, messageId, metadata: requestMetadata },
+      }),
+    }),
   })
   const launcherRef = useRef<HTMLButtonElement>(null)
   const closeRef = useRef<HTMLButtonElement>(null)

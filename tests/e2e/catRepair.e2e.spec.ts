@@ -112,6 +112,21 @@ test.describe('Cat repair and confirmed visitor submissions', () => {
     await expect(dialog.getByRole('heading', { name: 'What can we help you explore?' })).toBeVisible()
     await expect(dialog.getByRole('button', { name: 'Report a problem' })).toHaveCount(0)
   })
+  test('longer conversations retain browser history but send only the recent model window', async ({ page }) => {
+    let envelope: { messages: unknown[] } | undefined
+    const dialog = await open(page)
+    await page.route('**/api/chat', async (route) => {
+      envelope = route.request().postDataJSON()
+      await route.fulfill({ contentType: 'text/event-stream', headers: { 'x-vercel-ai-ui-message-stream': 'v1' }, body: sse('A concise synthetic reply.') })
+    })
+    for (let i = 1; i < 8; i++) {
+      await dialog.getByRole('textbox', { name: 'Message Cat' }).fill('Synthetic conversation turn ' + i)
+      await dialog.getByRole('button', { name: 'Send', exact: true }).click()
+      await expect(dialog.locator('.cx83-cat-assistant-message')).toHaveCount(i + 1)
+    }
+    expect(envelope!.messages).toHaveLength(12)
+    await expect(dialog.locator('.cx83-cat-user-message')).toHaveCount(8)
+  })
   test('unsafe links remain text, useful safety explanation remains visible', async ({ page }) => {
     const dialog = await open(page, 'For safety, avoid sending patient records. [Bad link](https://evil.example/contact) [Good contact](/contact).')
     await expect(dialog).toContainText('For safety, avoid sending patient records.')

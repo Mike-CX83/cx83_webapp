@@ -80,6 +80,31 @@ describe('confirmed Cat failures and the real HTTP/SSE boundary', () => {
     expect(isInternalAnswer(s)).toBe(false)
     expect(formatVisitorAnswer(s, 'stop').text).toBe(s)
   })
+  it('retains a completed ordinary safety refusal with a provider filter finish', () => {
+    const text = 'I cannot review patient records in this visitor chat. Please use a qualified clinician for clinical questions.'
+    expect(formatVisitorAnswer(text, 'content-filter')).toEqual({ text, rejected: false })
+    expect(formatVisitorAnswer('User Safety: unsafe', 'content-filter').rejected).toBe(true)
+  })
+  it('recovers once from an invalid model result without exposing or replaying it', async () => {
+    const invalid = fakeModel('User Safety: safe')
+    const valid = fakeModel('CX83 can help map a supported workflow. [Contact CX83](/contact).')
+    let attempts = 0
+    const model = new MockLanguageModelV3({ doGenerate: async (options) => (++attempts === 1 ? invalid : valid).doGenerate(options) })
+    vi.mocked(getLanguageModel).mockReturnValue(model)
+    const r = await POST(request({ messages: [uiMessage('Explain your automation service')] }))
+    const text = await r.text()
+    expect(attempts).toBe(2)
+    expect(text).toContain('CX83 can help map')
+    expect(text).not.toContain('User Safety')
+    expect(JSON.stringify(model.doGenerateCalls[1].prompt)).not.toContain('User Safety: safe')
+  })
+  it('stops recovery after two invalid outputs with a useful honest fallback', async () => {
+    const model = fakeModel('User Safety: safe')
+    vi.mocked(getLanguageModel).mockReturnValue(model)
+    const r = await POST(request({ messages: [uiMessage('Explain your automation service')] }))
+    expect(model.doGenerateCalls).toHaveLength(2)
+    expect(await r.text()).toContain('I could not complete a useful answer')
+  })
   it('returns a useful empty output fallback', () => expect(formatVisitorAnswer('', 'stop').text).toBe(CAT_FALLBACK))
   it('formats plain published email', () => expect(formatVisitorAnswer('Email hello@cx83labs.com.', 'stop').text).toContain('](mailto:hello@cx83labs.com)'))
   it('sanitizes provider failures and logs no error contents', async () => {

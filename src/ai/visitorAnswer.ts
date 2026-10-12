@@ -28,7 +28,8 @@ export function privateInstructionShortcut(question: string): string | null {
 }
 
 export function formatVisitorAnswer(text: string, finishReason: string): { text: string; rejected: boolean } {
-  if (finishReason !== 'stop' || !text.trim() || text.length > 8000 || isInternalAnswer(text)) return { text: CAT_FALLBACK, rejected: true }
+  const ordinarySafetyReply = finishReason === 'content-filter' && text.length <= 1200 && /[.!?]$/.test(text.trim()) && /\b(cannot|can't|won't|unable|do not|don't|should not)\b/i.test(text)
+  if ((!ordinarySafetyReply && finishReason !== 'stop') || !text.trim() || text.length > 8000 || isInternalAnswer(text)) return { text: CAT_FALLBACK, rejected: true }
   let answer = text.trim()
   // Repair bare contact paths without touching a Markdown destination or label.
   answer = answer.replace(/(?<![\w\[\](])(?:https:\/\/(?:www\.)?cx83labs\.com)?\/contact(?:\?context=[a-z-]+)?(?:#contact-form)?/g, (path) => {
