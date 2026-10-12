@@ -1,0 +1,171 @@
+/* October 11 banner and footer refinement.
+   Explicit About exclusion preserves its approved composition across client navigation. */
+.cx83-interior-root:not(.cx83-about-refined) .cx83-interior-hero,
+.cx83-shared-page-hero,
+.cx83-post-banner {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse 48% 130% at 100% 0%, rgb(130 71 245 / 27%), transparent 76%),
+    radial-gradient(ellipse 48% 110% at 0% 100%, rgb(36 107 255 / 18%), transparent 76%),
+    var(--cx83-midnight);
+  border-bottom: 1px solid rgb(164 182 211 / 22%);
+  color: var(--cx83-silver);
+}
+.cx83-interior-root:not(.cx83-about-refined) .cx83-interior-hero-inner,
+.cx83-shared-page-hero > .cx83-container,
+.cx83-post-banner .cx83-post-banner-inner {
+  padding-block: 2rem;
+}
+.cx83-shared-page-hero::after { content: none; }
+.cx83-shared-page-hero h1,
+.cx83-post-banner h1 {
+  max-width: 23ch;
+  margin: 0;
+  color: var(--cx83-white);
+  font-size: clamp(2rem, 4.2vw, 3.6rem);
+  font-weight: 650;
+  letter-spacing: -.04em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+.cx83-shared-page-hero .cx83-shared-hero-description {
+  max-width: 66ch;
+  margin-top: 1.2rem;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+.cx83-post-banner .cx83-post-banner-inner { position: relative; z-index: 1; }
+.cx83-post-banner h1 { margin-bottom: 1.2rem; }
+.cx83-post-banner-media { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
+.cx83-post-banner-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgb(8 14 34 / 94%), rgb(8 14 34 / 80%));
+}
+@media (min-width: 64rem) {
+  .cx83-interior-root:not(.cx83-about-refined) .cx83-interior-hero-inner,
+  .cx83-shared-page-hero > .cx83-container {
+    display: grid;
+    grid-template-rows: 2.75rem auto 1fr;
+    align-content: start;
+    min-height: 21rem;
+    padding-block: 2.5rem;
+  }
+  .cx83-interior-root:not(.cx83-about-refined) .cx83-interior-return {
+    grid-row: 1;
+    align-self: start;
+    justify-self: start;
+    margin: 0;
+  }
+  .cx83-interior-root:not(.cx83-about-refined) .cx83-interior-heading,
+  .cx83-shared-page-hero h1 { grid-row: 2; }
+  .cx83-interior-root:not(.cx83-about-refined) .cx83-interior-lead,
+  .cx83-shared-page-hero .cx83-shared-hero-description { grid-row: 3; }
+  .cx83-shared-page-hero .cx83-shared-eyebrow { grid-row: 1; margin: 0; align-self: center; }
+  .cx83-post-banner .cx83-post-banner-inner { min-height: 21rem; padding-block: 2.5rem; }
+}
+
+/* Full width color, compact content, and deliberate navigation targets. */
+.cx83-site-footer.cx83-footer-refined {
+  position: relative;
+  padding-bottom: 0;
+  border-top: 1px solid rgb(130 113 245 / 32%);
+  background:
+    radial-gradient(ellipse 55% 110% at 0% 0%, rgb(130 71 245 / 10%), transparent 75%),
+    linear-gradient(110deg, #211337 0%, #11182f 52%, #09233d 100%);
+}
+.cx83-footer-refined::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(130 71 245 / 65%), rgb(36 107 255 / 60%), transparent);
+  pointer-events: none;
+}
+.cx83-footer-refined > .cx83-footer-grid,
+.cx83-footer-refined .cx83-footer-copyright { max-width: 64rem; }
+.cx83-footer-refined .cx83-footer-grid {
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 1.5rem;
+  padding-block: 2rem 1.75rem;
+}
+.cx83-footer-refined .cx83-footer-grid > * { min-width: 0; }
+.cx83-footer-refined .cx83-footer-identity > p { max-width: 30ch; line-height: 1.65; }
+.cx83-footer-refined .cx83-footer-heading {
+  margin-bottom: .75rem;
+  color: var(--cx83-on-dark-accent);
+  font-size: .75rem;
+  letter-spacing: .1em;
+}
+.cx83-footer-refined .cx83-footer-nav {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .125rem 1rem;
+  margin: 0;
+}
+.cx83-footer-refined .cx83-footer-nav .cx83-footer-link {
+  display: flex;
+  justify-content: space-between;
+  gap: .4rem;
+  width: 100%;
+  padding: .5rem .625rem;
+  border: 1px solid transparent;
+  border-radius: .5rem;
+  text-decoration: none;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+.cx83-footer-refined .cx83-footer-nav .cx83-footer-link:is(:hover, :focus-visible) {
+  color: var(--cx83-white);
+  background: rgb(36 107 255 / 16%);
+  border-color: rgb(182 234 255 / 22%);
+}
+.cx83-footer-refined .cx83-footer-arrow {
+  flex-shrink: 0;
+  color: var(--cx83-on-dark-accent);
+  opacity: .6;
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+.cx83-footer-refined .cx83-footer-link:is(:hover, :focus-visible) .cx83-footer-arrow {
+  opacity: 1;
+  transform: translate(2px, -2px);
+}
+.cx83-footer-refined .cx83-footer-email {
+  max-width: 100%;
+  gap: .65rem;
+  padding: .65rem .85rem;
+  border: 1px solid rgb(182 234 255 / 30%);
+  border-radius: .65rem;
+  background: rgb(8 14 34 / 35%);
+  text-decoration: none;
+  transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+.cx83-footer-refined .cx83-footer-email svg { flex-shrink: 0; color: var(--cx83-on-dark-accent); }
+.cx83-footer-refined .cx83-footer-email span { min-width: 0; overflow-wrap: anywhere; }
+.cx83-footer-refined .cx83-footer-email:is(:hover, :focus-visible) {
+  color: var(--cx83-white);
+  border-color: var(--cx83-on-dark-accent);
+  background: rgb(36 107 255 / 15%);
+  box-shadow: 0 0 20px rgb(36 107 255 / 13%);
+}
+.cx83-footer-refined .cx83-footer-bottom { border-color: rgb(164 182 211 / 16%); }
+.cx83-footer-refined .cx83-footer-copyright {
+  padding-block: 1rem;
+  padding-right: 9rem;
+  line-height: 1.7;
+}
+@media (min-width: 52rem) {
+  .cx83-footer-refined .cx83-footer-grid {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr) minmax(0, 1fr);
+    column-gap: clamp(1.5rem, 3vw, 3rem);
+  }
+}
+@media (max-width: 39.99rem) {
+  /* Reserve only the launcher's actual bottom corner, not a blank full footer row. */
+  .cx83-footer-refined .cx83-footer-copyright { min-height: 5rem; padding-right: 8.75rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cx83-footer-refined :is(.cx83-footer-link, .cx83-footer-arrow) { transition: none; }
+  .cx83-footer-refined .cx83-footer-link:is(:hover, :focus-visible) .cx83-footer-arrow { transform: none; }
+}

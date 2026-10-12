@@ -1,0 +1,93 @@
+/* About only. No shared navigation, footer, Home, or Cat styles. */
+.cx83-about-refined {
+  background: var(--cx83-midnight);
+  /* Expanded glow can cross the viewport edge at the desktop breakpoint. Prevent a horizontal scrollbar. */
+  overflow-x: clip;
+}
+.cx83-about-refined .cx83-interior-hero {
+  background:
+    linear-gradient(90deg, rgb(5 10 27 / 18%), rgb(5 10 27 / 6%)),
+    url('/brand/cx83-atmosphere-wide.webp') center 72% / cover no-repeat,
+    var(--cx83-midnight);
+}
+.cx83-about-refined .cx83-interior-hero-inner {
+  padding-block: clamp(2.25rem, 4.5vw, 3.5rem);
+}
+.cx83-about-refined .cx83-about-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+.cx83-about-refined .cx83-about-story {
+  min-width: 0;
+  color: var(--cx83-silver);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+.cx83-about-refined .cx83-about-story p {
+  margin: 0;
+  text-align: justify;
+  text-align-last: left;
+  text-indent: 2em;
+  hyphens: manual;
+}
+.cx83-about-refined .cx83-about-story p + p { margin-top: 1.2rem; }
+.cx83-about-refined .cx83-about-story strong {
+  color: var(--cx83-white);
+  font-weight: 650;
+}
+.cx83-about-refined .cx83-about-emblem-column {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  isolation: isolate;
+  margin-top: 2rem;
+  padding-block: 1.5rem;
+  border-top: 1px solid var(--cx83-border);
+}
+.cx83-about-refined .cx83-about-emblem-column::before {
+  content: '';
+  position: absolute;
+  width: min(110%, 22rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 35% 65%, rgb(0 115 255 / 12%), transparent 60%),
+    radial-gradient(ellipse at 65% 35%, rgb(130 71 245 / 11%), transparent 60%);
+  filter: blur(16px);
+  transform: translateX(var(--cx83-about-optical-shift, 0px));
+  z-index: -1;
+  pointer-events: none;
+}
+.cx83-about-refined .cx83-about-symbol {
+  display: block;
+  width: 10rem;
+  height: auto;
+  transform: translateX(var(--cx83-about-optical-shift, 0px));
+}
+.cx83-about-refined .cx83-about-story-action { margin-top: 1.75rem; }
+@media (min-width: 64rem) {
+  .cx83-about-refined .cx83-about-layout {
+    grid-template-columns: minmax(0, 2.15fr) minmax(0, 1fr);
+    column-gap: clamp(2rem, 3.5vw, 3.5rem);
+  }
+  .cx83-about-refined .cx83-about-emblem-column {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+    padding: 0;
+    border-top: 0;
+    border-left: 1px solid var(--cx83-border);
+    /* Shift by half the outer content gutter: center the visible mark between divider and page edge.
+       The SVG's 24-unit transparent margins are symmetrical, so the image and visible mark share a center. */
+    --cx83-about-optical-shift: max(0.625rem, calc((100vw - var(--cx83-container)) / 4));
+  }
+  .cx83-about-refined .cx83-about-symbol {
+    width: min(80%, 17rem);
+  }
+  .cx83-about-refined .cx83-about-story-action { grid-column: 1; }
+}
+
+@media (max-width: 39.99rem) {
+  .cx83-about-refined .cx83-about-story p { hyphens: auto; }
+}

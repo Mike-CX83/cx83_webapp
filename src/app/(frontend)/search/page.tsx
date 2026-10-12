@@ -1,6 +1,8 @@
 import type { Metadata } from 'next/types'
 
 import { CollectionArchive } from '@/components/CollectionArchive'
+import Link from 'next/link'
+import { InteriorHero, InteriorSection } from '@/components/site/InteriorPage'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import React from 'react'
@@ -11,17 +13,18 @@ import { databaseConfigured } from '@/lib/database'
 
 type Args = {
   searchParams: Promise<{
-    q: string
+    q?: string | string[]
   }>
 }
 export default async function Page({ searchParams: searchParamsPromise }: Args) {
-  const { q: query } = await searchParamsPromise
+  const { q } = await searchParamsPromise
+  const query = typeof q === 'string' ? q.slice(0, 200).trim() : ''
 
   if (!databaseConfigured()) {
     return (
-      <div className="cx83-container py-24">
-        <h1 className="text-3xl font-semibold">Search</h1>
-        <p className="mt-4 text-muted-foreground">Search is available after PostgreSQL is connected.</p>
+      <div className="cx83-interior-root">
+        <InteriorHero title="Search notes."><p>Search covers published articles, not every website page.</p></InteriorHero>
+        <InteriorSection><p>Article search is temporarily unavailable.</p><Link className="cx83-interior-link" href="/services">Explore Services</Link></InteriorSection>
       </div>
     )
   }
@@ -30,6 +33,7 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
 
   const posts = await payload.find({
     collection: 'search',
+    overrideAccess: false,
     depth: 1,
     limit: 12,
     select: {
@@ -71,22 +75,17 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
   })
 
   return (
-    <div className="pt-24 pb-24">
+    <div className="cx83-interior-root pb-24">
       <PageClient />
-      <div className="container mb-16">
-        <div className="prose dark:prose-invert max-w-none text-center">
-          <h1 className="mb-8 lg:mb-16">Search</h1>
-
-          <div className="max-w-[50rem] mx-auto">
-            <Search />
-          </div>
-        </div>
+      <InteriorHero title="Search notes."><p>Search covers published articles, not every website page.</p></InteriorHero>
+      <div className="container my-12">
+        <div className="max-w-[50rem] mx-auto"><Search initialQuery={query} /></div>
       </div>
 
       {posts.totalDocs > 0 ? (
         <CollectionArchive posts={posts.docs as CardPostData[]} />
       ) : (
-        <div className="container">No results found.</div>
+        <div className="cx83-container"><p>No published notes match this search.</p><Link className="cx83-interior-link" href="/services">Explore Services</Link></div>
       )}
     </div>
   )
@@ -94,6 +93,7 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Search`,
+    title: 'Search notes',
+    description: 'Search published CX83 Labs articles. Services and software are available through the main navigation.',
   }
 }

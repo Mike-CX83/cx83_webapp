@@ -16,6 +16,12 @@ import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import { draftMode } from 'next/headers'
 
 import './globals.css'
+import './cx83-brand.css'
+import './cx83-run2.css'
+import './cx83-run3.css'
+import './cx83-ecosystem.css'
+import './cx83-connections.css'
+import './cx83-banners-footer.css'
 import { getServerSideURL } from '@/utilities/getURL'
 
 export const dynamic = 'force-dynamic'
@@ -29,7 +35,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <head>
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
-        <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+        <link href="/brand/symbol-showcase.svg" rel="icon" type="image/svg+xml" />
       </head>
       <body>
         <Providers>
@@ -59,6 +65,7 @@ export const metadata: Metadata = {
   },
   description: 'CX83 Labs focuses on AI systems, automation, software, and business integration.',
   openGraph: mergeOpenGraph(),
+  robots: process.env.CX83_PUBLIC_LAUNCH_APPROVED === 'true' && !getServerSideURL().includes('staging.') ? undefined : { index: false, follow: false },
   twitter: {
     card: 'summary_large_image',
   },

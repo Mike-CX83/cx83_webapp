@@ -1,0 +1,62 @@
+# Staging site for staging.cx83labs.com.
+# The image is built by GitHub Actions. Secrets stay in /opt/cx83-webapp/.env on the server.
+# Postgres and the tunnel stay on the private network. Only the web container joins Coolify's proxy network.
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: cx83-webapp-postgres
+    environment:
+      POSTGRES_USER: cx83
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: cx83_webapp_staging
+    volumes:
+      - /opt/cx83-webapp/postgres:/var/lib/postgresql/data
+    mem_limit: 256m
+    shm_size: 128mb
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U cx83 -d cx83_webapp_staging']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    networks:
+      - internal
+
+  web:
+    image: cx83-webapp:staging
+    container_name: cx83-webapp
+    env_file:
+      - /opt/cx83-webapp/.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - /opt/cx83-webapp/media:/app/public/media
+      - /opt/cx83-webapp/repo:/repo
+    mem_limit: 1280m
+    restart: unless-stopped
+    networks:
+      - internal
+      - coolify
+
+  tunnel:
+    image: ghcr.io/openai/tunnel-client:v0.0.16
+    container_name: cx83-webapp-tunnel
+    command: ['--profile', 'cx83-website', '--profile-dir', '/tunnel/profiles']
+    env_file:
+      - /opt/cx83-webapp/tunnel.env
+    volumes:
+      - /opt/cx83-webapp/tunnel:/tunnel
+    mem_limit: 128m
+    restart: unless-stopped
+    ports:
+      - '127.0.0.1:8099:8099'
+    networks:
+      - internal
+
+networks:
+  internal:
+  coolify:
+    external: true
+    name: coolify

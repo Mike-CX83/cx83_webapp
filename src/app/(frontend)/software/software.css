@@ -1,0 +1,58 @@
+/* CX83 software catalog. Inherits the approved site brand roles. */
+.cx83-software { overflow-wrap: anywhere; }
+.cx83-software h2 { font-size: clamp(1.7rem, 3.2vw, 2.6rem); font-weight: 650; line-height: 1.15; letter-spacing: -.04em; text-wrap: balance; }
+.cx83-software-eyebrow, .cx83-software-number { color: var(--cx83-primary); font-size: .72rem; font-weight: 750; line-height: 1.6; letter-spacing: .12em; text-transform: uppercase; }
+.cx83-software-number { font-family: var(--font-mono); }
+.cx83-software-intro { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .8fr); gap: clamp(1.3rem, 5vw, 5rem); align-items: end; margin-bottom: 2.5rem; }
+.cx83-software-intro h2 { margin-top: .65rem; max-width: 23ch; }
+.cx83-software-intro > p { color: var(--cx83-muted); line-height: 1.8; max-width: 48ch; }
+.cx83-software-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+.cx83-software-card { display: flex; flex-direction: column; min-width: 0; min-height: 21rem; padding: clamp(1.45rem, 3vw, 2.7rem); border: 1px solid var(--cx83-border); border-radius: 1rem; background: var(--cx83-surface); box-shadow: var(--cx83-shadow); transition: transform var(--cx83-motion), border-color var(--cx83-motion), box-shadow var(--cx83-motion); }
+.cx83-software-card:hover, .cx83-software-card:focus-within { transform: translateY(-2px); border-color: var(--cx83-blue); box-shadow: 0 20px 44px rgb(8 14 34 / 12%); }
+.cx83-software-card-top { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center; }
+.cx83-software-status { display: inline-flex; align-items: center; padding: .3rem .75rem; border-radius: 99rem; border: 1px solid var(--cx83-border); color: var(--cx83-primary); background: var(--cx83-background); font-size: .75rem; font-weight: 700; }
+.cx83-software-card-label { margin-top: 2.4rem; font-size: .88rem; color: var(--cx83-primary); font-weight: 650; }
+.cx83-software-card h3 { margin-top: .65rem; max-width: 24ch; font-size: clamp(1.5rem, 2.5vw, 2.3rem); font-weight: 700; line-height: 1.16; letter-spacing: -.035em; }
+.cx83-software-card-summary { max-width: 48ch; margin-top: 1rem; color: var(--cx83-muted); line-height: 1.8; }
+.cx83-software-card-actions { margin-top: auto; padding-top: 1.5rem; }
+.cx83-software-detail-link { display: inline-flex; align-items: center; min-height: 2.75rem; gap: .65rem; color: var(--cx83-primary); font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+.cx83-software-detail-link:hover { color: var(--cx83-action-hover); }
+.cx83-software a:focus-visible { outline: 3px solid var(--ring); outline-offset: 4px; }
+.cx83-software-next { background: var(--cx83-background); border-top: 1px solid var(--cx83-border); }
+.cx83-software-contact { display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; justify-content: space-between; padding: clamp(2rem, 4vw, 3.4rem); border-radius: 1.05rem; background: radial-gradient(ellipse at top right, rgb(130 71 245 / 17%), transparent 64%), var(--cx83-midnight); color: var(--cx83-white); }
+.cx83-software-contact h2 { max-width: 24ch; margin-top: .65rem; }
+.cx83-software-contact p:not(.cx83-software-eyebrow) { max-width: 49ch; margin-top: 1rem; line-height: 1.7; color: var(--cx83-silver); }
+.cx83-software-contact .cx83-software-eyebrow { color: var(--cx83-on-dark-accent); }
+.cx83-software-back { display: inline-flex; min-height: 2.75rem; align-items: center; margin-bottom: 2rem; }
+.cx83-software-detail-intro { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(1.5rem, 5vw, 5rem); align-items: start; }
+.cx83-software-detail-intro h2 { max-width: 19ch; margin-top: .65rem; }
+.cx83-software-detail-intro > div > p:last-child { max-width: 65ch; color: var(--cx83-muted); margin-top: 1.5rem; line-height: 1.85; }
+.cx83-software-detail-status { padding: clamp(1.3rem, 3vw, 2rem); border-radius: 1rem; border: 1px solid var(--cx83-border); background: var(--cx83-surface); box-shadow: var(--cx83-shadow); }
+.cx83-software-detail-status h3 { margin-top: 1.3rem; font-size: 1.35rem; font-weight: 700; line-height: 1.25; }
+.cx83-software-detail-status p { margin-top: .75rem; color: var(--cx83-muted); line-height: 1.65; }
+.cx83-software-detail-status .cx83-software-updated { font-size: .78rem; }
+.cx83-software-detail-status a { margin-top: .95rem; }
+.cx83-software-features { background: var(--cx83-surface); border-block: 1px solid var(--cx83-border); }
+.cx83-software-features h2 { max-width: 25ch; margin-top: .75rem; }
+.cx83-software-features-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
+.cx83-software-benefit { padding: clamp(1.3rem, 2.6vw, 2rem); border: 1px solid var(--cx83-border); border-radius: 1rem; background: var(--cx83-background); }
+.cx83-software-benefit h3 { margin-top: .75rem; font-size: 1.3rem; font-weight: 700; letter-spacing: -.02em; }
+.cx83-software-benefit p { margin-top: .85rem; color: var(--cx83-muted); line-height: 1.75; }
+.cx83-software-detail-heading { margin-top: .7rem; }
+.cx83-software-facts { margin-top: 2rem; max-width: 68rem; }
+.cx83-software-facts > div { display: grid; grid-template-columns: minmax(12rem, .6fr) minmax(0, 1.4fr); gap: 1.5rem; border-top: 1px solid var(--cx83-border); padding: 1.5rem 0; }
+.cx83-software-facts dt { font-weight: 700; }
+.cx83-software-facts dd { color: var(--cx83-muted); line-height: 1.75; }
+.cx83-software-detail-final { margin-top: 3rem; padding: 2rem; border-radius: 1rem; background: var(--cx83-midnight); color: var(--cx83-white); }
+.cx83-software-detail-final p { margin-top: .9rem; max-width: 52ch; color: var(--cx83-silver); line-height: 1.65; }
+.cx83-software-detail-final a { margin-top: 1.5rem; }
+@media (max-width: 48rem) {
+  .cx83-software-intro, .cx83-software-grid, .cx83-software-detail-intro, .cx83-software-features-grid { grid-template-columns: 1fr; }
+  .cx83-software-card { min-height: 18rem; }
+  .cx83-software-card-label { margin-top: 1.5rem; }
+  .cx83-software-facts > div { grid-template-columns: 1fr; gap: .4rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cx83-software-card { transition: none; }
+  .cx83-software-card:hover, .cx83-software-card:focus-within { transform: none; }
+}

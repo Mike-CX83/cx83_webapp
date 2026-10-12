@@ -12,7 +12,9 @@ import { searchFields } from '@/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
 
 import { Page, Post } from '@/payload-types'
+import { repositoryTools } from '@/plugins/repositoryTools'
 import { getServerSideURL } from '@/utilities/getURL'
+import { expireCatSubmissionRead, protectCatSubmissionCreate } from '@/ai/catSubmissions'
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
   return doc?.title ? `${doc.title} | CX83 Labs` : 'CX83 Labs'
@@ -57,6 +59,20 @@ export const plugins: Plugin[] = [
         enabled: { find: true, update: true },
       },
     },
+    mcp: {
+      handlerOptions: {
+        maxDuration: 300,
+      },
+      serverOptions: {
+        serverInfo: {
+          name: 'CX83 Website',
+          version: '0.2.0',
+        },
+        instructions:
+          'This server is the CX83 Labs owner connection. Content tools find, create, update, and delete pages, posts, media, services, projects, case studies, forms, form submissions, categories, and users, and they find and update header, footer, site settings, and assistant settings. Those tools run with the authenticated owner account. Code tools read and search this repository, read the local development log, and apply a unique text edit in the git checkout. getRepositoryStatus reports the staging checkout commit, the deployed commit, and whether a fast-forward is safe. syncRepositoryCheckout fast-forwards only the staging-host checkout of Mike-CX83/cx83_webapp to that deployed commit, and it refuses uncommitted work, the wrong branch, an unexpected origin, a detached HEAD, and diverged history. runRepositoryCheck starts typecheck, lint, or test:int and returns immediately with an id. Call it again with that id to retrieve the exit code and output. Do not ask for or repeat credential files. These code tools are not available to the public visitor assistant.',
+      },
+      tools: repositoryTools,
+    },
   }),
   redirectsPlugin({
     collections: ['pages', 'posts', 'services', 'projects', 'case-studies'],
@@ -89,6 +105,10 @@ export const plugins: Plugin[] = [
     generateURL,
   }),
   formBuilderPlugin({
+    formSubmissionOverrides: {
+      access: { create: protectCatSubmissionCreate },
+      hooks: { beforeRead: [expireCatSubmissionRead] },
+    },
     fields: {
       payment: false,
     },
@@ -124,3 +144,4 @@ export const plugins: Plugin[] = [
     },
   }),
 ]
+

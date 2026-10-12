@@ -47,6 +47,8 @@ The first visit to `/admin` creates the owner user when PostgreSQL is connected.
 
 Copy `.env.example` to `.env`. Do not commit `.env`.
 
+The OpenAI API key is `OPENAI_API_KEY` in that ignored `.env`. Agents retrieve it from the file and do not print it.
+
 Required before admin, publishing, media, and saved forms will work:
 
 - `DATABASE_URL`: a development PostgreSQL connection string. Do not use a production database.
@@ -58,7 +60,7 @@ The active development provider is OpenRouter. `CHATBOT_ENABLED=false` hides the
 
 ## Database
 
-PostgreSQL is the only database adapter configured. Local development uses PostgreSQL 17 from Homebrew, database `cx83_webapp_dev`, started with `brew services`. `DATABASE_URL` in the ignored `.env` points at that database on this Mac. It is not a hosted or paid database.
+PostgreSQL is the only database adapter configured. Local development uses PostgreSQL 17 from Homebrew, database `cx83_webapp_dev`, started with `brew services`. `DATABASE_URL` in the ignored `.env` points at that database on this Mac. It is not a hosted or paid database. Development schema push is off because this database also holds the studio download tables. Do not turn push back on against this database.
 
 Payload stores uploads in `public/media` during development. Production hosting needs persistent disk or object storage. No external media service was purchased.
 
@@ -76,11 +78,11 @@ Payload stores uploads in `public/media` during development. Production hosting 
 
 ## Branding
 
-Temporary tokens live in `:root` inside `src/app/(frontend)/globals.css`. The only supplied brand color is `#101216`. Typography is Geist until a typeface is approved. The header uses a text wordmark. See `docs/BRANDING.md`.
+CX83's dark-first brand system and shared surfaces live in `src/app/(frontend)/cx83-brand.css` and related site CSS. Genuine logo SVGs originate from the owner's draft Studio assets and are documented in `public/brand/PROVENANCE.md`. The existing illuminated homepage AVIF and first hero section remain protected and unchanged. See `docs/BRANDING.md`.
 
 ## Forms
 
-The contact page posts to `/api/inquiries`. The server validates the fields and, when PostgreSQL is connected, stores the submission in Payload's form submissions collection under the form titled `CX83 inquiry`. The owner reads submissions in the admin panel. Email, CRM, and scheduling delivery are not connected.
+The contact page posts to `/api/inquiries`. It validates fields and, when PostgreSQL is connected, stores an inquiry in Payload's `CX83 inquiry` form submissions. A saved record includes a request ID and durable notification state. A separately authorized Google Workspace Gmail adapter can notify the verified CX83 Labs public contact alias `hello@cx83labs.com`, using the existing Google Workspace OAuth principal (`users/me`); it remains disabled until website-owned OAuth credentials are deliberately configured. The form confirms **saved**, never claims inbox delivery. An owner-only manual dispatch route supports recovery; a dedicated bearer secret is required. Abuse and duplicate protections are designed for single-replica protected staging, not a public multi-replica guarantee. See `docs/CX83_RUN3_MAIL_DELIVERY.md`.
 
 ## Assistant
 
@@ -110,9 +112,13 @@ Approved knowledge comes from published Payload content when the database is con
 
 ## Payload MCP
 
-`@payloadcms/plugin-mcp` 3.90.2 is installed and registered. It is enabled during local development and disabled in production unless `PAYLOAD_MCP_ENABLED=true`. The local endpoint is `POST http://127.0.0.1:3000/api/mcp`. It expects a bearer API key created in the admin panel's MCP API keys collection and tied to the owner user. Enable find, create, update, and delete on that key for full content control. Do not expose this port with a public tunnel.
+`@payloadcms/plugin-mcp` 3.90.2 is installed and registered. It is enabled during local development and disabled in production unless `PAYLOAD_MCP_ENABLED=true`. The local endpoint is `POST http://127.0.0.1:3000/api/mcp`. It expects `Authorization: Bearer` with an API key from the MCP API keys collection. That key is tied to the owner user, and the plugin calls Payload with `overrideAccess: false`, so the owner keeps full authenticated access. Do not expose this port with a public tunnel.
 
-The installed plugin does not use the newer documentation's `overrideAccess=true` development URL. Follow the installed package: API key plus the owner's Payload access. CRUD through MCP was not tested because PostgreSQL is not connected. A local MCP process is not a connection to remote ChatGPT.
+The same server exposes repository tools for code repair: `readRepositoryFile`, `searchRepository`, `readDevelopmentErrors`, `applyRepositoryEdit`, `runRepositoryCheck` (`typecheck`, `lint`, `test:int`), `getRepositoryStatus`, and `syncRepositoryCheckout`. Those tools stay inside this repository and refuse credential files. The owner key is stored only in the ignored `.env` as `PAYLOAD_MCP_API_KEY`. `getRepositoryStatus` is read-only. `syncRepositoryCheckout` fast-forwards the staging checkout to the deployed commit only when that is safe. The public visitor assistant does not receive these tools.
+
+`runRepositoryCheck` starts the existing command and returns an id immediately. Call the same tool again with that id to retrieve the exit code and output.
+
+Personal ChatGPT reaches this private endpoint through the existing OpenAI tunnel. The tunnel client adds the owner key locally. The key is not entered in ChatGPT. On staging, that client runs beside the website so ChatGPT does not need this Mac. See `docs/STAGING.md`.
 
 ## Checks
 

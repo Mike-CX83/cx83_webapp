@@ -1,35 +1,66 @@
+import Image from 'next/image'
 import Link from 'next/link'
+import { ArrowUpRight, Mail } from 'lucide-react'
 
-export function SiteFooter({
-  siteName,
-  email,
-}: {
-  siteName: string
-  email?: string
-}) {
+const footerNav = [
+  { href: '/', label: 'Home' },
+  { href: '/software', label: 'Software' },
+  { href: '/services', label: 'Services' },
+  { href: '/how-it-works', label: 'How it works' },
+  { href: '/about', label: 'About' },
+  { href: '/work', label: 'Work' },
+  { href: '/contact', label: 'Contact' },
+]
+
+export function SiteFooter({ siteName, email }: { siteName: string; email?: string }) {
   return (
-    <footer className="border-t border-border">
-      <div className="cx83-container flex flex-col gap-6 py-10 md:flex-row md:items-end md:justify-between">
-        <div>
-          <p className="text-sm font-semibold tracking-[0.18em] uppercase">{siteName}</p>
-          <p className="mt-2 max-w-md text-sm leading-6 text-muted-foreground">
-            AI systems, automation, software, and business integration.
+    <footer className="cx83-site-footer cx83-footer-refined">
+      <div className="cx83-container cx83-footer-grid">
+        <div className="cx83-footer-identity">
+          <Link
+            className="cx83-footer-brand inline-flex min-h-11 items-center text-sm font-bold tracking-[0.18em] uppercase"
+            href="/"
+            aria-label={siteName + ', Home'}
+          >
+            <Image
+              src="/brand/logo-dark.svg"
+              alt="CX83 Labs"
+              loading="eager"
+              width={1014}
+              height={288}
+              className="h-auto w-[11rem]"
+            />
+          </Link>
+          <p className="mt-3 max-w-sm text-sm leading-7">
+            AI systems, automation and business integration.
           </p>
         </div>
-        <div className="flex flex-col gap-2 text-sm md:items-end">
+        <nav aria-label="Footer navigation">
+          <p className="cx83-footer-heading">Explore</p>
+          <ul className="cx83-footer-nav">
+            {footerNav.map((item) => (
+              <li key={item.href}>
+                <Link className="cx83-footer-link" href={item.href}>
+                  <span>{item.label}</span>
+                  <ArrowUpRight aria-hidden="true" className="cx83-footer-arrow" size={14} />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div className="cx83-footer-contact">
+          <p className="cx83-footer-heading">Contact</p>
           {email ? (
-            <a className="hover:underline" href={`mailto:${email}`}>
-              {email}
+            <a className="cx83-footer-link cx83-footer-email" href={'mailto:' + email}>
+              <Mail aria-hidden="true" size={16} />
+              <span>{email}</span>
             </a>
-          ) : (
-            <span className="text-muted-foreground">Contact email is set in Site settings.</span>
-          )}
-          <Link className="hover:underline" href="/contact">
-            Start a project
-          </Link>
-          <Link className="text-muted-foreground hover:underline" href="/posts">
-            Notes
-          </Link>
+          ) : null}
+        </div>
+      </div>
+      <div className="cx83-footer-bottom border-t">
+        <div className="cx83-container cx83-footer-copyright text-xs">
+          <span>© {new Date().getFullYear()} CX83 Labs. All rights reserved.</span>
         </div>
       </div>
     </footer>

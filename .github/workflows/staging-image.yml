@@ -1,0 +1,173 @@
+name: Staging
+
+# Staging only. A push to staging-host runs tests, builds the website image,
+# and deploys that image to the existing server. Pull requests run tests and
+# do not deploy. This workflow does not publish a public production release.
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - staging-host
+  pull_request:
+    branches:
+      - staging-host
+
+# A newer PR commit may cancel only its older PR checks. Never cancel a staging
+# push workflow: that can interrupt image upload, deployment, or rollback.
+concurrency:
+  group: cx83-staging-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: public.ecr.aws/docker/library/postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: cx83_webapp_ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d cx83_webapp_ci"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      CI: true
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/cx83_webapp_ci
+      PAYLOAD_SECRET: ci-test-secret
+      NEXT_PUBLIC_SERVER_URL: http://localhost:3000
+      PAYLOAD_DB_PUSH: true
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.28.5
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies from the lockfile
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm exec tsc --noEmit
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Install the Playwright browser
+        run: pnpm exec playwright install --with-deps chromium webkit
+
+      - name: Run automated tests
+        run: pnpm test
+
+      - name: Save homepage browser review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: homepage-review-${{ github.run_id }}
+          path: |
+            test-results/**/homepage-*.png
+            test-results/**/interior-*.png
+            test-results/**/interior-metrics-*.json
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: Build
+        run: pnpm build
+
+  image:
+    needs: check
+    if: github.ref == 'refs/heads/staging-host' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Bundle the deployed commit
+        run: |
+          git bundle create .cx83-staging-source.bundle HEAD
+          git bundle verify .cx83-staging-source.bundle
+          test "$(git bundle list-heads .cx83-staging-source.bundle | awk 'NR==1 {print $1}')" = "$(git rev-parse HEAD)"
+
+      - name: Build the staging image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64
+          push: false
+          load: true
+          tags: cx83-webapp:staging
+          build-args: |
+            NEXT_PUBLIC_SERVER_URL=https://staging.cx83labs.com
+            CX83_DEPLOYED_SHA=${{ github.sha }}
+
+      - name: Save the image
+        run: docker save cx83-webapp:staging | gzip -1 > cx83-webapp-staging.tar.gz
+
+      - name: Upload the image
+        uses: actions/upload-artifact@v4
+        with:
+          name: cx83-webapp-staging
+          path: cx83-webapp-staging.tar.gz
+          retention-days: 7
+
+  deploy:
+    needs: image
+    if: github.ref == 'refs/heads/staging-host' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Download the image
+        uses: actions/download-artifact@v4
+        with:
+          name: cx83-webapp-staging
+          path: image
+
+      - name: Deploy the image to staging
+        env:
+          STAGING_DEPLOY_SSH_KEY: ${{ secrets.STAGING_DEPLOY_SSH_KEY }}
+          STAGING_DEPLOY_HOST: ${{ secrets.STAGING_DEPLOY_HOST }}
+          STAGING_DEPLOY_USER: ${{ secrets.STAGING_DEPLOY_USER }}
+        run: |
+          test -n "$STAGING_DEPLOY_SSH_KEY"
+          test -n "$STAGING_DEPLOY_HOST"
+          test -n "$STAGING_DEPLOY_USER"
+          install -m 700 -d "$RUNNER_TEMP/ssh"
+          printf '%s\n' "$STAGING_DEPLOY_SSH_KEY" > "$RUNNER_TEMP/ssh/key"
+          chmod 600 "$RUNNER_TEMP/ssh/key"
+          set -o pipefail
+          ssh \
+            -i "$RUNNER_TEMP/ssh/key" \
+            -o IdentitiesOnly=yes \
+            -o StrictHostKeyChecking=yes \
+            -o UserKnownHostsFile="$GITHUB_WORKSPACE/deploy/staging/known_hosts" \
+            -o BatchMode=yes \
+            -o ServerAliveInterval=30 \
+            "$STAGING_DEPLOY_USER@$STAGING_DEPLOY_HOST" \
+            "deploy $GITHUB_SHA" < image/cx83-webapp-staging.tar.gz | tee "$RUNNER_TEMP/deploy-output.txt"
+          grep -q 'STAGING DEPLOY SUCCESS' "$RUNNER_TEMP/deploy-output.txt"
+
+

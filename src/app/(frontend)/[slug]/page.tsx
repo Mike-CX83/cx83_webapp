@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
+import { InteriorHero } from '@/components/site/InteriorPage'
 
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'
@@ -11,6 +13,13 @@ import { RenderHero } from '@/heros/RenderHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+
+function containsH1(value: unknown): boolean {
+  if (!value || typeof value !== 'object') return false
+  if (Array.isArray(value)) return value.some(containsH1)
+  const node = value as Record<string, unknown>
+  return (node.type === 'heading' && node.tag === 'h1') || Object.values(node).some(containsH1)
+}
 
 export async function generateStaticParams() {
   if (!databaseConfigured()) return []
@@ -65,15 +74,17 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { hero, layout } = page
 
   return (
-    <article className="pt-16 pb-24">
+    <article className="cx83-interior-root pb-24">
       <PageClient />
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
 
       {draft && <LivePreviewListener />}
 
+      {!containsH1(hero) && !containsH1(layout) ? <InteriorHero title={page.title || 'CX83 Labs'} /> : null}
       <RenderHero {...hero} />
       <RenderBlocks blocks={layout} />
+      <div className="cx83-container mt-8"><Link className="cx83-interior-link" href="/">Return home</Link></div>
     </article>
   )
 }

@@ -1,0 +1,338 @@
+{
+  "project": "CX83 Labs",
+  "run": "Interior Run 3",
+  "target": "protected staging only",
+  "sourceHead": "4fdd613b81c785c0d8073032347c0ebb7831fc5f",
+  "baseline": "3ce50476ae87bcd999ea891967713549ac6fd400",
+  "approvedSource": "docs/CX83_ABOUT_STORY_APPROVED_2026_10_10.md",
+  "sourceSha256": "9c96b68e61c664f787a5cfb6f2d2250b7da1e08efa4b0dc0fe9a94d000b75547",
+  "cms": {
+    "global": "site-settings",
+    "id": 1,
+    "field": "founder",
+    "before": "CX83 Labs grew from years spent solving operational problems where details, handoffs and reliability matter. Founder Mike Hankins came to software from a career in nursing and hospice care, working in frontline, education and leadership roles. He saw what happens when capable people have to work around disconnected tools and repetitive processes. As he moved into software engineering, he began applying that same practical systems thinking to business technology. In 2025, he founded Catalyst X83, a name reflecting meaningful, practical change, to bring these disciplines together: understand how the work actually happens, connect the tools that already serve it, and build useful software where something is missing. The goal is not simply to add AI. It is to make businesses more capable, more independent and better equipped to improve their own systems.",
+    "after": "CX83 Labs began with a simple belief: technology should make work easier and give people more time for what matters. Our founder, Mike Hankins, spent nearly two decades in nursing and hospice care, where he saw how disconnected systems, repetitive tasks, and complicated workflows could pull attention away from the people who needed it most. He began studying software engineering to solve problems he knew firsthand, and as he learned to build and connect tools, he recognized that small businesses and community organizations were facing many of the same challenges.\n\nThat idea grew into CX83 Labs, a company focused on making websites, software, AI, and automation work together in ways that are practical, understandable, and useful. CX83 isn't about making people dependent on sophisticated technology. It's about making sophisticated technology accessible so people can become more independent.\n\nFor someone opening a boutique, turning a garage workshop into a business, or leading a nonprofit with limited resources, this can mean a website they can update, tools that share information, and more time to focus on the people and work they care about. CX83 started with Mike's experience, but its approach is collaborative, drawing on a network of engineers, developers, family collaborators, and trusted independent specialists as each project requires. Our commitment to accessibility also means giving back through donated services and support for nonprofits and emerging organizations doing meaningful work without large budgets. Whether a customer wants a one time setup, a custom build, or optional ongoing support, our measure of success is simple: they understand their system, retain meaningful control, and have more time for what matters.",
+    "updatedAt": "2026-10-11T06:58:05.848Z",
+    "exactReadback": true,
+    "otherContentFieldsUnchanged": true,
+    "postDeploymentReadbackExact": true
+  },
+  "preservedBlobs": [
+    {
+      "path": "public/brand/PROVENANCE.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c2a3ed301ef4e4c55899d21ecf4c9a0fdbe57075",
+      "size": 1040,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/c2a3ed301ef4e4c55899d21ecf4c9a0fdbe57075"
+    },
+    {
+      "path": "public/brand/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "10179ca99c99d0b071333eafefa80e2b39aabef3",
+      "size": 293,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/10179ca99c99d0b071333eafefa80e2b39aabef3"
+    },
+    {
+      "path": "public/brand/cx83-atmosphere-wide.webp",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "28c0291196dca68cc65029af75109475ce779053",
+      "size": 130792,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/28c0291196dca68cc65029af75109475ce779053"
+    },
+    {
+      "path": "public/brand/cx83-labs-hero.avif",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3afb58548ceed0dab3c814991d5894ce09c16d5a",
+      "size": 4767,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/3afb58548ceed0dab3c814991d5894ce09c16d5a"
+    },
+    {
+      "path": "public/brand/logo-dark.svg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dda8f55ffb46259dfceed4ee94f11a3496153fb7",
+      "size": 4610,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/dda8f55ffb46259dfceed4ee94f11a3496153fb7"
+    },
+    {
+      "path": "public/brand/logo-light.svg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fd036c0ae3a46d8c8a70617088e5b72646894317",
+      "size": 4349,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/fd036c0ae3a46d8c8a70617088e5b72646894317"
+    },
+    {
+      "path": "public/brand/symbol-showcase.svg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8d064852cc97abb0253c6038987489631414b4c5",
+      "size": 680,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/8d064852cc97abb0253c6038987489631414b4c5"
+    },
+    {
+      "path": "public/connections/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4089eaa354db0b84760f640dc42b15693773fe51",
+      "size": 668,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/4089eaa354db0b84760f640dc42b15693773fe51"
+    },
+    {
+      "path": "public/connections/cx83-connections-overview.webp",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3e5c7c2e462d9542ce179858dccf3376a9407a56",
+      "size": 168296,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/3e5c7c2e462d9542ce179858dccf3376a9407a56"
+    },
+    {
+      "path": "public/connections/cx83-customer-connections.webp",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8799b988a1509b9c01aebd8d1325e6aba27eb498",
+      "size": 128432,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/8799b988a1509b9c01aebd8d1325e6aba27eb498"
+    },
+    {
+      "path": "public/connections/cx83-marketing-connections.webp",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "59fcd61976ccfeaf8f716e1480b216024fd62404",
+      "size": 145138,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/59fcd61976ccfeaf8f716e1480b216024fd62404"
+    },
+    {
+      "path": "public/connections/cx83-operations-connections.webp",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "40c0b5920afb5b4371e3329226e0c474d24d958b",
+      "size": 167892,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/40c0b5920afb5b4371e3329226e0c474d24d958b"
+    },
+    {
+      "path": "public/favicon.ico",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1ec2c191e9b317ccab3be0afe38084ae2dd1f271",
+      "size": 15086,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/1ec2c191e9b317ccab3be0afe38084ae2dd1f271"
+    },
+    {
+      "path": "public/favicon.svg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d7ccc5aa98f0b5fbe5df23146e2895933f2a521b",
+      "size": 4407,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/d7ccc5aa98f0b5fbe5df23146e2895933f2a521b"
+    },
+    {
+      "path": "public/integrations/MANIFEST.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3ba09e3905e971f6a9b2e59ed0a8b63ea63b83b0",
+      "size": 5833,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/3ba09e3905e971f6a9b2e59ed0a8b63ea63b83b0"
+    },
+    {
+      "path": "public/integrations/claude.svg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "29bb61bb9eed5694d5e59cb8e15524f2a709e339",
+      "size": 1936,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/29bb61bb9eed5694d5e59cb8e15524f2a709e339"
+    },
+    {
+      "path": "public/integrations/github.svg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6a58a42484f2aef61bbd58951b44d068080d1d4d",
+      "size": 837,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/6a58a42484f2aef61bbd58951b44d068080d1d4d"
+    },
+    {
+      "path": "public/integrations/gmail.svg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8a5e9b55b9e3be4472fa3ab49f4290b4be729df3",
+      "size": 354,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/8a5e9b55b9e3be4472fa3ab49f4290b4be729df3"
+    },
+    {
+      "path": "public/integrations/googledrive.svg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7263ef31247d56240df2a20232e3c8276252d807",
+      "size": 614,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/7263ef31247d56240df2a20232e3c8276252d807"
+    },
+    {
+      "path": "public/integrations/googlegemini.svg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a2ae36895209f2a99ab6e86735eadc83219b394c",
+      "size": 416,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/a2ae36895209f2a99ab6e86735eadc83219b394c"
+    },
+    {
+      "path": "public/integrations/n8n.svg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5416dd35ad16cdd400ffbaa3433bd1c39e9b10d8",
+      "size": 1588,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/5416dd35ad16cdd400ffbaa3433bd1c39e9b10d8"
+    },
+    {
+      "path": "public/integrations/nextdotjs.svg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "90cc3f318a6c9a7b2c34fa4d4a3e55711914b9c8",
+      "size": 337,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/90cc3f318a6c9a7b2c34fa4d4a3e55711914b9c8"
+    },
+    {
+      "path": "public/integrations/openai.svg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f13ee743bc98edd81c0f376b6f7500019f49067e",
+      "size": 1585,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/f13ee743bc98edd81c0f376b6f7500019f49067e"
+    },
+    {
+      "path": "public/integrations/postgresql.svg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "931bdae18bc31cee750ae9487ecbd273c569cf97",
+      "size": 5220,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/931bdae18bc31cee750ae9487ecbd273c569cf97"
+    },
+    {
+      "path": "public/integrations/wordpress.svg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c3ccd1a140e7f14afc5a34e67f285110dad376e2",
+      "size": 1074,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/c3ccd1a140e7f14afc5a34e67f285110dad376e2"
+    },
+    {
+      "path": "public/showcase/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "94d30ee591bad195206307fa5cb13c495d97c861",
+      "size": 3518,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/94d30ee591bad195206307fa5cb13c495d97c861"
+    },
+    {
+      "path": "public/showcase/cx83-website-showcase-poster-v2.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e72924405b648d6f22a8bc9f4e101b6b85dc5723",
+      "size": 362476,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/e72924405b648d6f22a8bc9f4e101b6b85dc5723"
+    },
+    {
+      "path": "public/showcase/cx83-website-showcase-v2.en.vtt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fab96a084bcf755a37e87d74ec7e3899c4403d21",
+      "size": 1050,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/fab96a084bcf755a37e87d74ec7e3899c4403d21"
+    },
+    {
+      "path": "public/showcase/cx83-website-showcase-v2.mp4",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "27ea8261d137add910fc156799451f4f3bd1999d",
+      "size": 2037276,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/27ea8261d137add910fc156799451f4f3bd1999d"
+    },
+    {
+      "path": "public/website-template-OG.webp",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ceb0efc471c7503324f6fe561322d264291de2bb",
+      "size": 101500,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/ceb0efc471c7503324f6fe561322d264291de2bb"
+    },
+    {
+      "path": "src/app/(frontend)/page.tsx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5ad8a992f6a651e1f71904e638b979754ddbeeb7",
+      "size": 6710,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/5ad8a992f6a651e1f71904e638b979754ddbeeb7"
+    },
+    {
+      "path": "src/components/site/ConnectionVisuals.tsx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a7e1b285d11cf3b82bb30c35f39f8b6a87134dea",
+      "size": 5082,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/a7e1b285d11cf3b82bb30c35f39f8b6a87134dea"
+    },
+    {
+      "path": "src/components/site/SiteFooter.tsx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b9aedce363fd24a46c4bd861889bb192c10345e8",
+      "size": 2161,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/b9aedce363fd24a46c4bd861889bb192c10345e8"
+    },
+    {
+      "path": "src/components/site/SiteHeader.tsx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "45540bab3a2362faeac935798afc011d94a3ff86",
+      "size": 4546,
+      "url": "https://api.github.com/repos/Mike-CX83/cx83_webapp/git/blobs/45540bab3a2362faeac935798afc011d94a3ff86"
+    }
+  ],
+  "liveReviewLimit": "After the owner restart, the selected Chrome browser blocked staging.cx83labs.com with ERR_BLOCKED_BY_CLIENT. No security setting was altered. New deployed rendered review, live model samples and actual mobile software keyboard verification remain unverified.",
+  "mergedApplication": "3af4ff4ffd9a2fc5ce798fa0907cf2eb879330bb",
+  "prRun": {
+    "id": 38121738151,
+    "conclusion": "success",
+    "integrationTests": 83,
+    "browserTests": 133,
+    "artifactId": 11695489222,
+    "artifactSha256": "d09c08857d7f5d15616d37813a12c13a6a12582b06d5a3a12d22181ee3b34d01"
+  },
+  "mergedTree": "d2dc9b2ccaf2f3b81c4826da5f9b0fee2a60c1b4",
+  "releaseVerification": {
+    "workflow": 38122396978,
+    "checkJob": 114419654473,
+    "integrationTests": 83,
+    "browserTests": 133,
+    "typecheck": "passed",
+    "lint": "passed",
+    "build": "passed",
+    "staticPages": 16,
+    "artifact": {
+      "id": 11695408895,
+      "bytes": 52372196,
+      "sha256": "21852057c1bb264b76a5c5d38828e4df8f041723bcf0642cc13f208e9f41e4fb"
+    }
+  },
+  "status": "protected staging deployed; automated and runtime checks passed; manual acceptance limited",
+  "deployment": {
+    "workflow": 38122396978,
+    "imageJob": 114422367489,
+    "deployJob": 114422972899,
+    "conclusion": "success",
+    "verifiedAt": "2026-10-11T08:05:13Z",
+    "checkoutSha": "3af4ff4ffd9a2fc5ce798fa0907cf2eb879330bb",
+    "deployedSha": "3af4ff4ffd9a2fc5ce798fa0907cf2eb879330bb",
+    "dirty": false,
+    "branch": "staging-host",
+    "anonymousHTTP": 401,
+    "authenticatedHTTP": 200,
+    "staticImageHTTP": 200,
+    "optimizedImageHTTP": 200,
+    "previousImage": "present"
+  },
+  "pauseRequested": "2026-10-11T03:05:51-05:00"
+}

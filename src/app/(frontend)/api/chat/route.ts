@@ -1,70 +1,64 @@
-import { convertToModelMessages, createUIMessageStream, createUIMessageStreamResponse, streamText, type UIMessage } from 'ai'
-
+import { randomUUID } from 'node:crypto'
+import { createUIMessageStream, createUIMessageStreamResponse, generateText } from 'ai'
 import { buildApprovedKnowledge, buildSystemPrompt, getAssistantRuntimeConfig } from '@/ai/assistant'
 import { getLanguageModel } from '@/ai/model'
+import { parseChatMessages } from '@/ai/chatProtocol'
+import { allowCatAttempt, readPublicJSON, PublicRequestError, publicFailure } from '@/ai/publicRequest'
+import { CAT_FALLBACK, contactShortcut, formatVisitorAnswer, privateInstructionShortcut } from '@/ai/visitorAnswer'
+import { recordCatOutcome } from '@/ai/catDiagnostics'
 
-const historyLimit = 12
-
-function mockResponse(text: string) {
-  const stream = createUIMessageStream({
-    execute({ writer }) {
-      const id = 'mock'
-      writer.write({ type: 'start' })
-      writer.write({ type: 'start-step' })
-      writer.write({ type: 'text-start', id })
-      writer.write({ type: 'text-delta', id, delta: text })
-      writer.write({ type: 'text-end', id })
-      writer.write({ type: 'finish-step' })
-      writer.write({ type: 'finish', finishReason: 'stop' })
-    },
-  })
-
-  return createUIMessageStreamResponse({ stream })
-}
+export const runtime = 'nodejs'
 
 export async function POST(req: Request) {
-  const config = await getAssistantRuntimeConfig()
-
-  if (!config.enabled) {
-    return mockResponse('Mock response. The CX83 assistant is turned off. This is not a live model reply.')
-  }
-
-  let body: { messages?: UIMessage[] } = {}
   try {
-    body = await req.json()
-  } catch {
-    return Response.json({ error: 'The chat request was not valid JSON.' }, { status: 400 })
-  }
-
-  const messages = Array.isArray(body.messages) ? body.messages.slice(-historyLimit) : []
-
-  if (config.configurationError) {
-    return Response.json({ error: config.configurationError }, { status: 503 })
-  }
-
-  try {
-    // Public site knowledge and the visitor's chat messages only. Form submissions stay out of this request.
-    const knowledge = await buildApprovedKnowledge()
-    const result = streamText({
-      model: getLanguageModel(config),
-      system: buildSystemPrompt(knowledge, config.extraGuidance),
-      messages: await convertToModelMessages(messages),
-      maxOutputTokens: config.maxOutputTokens,
+    const body = await readPublicJSON(req, 64_000)
+    const messages = parseChatMessages(body.messages)
+    if (!allowCatAttempt(req, 'chat')) throw new PublicRequestError(429, 'Too many messages. Please try again later or use the contact form.')
+    const config = await getAssistantRuntimeConfig()
+    if (!config.enabled || !config.configured) throw new PublicRequestError(503, 'Cat is temporarily unavailable. Please use the contact form.')
+    const last = messages.at(-1)!.content as string
+    let answer = privateInstructionShortcut(last) || contactShortcut(last)
+    if (!answer) {
+      const knowledge = await buildApprovedKnowledge()
+      const model = getLanguageModel(config)
+      const system = buildSystemPrompt(knowledge, config.extraGuidance)
+      const signal = AbortSignal.any([req.signal, AbortSignal.timeout(35_000)])
+      // One bounded recovery for a classifier/empty/truncated result. The
+      // configured provider, model and output cap stay unchanged. No rejected
+      // output enters visitor history or the recovery prompt.
+      for (let attempt = 0; attempt < 2; attempt++) {
+        const result = await generateText({
+          model,
+          system: system + (attempt ? '\nRecovery: answer the visitor in one or two complete sentences. Do not output analysis or classifications. Include a useful next action.' : ''),
+          messages,
+          maxOutputTokens: config.maxOutputTokens,
+          maxRetries: 0,
+          abortSignal: signal,
+        })
+        const checked = formatVisitorAnswer(result.text, result.finishReason)
+        recordCatOutcome({ provider: config.provider, configuredModel: config.model, responseModel: result.response.modelId, finishReason: result.finishReason, rejected: checked.rejected })
+        answer = checked.text
+        if (!checked.rejected) break
+        if (attempt === 1) console.warn('CX83 Cat reply rejected by output validation.')
+      }
+    }
+    const text = answer || CAT_FALLBACK
+    return createUIMessageStreamResponse({
+      headers: { 'Cache-Control': 'no-store' },
+      stream: createUIMessageStream({
+        execute({ writer }) {
+          const id = randomUUID()
+          writer.write({ type: 'start' })
+          writer.write({ type: 'text-start', id })
+          writer.write({ type: 'text-delta', id, delta: text })
+          writer.write({ type: 'text-end', id })
+          writer.write({ type: 'finish', finishReason: 'stop' })
+        },
+        onError: () => 'Cat could not complete that reply. Please retry or contact CX83.',
+      }),
     })
-
-    return result.toUIMessageStreamResponse()
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'unknown error'
-    console.error(
-      'CX83 assistant request failed.',
-      message
-        .replace(/sk-[A-Za-z0-9_-]+/g, '[redacted]')
-        .replace(/AIza[0-9A-Za-z_-]{10,}/g, '[redacted]')
-        .replace(/AQ\.[0-9A-Za-z_-]{10,}/g, '[redacted]'),
-    )
-    return Response.json(
-      { error: 'The assistant request failed before a reply started. The selected provider was not changed.' },
-      { status: 502 },
-    )
+    if (!(error instanceof PublicRequestError)) console.error('CX83 Cat request failed; private details were not logged.')
+    return publicFailure(error)
   }
 }

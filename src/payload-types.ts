@@ -1221,6 +1221,28 @@ export interface PayloadMcpApiKey {
      */
     update?: boolean | null;
   };
+  'payload-mcp-tool'?: {
+    /**
+     * Read a text source file in this CX83 website repository. Use a repository-relative path. Credential files are refused.
+     */
+    readRepositoryFile?: boolean | null;
+    /**
+     * Search this repository with ripgrep and return matching lines. Skips dependencies, build output, and credential files.
+     */
+    searchRepository?: boolean | null;
+    /**
+     * Return the latest local Next.js development log lines so a code repair can start from the current error.
+     */
+    readDevelopmentErrors?: boolean | null;
+    /**
+     * Replace one unique text span in a repository file. The old text must match exactly once. This writes the git checkout on this server and does not change the running site until that change is committed and deployed.
+     */
+    applyRepositoryEdit?: boolean | null;
+    /**
+     * Start typecheck, lint, or test:int and return immediately with an id. Call again with that id to retrieve the exit code and output. The commands stay pnpm exec tsc --noEmit, pnpm lint, and pnpm test:int.
+     */
+    runRepositoryCheck?: boolean | null;
+  };
   updatedAt: string;
   createdAt: string;
   enableAPIKey?: boolean | null;
@@ -2141,6 +2163,15 @@ export interface PayloadMcpApiKeysSelect<T extends boolean = true> {
     | {
         find?: T;
         update?: T;
+      };
+  'payload-mcp-tool'?:
+    | T
+    | {
+        readRepositoryFile?: T;
+        searchRepository?: T;
+        readDevelopmentErrors?: T;
+        applyRepositoryEdit?: T;
+        runRepositoryCheck?: T;
       };
   updatedAt?: T;
   createdAt?: T;

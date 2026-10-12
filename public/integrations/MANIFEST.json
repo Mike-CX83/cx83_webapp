@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "preparedOn": "2026-10-10",
+  "usage": "Provider recognition in educational CX83 ecosystem, not endorsement or authorization",
+  "licenseNotice": "Simple Icons source vectors under CC0 1.0; trademark rights and individual brands' usage requirements remain with the owners and require independent confirmation for public production.",
+  "sourceRepository": "https://github.com/simple-icons/simple-icons",
+  "license": "https://github.com/simple-icons/simple-icons/blob/develop/LICENSE.md",
+  "cx83Brand": {
+    "path": "/brand/symbol-showcase.svg",
+    "source": "public/brand/PROVENANCE.md",
+    "status": "Authentic existing CX83 Studio draft asset; unchanged"
+  },
+  "assets": [
+    {
+      "id": "openai",
+      "provider": "ChatGPT",
+      "file": "/integrations/openai.svg",
+      "source": "https://github.com/simple-icons/simple-icons/blob/14.0.0/icons/openai.svg",
+      "sourceBlobSha": "ebbdab0ecf9c844b8c20d25e9115c06f9332d3c2",
+      "relationship": "thirdParty",
+      "displayStatus": "demonstrated",
+      "style": "Original Simple Icons SVG path with a high contrast single-color fill on the SVG root, #FFFFFF",
+      "thirdPartyTrademarkClearedForProduction": false
+    },
+    {
+      "id": "github",
+      "provider": "GitHub",
+      "file": "/integrations/github.svg",
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/github.svg",
+      "sourceBlobSha": "538ec5bf2a9a5724899daf728577cd0b8beaae90",
+      "relationship": "thirdParty",
+      "displayStatus": "demonstrated",
+      "style": "Original Simple Icons SVG path with a high contrast single-color fill on the SVG root, #FFFFFF",
+      "thirdPartyTrademarkClearedForProduction": false
+    },
+    {
+      "id": "nextdotjs",
+      "provider": "Next.js",
+      "file": "/integrations/nextdotjs.svg",
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/nextdotjs.svg",
+      "sourceBlobSha": "06a2bd6eed21da68b22202c00fb1944443b53a82",
+      "relationship": "thirdParty",
+      "displayStatus": "demonstrated",
+      "style": "Original Simple Icons SVG path with a high contrast single-color fill on the SVG root, #FFFFFF",
+      "thirdPartyTrademarkClearedForProduction": false
+    },
+    {
+      "id": "postgresql",
+      "provider": "PostgreSQL",
+      "file": "/integrations/postgresql.svg",
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/postgresql.svg",
+      "sourceBlobSha": "dcf75b726dee7a67e7d4a4b6067991d7d15c2f02",
+      "relationship": "thirdParty",
+      "displayStatus": "demonstrated",
+      "style": "Original Simple Icons SVG path with a high contrast single-color fill on the SVG root, #4169E1",
+      "thirdPartyTrademarkClearedForProduction": false
+    },
+    {
+      "id": "claude",
+      "provider": "Claude",
+      "file": "/integrations/claude.svg",
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/claude.svg",
+      "sourceBlobSha": "1beee8612185a8fb0a23bcfd8c3ce9b6d86785a8",
+      "relationship": "thirdParty",
+      "displayStatus": "example",
+      "style": "Original Simple Icons SVG path with a high contrast single-color fill on the SVG root, #D97757",
+      "thirdPartyTrademarkClearedForProduction": false
+    },
+    {
+      "id": "googlegemini",
+      "provider": "Gemini",
+      "file": "/integrations/googlegemini.svg",
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/googlegemini.svg",
+      "sourceBlobSha": "765adb0887e684492b7721b2d62635c11e99f7fd",
+      "relationship": "thirdParty",
+      "displayStatus": "example",
+      "style": "Original Simple Icons SVG path with a high contrast single-color fill on the SVG root, #8AB4F8",
+      "thirdPartyTrademarkClearedForProduction": false
+    },
+    {
+      "id": "wordpress",
+      "provider": "WordPress",
+      "file": "/integrations/wordpress.svg",
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/wordpress.svg",
+      "sourceBlobSha": "08ecac100f6acaf579e5d5e23461fb0783bd9f32",
+      "relationship": "thirdParty",
+      "displayStatus": "example",
+      "style": "Original Simple Icons SVG path with a high contrast single-color fill on the SVG root, #21759B",
+      "thirdPartyTrademarkClearedForProduction": false
+    },
+    {
+      "id": "n8n",
+      "provider": "n8n",
+      "file": "/integrations/n8n.svg",
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/n8n.svg",
+      "sourceBlobSha": "2b67f5ab4f94845cc9d849ceeccab21730a28acf",
+      "relationship": "thirdParty",
+      "displayStatus": "example",
+      "style": "Original Simple Icons SVG path with a high contrast single-color fill on the SVG root, #EA4B71",
+      "thirdPartyTrademarkClearedForProduction": false
+    },
+    {
+      "id": "googledrive",
+      "provider": "Google Drive",
+      "file": "/integrations/googledrive.svg",
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/googledrive.svg",
+      "sourceBlobSha": "9f44a507575153da2758a1c9b36f4c42a53fe22a",
+      "relationship": "thirdParty",
+      "displayStatus": "example",
+      "style": "Original Simple Icons SVG path with a high contrast single-color fill on the SVG root, #4285F4",
+      "thirdPartyTrademarkClearedForProduction": false
+    },
+    {
+      "id": "gmail",
+      "provider": "Gmail",
+      "file": "/integrations/gmail.svg",
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/gmail.svg",
+      "sourceBlobSha": "9ee779ada6753eab5e833350d167bff6747c9ae3",
+      "relationship": "thirdParty",
+      "displayStatus": "example",
+      "style": "Original Simple Icons SVG path with a high contrast single-color fill on the SVG root, #EA4335",
+      "thirdPartyTrademarkClearedForProduction": false
+    }
+  ]
+}

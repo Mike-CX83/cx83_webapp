@@ -1,11 +1,13 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-import { PageHero, Section } from '@/components/site/Section'
+import { InteriorHero, InteriorSection } from '@/components/site/InteriorPage'
 import { loadProjects } from '@/content/load'
 
-export const dynamic = 'force-dynamic'
+import '../../../interior-run2.css'
 
+export const dynamic = 'force-dynamic'
 type Args = { params: Promise<{ slug: string }> }
 
 export async function generateMetadata({ params }: Args): Promise<Metadata> {
@@ -22,27 +24,32 @@ export default async function ProjectPage({ params }: Args) {
   if (!project) notFound()
 
   return (
-    <>
-      <PageHero eyebrow="Project" title={project.title}>
+    <div className="cx83-interior-root cx83-interior-run2 cx83-work-detail">
+      <InteriorHero title={project.title} backHref="/work" backLabel="Back to Work" id="project-title">
         <p>{project.summary}</p>
-      </PageHero>
-      <Section>
-        <p className="max-w-3xl leading-8 text-muted-foreground">{project.description}</p>
+      </InteriorHero>
+      <InteriorSection>
+        <div className="cx83-interior-reading">
+          <h2>About this project</h2>
+          <p>{project.description}</p>
+        </div>
         {project.technologies.length ? (
-          <p className="mt-6 text-sm">Technology: {project.technologies.join(', ')}</p>
+          <p className="cx83-work-detail-note"><strong>Technology:</strong> {project.technologies.join(', ')}</p>
         ) : null}
         {project.links.length ? (
-          <ul className="mt-6 grid gap-2">
+          <ul className="cx83-work-detail-links">
             {project.links.map((link) => (
               <li key={link.url}>
-                <a className="underline-offset-4 hover:underline" href={link.url} rel="noreferrer" target="_blank">
-                  {link.label}
-                </a>
+                <a className="cx83-interior-link" href={link.url} rel="noreferrer" target="_blank">{link.label}</a>
               </li>
             ))}
           </ul>
         ) : null}
-      </Section>
-    </>
+        <div className="cx83-interior-closing">
+          <div><h2>Want to explore a similar project?</h2><p>Describe the outcome you need and the tools already involved.</p></div>
+          <Link className="cx83-action cx83-action-primary" href="/contact">Start a conversation <span aria-hidden="true">↗</span></Link>
+        </div>
+      </InteriorSection>
+    </div>
   )
 }

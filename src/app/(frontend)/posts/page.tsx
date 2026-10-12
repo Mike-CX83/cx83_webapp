@@ -1,6 +1,8 @@
 import type { Metadata } from 'next/types'
 
 import { CollectionArchive } from '@/components/CollectionArchive'
+import Link from 'next/link'
+import { InteriorHero, InteriorSection } from '@/components/site/InteriorPage'
 import { PageRange } from '@/components/PageRange'
 import { Pagination } from '@/components/Pagination'
 import configPromise from '@payload-config'
@@ -14,10 +16,10 @@ export const dynamic = 'force-dynamic'
 export default async function Page() {
   if (!databaseConfigured()) {
     return (
-      <div className="cx83-container py-24">
-        <h1 className="text-3xl font-semibold">Notes</h1>
-        <p className="mt-4 max-w-2xl text-muted-foreground">
-          Articles will appear here after PostgreSQL is connected and posts are published.
+      <div className="cx83-interior-root">
+        <InteriorHero title="Notes from CX83 Labs." />
+        <p className="cx83-container py-20 text-muted-foreground">
+          Published articles are temporarily unavailable. Explore Services or return later.
         </p>
       </div>
     )
@@ -39,14 +41,11 @@ export default async function Page() {
   })
 
   return (
-    <div className="pt-24 pb-24">
+    <div className="cx83-interior-root pb-24">
       <PageClient />
-      <div className="container mb-16">
-        <div className="prose dark:prose-invert max-w-none">
-          <h1>Posts</h1>
-        </div>
-      </div>
+      <InteriorHero title="Notes from CX83 Labs." />
 
+      {posts.totalDocs === 0 ? <InteriorSection><p>No notes have been published yet.</p><Link className="cx83-interior-link" href="/services">Explore Services</Link></InteriorSection> : null}
       <div className="container mb-8">
         <PageRange
           collection="posts"

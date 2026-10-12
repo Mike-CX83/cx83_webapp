@@ -12,7 +12,9 @@ module.exports = {
     policies: [
       {
         userAgent: '*',
-        disallow: '/admin/*',
+        ...(process.env.CX83_PUBLIC_LAUNCH_APPROVED === 'true' && !SITE_URL.includes('staging.')
+          ? { disallow: '/admin/*' }
+          : { disallow: '/' }),
       },
     ],
     additionalSitemaps: [`${SITE_URL}/pages-sitemap.xml`, `${SITE_URL}/posts-sitemap.xml`],

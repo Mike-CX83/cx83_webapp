@@ -1,0 +1,34 @@
+{
+  "status": "created for owner visual review; not published",
+  "generator": "built-in image_gen",
+  "assets": [
+    {
+      "file": "cx83-connections-overview.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1630484,
+      "sha256": "510578bd19be53a33a89f6c08090dcfc1231f2ef9935efa34d5b9a014dfdccf3"
+    },
+    {
+      "file": "cx83-customer-connections.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1481059,
+      "sha256": "ac13ac8e7fa2d9bbb813e101d928e19dcdac02d6618fafd8fbfe1efc2d2ff338"
+    },
+    {
+      "file": "cx83-marketing-connections.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1479732,
+      "sha256": "35fa987a03478dcd724b4fb2a655a230ad80d06eede33b17e8e984ca3b104573"
+    },
+    {
+      "file": "cx83-operations-connections.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1537680,
+      "sha256": "ae734d5f8004d65b3ddfa700dc361e58620397db74b0fc9b18a34c59b62c508f"
+    }
+  ]
+}

@@ -17,6 +17,8 @@ declare global {
       OPENROUTER_API_KEY?: string
       OPENROUTER_MODEL?: string
       PAYLOAD_MCP_ENABLED?: string
+      CX83_REPO_ROOT?: string
+      CX83_DEPLOYED_SHA?: string
     }
   }
 }
