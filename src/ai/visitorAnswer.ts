@@ -29,7 +29,7 @@ export function formatVisitorAnswer(text: string, finishReason: string): { text:
     const href = safeAssistantHref(path)
     return href ? '[Contact CX83](' + href + ')' : CAT_CONTACT
   })
-  answer = answer.replace(/(?<![\w\[(])hello@cx83labs\.com(?![\w\])])/gi, CAT_EMAIL)
+  answer = answer.replace(/(?<![\w\[(])(?:mailto:)?hello@cx83labs\.com(?![\w\])])/gi, CAT_EMAIL)
   return { text: answer, rejected: false }
 }
 

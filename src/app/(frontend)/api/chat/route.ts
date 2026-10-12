@@ -5,6 +5,7 @@ import { getLanguageModel } from '@/ai/model'
 import { parseChatMessages } from '@/ai/chatProtocol'
 import { allowCatAttempt, readPublicJSON, PublicRequestError, publicFailure } from '@/ai/publicRequest'
 import { contactShortcut, formatVisitorAnswer } from '@/ai/visitorAnswer'
+import { recordCatOutcome } from '@/ai/catDiagnostics'
 
 export const runtime = 'nodejs'
 
@@ -28,6 +29,7 @@ export async function POST(req: Request) {
         abortSignal: AbortSignal.any([req.signal, AbortSignal.timeout(35_000)]),
       })
       const checked = formatVisitorAnswer(result.text, result.finishReason)
+      recordCatOutcome({ provider: config.provider, configuredModel: config.model, responseModel: result.response.modelId, finishReason: result.finishReason, rejected: checked.rejected })
       answer = checked.text
       if (checked.rejected) console.warn('CX83 Cat reply rejected by output validation.')
     }

@@ -6,15 +6,22 @@ import {
   ComposerPrimitive,
   MessagePrimitive,
   ThreadPrimitive,
+  useAuiState,
 } from '@assistant-ui/react'
 import { MarkdownTextPrimitive } from '@assistant-ui/react-markdown'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { conversationStarters } from '@/content/assistantNavigation'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { createContext, useContext, useCallback, useEffect, useRef, useState } from 'react'
 import remarkGfm from 'remark-gfm'
 import { safeAssistantHref } from '@/ai/visitorAnswer'
+import { CatSubmissionReview, type CatReview } from './CatSubmissionReview'
+
+const CatReportContext = createContext<(id: string) => void>(() => undefined)
+function publicText(content: readonly { type: string; text?: string }[]): string {
+  return content.filter((part) => part.type === 'text').map((part) => part.text || '').join('\n')
+}
 
 export function AssistantWidget() {
   const returnFocusRef = useRef<HTMLElement | null>(null)
@@ -51,6 +58,24 @@ function AssistantSession({
   const launcherRef = useRef<HTMLButtonElement>(null)
   const closeRef = useRef<HTMLButtonElement>(null)
   const [status, setStatus] = useState<'checking' | 'configured' | 'unavailable'>('checking')
+  const [review, setReview] = useState<CatReview | null>(null)
+  const openReport = (id: string) => {
+    const messages = runtime.thread.getState().messages
+    const index = messages.findIndex((message) => message.id === id)
+    const answer = messages[index]
+    if (!answer || answer.role !== 'assistant') return
+    const question = messages.slice(0, index).reverse().find((message) => message.role === 'user')
+    setReview({ type: 'report', question: question ? publicText(question.content) : '', answer: publicText(answer.content) })
+  }
+  const openPlan = () => {
+    const messages = runtime.thread.getState().messages
+    const last = [...messages].reverse().find((message) => message.role === 'assistant')
+    setReview({ type: 'plan', draft: last ? publicText(last.content) : '' })
+  }
+  const draftPlan = () => {
+    setReview(null)
+    runtime.thread.append({ role: 'user', content: [{ type: 'text', text: 'Help me draft a preliminary project plan using our conversation. Include goal, current tools, requirements, constraints and open questions. If information is missing, ask one useful question first. Do not invent CX83 prices or delivery promises.' }] })
+  }
 
   useEffect(() => {
     const controller = new AbortController()
@@ -110,6 +135,7 @@ function AssistantSession({
 
   return (
     <AssistantRuntimeProvider runtime={runtime}>
+      <CatReportContext.Provider value={openReport}>
       <button
         ref={launcherRef}
         aria-controls="cx83-assistant"
@@ -149,7 +175,7 @@ function AssistantSession({
             </div>
             <button ref={closeRef} aria-label="Close Cat" className="cx83-cat-close" onClick={close} type="button">×</button>
           </header>
-          <ThreadPrimitive.Root className="cx83-cat-thread">
+          {review ? <CatSubmissionReview key={review.type} review={review} onCancel={() => setReview(null)} onDraft={draftPlan} /> : <ThreadPrimitive.Root className="cx83-cat-thread">
             <ThreadPrimitive.Viewport className="cx83-cat-messages" turnAnchor="top" scrollToBottomOnInitialize={false}>
               <ThreadPrimitive.Empty>
                 <div className="cx83-cat-welcome">
@@ -179,6 +205,7 @@ function AssistantSession({
                 rows={2}
                 maxLength={2000}
               />
+              <p className="cx83-cat-review-note">AI processes this chat. Avoid sensitive information. CX83 saves only submissions you choose to send.</p>
               <div className="cx83-cat-composer-actions">
                 <button className="cx83-cat-reset" onClick={onReset} type="button">New conversation</button>
                 <ThreadPrimitive.If running>
@@ -189,13 +216,15 @@ function AssistantSession({
                 </ThreadPrimitive.If>
               </div>
             </ComposerPrimitive.Root>
-          </ThreadPrimitive.Root>
+          </ThreadPrimitive.Root>}
           <footer className="cx83-cat-footer">
-            <span>Have a project in mind? We would like to hear about it.</span>
+            <button className="cx83-cat-inline-action" onClick={() => setReview({ type: 'privacy' })} type="button">Chat privacy</button>
+            <button className="cx83-cat-inline-action" onClick={openPlan} type="button">Review and send a plan</button>
             <Link href="/contact" onClick={() => onOpenChange(false)}>Contact CX83 <span aria-hidden="true">↗</span></Link>
           </footer>
         </section>
       ) : null}
+      </CatReportContext.Provider>
     </AssistantRuntimeProvider>
   )
 }
@@ -212,6 +241,7 @@ function AssistantMessage() {
   return (
     <MessagePrimitive.Root className="cx83-cat-assistant-message">
       <MessagePrimitive.Content components={{ Text: AssistantMarkdown }} />
+      <CatReportAction />
       <MessagePrimitive.Error>
         <p className="cx83-cat-unavailable" role="alert">
           Cat could not complete that reply. Please retry, or contact CX83 using the link below.
@@ -219,6 +249,12 @@ function AssistantMessage() {
       </MessagePrimitive.Error>
     </MessagePrimitive.Root>
   )
+}
+
+function CatReportAction() {
+  const report = useContext(CatReportContext)
+  const id = useAuiState((state) => state.message.id)
+  return <ThreadPrimitive.If running={false}><button className="cx83-cat-report-action" onClick={() => report(id)} type="button">Report a problem</button></ThreadPrimitive.If>
 }
 
 function AssistantMarkdown() {

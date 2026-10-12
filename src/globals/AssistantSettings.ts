@@ -39,6 +39,7 @@ export const AssistantSettings: GlobalConfig = {
     {
       name: 'maxOutputTokens',
       type: 'number',
+      access: { read: ({ req }) => Boolean(req.user) },
       defaultValue: 800,
       min: 100,
       max: 4000,
