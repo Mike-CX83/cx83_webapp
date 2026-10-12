@@ -25,9 +25,9 @@ export async function POST(req: Request) {
 export async function GET(req: Request) {
   try {
     const payload = await getPayloadClient()
-    if (!payload) return Response.json({ error: 'Not found.' }, { status: 404 })
+    if (!payload) return Response.json({ error: 'Not found.' }, { status: 404, headers: { 'Cache-Control': 'no-store' } })
     const { user } = await payload.auth({ headers: req.headers })
-    if (!user || user.collection !== 'users') return Response.json({ error: 'Not found.' }, { status: 404 })
+    if (!user || user.collection !== 'users') return Response.json({ error: 'Not found.' }, { status: 404, headers: { 'Cache-Control': 'no-store' } })
     await pruneExpiredCatSubmissions(payload, true)
     const forms = await payload.find({ collection: 'forms', user, overrideAccess: false, depth: 0, limit: 1, where: { title: { equals: CAT_REPORT_FORM } } })
     if (!forms.docs[0]) return Response.json({ reports: [] }, { headers: { 'Cache-Control': 'no-store' } })

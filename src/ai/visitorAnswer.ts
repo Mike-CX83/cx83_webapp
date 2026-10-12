@@ -16,9 +16,15 @@ export function safeAssistantHref(href: string | undefined): string | null {
 
 // Narrow classifier/serialization signatures, not ordinary explanations about safety.
 export function isInternalAnswer(text: string): boolean {
-  return /(?:^|\n)\s*(?:user\s+safety|safety\s+classification|debug|system\s+prompt|owner\s+guidance|providerMetadata)\s*:/i.test(text)
+  return /(?:^|\n)\s*(?:user\s+safety|safety\s+classification|safety\s+categories|debug|system\s+prompt|owner\s+guidance|approved\s+CX83\s+knowledge|providerMetadata)\s*:/i.test(text)
+    || /(?:^|\n)\s*(?:You are Cat, the CX83 Labs AI assistant|You are strictly a visitor guide)/i.test(text)
     || /<\/?(?:think|analysis|system|tool_call)>/i.test(text)
     || /^\s*\{\s*"(?:safety|classification|providerMetadata|system)"\s*:/i.test(text)
+}
+
+export function privateInstructionShortcut(question: string): string | null {
+  if (!/\b(show|print|reveal|repeat|dump|output|give|what are)\b[\s\S]{0,80}\b(your|the|all)\b[\s\S]{0,30}\b(system prompt|hidden instructions|internal instructions|developer instructions|credentials|api key|private keys)\b/i.test(question)) return null
+  return 'I can help with CX83 services or your preliminary project, but I cannot share private instructions or credentials. What would you like to build or improve?'
 }
 
 export function formatVisitorAnswer(text: string, finishReason: string): { text: string; rejected: boolean } {

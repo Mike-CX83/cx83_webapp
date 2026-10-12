@@ -76,6 +76,18 @@ test.describe('Cat repair and confirmed visitor submissions', () => {
     expect(calls).toBe(0)
     await expect(dialog.getByRole('textbox', { name: 'Message Cat' })).toBeVisible()
   })
+  test('closing Cat preserves an unsent plan, while new conversation clears the session', async ({ page }) => {
+    const dialog = await open(page)
+    await dialog.getByRole('button', { name: 'Review and send a plan' }).click()
+    await dialog.getByLabel('Preliminary project plan').fill('Goal: preserve this synthetic draft. Tools: email. Requirements: review before send.')
+    await dialog.getByRole('button', { name: 'Close Cat', exact: true }).click()
+    await expect(dialog).toBeHidden()
+    await page.locator('.cx83-assistant-launcher').click()
+    await expect(dialog.getByLabel('Preliminary project plan')).toHaveValue(/preserve this synthetic draft/)
+    await dialog.getByRole('button', { name: 'Cancel', exact: true }).click()
+    await dialog.getByRole('button', { name: 'New conversation' }).click()
+    await expect(dialog.getByRole('heading', { name: 'What can we help you explore?' })).toBeVisible()
+  })
   test('failed submission keeps edited text and retry identifier', async ({ page }) => {
     const ids: string[] = []
     await page.route('**/api/cat-plans', async (route) => { ids.push(route.request().postDataJSON().requestId); await route.fulfill({ status: 503, json: { error: 'Synthetic storage unavailable.' } }) })

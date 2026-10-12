@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { minimizeDiagnosticText } from '@/ai/catPrivacy'
 
 export type CatReview = { type: 'report'; question: string; answer: string } | { type: 'plan'; draft: string } | { type: 'privacy' }
@@ -16,6 +16,8 @@ export function CatSubmissionReview({ review, onCancel, onDraft }: { review: Cat
   const [status, setStatus] = useState<'idle' | 'saving' | 'saved'>('idle')
   const [notice, setNotice] = useState('')
   const request = useRef<{ fingerprint: string; id: string } | null>(null)
+  const heading = useRef<HTMLHeadingElement>(null)
+  useEffect(() => { heading.current?.focus() }, [review.type, status])
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -43,7 +45,7 @@ export function CatSubmissionReview({ review, onCancel, onDraft }: { review: Cat
 
   if (review.type === 'privacy') return (
     <div className="cx83-cat-review">
-      <h3>Chat privacy</h3>
+      <h3 ref={heading} tabIndex={-1}>Chat privacy</h3>
       <p>Your messages and recent conversation context are sent to our configured AI provider to answer you. Avoid passwords, patient records, financial account details and other sensitive information.</p>
       <p>CX83 does not save a general chat archive in this application. A problem report saves your optional note, plus the selected question and answer only if you choose to attach them. Common contact details and credentials are removed from attached text; remove any other sensitive information yourself before sending.</p>
       <p>Reports expire after 30 days. Submitted preliminary project plans and optional contact details expire after 90 days. They are available only to authorized CX83 reviewers. Expired contents are hidden on read and removed during the next retention cleanup. Server backups have a separate rotation cycle.</p>
@@ -54,7 +56,7 @@ export function CatSubmissionReview({ review, onCancel, onDraft }: { review: Cat
   )
   if (status === 'saved') return (
     <div className="cx83-cat-review" role="status">
-      <h3>{review.type === 'report' ? 'Report saved' : 'Plan saved'}</h3>
+      <h3 ref={heading} tabIndex={-1}>{review.type === 'report' ? 'Report saved' : 'Plan saved'}</h3>
       <p>{notice}</p>
       <p>{review.type === 'report' ? 'Thank you for helping improve Cat.' : 'A saved plan is an inquiry. CX83 must separately agree to scope, pricing and timing.'}</p>
       <button className="cx83-cat-review-button" onClick={onCancel} type="button">Back to chat</button>
@@ -62,7 +64,7 @@ export function CatSubmissionReview({ review, onCancel, onDraft }: { review: Cat
   )
   return (
     <form className="cx83-cat-review" onSubmit={submit} aria-busy={status === 'saving'}>
-      <h3>{review.type === 'report' ? 'Report a problem' : 'Review your preliminary plan'}</h3>
+      <h3 ref={heading} tabIndex={-1}>{review.type === 'report' ? 'Report a problem' : 'Review your preliminary plan'}</h3>
       <p>{review.type === 'report' ? 'Flag an incorrect or unusual answer for CX83 to review. Do not include sensitive information.' : 'Review and edit before submitting. Include your goal, current tools, requirements, constraints and open questions. Budget and timeline preferences are yours, and require CX83 agreement.'}</p>
       {review.type === 'report' ? <>
         <label>Details (optional)<textarea value={details} maxLength={1000} rows={3} onChange={(e) => { setDetails(e.target.value); setConfirmed(false) }} disabled={status === 'saving'} /></label>

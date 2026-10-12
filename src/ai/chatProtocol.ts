@@ -3,7 +3,8 @@ import { PublicRequestError } from './publicRequest'
 
 export const CAT_INPUT_LIMIT = 2000
 export function parseChatMessages(value: unknown): ModelMessage[] {
-  if (!Array.isArray(value) || !value.length || value.length > 40) throw new PublicRequestError(400, 'Please send a message to Cat.')
+  if (!Array.isArray(value) || !value.length) throw new PublicRequestError(400, 'Please send a message to Cat.')
+  if (value.length > 40) throw new PublicRequestError(400, 'This conversation is long. Start a new conversation to continue.')
   const parsed: ModelMessage[] = value.map((message: unknown) => {
     if (!message || typeof message !== 'object') throw new PublicRequestError(400, 'The conversation is invalid.')
     const m = message as Record<string, unknown>

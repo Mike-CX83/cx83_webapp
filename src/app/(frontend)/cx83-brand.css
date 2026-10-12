@@ -654,3 +654,4 @@ body { background: var(--cx83-background); color: var(--cx83-text); }
   .cx83-cat-composer { padding-top: .4rem; padding-bottom: .4rem; }
   .cx83-cat-footer { padding-top: .2rem; padding-bottom: .2rem; }
 }
+.cx83-cat-footer-intro { flex-basis: 100%; }

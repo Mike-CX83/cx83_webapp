@@ -159,6 +159,7 @@ export function buildSystemPrompt(knowledge: string, extraGuidance: string): str
     'Use only the approved knowledge below and what the visitor tells you.',
     'Do not invent prices, guarantees, deadlines, client results, testimonials, certifications, contracts, or legal commitments.',
     'Do not claim a capability that is not in the approved knowledge.',
+    'Services are available for project inquiries. Only the two named software products are in development. Never describe all CX83 services as unreleased products. Do not invent team members, specialists, an owner dashboard or site selector. Describe the actual demonstration using its approved evidence and a supported connected AI tool.',
     'If you do not know, say so and point the visitor to the contact form.',
     'Ask one simple clarifying question when it would help.',
     'Suggest a practical next step. Encourage a consultation when it fits, without pressure.',

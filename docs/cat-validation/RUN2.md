@@ -20,7 +20,7 @@ Inquiry deduplication now queries the exact request identifier instead of relyin
 
 ## Tests
 
-Local TypeScript and lint pass. Full integration checks: 188 passed, no failures, 30 live tests intentionally skipped outside the protected staging owner runtime. Tests cover actual route behavior with a synthetic SDK language model, consent, access control, expiry, storage/readback, retry conflicts and existing inquiry mail/outbox behavior. This is not a substitute for live provider quality testing.
+Local TypeScript and lint pass. Full integration checks: 190 passed, no failures, 31 live/destination tests intentionally skipped outside the protected staging owner runtime. Tests cover actual route behavior with a synthetic SDK language model, consent, access control, expiry, storage/readback, retry conflicts and existing inquiry mail/outbox behavior. This is not a substitute for live provider quality testing.
 
 Thirty unique representative scenario inputs and per-scenario keyword criteria are retained in tests/fixtures/catScenarios.json. Contract tests execute every input; a separate protected-staging-only suite executes the real route and configured live provider, stores synthetic results in .cx83-checks/cat-live-validation.json and evaluates correctness/relevance support, clarity, tone, formatting, next action, privacy and security. Human review is required for semantic correctness and practical usefulness. Until that suite actually runs, model quality outcomes remain pending.
 
@@ -31,3 +31,5 @@ Browser tests exercise contact navigation, safe links, consented reports, redact
 PR 45 targets staging-host only. After CI/browser verification and screenshot review, normal staging merge/build/deploy should run. Previous staging image and exact staging base fe89b67 are the rollback reference. No database schema migration is required. Created Cat records/forms remain ordinary private CMS objects.
 
 Public production still needs exact runtime SHA/model verification, authorized production SSH deployment using the existing production image workflow and rollback image, public postdeployment behavioral checks, synthetic report/plan destination readback and final live criteria review. No production deployment or recipient email delivery is claimed in this checkpoint.
+
+Expanded CI at checkpoint 84794b20 passed 173 browser tests including Cat desktop, Android Chromium and iPhone WebKit checks. One older preservation assertion failed because the footer tagline had been replaced; four subsequent serial checks did not run. The tagline was restored while retaining the new controls. This failed CI was not merged or deployed. Source/link/focus/closed-panel preservation refinements are included in the next corrective checkpoint; CI is required again for that exact commit.

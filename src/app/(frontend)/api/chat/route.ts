@@ -4,7 +4,7 @@ import { buildApprovedKnowledge, buildSystemPrompt, getAssistantRuntimeConfig } 
 import { getLanguageModel } from '@/ai/model'
 import { parseChatMessages } from '@/ai/chatProtocol'
 import { allowCatAttempt, readPublicJSON, PublicRequestError, publicFailure } from '@/ai/publicRequest'
-import { contactShortcut, formatVisitorAnswer } from '@/ai/visitorAnswer'
+import { contactShortcut, formatVisitorAnswer, privateInstructionShortcut } from '@/ai/visitorAnswer'
 import { recordCatOutcome } from '@/ai/catDiagnostics'
 
 export const runtime = 'nodejs'
@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     const config = await getAssistantRuntimeConfig()
     if (!config.enabled || !config.configured) throw new PublicRequestError(503, 'Cat is temporarily unavailable. Please use the contact form.')
     const last = messages.at(-1)!.content as string
-    let answer = contactShortcut(last)
+    let answer = privateInstructionShortcut(last) || contactShortcut(last)
     if (!answer) {
       const knowledge = await buildApprovedKnowledge()
       const result = await generateText({

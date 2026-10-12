@@ -19,6 +19,7 @@ import { safeAssistantHref } from '@/ai/visitorAnswer'
 import { CatSubmissionReview, type CatReview } from './CatSubmissionReview'
 
 const CatReportContext = createContext<(id: string) => void>(() => undefined)
+const CatNavigationContext = createContext<() => void>(() => undefined)
 function publicText(content: readonly { type: string; text?: string }[]): string {
   return content.filter((part) => part.type === 'text').map((part) => part.text || '').join('\n')
 }
@@ -136,6 +137,7 @@ function AssistantSession({
   return (
     <AssistantRuntimeProvider runtime={runtime}>
       <CatReportContext.Provider value={openReport}>
+      <CatNavigationContext.Provider value={() => onOpenChange(false)}>
       <button
         ref={launcherRef}
         aria-controls="cx83-assistant"
@@ -154,13 +156,15 @@ function AssistantSession({
         <Image src="/brand/symbol-showcase.svg" alt="" aria-hidden="true" width={25} height={25} />
         <span>{open ? 'Close Cat' : 'Ask Cat'}</span>
       </button>
-      {open ? (
+      {(
         <section
           aria-label="Cat, the CX83 Labs AI assistant"
           aria-modal="false"
           className="cx83-assistant-panel"
           id="cx83-assistant"
           role="dialog"
+          style={open ? undefined : { display: 'none' }}
+          aria-hidden={!open}
         >
           <header className="cx83-cat-header">
             <span className="cx83-cat-symbol">
@@ -218,12 +222,14 @@ function AssistantSession({
             </ComposerPrimitive.Root>
           </ThreadPrimitive.Root>}
           <footer className="cx83-cat-footer">
+            <span className="cx83-cat-footer-intro">Have a project in mind? We would like to hear about it.</span>
             <button className="cx83-cat-inline-action" onClick={() => setReview({ type: 'privacy' })} type="button">Chat privacy</button>
             <button className="cx83-cat-inline-action" onClick={openPlan} type="button">Review and send a plan</button>
             <Link href="/contact" onClick={() => onOpenChange(false)}>Contact CX83 <span aria-hidden="true">↗</span></Link>
           </footer>
         </section>
-      ) : null}
+      )}
+      </CatNavigationContext.Provider>
       </CatReportContext.Provider>
     </AssistantRuntimeProvider>
   )
@@ -258,10 +264,11 @@ function CatReportAction() {
 }
 
 function AssistantMarkdown() {
+  const close = useContext(CatNavigationContext)
   return <MarkdownTextPrimitive className="prose prose-sm prose-invert max-w-none" remarkPlugins={[remarkGfm]} components={{
     a: ({ href, children }) => {
       const safe = safeAssistantHref(href)
-      return safe ? <a href={safe}>{children}</a> : <span>{children}</span>
+      return safe?.startsWith('/') ? <Link href={safe} onClick={close}>{children}</Link> : safe ? <a href={safe}>{children}</a> : <span>{children}</span>
     },
   }} />
 }
