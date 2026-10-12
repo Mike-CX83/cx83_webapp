@@ -30,6 +30,8 @@ RUN if [ ! -s .cx83-staging-source.bundle ]; then printf '' > .cx83-staging-sour
 
 ARG NEXT_PUBLIC_SERVER_URL=http://localhost:3000
 ENV NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL
+ARG CX83_PUBLIC_LAUNCH_APPROVED=
+ENV CX83_PUBLIC_LAUNCH_APPROVED=$CX83_PUBLIC_LAUNCH_APPROVED
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
@@ -50,6 +52,8 @@ WORKDIR /app
 ENV NODE_ENV production
 ARG CX83_DEPLOYED_SHA=
 ENV CX83_DEPLOYED_SHA=$CX83_DEPLOYED_SHA
+ARG CX83_PUBLIC_LAUNCH_APPROVED=
+ENV CX83_PUBLIC_LAUNCH_APPROVED=$CX83_PUBLIC_LAUNCH_APPROVED
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
