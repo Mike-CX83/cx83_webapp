@@ -111,6 +111,12 @@ A bounded remaining production work order was submitted to the existing cursor-c
 
 The check configuration update will use the existing protected staging workflow. Previously completed application tests remain evidence for that source; the new check configuration needs its own release receipt.
 
+A fresh read only capacity probe on the existing staging credential returned HTTP 200 for both account credits and quota. It reported no prepaid capacity and zero free requests remaining. Only those booleans/counters were logged; no credentials, financial balances or key labels were retained. The generated thirty-scenario evidence was restored after the probe. The local operator task remains submitted, with no acceptance/execution receipt observed at this checkpoint.
+
+Runner repair PR 47 passed CI workflow 38255383381: 203 integration tests, 183 browser tests passed, one existing Interior Run 3 utility navigation test passed on retry after a five second URL timeout, plus TypeScript, lint and build. It merged at ab53e2a12aec523f316168e7adf825ea9ec81d82 and its staging release workflow is 38258040734. The separate existing main promotion PR 2 also runs CI; that workflow still installed only Chromium, causing missing WebKit executable failures for Cat's iPhone project. Its browser installation is corrected to the same chromium webkit command already verified in the successful staging workflow. This is a CI configuration change, with no application or test assertion change.
+
+This cloud browser could not open protected staging, returning ERR_BLOCKED_BY_CLIENT before page load. The password gate was preserved; no live browser pass is claimed. Provider aggregate activity covers completed UTC days and cannot establish today's per-conversation routed model. Routed model identity remains unverified until a completion or a valid runtime receipt is available.
+
 ## Future improvements
 
 Monitor provider request capacity and private model/rejection counters. Establish an explicit owner report review routine and separately verify backups/retention. Adopt database uniqueness and a shared limiter when adding replicas. Physical phone keyboard and accessibility walkthroughs remain useful acceptance follow ups.
