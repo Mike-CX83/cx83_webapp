@@ -56,10 +56,11 @@ jobs:
         run: pnpm lint
 
       - name: Install the Playwright browser
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm exec playwright install --with-deps chromium webkit
 
       - name: Run automated tests
         run: pnpm test
 
       - name: Build
         run: pnpm build
+
