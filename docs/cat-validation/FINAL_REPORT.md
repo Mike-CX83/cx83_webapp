@@ -1,6 +1,6 @@
 # Cat repair and validation report
 
-Status: the repaired Cat is live on public production. Protected staging and production use OpenRouter with `google/gemini-2.5-flash` because the free-model daily quota was exhausted. Website inquiry mail for `hello@cx83labs.com` is authorized, provider-accepted, and present in the CX83 inbox. One continuity scenario still misses an approval constraint. The staging checkout has one preserved uncommitted type edit, so it does not match the deployed image.
+Status: the repaired Cat is live on public production. Staging and production use OpenAI `gpt-6-luna`, which is the account with the paid balance. An earlier switch to OpenRouter `google/gemini-2.5-flash` was reversed. Website inquiry mail for `hello@cx83labs.com` is authorized, provider-accepted, and present in the CX83 inbox. One continuity scenario still misses an approval constraint. The staging checkout has one preserved uncommitted type edit, so it does not match the deployed image.
 
 ## Confirmed root causes
 
@@ -106,7 +106,7 @@ PR 47 remains merged at `ab53e2a12aec523f316168e7adf825ea9ec81d82`. PR 48 merged
 
 ### Provider
 
-The shared OpenRouter key still had `free_model_daily_requests` at 51 used, limit 50, remaining 0, and zero prepaid credits. The key spending cap had $100 remaining and $0 spent. A paid completion on the same provider succeeded, so staging and production `OPENROUTER_MODEL` is now `google/gemini-2.5-flash`. `AI_PROVIDER` remains `openrouter`. Output cap remains 800. After the live runs, key usage was about $0.024 and about $99.98 of the cap remained. The free daily counter was unchanged.
+The shared OpenRouter key still had `free_model_daily_requests` at 51 used, limit 50, remaining 0, and zero prepaid credits. A paid OpenRouter completion was used for the thirty staging scenarios and spent about $0.024 of that key's $100 cap. Mike then identified the paid balance as the existing OpenAI account. Both env files were set back to `AI_PROVIDER=openai` and `OPENAI_MODEL=gpt-6-luna`, and only the web containers were recreated. A direct OpenAI completion returned HTTP 200. A later public Cat answer returned HTTP 200 while the OpenRouter usage counter stayed at $0.02441632. Output cap remains 800.
 
 ### Mail
 
@@ -122,7 +122,7 @@ A phone-sized browser session on protected staging opened Cat, showed `Assistant
 
 ### Production
 
-The pre-repair production runtime was image `cx83-webapp:production` `9819d080f3cc`, SHA `6489a0b206ed2835f04e1cf281371f400ec428e7`, OpenRouter `openrouter/free`, output cap 800. That image was tagged `cx83-webapp:production-previous` before replacement and is still present. PR 46 merged at `1dbc4454ee2df9719551332145698fe3535774e3`. Its tree matches staging `52c989c`. Production image workflow [38283425894](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38283425894) succeeded. The loaded image is `8f712d4d16c98daca8ababc7ac59b265670037acb0611391b572507783a6b4da`. The running container reports SHA `1dbc4454ee2df9719551332145698fe3535774e3`, provider `openrouter`, model `google/gemini-2.5-flash`, output cap 800, and `CX83_PUBLIC_LAUNCH_APPROVED=true`. Public homepage returned HTTP 200.
+The pre-repair production runtime was image `cx83-webapp:production` `9819d080f3cc`, SHA `6489a0b206ed2835f04e1cf281371f400ec428e7`, OpenRouter `openrouter/free`, output cap 800. That image was tagged `cx83-webapp:production-previous` before replacement and is still present. PR 46 merged at `1dbc4454ee2df9719551332145698fe3535774e3`. Its tree matches staging `52c989c`. Production image workflow [38283425894](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38283425894) succeeded. The loaded image is `8f712d4d16c98daca8ababc7ac59b265670037acb0611391b572507783a6b4da`. The running container first reported SHA `1dbc4454ee2df9719551332145698fe3535774e3`, provider `openrouter`, model `google/gemini-2.5-flash`, output cap 800, and `CX83_PUBLIC_LAUNCH_APPROVED=true`. Public homepage returned HTTP 200. The same image was then recreated with `AI_PROVIDER=openai` and `OPENAI_MODEL=gpt-6-luna`. The SHA did not change.
 
 ## Remaining limitations
 
