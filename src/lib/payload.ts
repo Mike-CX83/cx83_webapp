@@ -9,11 +9,12 @@ export async function getPayloadClient(): Promise<Payload | null> {
   if (!databaseConfigured()) return null
 
   if (!client) {
-    client = getPayload({ config: configPromise }).catch((error: unknown) => {
-      console.error('Payload could not connect to PostgreSQL.', error)
+    client = getPayload({ config: configPromise }).catch(() => {
+      console.error('Payload could not connect to PostgreSQL; private connection details were not logged.')
       return null
     })
   }
 
   return client
 }
+

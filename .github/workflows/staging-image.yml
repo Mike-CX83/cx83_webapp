@@ -70,7 +70,7 @@ jobs:
         run: pnpm lint
 
       - name: Install the Playwright browser
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm exec playwright install --with-deps chromium webkit
 
       - name: Run automated tests
         run: pnpm test
@@ -169,4 +169,5 @@ jobs:
             "$STAGING_DEPLOY_USER@$STAGING_DEPLOY_HOST" \
             "deploy $GITHUB_SHA" < image/cx83-webapp-staging.tar.gz | tee "$RUNNER_TEMP/deploy-output.txt"
           grep -q 'STAGING DEPLOY SUCCESS' "$RUNNER_TEMP/deploy-output.txt"
+
 

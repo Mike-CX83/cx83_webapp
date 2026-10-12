@@ -72,15 +72,15 @@ export async function saveInquiry(
   data: InquiryInput,
   requestId: string,
 ): Promise<{ submission: StoredInquiry; duplicate: boolean; conflict: boolean }> {
-  // Bounded deduplication window with a single-process lock. Staging runs
-  // one web replica. Multi-replica production needs a database UNIQUE index.
+  // Exact identifier query with a single-process lock. The current deployment
+  // uses one web replica. Multi-replica production needs a database UNIQUE index.
   const recent = await payload.find({
     collection: 'form-submissions',
     overrideAccess: true,
     depth: 0,
     sort: '-createdAt',
     limit: MAX_SCAN,
-    where: { form: { equals: form } },
+    where: { and: [{ form: { equals: form } }, { 'submissionData.value': { equals: requestId } }] },
   })
   const found = recent.docs.find((item) => fieldValue(item, 'cx83-request-id') === requestId)
   if (found) {
@@ -101,6 +101,10 @@ export async function saveInquiry(
         { field: 'organization', value: data.organization },
         { field: 'inquiry-type', value: data.inquiryType },
         { field: 'message', value: data.message },
+        ...(data.source === 'cat-plan' ? [
+          { field: 'cx83-source', value: 'cat-plan' },
+          { field: 'cx83-expires-at', value: new Date(Date.now() + 90 * 86400_000).toISOString() },
+        ] : []),
         { field: 'cx83-request-id', value: requestId },
         { field: 'cx83-content-digest', value: fingerprintInquiry(data) },
         { field: 'cx83-delivery-status', value: 'pending' },
@@ -121,7 +125,7 @@ function inputFromSubmission(submission: StoredInquiry): InquiryInput | null {
     inquiryType: type as InquiryInput['inquiryType'],
     message: fieldValue(submission, 'message'),
   }
-  return data.name && data.email && data.message ? data : null
+  return data.name && data.message && (data.email || fieldValue(submission, 'cx83-source') === 'cat-plan') ? data : null
 }
 
 export async function dispatchInquiry(
@@ -181,3 +185,4 @@ export function inquiryDeliveryLabel(submission: StoredInquiry): string {
   if (status === 'unconfigured') return 'needs-configuration'
   return 'queued'
 }
+

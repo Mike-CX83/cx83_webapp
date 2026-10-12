@@ -1,6 +1,6 @@
 import type { Payload } from 'payload'
 
-const confirmationMessage = {
+export const confirmationMessage = {
   root: {
     type: 'root',
     children: [
@@ -77,3 +77,4 @@ export async function ensureInquiryForm(payload: Payload): Promise<number> {
 
   return created.id
 }
+

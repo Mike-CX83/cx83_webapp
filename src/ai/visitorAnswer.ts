@@ -1,0 +1,56 @@
+export const CAT_CONTACT = '[Contact CX83](/contact#contact-form)'
+export const CAT_EMAIL = '[hello@cx83labs.com](mailto:hello@cx83labs.com)'
+export const CAT_FALLBACK = 'I could not complete a useful answer. Please try a shorter question, or use ' + CAT_CONTACT + '. You can also email ' + CAT_EMAIL + '.'
+
+export function safeAssistantHref(href: string | undefined): string | null {
+  if (!href) return null
+  if (href.toLowerCase() === 'mailto:hello@cx83labs.com') return 'mailto:hello@cx83labs.com'
+  try {
+    const url = new URL(href, 'https://cx83labs.com')
+    if (url.protocol !== 'https:' || !['cx83labs.com', 'www.cx83labs.com'].includes(url.hostname) || url.username || url.password || url.port) return null
+    if (!/^\/(?:$|(?:contact|services|software|about|work|how-it-works|posts|search)(?:\/[a-z0-9-]+)*\/?$)/.test(url.pathname)) return null
+    if (url.search && (url.pathname !== '/contact' || !/^\?context=(websites-and-business-tools|automation-and-integrations|ai-setup-and-workflows|connected-websites|client-brand-studio)$/.test(url.search))) return null
+    return url.pathname + url.search + url.hash
+  } catch { return null }
+}
+
+// Narrow classifier/serialization signatures, not ordinary explanations about safety.
+export function isInternalAnswer(text: string): boolean {
+  return /\bUser\s+Safety\s*:/i.test(text)
+    || /"(?:User Safety|classification|providerMetadata)"\s*:/i.test(text)
+    || /(?:^|\n)\s*(?:user\s+safety|safety\s+classification|safety\s+categories|debug|system\s+prompt|owner\s+guidance|approved\s+CX83\s+knowledge|providerMetadata)\s*:/i.test(text)
+    || /(?:^|\n)\s*(?:You are Cat, the CX83 Labs AI assistant|You are strictly a visitor guide)/i.test(text)
+    || /<\/?(?:think|analysis|system|tool_call)>/i.test(text)
+    || /^\s*\{\s*"(?:safety|classification|providerMetadata|system)"\s*:/i.test(text)
+}
+
+export function privateInstructionShortcut(question: string): string | null {
+  if (!/\b(show|print|reveal|repeat|dump|output|give|what are)\b[\s\S]{0,80}\b(your|the|all)\b[\s\S]{0,30}\b(system prompt|hidden instructions|internal instructions|developer instructions|credentials|api key|private keys)\b/i.test(question)) return null
+  return 'I can help with CX83 services or your preliminary project, but I cannot share private instructions or credentials. What would you like to build or improve?'
+}
+
+export function formatVisitorAnswer(text: string, finishReason: string): { text: string; rejected: boolean } {
+  const ordinarySafetyReply = finishReason === 'content-filter' && text.length <= 1200 && /[.!?]$/.test(text.trim()) && /\b(cannot|can't|won't|unable|do not|don't|should not)\b/i.test(text)
+  if ((!ordinarySafetyReply && finishReason !== 'stop') || !text.trim() || text.length > 8000 || isInternalAnswer(text)) return { text: CAT_FALLBACK, rejected: true }
+  let answer = text.trim()
+  answer = answer.replace(/\[[^\]]+\]\(https?:\/\/hello@cx83labs\.com\)/gi, CAT_EMAIL)
+  answer = answer.replace(/<?https?:\/\/hello@cx83labs\.com>?(?![\w-]|\.[a-z0-9])/gi, CAT_EMAIL)
+  answer = answer.replace(/`((?:https:\/\/(?:www\.)?cx83labs\.com)?\/contact(?:\?context=[a-z-]+)?(?:#contact-form)?)`/g, (_, path: string) => {
+    return '[Contact CX83](' + (safeAssistantHref(path) || '/contact#contact-form') + ')'
+  })
+  // Repair bare contact paths without touching a Markdown destination or label.
+  answer = answer.replace(/(?<![\w\[\](])(?:https:\/\/(?:www\.)?cx83labs\.com)?\/contact(?:\?context=[a-z-]+)?(?:#contact-form)?/g, (path) => {
+    const href = safeAssistantHref(path)
+    return href ? '[Contact CX83](' + href + ')' : CAT_CONTACT
+  })
+  answer = answer.replace(/(?<![\w\[(])(?:mailto:)?hello@cx83labs\.com(?![\w\])])/gi, CAT_EMAIL)
+  return { text: answer, rejected: false }
+}
+
+export function contactShortcut(question: string): string | null {
+  if (question.length > 250 || !/\b(contact|email|reach|talk to someone)\b/i.test(question)) return null
+  if (!/\b(how|where|who|someone|address|you|cx83)\b/i.test(question)) return null
+  if (/\b(api|code|privacy|data|integrat\w*|automat\w*|not|don't|cannot)\b/i.test(question)) return null
+  const path = /\b(website|web site)\b/i.test(question) ? '/contact?context=websites-and-business-tools#contact-form' : '/contact#contact-form'
+  return 'You can use [Contact CX83](' + path + ') or email ' + CAT_EMAIL + '. Share what you want to build or improve, and the tools you currently use.'
+}
