@@ -14,6 +14,7 @@ import { usePathname } from 'next/navigation'
 import { conversationStarters } from '@/content/assistantNavigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import remarkGfm from 'remark-gfm'
+import { safeAssistantHref } from '@/ai/visitorAnswer'
 
 export function AssistantWidget() {
   const returnFocusRef = useRef<HTMLElement | null>(null)
@@ -176,6 +177,7 @@ function AssistantSession({
                 className="cx83-cat-input"
                 placeholder="Ask Cat about CX83…"
                 rows={2}
+                maxLength={2000}
               />
               <div className="cx83-cat-composer-actions">
                 <button className="cx83-cat-reset" onClick={onReset} type="button">New conversation</button>
@@ -220,5 +222,11 @@ function AssistantMessage() {
 }
 
 function AssistantMarkdown() {
-  return <MarkdownTextPrimitive className="prose prose-sm prose-invert max-w-none" remarkPlugins={[remarkGfm]} />
+  return <MarkdownTextPrimitive className="prose prose-sm prose-invert max-w-none" remarkPlugins={[remarkGfm]} components={{
+    a: ({ href, children }) => {
+      const safe = safeAssistantHref(href)
+      return safe ? <a href={safe}>{children}</a> : <span>{children}</span>
+    },
+  }} />
 }
+
