@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { ArrowUpRight, Mail } from 'lucide-react'
 
 const footerNav = [
   { href: '/', label: 'Home' },
@@ -13,9 +14,9 @@ const footerNav = [
 
 export function SiteFooter({ siteName, email }: { siteName: string; email?: string }) {
   return (
-    <footer className="cx83-site-footer">
+    <footer className="cx83-site-footer cx83-footer-refined">
       <div className="cx83-container cx83-footer-grid">
-        <div>
+        <div className="cx83-footer-identity">
           <Link
             className="cx83-footer-brand inline-flex min-h-11 items-center text-sm font-bold tracking-[0.18em] uppercase"
             href="/"
@@ -40,23 +41,25 @@ export function SiteFooter({ siteName, email }: { siteName: string; email?: stri
             {footerNav.map((item) => (
               <li key={item.href}>
                 <Link className="cx83-footer-link" href={item.href}>
-                  {item.label}
+                  <span>{item.label}</span>
+                  <ArrowUpRight aria-hidden="true" className="cx83-footer-arrow" size={14} />
                 </Link>
               </li>
             ))}
           </ul>
         </nav>
-        <div>
+        <div className="cx83-footer-contact">
           <p className="cx83-footer-heading">Contact</p>
           {email ? (
-            <a className="cx83-footer-link mt-1 break-all" href={'mailto:' + email}>
-              {email}
+            <a className="cx83-footer-link cx83-footer-email" href={'mailto:' + email}>
+              <Mail aria-hidden="true" size={16} />
+              <span>{email}</span>
             </a>
           ) : null}
         </div>
       </div>
       <div className="cx83-footer-bottom border-t">
-        <div className="cx83-container flex flex-wrap items-center justify-between gap-3 py-5 text-xs">
+        <div className="cx83-container cx83-footer-copyright text-xs">
           <span>© {new Date().getFullYear()} CX83 Labs. All rights reserved.</span>
         </div>
       </div>
