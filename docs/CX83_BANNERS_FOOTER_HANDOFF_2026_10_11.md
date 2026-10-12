@@ -25,7 +25,7 @@ Homepage and About hero markup, CSS and asset files are not edited. Shared foote
 
 Active stylesheet: src/app/(frontend)/cx83-banners-footer.css, imported once from the frontend root layout. Selectors explicitly exclude cx83-about-refined and do not target homepage/header/Cat.
 Runtime changes: shared stylesheet/import, footer markup for decorative icons, article hero class hooks and removal of its obsolete outer top padding.
-Existing automated coverage remains intact. Focused banner/footer checks cover twelve index/detail/utility routes at 390 and 1440 pixels, title placement, no horizontal overflow, footer target size, keyboard focus and navigation. Existing fixture suites exercise CMS, Work and article templates and existing About/Home preservation assertions.
+Existing automated coverage remains intact. Focused banner/footer checks cover nine static index/detail/utility routes at 390 and 1440 pixels, title placement, no horizontal overflow, footer target size, keyboard focus and navigation. Service banner geometry runs inside the existing isolated service fixture suite, which covers all three detail routes at both widths. Existing fixture suites exercise CMS, Work and article templates and existing About/Home preservation assertions.
 Screenshot names use the existing interior-* artifact pattern. Full required Staging gate and deployed visual verification are pending at this implementation checkpoint. No passing check or deployment is claimed here.
 
 ## Avoiding repeated work

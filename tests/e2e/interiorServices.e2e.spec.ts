@@ -241,6 +241,16 @@ test.describe('Run 1 interior services and Contact visual continuity', () => {
 
         const detail = page.getByTestId('cx83-service-detail')
         await expect(detail.getByRole('heading', { level: 1 })).toHaveText(service.name)
+        // Exercise CMS-backed banner geometry while this suite's published fixtures exist.
+        const hero = detail.locator('.cx83-interior-hero')
+        const banner = await hero.boundingBox()
+        const heading = await hero.locator('h1').boundingBox()
+        expect(heading!.y).toBeGreaterThanOrEqual(banner!.y)
+        expect(heading!.y + heading!.height).toBeLessThan(banner!.y + banner!.height)
+        if (width === 1440) {
+          expect(banner!.height).toBeCloseTo(337, 0)
+          expect(heading!.y - banner!.y).toBeCloseTo(84, 0)
+        }
         await expect(detail).toContainText(service.shortDescription)
         await expect(detail).toContainText(service.description)
         await expect(detail.getByRole('heading', { name: 'Who this helps', exact: true })).toHaveAttribute('id', 'service-fit')

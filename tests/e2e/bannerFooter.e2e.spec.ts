@@ -3,8 +3,7 @@ import { expect, test } from '@playwright/test'
 const host = 'http://localhost:3000'
 const routes = [
   '/software', '/software/connected-websites', '/software/client-brand-studio',
-  '/services', '/services/websites-and-business-tools', '/services/automation-and-integrations',
-  '/services/ai-setup-and-workflows', '/how-it-works', '/work', '/contact', '/posts', '/search',
+  '/services', '/how-it-works', '/work', '/contact', '/posts', '/search',
 ]
 
 for (const width of [390, 1440]) {
