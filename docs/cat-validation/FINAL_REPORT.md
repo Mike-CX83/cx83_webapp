@@ -103,8 +103,16 @@ No production deployment has occurred. The established production workflow build
 3. Continue in the existing production SSH environment: inspect the running image/SHA, provider, model and output cap without exposing keys. If persistent output exhaustion requires configuration adjustment, remain within the existing provider and approved budget, then rerun behavior checks.
 4. Promote PR 46 only after acceptance, use the established image/SSH workflow, preserve rollback and test public Cat, links, reports, submitted plans and owner readback. Production postdeployment validation remains unperformed.
 
+## Resumed execution, October 12
+
+Mike reaffirmed execution authority. The repair branch now pins pnpm 11.28.5, matching existing CI/Docker configuration, and sets NODE_ENV=test for the integration check subprocess. Running the check from NODE_ENV=production passed 198 local tests; 31 live/destination and five CI database cases remained intentionally skipped. This removes the two check runner defects without changing the web server runtime, dependencies, provider, or model.
+
+A bounded remaining production work order was submitted to the existing cursor-client-brand-studio operator through CX83 Agent Mailbox, task task-67525552. Submitted does not mean accepted or running; independent production verification remains required. The operator is instructed to use existing authorized local/server access, preserve rollback, resolve legitimate provider/mail configuration, rerun actual behavior, and use the established production deployment workflow without routine approval prompts.
+
+The check configuration update will use the existing protected staging workflow. Previously completed application tests remain evidence for that source; the new check configuration needs its own release receipt.
+
 ## Future improvements
 
-Monitor provider request capacity and private model/rejection counters. Permanently pin the owner check runner to the CI pnpm version and isolate test mode from the production process. Establish an explicit owner report review routine and separately verify backups/retention. Adopt database uniqueness and a shared limiter when adding replicas. Physical phone keyboard and accessibility walkthroughs remain useful acceptance follow ups.
+Monitor provider request capacity and private model/rejection counters. Establish an explicit owner report review routine and separately verify backups/retention. Adopt database uniqueness and a shared limiter when adding replicas. Physical phone keyboard and accessibility walkthroughs remain useful acceptance follow ups.
 
 Operational reference: OpenRouter documents the read only quota endpoint and handling of 429 platform/upstream limits at https://openrouter.ai/docs/api_reference/limits. The exhausted quota stated here was directly measured, not inferred from that documentation.
