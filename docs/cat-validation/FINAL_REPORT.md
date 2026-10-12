@@ -1,10 +1,21 @@
 # Cat repair and validation report
 
-Status: implementation and final automated checks passed. PR 45 merged to staging-host at 5048fce34c44dab6c6ce65c414aa4cceed49b1eb. Protected staging workflow 38225103031 is running; repaired live provider validation remains pending. Public production release is blocked by unavailable production SSH access. This is not a completed production repair.
+Status: repairs, visitor reporting, confirmed project plans, automated checks and protected staging deployment are complete. Live staging acceptance failed because the existing OpenRouter free request quota is exhausted. Staging inquiry email authorization is unconfigured, and production SSH access is unavailable. Public production remains unchanged. This project does not meet the requested production completion requirements.
 
 ## Confirmed root causes
 
-The default GitHub main branch contains the older Ask CX83 widget. Production launch source 6489a0b and staging base fe89b67 share the current Cat frontend/backend. The exact running production SHA and configured/routed model have not been inspected on the server.
+| Completion requirement | Result |
+| :--- | :--- |
+| Screenshot failures diagnosed and regression tested | Passed; actual baseline reproduced classifiers, blank completions and contact defects. |
+| Contact responses and approved links | Passed in three staging scenarios and browser regression tests. |
+| Internal metadata excluded from normal answers | Passed automated real SDK route checks; unavailable staging inference cannot prove model quality. |
+| Problem reports reach authorized review | Passed staging save and private owner readback. |
+| Explicit plans reach existing inquiry workflow | Passed staging save/readback; email notification authorization remains missing. |
+| At least thirty documented scenarios | Executed and documented; repaired acceptance is three passed, twenty-seven blocked. |
+| Mobile usability and relevant security checks | Automated desktop/Android/iPhone emulation, database access, limits and consent passed. Physical devices untested. |
+| Production deployment and postdeployment checks | Blocked; existing SSH access unavailable, live provider acceptance and mail verification outstanding. |
+
+The default GitHub main branch contains the older Ask CX83 widget. Production launch source 6489a0b and staging base fe89b67 share the current Cat frontend/backend. Cat uses the existing Next.js/assistant-ui frontend, Next API route, Payload knowledge/settings and AI SDK provider adapter. The exact running production SHA and configured/routed model have not been inspected on the server.
 
 Thirty synthetic requests to the public chat API all returned HTTP 200, but 26 exposed reasoning/provider metadata, six exhausted the output limit with no visitor answer, and two rendered internal classifier answers. Raw contact paths, a malformed email URL, excessive explanations and unsupported business/workflow claims were also reproduced. The source forwarded the provider stream without a final output check. The live provider transport identified OpenRouter; exact model routing remains unverified.
 
@@ -24,7 +35,10 @@ Privacy disclosure, 30-day report and 90-day plan expiry, origin/body/rate limit
 * Checkpoint 9a357d1: successful workflow 38218899032, 198 integration tests including five real PostgreSQL checks, 184 browser tests, TypeScript, lint and build. An earlier footer preservation failure was corrected before release.
 * Final application source a8ab09a69f9a12b9f985f5e8236a342dff633f1d: exact CI workflow 38222591686 passed 203 integration tests, 184 browser tests, TypeScript, lint and build. Thirty-one live/destination tests were intentionally skipped. Local output regressions: 56 passed. Full local suite: 198 passed, 36 intentionally skipped (31 live/destination and five CI-only database tests).
 * Browser checks cover desktop, Android Chromium and iPhone WebKit emulation, measured 320x720, 390x844, 430x932, 844x390 and 1440x1000 viewports, long replies/scrolling, links, reset, errors, confirmation, cancel and retry. Representative captures were visually reviewed. No physical device/native Safari or actual mobile keyboard pass is claimed.
-* Real CI database tests proved saved report/plan rows, deduplication, blocked anonymous reads/creates and expiry masking. Live staging/production destination readback and recipient inbox delivery remain separate checks.
+* Staging release workflow 38225103031 repeated 203 integration and 184 browser passes, TypeScript, lint and build, then successfully deployed. Source and owner checkout match 5048fce, whose file tree exactly matches tested a8ab09a.
+* Thirty repaired staging scenarios executed: S10, S11 and S12 passed contact answer review; 27 model scenarios returned 503 before a completion. The owner suite recorded 202 passes, 27 failures and five CI-only skips. No model answer quality pass is claimed for unavailable responses. A separate probe confirmed AI_APICallError with provider HTTP 429. Read only key quota check: HTTP 200, free requests used 51, daily ceiling 50, remaining 0. Provider/model configuration was OpenRouter/openrouter/free; routed model remains unknown. Full results and manual assessments are in STAGING_REVIEW.md and staging-validation.json.
+* Real CI database tests proved saved report/plan rows, deduplication, blocked anonymous reads/creates and expiry masking. Live staging synthetic report and confirmed plan both saved and were read back from private owner form submissions, record IDs 5 and 6. Plan notification was needs-configuration. Gmail provider acceptance and recipient inbox delivery were not verified.
+* The staging owner runner initially referenced missing pnpm 12.11.2, then inherited production React/Vite mode. Temporary pnpm 11.28.5 and NODE_ENV=test settings allowed the real guarded suite to run. All temporary package, route diagnostic and test edits were restored and compared with original source. No production credentials or private visitor data were accessed.
 
 ## Changed files
 
@@ -33,6 +47,9 @@ Privacy disclosure, 30-day report and 90-day plan expiry, origin/body/rate limit
 * `docs/cat-validation/RUN1.md`
 * `docs/cat-validation/RUN2.md`
 * `docs/cat-validation/production-baseline.json`
+* `docs/cat-validation/FINAL_REPORT.md`
+* `docs/cat-validation/STAGING_REVIEW.md`
+* `docs/cat-validation/staging-validation.json`
 * `playwright.config.ts`
 * `scripts/cat-baseline-check.py`
 * `src/ai/assistant.ts`
@@ -75,15 +92,19 @@ Run 2 feature checkpoint: 84794b20a58125a5146f1b815b575bad760fffff.
 Validated recovery/storage checkpoint: 9a357d11929985abe68deb9322516efff4308166.
 Final formatting/guard source: a8ab09a69f9a12b9f985f5e8236a342dff633f1d.
 
-No production deployment has occurred. The established production workflow builds an image and requires a separate existing SSH operation. This execution environment has no production SSH key; the 1Password server tools are unavailable. Staging rollback is the existing previous-image mechanism and base fe89b67. Production rollback must tag/verify the actual running image before replacing it; the launch branch commit is a reference, not proof of the currently running image.
+Protected staging deployment succeeded at 2026-10-12 09:09 UTC. Receipt: gate_without_password=401, site_with_password=200, static_image=200, optimized_image=200, checkout_sync=ok, deployedSha=checkoutSha=5048fce34c44dab6c6ce65c414aa4cceed49b1eb, previous_image=present. Rollback uses cx83-webapp:staging-previous, preserved by the established deployment script. No unrelated container change was reported.
+
+No production deployment has occurred. The established production workflow builds an image and requires a separate existing SSH operation. This execution environment has no production SSH key; the 1Password server tools are unavailable. Production rollback must tag/verify the actual running image before replacing it; the launch branch commit is a reference, not proof of the currently running image. Draft PR 46 stays on hold for live acceptance and access.
 
 ## Remaining completion work
 
-1. Finish the exact-source CI gate and protected staging deployment, then record deployed/checkout SHAs and gate/health results.
-2. Execute the protected staging live suite and review all thirty repaired answers, private model diagnostics and synthetic report/plan destination receipts. The suite is guarded to the exact staging database name and does not run against production or spend provider tokens in CI.
-3. In the existing authorized deployment environment, inspect production runtime SHA, provider, model and output cap without exposing keys. If diagnostics identify an unsuitable routed model or persistent token exhaustion, correct that configuration within the existing provider and rerun behavioral validation.
-4. Promote the validated application using the existing production image/SSH workflow, preserve rollback and test public Cat, links, submitted plans, reports and owner readback. Never equate provider acceptance with inbox delivery.
+1. Restore legitimate request capacity in the existing OpenRouter account, then rerun the thirty live scenarios and manually assess completed answers. No key rotation, provider replacement, billing change or quota workaround was attempted. The suite remains guarded to the exact staging database and never spends provider tokens in CI. Inspect the actual routed model and output completion diagnostics once inference is available.
+2. Configure the existing authorized server Gmail OAuth grant and verified hello@cx83labs.com inquiry destination through the approved secret workflow. A ChatGPT Gmail connection is not a server credential. Validate provider acceptance separately from recipient inbox delivery.
+3. Continue in the existing production SSH environment: inspect the running image/SHA, provider, model and output cap without exposing keys. If persistent output exhaustion requires configuration adjustment, remain within the existing provider and approved budget, then rerun behavior checks.
+4. Promote PR 46 only after acceptance, use the established image/SSH workflow, preserve rollback and test public Cat, links, reports, submitted plans and owner readback. Production postdeployment validation remains unperformed.
 
 ## Future improvements
 
-Use the private model/rejection counters to monitor regressions. Establish an explicit owner report-review routine and a separately verified backup/retention policy. Adopt database uniqueness and a shared limiter only when adding replicas. Physical phone keyboard and accessibility walkthroughs remain useful acceptance follow ups.
+Monitor provider request capacity and private model/rejection counters. Permanently pin the owner check runner to the CI pnpm version and isolate test mode from the production process. Establish an explicit owner report review routine and separately verify backups/retention. Adopt database uniqueness and a shared limiter when adding replicas. Physical phone keyboard and accessibility walkthroughs remain useful acceptance follow ups.
+
+Operational reference: OpenRouter documents the read only quota endpoint and handling of 429 platform/upstream limits at https://openrouter.ai/docs/api_reference/limits. The exhausted quota stated here was directly measured, not inferred from that documentation.
