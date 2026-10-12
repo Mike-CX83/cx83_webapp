@@ -1,6 +1,6 @@
 # Cat repair and validation report
 
-Status: repairs, visitor reporting, confirmed project plans, automated checks and protected staging deployment are complete. Live staging acceptance failed because the existing OpenRouter free request quota is exhausted. Staging inquiry email authorization is unconfigured, and production SSH access is unavailable. Public production remains unchanged. This project does not meet the requested production completion requirements.
+Status: the repaired Cat is live on public production. Protected staging and production use OpenRouter with `google/gemini-2.5-flash` because the free-model daily quota was exhausted. Website inquiry mail for `hello@cx83labs.com` is authorized, provider-accepted, and present in the CX83 inbox. One continuity scenario still misses an approval constraint. The staging checkout has one preserved uncommitted type edit, so it does not match the deployed image.
 
 ## Confirmed root causes
 
@@ -94,16 +94,46 @@ Final formatting/guard source: a8ab09a69f9a12b9f985f5e8236a342dff633f1d.
 
 Protected staging deployment succeeded at 2026-10-12 09:09 UTC. Receipt: gate_without_password=401, site_with_password=200, static_image=200, optimized_image=200, checkout_sync=ok, deployedSha=checkoutSha=5048fce34c44dab6c6ce65c414aa4cceed49b1eb, previous_image=present. Rollback uses cx83-webapp:staging-previous, preserved by the established deployment script. No unrelated container change was reported.
 
-No production deployment has occurred. The established production workflow builds an image and requires a separate existing SSH operation. This execution environment has no production SSH key; the 1Password server tools are unavailable. Production rollback must tag/verify the actual running image before replacing it; the launch branch commit is a reference, not proof of the currently running image. Draft PR 46 stays on hold for live acceptance and access.
+That paragraph described the state before this release. The production deployment and its rollback image are recorded below.
 
-## Remaining completion work
+## Release completion, October 12
 
-1. Restore legitimate request capacity in the existing OpenRouter account, then rerun the thirty live scenarios and manually assess completed answers. No key rotation, provider replacement, billing change or quota workaround was attempted. The suite remains guarded to the exact staging database and never spends provider tokens in CI. Inspect the actual routed model and output completion diagnostics once inference is available.
-2. Configure the existing authorized server Gmail OAuth grant and verified hello@cx83labs.com inquiry destination through the approved secret workflow. A ChatGPT Gmail connection is not a server credential. Validate provider acceptance separately from recipient inbox delivery.
-3. Continue in the existing production SSH environment: inspect the running image/SHA, provider, model and output cap without exposing keys. If persistent output exhaustion requires configuration adjustment, remain within the existing provider and approved budget, then rerun behavior checks.
-4. Promote PR 46 only after acceptance, use the established image/SSH workflow, preserve rollback and test public Cat, links, reports, submitted plans and owner readback. Production postdeployment validation remains unperformed.
+Cursor took mailbox task task-67525552 once. The local webapp checkout was left on its dirty `staging-host` work. Release commands used an isolated copy and the existing server.
+
+### CI and staging
+
+PR 47 remains merged at `ab53e2a12aec523f316168e7adf825ea9ec81d82`. PR 48 merged at `52c989c62c401fc2be2e8b75fd37afb492e78f98`. Main CI run [38278011679](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38278011679) installed Chromium and WebKit, then passed 203 integration tests and 184 browser tests. Staging workflow [38278007231](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38278007231) passed the same check, built the image, and deployed. Receipt: `gate_without_password=401`, public image checks passed, `deployedSha=52c989c62c401fc2be2e8b75fd37afb492e78f98`, `previous_image=present`. The server checkout stayed at `5048fce34c44dab6c6ce65c414aa4cceed49b1eb` because `src/payload-types.ts` has a preserved uncommitted 10-line addition for the repository status tools. That file was not reset.
+
+### Provider
+
+The shared OpenRouter key still had `free_model_daily_requests` at 51 used, limit 50, remaining 0, and zero prepaid credits. The key spending cap had $100 remaining and $0 spent. A paid completion on the same provider succeeded, so staging and production `OPENROUTER_MODEL` is now `google/gemini-2.5-flash`. `AI_PROVIDER` remains `openrouter`. Output cap remains 800. After the live runs, key usage was about $0.024 and about $99.98 of the cap remained. The free daily counter was unchanged.
+
+### Mail
+
+A dedicated desktop OAuth client in the existing internal Google Cloud project `cx83-labs-pilot` was granted only `https://www.googleapis.com/auth/gmail.send` for `mike@cx83labs.com`. The refresh token issues an access token. ChatGPT and the student Gmail connector were not used. Staging and production env files now set `CX83_INQUIRY_TO=hello@cx83labs.com` and the website grant. Values stay in the mode 600 env files.
+
+Staging synthetic plan record 8 returned `provider-accepted`, provider id `1a13115acd5a4509`. The message `[CX83 website] project inquiry #8` was unread in the `mike@cx83labs.com` inbox. Staging report record 7 saved with source `cat-report` and does not send mail. Production plan record 10 returned `provider-accepted`, provider id `1a13127d0b8fa7d5`. `[CX83 website] project inquiry #10` was unread in the same inbox at 12:27 PM. Production report record 9 saved with source `cat-report`.
+
+### Thirty live staging scenarios
+
+Executed against the deployed container at `52c989c`, model `google/gemini-2.5-flash`, through the real `/api/chat` route. All 30 returned HTTP 200. Automated keyword checks passed 24. Manual review of the actual answers accepts 29. S21 is not accepted: the follow-up asked to keep the owner approval step, and the reply asked about the inquiry process without restating that constraint. S07, S16, S22, S23, and S24 failed a narrow keyword rule but the answers were correct: development status, a clarifying question, a one-sentence intake summary, a medical refusal, and a private-conversation refusal. Contact scenarios S10 through S12 returned the approved contact form and `mailto:hello@cx83labs.com`. No internal metadata or unapproved links appeared.
+
+A phone-sized browser session on protected staging opened Cat, showed `Assistant configured`, rendered the email answer with the mailto and contact links, opened Report a problem with confirmation and optional attachment, reset back to the welcome state, and followed the contact link to `/contact#contact-form` with the inquiry form present. The mobile menu stayed collapsed. Public production then returned the same mailto answer and a real services answer, and the homepage plus three images returned HTTP 200.
+
+### Production
+
+The pre-repair production runtime was image `cx83-webapp:production` `9819d080f3cc`, SHA `6489a0b206ed2835f04e1cf281371f400ec428e7`, OpenRouter `openrouter/free`, output cap 800. That image was tagged `cx83-webapp:production-previous` before replacement and is still present. PR 46 merged at `1dbc4454ee2df9719551332145698fe3535774e3`. Its tree matches staging `52c989c`. Production image workflow [38283425894](https://github.com/Mike-CX83/cx83_webapp/actions/runs/38283425894) succeeded. The loaded image is `8f712d4d16c98daca8ababc7ac59b265670037acb0611391b572507783a6b4da`. The running container reports SHA `1dbc4454ee2df9719551332145698fe3535774e3`, provider `openrouter`, model `google/gemini-2.5-flash`, output cap 800, and `CX83_PUBLIC_LAUNCH_APPROVED=true`. Public homepage returned HTTP 200.
+
+## Remaining limitations
+
+1. S21 did not keep the stated owner-approval constraint. The provider was not changed for that answer.
+2. The staging git checkout is still `5048fce` because of the preserved `src/payload-types.ts` edit. The running staging image is `52c989c`.
+3. No physical phone or native Safari pass was performed. Browser coverage is the automated suite plus one phone-sized staging session.
+4. This report commit is documentation on the repair branch. It is not a second production image.
 
 ## Resumed execution, October 12
+
+The release completion section above is the current record. The notes below are the earlier checkpoint.
 
 Mike reaffirmed execution authority. The repair branch now pins pnpm 11.28.5, matching existing CI/Docker configuration, and sets NODE_ENV=test for the integration check subprocess. Running the check from NODE_ENV=production passed 198 local tests; 31 live/destination and five CI database cases remained intentionally skipped. This removes the two check runner defects without changing the web server runtime, dependencies, provider, or model.
 
