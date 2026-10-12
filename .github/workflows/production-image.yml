@@ -5,6 +5,9 @@ name: Production image
 # Load the artifact on the server with the existing root SSH key.
 
 on:
+  push:
+    branches:
+      - production
   workflow_dispatch:
     inputs:
       git_sha:
