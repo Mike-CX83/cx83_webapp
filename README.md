@@ -8,7 +8,7 @@ The project gives the owner a way to maintain service descriptions, projects, ar
 
 [Company website](https://cx83labs.com)
 
-This README describes the code on the repository's `main` branch. A hosted environment or another branch may contain later changes; a website link alone does not establish which commit is deployed.
+This README describes the code on the repository's `main` branch. The [production branch](https://github.com/Mike-CX83/cx83_webapp/tree/production) contains later implementation, including additional software pages and assistant workflows. A website link alone does not establish which commit is deployed.
 
 ## Contents
 
